@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
+		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
+		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
 		D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */; };
-		D180B9081E7FAFC900AB0DA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9071E7FAFC900AB0DA9 /* ViewController.swift */; };
+		D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */; };
 		D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9091E7FAFC900AB0DA9 /* Main.storyboard */; };
 		D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D180B90C1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld */; };
 		D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */; };
@@ -22,9 +25,13 @@
 		053EDA45175F6F6844BC8E30 /* Pods-MuscleBeach.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuscleBeach.release.xcconfig"; path = "Pods/Target Support Files/Pods-MuscleBeach/Pods-MuscleBeach.release.xcconfig"; sourceTree = "<group>"; };
 		452A96E7E9CB468151246D7E /* Pods-MuscleBeach.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuscleBeach.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MuscleBeach/Pods-MuscleBeach.debug.xcconfig"; sourceTree = "<group>"; };
 		53828CBFA9D569BFD84F0A67 /* Pods_MuscleBeach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MuscleBeach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1683C231E7FCADE00C9D887 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
+		D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		D180B9021E7FAFC900AB0DA9 /* MuscleBeach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleBeach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D180B9071E7FAFC900AB0DA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D180B90A1E7FAFC900AB0DA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D180B90D1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MuscleBeach.xcdatamodel; sourceTree = "<group>"; };
 		D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +70,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D1683C211E7FBF8D00C9D887 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
+				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
+				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D1683C221E7FBF9600C9D887 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D1683C231E7FCADE00C9D887 /* DataService.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		D180B8F91E7FAFC900AB0DA9 = {
 			isa = PBXGroup;
 			children = (
@@ -84,9 +109,11 @@
 		D180B9041E7FAFC900AB0DA9 /* MuscleBeach */ = {
 			isa = PBXGroup;
 			children = (
+				D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */,
+				D1683C221E7FBF9600C9D887 /* Model */,
+				D1683C211E7FBF8D00C9D887 /* Controller */,
 				D180B91A1E7FB01500AB0DA9 /* StoryBoard */,
 				D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */,
-				D180B9071E7FAFC900AB0DA9 /* ViewController.swift */,
 				D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */,
 				D180B9111E7FAFC900AB0DA9 /* LaunchScreen.storyboard */,
 				D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */,
@@ -143,6 +170,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 73GBZ239BR;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -246,9 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D180B9081E7FAFC900AB0DA9 /* ViewController.swift in Sources */,
+				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,
 				D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */,
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
+				D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */,
+				D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */,
+				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +405,7 @@
 			baseConfigurationReference = 452A96E7E9CB468151246D7E /* Pods-MuscleBeach.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MuscleBeach/MuscleBeach.entitlements;
 				DEVELOPMENT_TEAM = 73GBZ239BR;
 				INFOPLIST_FILE = MuscleBeach/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -384,6 +420,7 @@
 			baseConfigurationReference = 053EDA45175F6F6844BC8E30 /* Pods-MuscleBeach.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MuscleBeach/MuscleBeach.entitlements;
 				DEVELOPMENT_TEAM = 73GBZ239BR;
 				INFOPLIST_FILE = MuscleBeach/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
