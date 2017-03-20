@@ -13,9 +13,15 @@
 		D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D180B90C1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld */; };
 		D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */; };
 		D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9111E7FAFC900AB0DA9 /* LaunchScreen.storyboard */; };
+		D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */; };
+		D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */; };
+		FFC1E6A5E02CDF738FBE4685 /* Pods_MuscleBeach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53828CBFA9D569BFD84F0A67 /* Pods_MuscleBeach.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		053EDA45175F6F6844BC8E30 /* Pods-MuscleBeach.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuscleBeach.release.xcconfig"; path = "Pods/Target Support Files/Pods-MuscleBeach/Pods-MuscleBeach.release.xcconfig"; sourceTree = "<group>"; };
+		452A96E7E9CB468151246D7E /* Pods-MuscleBeach.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuscleBeach.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MuscleBeach/Pods-MuscleBeach.debug.xcconfig"; sourceTree = "<group>"; };
+		53828CBFA9D569BFD84F0A67 /* Pods_MuscleBeach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MuscleBeach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D180B9021E7FAFC900AB0DA9 /* MuscleBeach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleBeach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D180B9071E7FAFC900AB0DA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +30,8 @@
 		D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D180B9121E7FAFC900AB0DA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D180B9141E7FAFC900AB0DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFC1E6A5E02CDF738FBE4685 /* Pods_MuscleBeach.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27D761F5F9B8AE4271468DDF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53828CBFA9D569BFD84F0A67 /* Pods_MuscleBeach.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4CD5C32B3FBBF758C67B81C8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				452A96E7E9CB468151246D7E /* Pods-MuscleBeach.debug.xcconfig */,
+				053EDA45175F6F6844BC8E30 /* Pods-MuscleBeach.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D180B8F91E7FAFC900AB0DA9 = {
 			isa = PBXGroup;
 			children = (
 				D180B9041E7FAFC900AB0DA9 /* MuscleBeach */,
 				D180B9031E7FAFC900AB0DA9 /* Products */,
+				4CD5C32B3FBBF758C67B81C8 /* Pods */,
+				27D761F5F9B8AE4271468DDF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +84,25 @@
 		D180B9041E7FAFC900AB0DA9 /* MuscleBeach */ = {
 			isa = PBXGroup;
 			children = (
+				D180B91A1E7FB01500AB0DA9 /* StoryBoard */,
 				D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */,
 				D180B9071E7FAFC900AB0DA9 /* ViewController.swift */,
-				D180B9091E7FAFC900AB0DA9 /* Main.storyboard */,
 				D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */,
 				D180B9111E7FAFC900AB0DA9 /* LaunchScreen.storyboard */,
+				D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */,
 				D180B9141E7FAFC900AB0DA9 /* Info.plist */,
 				D180B90C1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld */,
 			);
 			path = MuscleBeach;
+			sourceTree = "<group>";
+		};
+		D180B91A1E7FB01500AB0DA9 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				D180B9091E7FAFC900AB0DA9 /* Main.storyboard */,
+				D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */,
+			);
+			name = StoryBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +112,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D180B9171E7FAFC900AB0DA9 /* Build configuration list for PBXNativeTarget "MuscleBeach" */;
 			buildPhases = (
+				75BA47530092238A36EAF0B6 /* [CP] Check Pods Manifest.lock */,
 				D180B8FE1E7FAFC900AB0DA9 /* Sources */,
 				D180B8FF1E7FAFC900AB0DA9 /* Frameworks */,
 				D180B9001E7FAFC900AB0DA9 /* Resources */,
+				69EECD20FF7AC2F8757B2B8A /* [CP] Embed Pods Frameworks */,
+				A6C3217E3AAC5E9174A10A9B /* [CP] Copy Pods Resources */,
+				D1683C1F1E7FB66E00C9D887 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -129,11 +171,75 @@
 			files = (
 				D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */,
 				D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */,
+				D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */,
 				D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */,
+				D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		69EECD20FF7AC2F8757B2B8A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MuscleBeach/Pods-MuscleBeach-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75BA47530092238A36EAF0B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A6C3217E3AAC5E9174A10A9B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MuscleBeach/Pods-MuscleBeach-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1683C1F1E7FB66E00C9D887 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D180B8FE1E7FAFC900AB0DA9 /* Sources */ = {
@@ -261,6 +367,7 @@
 		};
 		D180B9181E7FAFC900AB0DA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 452A96E7E9CB468151246D7E /* Pods-MuscleBeach.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 73GBZ239BR;
@@ -274,6 +381,7 @@
 		};
 		D180B9191E7FAFC900AB0DA9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 053EDA45175F6F6844BC8E30 /* Pods-MuscleBeach.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 73GBZ239BR;
@@ -304,6 +412,7 @@
 				D180B9191E7FAFC900AB0DA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
