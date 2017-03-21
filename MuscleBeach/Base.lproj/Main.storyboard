@@ -252,11 +252,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63H-4v-Qaz">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bz8-4b-NCj">
+                                <rect key="frame" x="16" y="72" width="343" height="520"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.95078410879999997" green="1" blue="0.1046111519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">🌟肌肉海灘 包週餐方案 (2016.9月起)🌟
+　
+👑台北市各大區域皆有配送👑
+內湖區、南港區經過兩個月的試營運，
+現在正式開賣啦～
+包週餐與免運費門檻 全 面 優 惠 與台北市區域一致！
+歡迎多加預訂包週餐👍🏻
+台北市全區訂購單：http://goo.gl/Cv9DWG
+　
+✔包週餐特點：
+每餐配送兩份以上包週餐
+中餐或晚餐擇一
+每日新鮮配送(不含六日)
+前一個工作日(不含六日)晚上【5點】前填單預訂、完成轉帳即可
+包週餐可享 6 ~ 8 折 運費折扣
+自由選擇開始日期
+　
+✔包週餐費用(5天)：
+包一週1號享瘦餐600元
+包一週2號仙女餐600元
+包一週3號猛男餐750元
+可任選2份包週餐
+　
+✔包週餐享運費優惠：
+1-2週：運費【八折】
+3週：運費【七折】
+4週(包月)：運費【六折】
+　
+✔自取時段&amp;外送預估時段：
+週一～週五
+午餐：11:00~12:30
+晚餐：17:00~18:30
+備註：因餐點運送特性，恕無法指定、保證到達時間，但外送夥伴一定儘快將餐點送達！請訂餐朋友多多體諒
+　
+✔外送範圍：
+台北市中正區、大同區、中山區、松山區、大安區、萬華區、信義區、內湖區、南港區
+備註：部分區域無法配送或試營運中請私訊我們為您查詢
+　
+✔自取地點：
+肌肉海灘工作室　台北市信義區和平東路三段391巷8弄30號1樓
+文逸動物醫院正對面
+捷運麟光站出站後步行約五分鐘
+　
+✔範例解說：
+Q: 我要訂一週(5天)午餐，包週餐1號+2號，共多少錢?
+A: 600元+600元+運費八折240元，共1,440元】Q: 我要訂包月餐(4週、20天)午餐，包週餐1號+2號+3號，共多少錢?
+A: 2,400元+2,400元3,000元+運費六折720元，共8,520元
+　
+Q:我已訂購包週餐2份，其中幾天有滿五份運費怎麼算？
+A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費折抵下次訂餐使用哦！(歡迎大家揪團訂餐省運費囉)</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -264,7 +316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JFk-Ma-fVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3380" y="785"/>
+            <point key="canvasLocation" x="3380" y="784.85757121439292"/>
         </scene>
         <!--揪團訂餐-->
         <scene sceneID="5Xr-Ug-K4C">
@@ -309,7 +361,7 @@
             </objects>
             <point key="canvasLocation" x="3380" y="1496"/>
         </scene>
-        <!--帳號資訊-->
+        <!--Side Menu-->
         <scene sceneID="dvG-SM-aus">
             <objects>
                 <tableViewController storyboardIdentifier="SideMenuTableViewController" id="d1Q-Lb-4PB" customClass="SideMenuTableViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
@@ -322,11 +374,110 @@
                             <outlet property="delegate" destination="d1Q-Lb-4PB" id="1k6-8N-MMU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="帳號資訊" id="L5G-s4-PY2"/>
+                    <navigationItem key="navigationItem" title="Side Menu" id="L5G-s4-PY2"/>
+                    <connections>
+                        <segue destination="dBS-wh-lCH" kind="show" identifier="toProfilePage" id="xCE-kj-huR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OwV-C0-coI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4180" y="-1517"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="ayx-Tn-nyS">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="dBS-wh-lCH" customClass="ProfileViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fxc-Fl-Adx"/>
+                        <viewControllerLayoutGuide type="bottom" id="sog-fj-uwW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bmP-8A-12V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K7s-gt-YNz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="206"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="yWh-bz-kxJ">
+                                        <rect key="frame" x="67" y="70" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NOb-7A-3KT">
+                                <rect key="frame" x="96" y="214" width="239" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-nR-AI3">
+                                <rect key="frame" x="96" y="256" width="239" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aG3-WN-gnK">
+                                <rect key="frame" x="96" y="300" width="239" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="appworks" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZHf-fN-nL3">
+                                <rect key="frame" x="96" y="350" width="239" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEH-sV-WQX">
+                                <rect key="frame" x="42" y="219" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="電話" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI6-2I-Iew">
+                                <rect key="frame" x="42" y="261" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="生日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBb-z0-sxr">
+                                <rect key="frame" x="42" y="303" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="送餐地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ0-f1-Aim">
+                                <rect key="frame" x="8" y="355" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CFd-ln-a9R">
+                                <rect key="frame" x="0.0" y="395" width="375" height="272"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="orderAddress" destination="ZHf-fN-nL3" id="ylf-Rs-8HU"/>
+                        <outlet property="tableView" destination="CFd-ln-a9R" id="B9w-Fl-MsO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sPD-VL-f3M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4180" y="-2185.4572713643179"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Kmp-zE-t5J">
@@ -413,6 +564,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jo0-ag-nHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3380" y="-771.36431784107947"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ZcR-KB-fDM">
+            <objects>
+                <viewController id="GMo-f0-pRK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kjR-iu-Wr1"/>
+                        <viewControllerLayoutGuide type="bottom" id="vym-HC-gcK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e8j-X1-Et7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6R9-aT-Rt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4180" y="35.532233883058474"/>
         </scene>
         <!--訂餐首頁-->
         <scene sceneID="gF2-o8-6se">

@@ -96,11 +96,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkLoginStatus() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+        let MainPageInitialViewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+        let LoginInitialViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
         
         let currentuser = FIRAuth.auth()?.currentUser
         if currentuser != nil {
-            self.window?.rootViewController = initialViewController
+            self.window?.rootViewController = MainPageInitialViewController
+            self.window?.makeKeyAndVisible()
+        } else {
+            self.window?.rootViewController = LoginInitialViewController
             self.window?.makeKeyAndVisible()
         }
     }

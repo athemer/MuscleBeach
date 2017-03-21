@@ -90,6 +90,23 @@ class SideMenuTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let componenets = cellComponentsArray[indexPath.section]
+        switch componenets {
+        case .profile:
+//            let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController")
+//            self.present(profileViewController!, animated: true, completion: nil)
+            performSegue(withIdentifier: "toProfilePage", sender: nil)
+            
+        case .orderHistory:
+            print (3)
+            
+        case .setting:
+            print (4)
+            
+        }
+    }
+    
     func registerCell() {
         let proFileNib = UINib(nibName: "ProfileCell", bundle: nil)
         let orderHisNib = UINib(nibName: "OrderHistoryCell", bundle: nil)

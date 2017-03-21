@@ -14,6 +14,11 @@
 		D121F66E1E8114450049796D /* OrderHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F66C1E8114450049796D /* OrderHistoryCell.xib */; };
 		D121F6711E81146C0049796D /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F66F1E81146C0049796D /* SettingsCell.swift */; };
 		D121F6721E81146C0049796D /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F6701E81146C0049796D /* SettingsCell.xib */; };
+		D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6731E8122D80049796D /* ProfileViewController.swift */; };
+		D121F6791E815E1F0049796D /* ProfilePageAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6771E815E1F0049796D /* ProfilePageAddressCell.swift */; };
+		D121F67A1E815E1F0049796D /* ProfilePageAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F6781E815E1F0049796D /* ProfilePageAddressCell.xib */; };
+		D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F67B1E815E350049796D /* ProfilePageAddCell.swift */; };
+		D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F67C1E815E350049796D /* ProfilePageAddCell.xib */; };
 		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
 		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
 		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
@@ -39,6 +44,11 @@
 		D121F66C1E8114450049796D /* OrderHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderHistoryCell.xib; sourceTree = "<group>"; };
 		D121F66F1E81146C0049796D /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		D121F6701E81146C0049796D /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
+		D121F6731E8122D80049796D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D121F6771E815E1F0049796D /* ProfilePageAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageAddressCell.swift; sourceTree = "<group>"; };
+		D121F6781E815E1F0049796D /* ProfilePageAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePageAddressCell.xib; sourceTree = "<group>"; };
+		D121F67B1E815E350049796D /* ProfilePageAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageAddCell.swift; sourceTree = "<group>"; };
+		D121F67C1E815E350049796D /* ProfilePageAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePageAddCell.xib; sourceTree = "<group>"; };
 		D1683C231E7FCADE00C9D887 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
@@ -84,17 +94,38 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		D1683C211E7FBF8D00C9D887 /* Controller */ = {
+		D121F67F1E817D870049796D /* ProfilePage */ = {
 			isa = PBXGroup;
 			children = (
-				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
-				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
-				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
-				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
+				D121F6731E8122D80049796D /* ProfileViewController.swift */,
+				D121F6771E815E1F0049796D /* ProfilePageAddressCell.swift */,
+				D121F6781E815E1F0049796D /* ProfilePageAddressCell.xib */,
+				D121F67B1E815E350049796D /* ProfilePageAddCell.swift */,
+				D121F67C1E815E350049796D /* ProfilePageAddCell.xib */,
+			);
+			name = ProfilePage;
+			sourceTree = "<group>";
+		};
+		D121F6811E817DB90049796D /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
 				D121F65F1E81135F0049796D /* ProfileCell.swift */,
 				D121F6601E81135F0049796D /* ProfileCell.xib */,
 				D121F66B1E8114450049796D /* OrderHistoryCell.swift */,
 				D121F66C1E8114450049796D /* OrderHistoryCell.xib */,
+			);
+			name = "Side Menu";
+			sourceTree = "<group>";
+		};
+		D1683C211E7FBF8D00C9D887 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D121F67F1E817D870049796D /* ProfilePage */,
+				D121F6811E817DB90049796D /* Side Menu */,
+				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
+				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
+				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
+				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
 				D121F66F1E81146C0049796D /* SettingsCell.swift */,
 				D121F6701E81146C0049796D /* SettingsCell.xib */,
 			);
@@ -222,9 +253,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D121F67A1E815E1F0049796D /* ProfilePageAddressCell.xib in Resources */,
 				D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */,
 				D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */,
 				D121F6721E81146C0049796D /* SettingsCell.xib in Resources */,
+				D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */,
 				D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */,
 				D121F66E1E8114450049796D /* OrderHistoryCell.xib in Resources */,
 				D121F6621E81135F0049796D /* ProfileCell.xib in Resources */,
@@ -307,7 +340,10 @@
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
 				D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,
+				D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
+				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
+				D121F6791E815E1F0049796D /* ProfilePageAddressCell.swift in Sources */,
 				D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */,
 				D121F6611E81135F0049796D /* ProfileCell.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
