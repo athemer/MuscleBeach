@@ -309,6 +309,44 @@
             </objects>
             <point key="canvasLocation" x="3380" y="1496"/>
         </scene>
+        <!--帳號資訊-->
+        <scene sceneID="dvG-SM-aus">
+            <objects>
+                <tableViewController storyboardIdentifier="SideMenuTableViewController" id="d1Q-Lb-4PB" customClass="SideMenuTableViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3az-ny-6rl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="d1Q-Lb-4PB" id="1t1-yx-On7"/>
+                            <outlet property="delegate" destination="d1Q-Lb-4PB" id="1k6-8N-MMU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="帳號資訊" id="L5G-s4-PY2"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OwV-C0-coI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4180" y="-1517"/>
+        </scene>
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="Kmp-zE-t5J">
+            <objects>
+                <navigationController id="b5g-Ea-shW" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Rh-JA-Sz3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="d1Q-Lb-4PB" kind="relationship" relationship="rootViewController" id="2fE-5t-lpr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L03-g4-dM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3380" y="-1517"/>
+        </scene>
         <!--Main Page View Controller-->
         <scene sceneID="lcK-cD-YUL">
             <objects>
@@ -357,6 +395,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.58736115690000001" green="0.78680557009999996" blue="0.23521485919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="包週"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ggf-K2-tg1">
+                                <rect key="frame" x="40" y="310" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="butTapped:" destination="Jtr-Ur-Moe" eventType="touchUpInside" id="pAp-ys-wDo"/>
+                                    <segue destination="b5g-Ea-shW" kind="presentation" id="fXC-BL-PrX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
