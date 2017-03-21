@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 class DataService {
-    
+
     static let ds = DataService()
 
     func createFirbaseDBUser(uid: String, userData: [String: String], email: [String: String], password: [String: String], name: [String: String], number: [String: String]) {
@@ -20,6 +20,4 @@ class DataService {
         FIRDatabase.database().reference().child("users").child(uid).updateChildValues(name)
         FIRDatabase.database().reference().child("users").child(uid).updateChildValues(number)
     }
-    
-    
 }

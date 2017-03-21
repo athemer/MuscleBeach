@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        
+        checkLoginStatus()
         return true
     }
 
@@ -90,6 +92,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
+    func checkLoginStatus() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+        
+        let currentuser = FIRAuth.auth()?.currentUser
+        if currentuser != nil {
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
+    }
 }
 

@@ -21,7 +21,6 @@ class MainPageViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -38,7 +37,6 @@ class MainPageViewController: UIViewController {
             try FIRAuth.auth()?.signOut()
             let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
             self.present(signUpViewController!, animated: true, completion: nil)
-            
         } catch let error {
             print ("not logged out \(error)")
         }
