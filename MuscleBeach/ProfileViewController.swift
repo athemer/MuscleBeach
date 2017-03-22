@@ -14,10 +14,9 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     @IBOutlet weak var orderAddress: UITextField!
     var addressArray: [String] = ["中山區"]
-    let arr: [String] = ["中山區" ,"大同區", "南港區", "信義區", "大安區"]
-    let alert = UIAlertController(title: "新增外送地址",
-                                  message: "請輸入外地址\n\n\n\n\n\n台北市",
-                                  preferredStyle: .alert)
+    let arr: [String] = ["台北市中山區" ,"台北市大同區", "台北市南港區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區"]
+    
+    var areaTextField: UITextField!
     
     enum Content {
         case addressCell
@@ -106,7 +105,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        alert.textFields?[0].text = arr[row]
+        areaTextField.text = arr[row]
         
         
         print ("\(arr[row])")
@@ -122,14 +121,19 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func setUpAlert() {
 
+        let alert = UIAlertController(title: "新增外送地址",
+                                      message: "請輸入外地址\n\n\n\n\n\n",
+                                      preferredStyle: .alert)
+        
         // Picker
-        let frame = CGRect(x: 40, y: 40, width: 100, height: 100)
+        let frame = CGRect(x: 30, y: 50, width: 200, height: 120)
         let picker: UIPickerView = UIPickerView(frame: frame)
         picker.dataSource = self
         picker.delegate = self
         alert.view.addSubview(picker)
         
         alert.addTextField { (textField: UITextField) in
+            self.areaTextField = textField
             textField.keyboardAppearance = .dark
             textField.keyboardType = .default
             textField.autocorrectionType = .default
@@ -147,8 +151,8 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
 
         let submitAction = UIAlertAction(title: "確定", style: .default, handler: { (action) -> Void in
             // Get 1st TextField's text
-            let textField = self.alert.textFields![0]
-            print(textField.text!)
+            //let textField = self.alert.textFields![0]
+            //print(textField.text!)
         })
         let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (action) -> Void in })
         alert.addAction(submitAction)
