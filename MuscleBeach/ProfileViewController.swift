@@ -13,10 +13,12 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var orderAddress: UITextField!
+    
     var addressArray: [String] = ["中山區"]
     let arr: [String] = ["台北市中山區" ,"台北市大同區", "台北市南港區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區"]
     
     var areaTextField: UITextField!
+    var addressTextField: UITextField!
     
     enum Content {
         case addressCell
@@ -142,6 +144,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
         
         alert.addTextField { (textField: UITextField) in
+            self.addressTextField = textField
             textField.keyboardAppearance = .dark
             textField.keyboardType = .default
             textField.autocorrectionType = .default
@@ -153,6 +156,17 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             // Get 1st TextField's text
             //let textField = self.alert.textFields![0]
             //print(textField.text!)
+
+            
+            if alert.textFields?[0] != nil && alert.textFields?[1] != nil {
+                let address = "\((alert.textFields?[0].text)!) \((alert.textFields?[1].text)!)"
+                print(address)
+                self.addressArray.append(address)
+                self.tableView.reloadData()
+            } else {
+                print ("please insert value")
+            }
+            
         })
         let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (action) -> Void in })
         alert.addAction(submitAction)
