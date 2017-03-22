@@ -19,6 +19,8 @@
 		D121F67A1E815E1F0049796D /* ProfilePageAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F6781E815E1F0049796D /* ProfilePageAddressCell.xib */; };
 		D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F67B1E815E350049796D /* ProfilePageAddCell.swift */; };
 		D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F67C1E815E350049796D /* ProfilePageAddCell.xib */; };
+		D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6821E81840C0049796D /* SelfPickUpViewController.swift */; };
+		D121F6851E8185350049796D /* SelfPickUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */; };
 		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
 		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
 		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
@@ -49,6 +51,8 @@
 		D121F6781E815E1F0049796D /* ProfilePageAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePageAddressCell.xib; sourceTree = "<group>"; };
 		D121F67B1E815E350049796D /* ProfilePageAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageAddCell.swift; sourceTree = "<group>"; };
 		D121F67C1E815E350049796D /* ProfilePageAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePageAddCell.xib; sourceTree = "<group>"; };
+		D121F6821E81840C0049796D /* SelfPickUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfPickUpViewController.swift; sourceTree = "<group>"; };
+		D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfPickUpTableViewCell.swift; sourceTree = "<group>"; };
 		D1683C231E7FCADE00C9D887 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
@@ -117,12 +121,22 @@
 			name = "Side Menu";
 			sourceTree = "<group>";
 		};
+		D121F6861E8185440049796D /* SelfPickUp */ = {
+			isa = PBXGroup;
+			children = (
+				D121F6821E81840C0049796D /* SelfPickUpViewController.swift */,
+				D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */,
+			);
+			name = SelfPickUp;
+			sourceTree = "<group>";
+		};
 		D1683C211E7FBF8D00C9D887 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				D121F67F1E817D870049796D /* ProfilePage */,
 				D121F6811E817DB90049796D /* Side Menu */,
 				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
+				D121F6861E8185440049796D /* SelfPickUp */,
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
 				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
 				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
@@ -335,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */,
 				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,
 				D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */,
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
@@ -348,6 +363,7 @@
 				D121F6611E81135F0049796D /* ProfileCell.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
 				D121F65E1E8103AE0049796D /* SideMenuTableViewController.swift in Sources */,
+				D121F6851E8185350049796D /* SelfPickUpTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

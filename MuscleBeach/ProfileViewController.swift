@@ -8,12 +8,16 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var orderAddress: UITextField!
     var addressArray: [String] = ["中山區"]
+    let arr: [String] = ["中山區" ,"大同區", "南港區", "信義區", "大安區"]
+    let alert = UIAlertController(title: "新增外送地址",
+                                  message: "請輸入外地址\n\n\n\n\n\n台北市",
+                                  preferredStyle: .alert)
     
     enum Content {
         case addressCell
@@ -26,6 +30,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         registerCell()
 
     }
@@ -73,7 +78,8 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             orderAddress.text = addressArray[indexPath.row]
             
         case .addCell:
-            print ("add")
+            setUpAlert()
+            
         }
     }
     
@@ -86,11 +92,70 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return arr.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return arr[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        alert.textFields?[0].text = arr[row]
+        
+        
+        print ("\(arr[row])")
+    }
+    
+    
     func registerCell() {
         let addressNib = UINib(nibName: "ProfilePageAddressCell", bundle: nil)
         let addNib = UINib(nibName: "ProfilePageAddCell", bundle: nil)
         tableView.register(addressNib, forCellReuseIdentifier: "ProfilePageAddressCell")
         tableView.register(addNib, forCellReuseIdentifier: "ProfilePageAddCell")
     }
+    
+    func setUpAlert() {
+
+        // Picker
+        let frame = CGRect(x: 40, y: 40, width: 100, height: 100)
+        let picker: UIPickerView = UIPickerView(frame: frame)
+        picker.dataSource = self
+        picker.delegate = self
+        alert.view.addSubview(picker)
+        
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "行政區"
+            textField.clearButtonMode = .whileEditing
+        }
+        
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "地址"
+            textField.clearButtonMode = .whileEditing
+        }
+
+        let submitAction = UIAlertAction(title: "確定", style: .default, handler: { (action) -> Void in
+            // Get 1st TextField's text
+            let textField = self.alert.textFields![0]
+            print(textField.text!)
+        })
+        let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (action) -> Void in })
+        alert.addAction(submitAction)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+        
+    }
+
 }
 
