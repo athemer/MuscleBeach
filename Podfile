@@ -11,4 +11,5 @@ target 'MuscleBeach' do
   pod 'Firebase/Database'
   pod 'SwiftLint'
   pod 'SideMenu'
+  pod 'JTAppleCalendar'
 end

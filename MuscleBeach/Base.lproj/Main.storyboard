@@ -185,7 +185,7 @@
             <objects>
                 <navigationController id="2uB-t5-QMv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="訂餐規則" id="jlg-1f-Ae9"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cdP-PW-xNo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdP-PW-xNo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -228,7 +228,7 @@
             <objects>
                 <navigationController id="UNb-6Y-QQD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="訂單查詢" id="8il-tr-ZM4"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9OB-fW-TMR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9OB-fW-TMR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -323,7 +323,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
             <objects>
                 <navigationController id="FDo-Ao-ajM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="揪團訂餐" id="A72-fp-z0l"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PJF-Zj-YCV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PJF-Zj-YCV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -483,7 +483,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
         <scene sceneID="Kmp-zE-t5J">
             <objects>
                 <navigationController id="b5g-Ea-shW" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7Rh-JA-Sz3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Rh-JA-Sz3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -733,6 +733,25 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     <view key="view" contentMode="scaleToFill" id="e8j-X1-Et7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yYI-yW-8Kt">
+                                <rect key="frame" x="0.0" y="105" width="375" height="257"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VS2-my-n1b">
+                                <rect key="frame" x="0.0" y="396" width="375" height="225"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pji-o1-Nqn">
+                                <rect key="frame" x="121" y="28" width="121" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -745,7 +764,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
             <objects>
                 <navigationController id="J21-dv-0BO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="訂餐首頁" id="4eU-JO-GV1"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cgr-sO-Ywn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cgr-sO-Ywn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
