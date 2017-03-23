@@ -13,6 +13,11 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
+    let daysLimitation: Int = 5
+    
+    
+    @IBOutlet weak var daysLeft: UILabel!
+    @IBOutlet weak var monthLabel: UILabel!
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
@@ -26,25 +31,28 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         calendarView.registerCellViewXib(file: "CellView") // Registering your cell is manditory
         calendarView.cellInset = CGPoint(x: 0, y: 0)       // default is (3,3)
         // Do any additional setup after loading the view, typically from a nib.
+        
+        calendarView.allowsMultipleSelection  = true
+        calendarView.rangeSelectionWillBeUsed = true
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM dd"
         
-        let startDate = formatter.date(from: "2016 02 01")! // You can use date generated from a formatter
-        let endDate = Date()                                // You can also use dates created from this function
+        let startDate = formatter.date(from: "2017 01 01")!         // You can use date generated from a formatter
+        let endDate = formatter.date(from: "2017 12 31")!           // You can also use dates created from this function
         let parameters = ConfigurationParameters(startDate: startDate,
                                                  endDate: endDate,
                                                  numberOfRows: 6, // Only 1, 2, 3, & 6 are allowed
             calendar: Calendar.current,
             generateInDates: .forAllMonths,
-            generateOutDates: .tillEndOfGrid,
+            generateOutDates: .tillEndOfGrid ,
             firstDayOfWeek: .sunday)
         return parameters
     }
@@ -58,10 +66,33 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         
         handleCellTextColor(view: cell, cellState: cellState)
         handleCellSelection(view: cell, cellState: cellState)
+        
+        if cellState.dateBelongsTo == .thisMonth {
+            myCustomCell.isHidden = false
+        } else {
+            myCustomCell.isHidden = true
+        }
+        
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        monthLabel.text = dateFormatter.string(from: visibleDates.monthDates.first!)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         
+        let number: Int = daysLimitation - calendarView.selectedDates.count
+        daysLeft.text = "\(number)"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        let localDate = dateFormatter.string(from: date)
+        
+        print ("aHA \(localDate)")
+        print ("COUNT \(calendarView.selectedDates.count)")
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
@@ -70,6 +101,21 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleDayCellView, cellState: CellState) -> Bool {
+        
+        
+        if cellState.dateBelongsTo == .thisMonth, cellState.day != .sunday, cellState.day != .saturday {
+            let number: Int = daysLimitation - calendarView.selectedDates.count
+            if number > 0 {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
     }
     
     // Function to handle the text color of the calendar
@@ -95,6 +141,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         guard let myCustomCell = view as? CellView  else {
             return
         }
+        
         if cellState.isSelected {
             myCustomCell.selectedView.layer.cornerRadius = 20
             myCustomCell.selectedView.isHidden = false
