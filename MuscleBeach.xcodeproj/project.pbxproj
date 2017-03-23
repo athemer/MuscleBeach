@@ -33,6 +33,9 @@
 		D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9111E7FAFC900AB0DA9 /* LaunchScreen.storyboard */; };
 		D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */; };
 		D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */; };
+		D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F4FDE11E8370AA001233FA /* CellView.xib */; };
+		D1F4FDE41E83710F001233FA /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE31E83710F001233FA /* CellView.swift */; };
+		D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE51E837176001233FA /* CalendarViewController.swift */; };
 		FFC1E6A5E02CDF738FBE4685 /* Pods_MuscleBeach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53828CBFA9D569BFD84F0A67 /* Pods_MuscleBeach.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +72,9 @@
 		D180B9141E7FAFC900AB0DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1F4FDE11E8370AA001233FA /* CellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellView.xib; sourceTree = "<group>"; };
+		D1F4FDE31E83710F001233FA /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		D1F4FDE51E837176001233FA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 		D1683C211E7FBF8D00C9D887 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D1F4FDE01E83708F001233FA /* Calendar */,
 				D121F67F1E817D870049796D /* ProfilePage */,
 				D121F6811E817DB90049796D /* Side Menu */,
 				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
@@ -199,6 +206,16 @@
 				D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */,
 			);
 			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		D1F4FDE01E83708F001233FA /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				D1F4FDE31E83710F001233FA /* CellView.swift */,
+				D1F4FDE51E837176001233FA /* CalendarViewController.swift */,
+				D1F4FDE11E8370AA001233FA /* CellView.xib */,
+			);
+			name = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +290,7 @@
 				D121F67A1E815E1F0049796D /* ProfilePageAddressCell.xib in Resources */,
 				D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */,
 				D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */,
+				D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */,
 				D121F6721E81146C0049796D /* SettingsCell.xib in Resources */,
 				D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */,
 				D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */,
@@ -358,7 +376,9 @@
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
 				D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */,
 				D11A2A371E826C1900D5D6B7 /* PickUpLocationViewController.swift in Sources */,
+				D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,
+				D1F4FDE41E83710F001233FA /* CellView.swift in Sources */,
 				D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
