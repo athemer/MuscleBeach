@@ -1,23 +1,25 @@
 //
-//  CalendarViewController.swift
+//  ReorderViewController.swift
 //  MuscleBeach
 //
-//  Created by 陳冠華 on 2017/3/23.
+//  Created by 陳冠華 on 2017/3/25.
 //  Copyright © 2017年 my app. All rights reserved.
 //
 
 import UIKit
 import JTAppleCalendar
+import Firebase
 
-class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
+class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
+    
+    
+    let dateArray: [String] = ["2017-03-29", "2017-03-28", "2017-03-25"]
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
-    let daysLimitation: Int = 10
-    
-    
-    @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
+    
+    let dateFormatter = DateFormatter()
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
@@ -25,7 +27,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         calendarView.dataSource = self
         calendarView.delegate = self
         calendarView.registerCellViewXib(file: "CellView") // Registering your cell is manditory
@@ -34,12 +35,17 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         
         calendarView.allowsMultipleSelection  = true
         calendarView.rangeSelectionWillBeUsed = true
+        // Do any additional setup after loading the view.
+        
+        
+        
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         let formatter = DateFormatter()
@@ -56,14 +62,15 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             firstDayOfWeek: .sunday)
         return parameters
     }
-    
+
     func calendar(_ calendar: JTAppleCalendarView, willDisplayCell cell: JTAppleDayCellView, date: Date, cellState: CellState) {
-
+        
         guard let myCustomCell = cell as? CellView else { return }
-
+        
         // Setup Cell text
         myCustomCell.dayLabel.text = cellState.text
         
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         handleCellTextColor(view: cell, cellState: cellState)
         handleCellSelection(view: cell, cellState: cellState)
         
@@ -73,20 +80,25 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             myCustomCell.isHidden = true
         }
         
+        let cellStateDateString = dateFormatter.string(from: cellState.date)
+
+        for x in 0...(dateArray.count - 1) {
+            if cellStateDateString == dateArray[x] {
+                myCustomCell.dayLabel.textColor = UIColor.red
+            }
+        }
+        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        let dateFormatter = DateFormatter()
+        
         dateFormatter.dateFormat = "MMMM yyyy"
         monthLabel.text = dateFormatter.string(from: visibleDates.monthDates.first!)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
+
         
-        let number: Int = daysLimitation - calendarView.selectedDates.count
-        daysLeft.text = "\(number)"
-        
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone.current
         let localDate = dateFormatter.string(from: date)
@@ -96,11 +108,10 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
-    
+
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         
-        let number: Int = daysLimitation - calendarView.selectedDates.count
-        daysLeft.text = "\(number)"
+        
         
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
@@ -110,12 +121,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         
         
         if cellState.dateBelongsTo == .thisMonth, cellState.day != .sunday, cellState.day != .saturday {
-            let number: Int = daysLimitation - calendarView.selectedDates.count
-            if number > 0 {
-                return true
-            } else {
-                return false
-            }
+            return true
         } else {
             return false
         }
@@ -152,15 +158,45 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             myCustomCell.selectedView.isHidden = true
         }
     }
-}
+    
+    func fetchQueriedDataFromFirebase () {
+        var arr: [[String: AnyObject]] = []
+        
+        
+        arr.removeAll()
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let snapData = snapshot.value as? [String: AnyObject] {
+                for snap in snapData {
+//                    print (" DATA \(snap)")
+                    if let data = snap.value as? [String: AnyObject] {
+//                        print ("CD \(data)")
 
-extension UIColor {
-    convenience init(colorWithHexValue value: Int, alpha:CGFloat = 1.0){
-        self.init(
-            red: CGFloat((value & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((value & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(value & 0x0000FF) / 255.0,
-            alpha: alpha
-        )
+                        
+                        arr.append(data)
+                        
+                    }
+                    
+                }
+            }
+//            print (arr)
+            
+            let predicate = NSPredicate(format: "date == %@", "2017-03-29")
+            let filtered = (arr as NSArray).filtered(using: predicate)
+            
+            print ("check \(filtered)")
+            
+            
+        })
+
+        
     }
+    
+    @IBAction func checkButtonTapped(_ sender: Any) {
+        fetchQueriedDataFromFirebase()
+        
+    }
+    
+    
+    
 }

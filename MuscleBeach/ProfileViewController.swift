@@ -17,8 +17,8 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     var addressArray: [String] = ["中山區"]
     let arr: [String] = ["台北市中山區" ,"台北市大同區", "台北市南港區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區"]
     
-    var areaTextField: UITextField!
-    var addressTextField: UITextField!
+    var areaTextField: UITextField?
+    var addressTextField: UITextField?
     
     enum Content {
         case addressCell
@@ -107,7 +107,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        areaTextField.text = arr[row]
+        areaTextField?.text = arr[row]
         
         
         print ("\(arr[row])")
@@ -120,20 +120,19 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         tableView.register(addressNib, forCellReuseIdentifier: "ProfilePageAddressCell")
         tableView.register(addNib, forCellReuseIdentifier: "ProfilePageAddCell")
     }
-    
+
     func setUpAlert() {
 
         let alert = UIAlertController(title: "新增外送地址",
                                       message: "請輸入外地址\n\n\n\n\n\n",
                                       preferredStyle: .alert)
-        
         // Picker
         let frame = CGRect(x: 30, y: 50, width: 200, height: 120)
         let picker: UIPickerView = UIPickerView(frame: frame)
         picker.dataSource = self
         picker.delegate = self
         alert.view.addSubview(picker)
-        
+
         alert.addTextField { (textField: UITextField) in
             self.areaTextField = textField
             textField.keyboardAppearance = .dark
@@ -142,7 +141,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             textField.placeholder = "行政區"
             textField.clearButtonMode = .whileEditing
         }
-        
+
         alert.addTextField { (textField: UITextField) in
             self.addressTextField = textField
             textField.keyboardAppearance = .dark
@@ -157,23 +156,54 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             //let textField = self.alert.textFields![0]
             //print(textField.text!)
 
-            
-            if alert.textFields?[0] != nil && alert.textFields?[1] != nil {
-                let address = "\((alert.textFields?[0].text)!) \((alert.textFields?[1].text)!)"
-                print(address)
-                self.addressArray.append(address)
-                self.tableView.reloadData()
-            } else {
-                print ("please insert value")
-            }
-            
+            guard
+                let textFields = alert.textFields,
+                textFields.count >= 2
+                else {
+
+                    // todo: error handling
+
+                    return
+
+                }
+
+            guard
+                let street = textFields[0].text
+                else {
+
+                    // todo: error handling
+
+                    return
+
+                }
+
+            guard
+                let address = textFields[1].text
+                else {
+
+                    // todo: error handling
+
+                    return
+
+                }
+
+            let finalAddress = "\(street) \(address)"
+
+            self.addressArray.append(finalAddress)
+
+//            if alert.textFields?[0] != nil && alert.textFields?[1] != nil {
+//                let address = "\((alert.textFields?[0].text)!) \((alert.textFields?[1].text)!)"
+//                print(address)
+//                self.addressArray.append(address)
+//                self.tableView.reloadData()
+//            } else {
+//                print ("please insert value")
+//            }
         })
         let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (action) -> Void in })
+
         alert.addAction(submitAction)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
-        
     }
-
 }
-

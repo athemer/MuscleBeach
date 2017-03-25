@@ -33,6 +33,11 @@
 		D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9111E7FAFC900AB0DA9 /* LaunchScreen.storyboard */; };
 		D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */; };
 		D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */; };
+		D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5D61E85179200A5D87B /* MealVariationViewController.swift */; };
+		D181C5D91E85195400A5D87B /* MealVariTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5D81E85195400A5D87B /* MealVariTableViewCell.swift */; };
+		D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5DA1E85FE4300A5D87B /* ReorderViewController.swift */; };
+		D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */; };
+		D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */; };
 		D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F4FDE11E8370AA001233FA /* CellView.xib */; };
 		D1F4FDE41E83710F001233FA /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE31E83710F001233FA /* CellView.swift */; };
 		D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE51E837176001233FA /* CalendarViewController.swift */; };
@@ -72,6 +77,11 @@
 		D180B9141E7FAFC900AB0DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D181C5D61E85179200A5D87B /* MealVariationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealVariationViewController.swift; sourceTree = "<group>"; };
+		D181C5D81E85195400A5D87B /* MealVariTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealVariTableViewCell.swift; sourceTree = "<group>"; };
+		D181C5DA1E85FE4300A5D87B /* ReorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderViewController.swift; sourceTree = "<group>"; };
+		D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D1F4FDE11E8370AA001233FA /* CellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellView.xib; sourceTree = "<group>"; };
 		D1F4FDE31E83710F001233FA /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		D1F4FDE51E837176001233FA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -142,14 +152,17 @@
 		D1683C211E7FBF8D00C9D887 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D181C5D51E85177500A5D87B /* MealVariation */,
 				D1F4FDE01E83708F001233FA /* Calendar */,
 				D121F67F1E817D870049796D /* ProfilePage */,
 				D121F6811E817DB90049796D /* Side Menu */,
 				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
 				D121F6861E8185440049796D /* SelfPickUp */,
+				D181C5DC1E861E6800A5D87B /* CheckOrder */,
+				D181C5DF1E86BB5C00A5D87B /* CheckOrderDetail */,
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
-				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
 				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
+				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
 				D121F66F1E81146C0049796D /* SettingsCell.swift */,
 				D121F6701E81146C0049796D /* SettingsCell.xib */,
 			);
@@ -206,6 +219,32 @@
 				D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */,
 			);
 			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		D181C5D51E85177500A5D87B /* MealVariation */ = {
+			isa = PBXGroup;
+			children = (
+				D181C5D61E85179200A5D87B /* MealVariationViewController.swift */,
+				D181C5D81E85195400A5D87B /* MealVariTableViewCell.swift */,
+			);
+			name = MealVariation;
+			sourceTree = "<group>";
+		};
+		D181C5DC1E861E6800A5D87B /* CheckOrder */ = {
+			isa = PBXGroup;
+			children = (
+				D181C5DA1E85FE4300A5D87B /* ReorderViewController.swift */,
+			);
+			name = CheckOrder;
+			sourceTree = "<group>";
+		};
+		D181C5DF1E86BB5C00A5D87B /* CheckOrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */,
+				D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */,
+			);
+			name = CheckOrderDetail;
 			sourceTree = "<group>";
 		};
 		D1F4FDE01E83708F001233FA /* Calendar */ = {
@@ -376,17 +415,22 @@
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
 				D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */,
 				D11A2A371E826C1900D5D6B7 /* PickUpLocationViewController.swift in Sources */,
+				D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */,
 				D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,
 				D1F4FDE41E83710F001233FA /* CellView.swift in Sources */,
 				D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */,
+				D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
 				D121F6791E815E1F0049796D /* ProfilePageAddressCell.swift in Sources */,
 				D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */,
 				D121F6611E81135F0049796D /* ProfileCell.swift in Sources */,
+				D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
+				D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */,
 				D121F65E1E8103AE0049796D /* SideMenuTableViewController.swift in Sources */,
+				D181C5D91E85195400A5D87B /* MealVariTableViewCell.swift in Sources */,
 				D121F6851E8185350049796D /* SelfPickUpTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
