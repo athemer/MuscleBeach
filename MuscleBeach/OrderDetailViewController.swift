@@ -24,6 +24,9 @@ class OrderDetailViewController: UIViewController, UITableViewDelegate, UITableV
     var locationAreaArr: [AnyObject ] = []
     var locationDetailArr: [AnyObject] = []
     var mealArr: [String: Int] = [:]
+    var typeAAmount: [AnyObject] = []
+    var typeBAmount: [AnyObject] = []
+    var typeCAmount: [AnyObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +73,23 @@ class OrderDetailViewController: UIViewController, UITableViewDelegate, UITableV
         // swiftlint:disable:next force_cast
         cell.locationInfo.text = locationAreaArr[indexPath.row] as! String
         // swiftlint:disable:previous force_cast
-
+        
+        // swiftlint:disable:next force_cast
+        cell.locationDetail.text = locationDetailArr[indexPath.row] as! String
+        // swiftlint:disable:previous force_cast
+        
+        // swiftlint:disable:next force_cast
+        cell.typeAAmount.text = "\(typeAAmount[indexPath.row] as! Int)"
+        // swiftlint:disable:previous force_cast
+        
+        // swiftlint:disable:next force_cast
+        cell.typeBAmount.text = "\(typeBAmount[indexPath.row] as! Int)"
+        // swiftlint:disable:previous force_cast
+        
+        // swiftlint:disable:next force_cast
+        cell.typeCAmount.text = "\(typeCAmount[indexPath.row] as! Int)"
+        // swiftlint:disable:previous force_cast
+        
         return cell
     }
 

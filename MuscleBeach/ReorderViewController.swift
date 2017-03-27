@@ -26,6 +26,9 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     var timeArr: [AnyObject] = []
     var locationAreaArr: [AnyObject ] = []
     var locationDetailArr: [AnyObject] = []
+    var typeAArr: [AnyObject] = []
+    var typeBArr: [AnyObject] = []
+    var typeCArr: [AnyObject] = []
     var mealArr: [String: Int] = [:]
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
@@ -122,6 +125,9 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         self.locationAreaArr.removeAll()
         self.locationDetailArr.removeAll()
         self.timeArr.removeAll()
+        self.typeAArr.removeAll()
+        self.typeBArr.removeAll()
+        self.typeCArr.removeAll()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone.current
@@ -136,6 +142,9 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         vc.locationAreaArr = self.locationAreaArr
         vc.locationDetailArr = self.locationDetailArr
         vc.timeArr = self.timeArr
+        vc.typeAAmount = self.typeAArr
+        vc.typeBAmount = self.typeBArr
+        vc.typeCAmount = self.typeCArr
         self.navigationController?.pushViewController(vc, animated: true)
 
 //        print ("aHA \(localDate)")
@@ -265,7 +274,12 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 let deliverType = dict["deliver"] as? AnyObject,
                 let deliverTime = dict["time"] as? AnyObject,
                 let deliverLocationArea = dict["locationArea"] as? AnyObject,
-                let delvierLocationDetail = dict["locationDetail"] as? AnyObject
+                let delvierLocationDetail = dict["locationDetail"] as? AnyObject,
+                let meal = dict["meal"] as? AnyObject,
+                let typeBAmount = meal["typeB"] as? AnyObject,
+                let typeCAmount = meal["typeC"] as? AnyObject,
+                let typeAAmount = meal["typeA"] as? AnyObject
+            
                 else { return }
             
             
@@ -273,6 +287,9 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
             self.timeArr.append(deliverTime)
             self.locationAreaArr.append(deliverLocationArea)
             self.locationDetailArr.append(delvierLocationDetail)
+            self.typeAArr.append(typeAAmount)
+            self.typeBArr.append(typeBAmount)
+            self.typeCArr.append(typeCAmount)
     }
     }
     

@@ -16,6 +16,8 @@ class OrderDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationInfo: UILabel!
     
+    @IBOutlet weak var locationDetail: UILabel!
+    
     @IBOutlet weak var typeAAmount: UILabel!
     
     @IBOutlet weak var typeBAmount: UILabel!
