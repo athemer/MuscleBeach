@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource {
 
@@ -15,6 +16,9 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var orderAddress: UITextField!
     
     var addressArray: [String] = ["中山區"]
+    
+    var addressArrFromDatabase: [String] = []
+    
     let arr: [String] = ["台北市中山區" ,"台北市大同區", "台北市南港區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區"]
     
     var areaTextField: UITextField?
@@ -33,7 +37,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         tableView.dataSource = self
         
         registerCell()
-
+        fetchAddressFromDatabase()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +52,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch contentArr[section] {
         case .addressCell:
-            return addressArray.count
+            return addressArrFromDatabase.count
         case .addCell:
             return 1
         }
@@ -59,7 +63,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePageAddressCell") as! ProfilePageAddressCell
             // swiftlint:disable:previous force_cast
-            cell.addressLabel.text = addressArray[indexPath.row]
+            cell.addressLabel.text = addressArrFromDatabase[indexPath.row]
             
             return cell
             
@@ -75,8 +79,9 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch contentArr[indexPath.section] {
         case .addressCell:
-            
-            orderAddress.text = addressArray[indexPath.row]
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            orderAddress.text = addressArrFromDatabase[indexPath.row]
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["main": orderAddress.text])
             
         case .addCell:
             setUpAlert()
@@ -188,8 +193,12 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
                 }
 
             let finalAddress = "\(street) \(address)"
-
-            self.addressArray.append(finalAddress)
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            let x = self.addressArrFromDatabase.count + 1
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("add\(x)").setValue(finalAddress)
+            
+            self.addressArrFromDatabase.append(finalAddress)
+            self.tableView.reloadData()
 
 //            if alert.textFields?[0] != nil && alert.textFields?[1] != nil {
 //                let address = "\((alert.textFields?[0].text)!) \((alert.textFields?[1].text)!)"
@@ -206,4 +215,31 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
+    
+    func fetchAddressFromDatabase() {
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let addressDict = snapshot.value as? [String: AnyObject] {
+                // swiftlint:disable:next force_cast
+//                let main = addressDict["main"] as! String
+                // swiftlint:disable:previous force_cast
+                
+                for x in 1...addressDict.count - 1 {
+                    
+                    // swiftlint:disable:next force_cast
+                    let addressPool = addressDict["add\(x)"] as! String
+                    // swiftlint:disable:previous force_cast
+                    
+                    self.addressArrFromDatabase.append(addressPool)
+                }
+                print (self.addressArrFromDatabase)
+            
+            }
+            self.tableView.reloadData()
+        })
+     
+    }
+    
+    
 }
