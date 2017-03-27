@@ -16,6 +16,15 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var backgroundView: UIView!
+
+    
+    
+    var dateToDB: [String] = []
+    var deliverToDB: String = ""
+    var locationAreaToDB: String = ""
+    var locationDetailToDB: String = ""
+    var mealToDB: [String: AnyObject] = [:]
+    var timeToDB: String = ""
     
     var mealArr: [String] = ["仙女餐", "享瘦餐", "猛男餐"]
     
@@ -23,6 +32,8 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        print("ahha \(deliverToDB) \(locationDetailToDB) \(dateToDB)")
         // Do any additional setup after loading the view.
     }
 
@@ -56,6 +67,8 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         guard let cell = sender.superview?.superview as? MealVariTableViewCell else { return }
         
         cell.amountLabel.text = "\(Int(cell.stepper.value))"
+
+        
     }
 
     @IBAction func segmentChange(_ sender: Any) {
@@ -67,11 +80,39 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     @IBAction func confirmTapped(_ sender: Any) {
-        let uid = FIRAuth.auth()!.currentUser!.uid
-        let meal: [String: Int] = ["typeB": 2, "typeC": 6]
-        let orderData: [String: AnyObject] = ["date": "2017-03-18" as AnyObject, "deliver": "deliver" as AnyObject, "locationArea": "台北市中山區" as AnyObject, "locationDetail": "吉林路" as AnyObject, "userUID": uid as AnyObject, "time": "lunch" as AnyObject, "meal" : meal as AnyObject]
-        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
         
+        // swiftlint:disable:next force_cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MealVariTableViewCell") as! MealVariTableViewCell
+        // swiftlint:disable:previous force_cast
+        
+        let indexPath0 = IndexPath(row: 0, section: 0)
+        let indexPath1 = IndexPath(row: 1, section: 0)
+        let indexPath2 = IndexPath(row: 2, section: 0)
+        // swiftlint:disable:next force_cast
+        let cell0 = tableView.cellForRow(at: indexPath0) as! MealVariTableViewCell
+        // swiftlint:disable:previous force_cast
+        
+        // swiftlint:disable:next force_cast
+        let cell1 = tableView.cellForRow(at: indexPath1) as! MealVariTableViewCell
+        // swiftlint:disable:previous force_cast
+        
+        // swiftlint:disable:next force_cast
+        let cell2 = tableView.cellForRow(at: indexPath2) as! MealVariTableViewCell
+        // swiftlint:disable:previous force_cast
+        
+        if timeSegment.selectedSegmentIndex == 0 {
+            timeToDB = "午餐"
+        } else if timeSegment.selectedSegmentIndex == 1 {
+            timeToDB = "晚餐"
+        }
+        
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        let meal: [String: Int] = ["typeA": Int(cell0.stepper.value) ,"typeB": Int(cell1.stepper.value), "typeC": Int(cell2.stepper.value)]
+        
+        for date in dateToDB {
+            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliverToDB as AnyObject, "locationArea": locationAreaToDB as AnyObject, "locationDetail": locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": timeToDB as AnyObject, "meal" : meal as AnyObject]
+            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        }
         
     }
 }

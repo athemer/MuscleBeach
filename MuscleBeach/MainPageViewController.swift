@@ -46,25 +46,36 @@ class MainPageViewController: UIViewController {
     @IBAction func start(_ sender: Any) {
         guard
             let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SelfPickUpViewController") as? SelfPickUpViewController,
-            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"ConfirmDeliverAdViewController") as? ConfirmDeliverAdViewController else { return }
+            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"ConfirmDeliverAdViewController") as?ConfirmDeliverAdViewController
+         else { return }
         
         if segOne.selectedSegmentIndex == 0 {
+            
+            vc1.deliverToDB = "自取"
             
             switch segTwo.selectedSegmentIndex {
             case 0:
                 vc1.toWhichPage = "single"
             case 1:
                 vc1.toWhichPage = "multiple"
+                
+            default: break
+                
             }
             
             self.navigationController?.pushViewController(vc1, animated: true)
         } else {
+            
+            vc2.deliverToDB = "外送"
             
             switch segTwo.selectedSegmentIndex {
             case 0:
                 vc2.toWhichPage = "single"
             case 1:
                 vc2.toWhichPage = "multiple"
+                
+            default: break
+            
             }
             
             self.navigationController?.pushViewController(vc2, animated: true)

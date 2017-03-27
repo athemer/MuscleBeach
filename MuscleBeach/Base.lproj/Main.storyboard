@@ -320,7 +320,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="169"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SW0-VD-XFK" id="sgv-7o-uEE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="仙女餐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bB0-53-0Z2">
@@ -931,6 +931,14 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-4T-AJH">
+                                <rect key="frame" x="324" y="127" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="R3y-qQ-jJg" eventType="touchUpInside" id="yC6-6u-2Fm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -962,8 +970,8 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="台北市基隆路一段178號" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfY-hK-PZW">
-                                <rect key="frame" x="77" y="184" width="212" height="75"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="台北市信義區" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfY-hK-PZW">
+                                <rect key="frame" x="49" y="189" width="140" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.79889279599999996" green="0.44214066860000001" blue="0.36547240609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -984,24 +992,32 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                 <state key="normal" title="確認"/>
                                 <connections>
                                     <action selector="confirmTapped:" destination="BPw-S5-cdD" eventType="touchUpInside" id="1PE-pC-z3C"/>
-                                    <segue destination="0FX-My-r1q" kind="show" id="G2L-EM-AZT"/>
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oxc-Fl-Prq">
                                 <rect key="frame" x="-4" y="401" width="375" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="基隆路一段" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3d-ye-gS6">
+                                <rect key="frame" x="189" y="189" width="151" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.79889279599999996" green="0.44214066860000001" blue="0.36547240609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="detailAddressLabel" destination="u3d-ye-gS6" id="DYV-em-soX"/>
                         <outlet property="mainAddressLabel" destination="pfY-hK-PZW" id="01L-ik-lfu"/>
                         <outlet property="pickerView" destination="Oxc-Fl-Prq" id="jye-5i-uhb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLR-1v-5la" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5060" y="-179"/>
+            <point key="canvasLocation" x="5060" y="-179.46026986506749"/>
         </scene>
         <!--Single Order View Controller-->
         <scene sceneID="4iv-p6-flC">
@@ -1024,7 +1040,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                         <rect key="frame" x="0.0" y="28" width="337" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l8K-hl-DuG" id="UBr-dq-Qbl">
-                                            <rect key="frame" x="0.0" y="0.0" width="337" height="114"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="337" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1W-4F-tO1">
@@ -1059,12 +1075,12 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHC-Pd-SUm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5776.8000000000002" y="-179.46026986506749"/>
+            <point key="canvasLocation" x="6497" y="-153"/>
         </scene>
-        <!--View Controller-->
+        <!--Week Menu Selection View Controller-->
         <scene sceneID="XCQ-MW-SWx">
             <objects>
-                <viewController id="7Pt-Cg-e8n" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeekMenuSelectionViewController" id="7Pt-Cg-e8n" customClass="WeekMenuSelectionViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kU7-Oy-cHE"/>
                         <viewControllerLayoutGuide type="bottom" id="hCM-OB-Wod"/>
@@ -1072,12 +1088,58 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     <view key="view" contentMode="scaleToFill" id="tTL-WX-Bus">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdk-11-jC5">
+                                <rect key="frame" x="70" y="147" width="249" height="97"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.79889279599999996" green="0.44214066860000001" blue="0.36547240609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="一週包週餐（五天）"/>
+                                <connections>
+                                    <action selector="dayButton:" destination="7Pt-Cg-e8n" eventType="touchUpInside" id="nA2-PV-cEp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYp-q6-H13">
+                                <rect key="frame" x="70" y="270" width="249" height="97"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.79889279599999996" green="0.44214066860000001" blue="0.36547240609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="雙週包週餐（十天）"/>
+                                <connections>
+                                    <action selector="tenDayButton:" destination="7Pt-Cg-e8n" eventType="touchUpInside" id="bCp-dx-71L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uk2-GM-GpN">
+                                <rect key="frame" x="70" y="391" width="249" height="97"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.79889279599999996" green="0.44214066860000001" blue="0.36547240609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="三週包週餐（十五天）"/>
+                                <connections>
+                                    <action selector="fifteenDayButton:" destination="7Pt-Cg-e8n" eventType="touchUpInside" id="lMI-R7-C3I"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="確認訂餐日數" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BS-tr-AI9">
+                                <rect key="frame" x="70" y="73" width="249" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.97601670029999998" green="0.87297958139999998" blue="0.092192582790000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vL-0W-G9S">
+                                <rect key="frame" x="70" y="518" width="249" height="97"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.79889279599999996" green="0.44214066860000001" blue="0.36547240609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="包月餐（二十天）"/>
+                                <connections>
+                                    <action selector="twDayButton:" destination="7Pt-Cg-e8n" eventType="touchUpInside" id="d2t-hc-KBe"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mHt-C2-HmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6183" y="-1489"/>
+            <point key="canvasLocation" x="6510" y="-836"/>
         </scene>
         <!--Pick Up Location View Controller-->
         <scene sceneID="Ydb-aW-d8a">
@@ -1140,7 +1202,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
         <!--Meal Variation View Controller-->
         <scene sceneID="ZcR-KB-fDM">
             <objects>
-                <viewController id="GMo-f0-pRK" customClass="MealVariationViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MealVariationViewController" id="GMo-f0-pRK" customClass="MealVariationViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kjR-iu-Wr1"/>
                         <viewControllerLayoutGuide type="bottom" id="vym-HC-gcK"/>
@@ -1173,7 +1235,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S5X-X9-wwb" id="Oad-fu-jlK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="VL6-88-wEc">
@@ -1233,12 +1295,12 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6R9-aT-Rt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7308" y="-836"/>
+            <point key="canvasLocation" x="8047" y="-397"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="pAl-Kf-wss">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="u7M-cC-mPz" customClass="CalendarViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" automaticallyAdjustsScrollViewInsets="NO" id="u7M-cC-mPz" customClass="CalendarViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vDV-l1-lbE"/>
                         <viewControllerLayoutGuide type="bottom" id="mkb-oM-XRD"/>
@@ -1330,7 +1392,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="go to selection"/>
                                 <connections>
-                                    <segue destination="GMo-f0-pRK" kind="show" id="PWH-d0-MyJ"/>
+                                    <action selector="goToSelectiontapped:" destination="u7M-cC-mPz" eventType="touchUpInside" id="ZqH-ay-djp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="確認訂餐日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZS-cH-CfA">
@@ -1356,7 +1418,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1s-5r-LW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6534" y="-834"/>
+            <point key="canvasLocation" x="7254" y="-817"/>
         </scene>
         <!--訂餐首頁-->
         <scene sceneID="gF2-o8-6se">

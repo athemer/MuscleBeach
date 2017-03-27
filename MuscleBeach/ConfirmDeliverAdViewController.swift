@@ -13,11 +13,21 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
 
     @IBOutlet weak var mainAddressLabel: UILabel!
     
+    @IBOutlet weak var detailAddressLabel: UILabel!
+    
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    
+    var deliverToDB: String = ""
+    
+    
     
     var toWhichPage: String = ""
     
     var addressArr: [String] = []
+    
+    var mainAdd: [String] = []
+    var detailAdd: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +37,10 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
         pickerView.isHidden = true
         
         fetchAddress()
+        
+        
+        print ("quickCHECK \(deliverToDB)")
+        
         // Do any additional setup after loading the view.
     }
 
@@ -49,12 +63,14 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        mainAddressLabel.text = addressArr[row]
+        mainAddressLabel.text = mainAdd[row]
+        detailAddressLabel.text = detailAdd[row]
+        
         pickerView.isHidden = true
         
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["main": mainAddressLabel.text])
-
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": mainAddressLabel.text])
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": detailAddressLabel.text])
         
     }
     
@@ -62,16 +78,23 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {
-                let main = dict["main"] as? String
+                let mainAdd = dict["mainAdd"] as? String
+                let mainDetail = dict["mainDetail"] as? String
                 
-                for x in 1...dict.count - 1 {
+                for x in 1...(dict.count / 2) - 1 {
                     
-                    let address = dict["add\(x)"] as? String
-                    self.addressArr.append(address!)
+                    let street = dict["add\(x)"] as? String
+                    let address = dict["detail\(x)"] as? String
+                    let finalAdd = street! + address!
+                    
+                    self.mainAdd.append(street!)
+                    self.detailAdd.append(address!)
+                    self.addressArr.append(finalAdd)
                     
                 }
 
-                self.mainAddressLabel.text = main
+                self.mainAddressLabel.text = mainAdd!
+                self.detailAddressLabel.text = mainDetail!
             }
             self.pickerView.reloadAllComponents()
         })
@@ -85,15 +108,24 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
         
         
         guard
-            let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SelfPickUpViewController") as? SelfPickUpViewController,
-            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"ConfirmDeliverAdViewController") as? ConfirmDeliverAdViewController else { return }
-        
-            self.navigationController?.pushViewController(vc1, animated: true)
+            let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SingleOrderViewController") as? SingleOrderViewController,
+            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"WeekMenuSelectionViewController") as? WeekMenuSelectionViewController else { return }
         
         if toWhichPage == "single" {
+            vc1.deliverToDB = self.deliverToDB
+            vc1.locationDetailToDB = detailAddressLabel.text!
+            vc1.locationAreaToDB = mainAddressLabel.text!
             
+            self.navigationController?.pushViewController(vc1, animated: true)
+            
+        } else if toWhichPage == "multiple" {
+            
+            vc2.deliverToDB = self.deliverToDB
+            vc2.locationDetailToDB = detailAddressLabel.text!
+            vc2.locationAreaToDB = mainAddressLabel.text!
+            
+            self.navigationController?.pushViewController(vc2, animated: true)
         }
-        
         
     }
 }

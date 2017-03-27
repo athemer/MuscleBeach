@@ -10,6 +10,12 @@ import UIKit
 
 class WeekMenuSelectionViewController: UIViewController {
 
+    var deliverToDB: String = ""
+    var locationAreaToDB: String = ""
+    var locationDetailToDB: String = ""
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +27,46 @@ class WeekMenuSelectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func dayButton(_ sender: Any) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+        vc.daysLimitation = 5
+        vc.deliverToDB = self.deliverToDB
+        vc.locationDetailToDB = self.locationDetailToDB
+        vc.locationAreaToDB = self.locationAreaToDB
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
-    */
-
+    @IBAction func tenDayButton(_ sender: Any) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+        vc.daysLimitation = 10
+        vc.deliverToDB = self.deliverToDB
+        vc.locationDetailToDB = self.locationDetailToDB
+        vc.locationAreaToDB = self.locationAreaToDB
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func fifteenDayButton(_ sender: Any) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+        vc.daysLimitation = 15
+        vc.deliverToDB = self.deliverToDB
+        vc.locationDetailToDB = self.locationDetailToDB
+        vc.locationAreaToDB = self.locationAreaToDB
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func twDayButton(_ sender: Any) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+        vc.daysLimitation = 20
+        vc.deliverToDB = self.deliverToDB
+        vc.locationDetailToDB = self.locationDetailToDB
+        vc.locationAreaToDB = self.locationAreaToDB
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }

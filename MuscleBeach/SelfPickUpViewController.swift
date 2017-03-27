@@ -12,8 +12,16 @@ class SelfPickUpViewController: UIViewController,UITableViewDelegate,UITableView
 
     @IBOutlet weak var tableView: UITableView!
     
+    //Data to Pass
+    
+    var deliverToDB: String = ""
+    
+    
+    
+    
     var toWhichPage: String = ""
     
+    let theNameArr: [String] = ["自取地點一", "自取地點二"]
     let nameArr: [String] = ["城市草倉 C-tea loft", "肌肉海灘工作室"]
     let addressArr: [String] = ["台北市大安區羅斯福路三段283巷19弄4號", "信義區和平東路三段391巷8弄30號1樓"]
     let numberArr: [String] = ["02 2366 0381","02 2366 0381"]
@@ -26,6 +34,8 @@ class SelfPickUpViewController: UIViewController,UITableViewDelegate,UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+         print ("quickCHECK \(deliverToDB)")
         // Do any additional setup after loading the view.
     }
 
@@ -57,18 +67,33 @@ class SelfPickUpViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"PickUpLocationViewController") as? PickUpLocationViewController else { return }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard
+            let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SingleOrderViewController") as? SingleOrderViewController,
+            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"WeekMenuSelectionViewController") as? WeekMenuSelectionViewController else { return }
         
-//        vc.name = nameArr[indexPath.row]
-//        vc.number = numberArr[indexPath.row]
-//        vc.address = addressArr[indexPath.row]
-//        vc.latitude = latitudeArr[indexPath.row]
-//        vc.longitude = longitudeArr[indexPath.row]
-//        self.navigationController?.pushViewController(vc, animated: true)
         
-//        return
-//    }
+        
+        
+        if toWhichPage == "single" {
+            vc1.deliverToDB = self.deliverToDB
+            vc1.locationDetailToDB = nameArr[indexPath.row]
+            vc1.locationAreaToDB = theNameArr[indexPath.row]
+            
+            self.navigationController?.pushViewController(vc1, animated: true)
+        } else if toWhichPage == "multiple" {
+            
+            vc2.deliverToDB = self.deliverToDB
+            vc2.locationDetailToDB = nameArr[indexPath.row]
+            vc2.locationAreaToDB = theNameArr[indexPath.row]
+            
+            
+            self.navigationController?.pushViewController(vc2, animated: true)
+        }
+        
+        
+        return
+    }
     
     func moveToMapPage(sender: UIButton) {
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"PickUpLocationViewController") as? PickUpLocationViewController else { return }
@@ -82,6 +107,10 @@ class SelfPickUpViewController: UIViewController,UITableViewDelegate,UITableView
         vc.longitude = longitudeArr[(indexPath?.row)!]
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func confirmTapped(_ sender: Any) {
+ 
     }
     
 }

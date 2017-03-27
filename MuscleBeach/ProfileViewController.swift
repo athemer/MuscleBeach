@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     var addressArray: [String] = ["中山區"]
     
     var addressArrFromDatabase: [String] = []
+    var addressDetailArrFromDatabase: [String] = []
     
     let arr: [String] = ["台北市中山區" ,"台北市大同區", "台北市南港區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區"]
     
@@ -64,6 +65,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePageAddressCell") as! ProfilePageAddressCell
             // swiftlint:disable:previous force_cast
             cell.addressLabel.text = addressArrFromDatabase[indexPath.row]
+            cell.addressDetailLabel.text = addressDetailArrFromDatabase[indexPath.row]
             
             return cell
             
@@ -80,9 +82,11 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         switch contentArr[indexPath.section] {
         case .addressCell:
             let uid = FIRAuth.auth()?.currentUser?.uid
-            orderAddress.text = addressArrFromDatabase[indexPath.row]
-            FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["main": orderAddress.text])
+            orderAddress.text = addressArrFromDatabase[indexPath.row] + addressDetailArrFromDatabase[indexPath.row]
             
+            
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": addressArrFromDatabase[indexPath.row]])
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": addressDetailArrFromDatabase[indexPath.row]])
         case .addCell:
             setUpAlert()
             
@@ -195,9 +199,11 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             let finalAddress = "\(street) \(address)"
             let uid = FIRAuth.auth()?.currentUser?.uid
             let x = self.addressArrFromDatabase.count + 1
-            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("add\(x)").setValue(finalAddress)
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("add\(x)").setValue(street)
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("detail\(x)").setValue(address)
             
-            self.addressArrFromDatabase.append(finalAddress)
+            self.addressArrFromDatabase.append(street)
+            self.addressDetailArrFromDatabase.append(address)
             self.tableView.reloadData()
 
 //            if alert.textFields?[0] != nil && alert.textFields?[1] != nil {
@@ -221,17 +227,21 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
             if let addressDict = snapshot.value as? [String: AnyObject] {
-                // swiftlint:disable:next force_cast
-//                let main = addressDict["main"] as! String
-                // swiftlint:disable:previous force_cast
                 
-                for x in 1...addressDict.count - 1 {
+                print("hoho \(addressDict )")
+                
+                for x in 1...(addressDict.count / 2) - 1  {
                     
                     // swiftlint:disable:next force_cast
-                    let addressPool = addressDict["add\(x)"] as! String
+                    let street = addressDict["add\(x)"] as! String
                     // swiftlint:disable:previous force_cast
                     
-                    self.addressArrFromDatabase.append(addressPool)
+                    // swiftlint:disable:next force_cast
+                    let address = addressDict["detail\(x)"] as! String
+                    // swiftlint:disable:previous force_cast
+                    
+                    self.addressArrFromDatabase.append(street)
+                    self.addressDetailArrFromDatabase.append(address)
                 }
                 print (self.addressArrFromDatabase)
             

@@ -12,12 +12,19 @@ class SingleOrderViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     
+    
+    var deliverToDB: String = ""
+    var locationAreaToDB: String = ""
+    var locationDetailToDB: String = ""
+    
     var dateArr: [String] = ["2017-03-20", "2017-03-21", "2017-03-22", "2017-03-23", "2017-03-24"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        print ("baba \(locationAreaToDB) \(locationDetailToDB)")
         // Do any additional setup after loading the view.
     }
 
@@ -44,4 +51,19 @@ class SingleOrderViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard
+            let vc = self.storyboard?.instantiateViewController(withIdentifier:"MealVariationViewController") as? MealVariationViewController
+            else { return }
+        
+            vc.deliverToDB = self.deliverToDB
+            vc.locationAreaToDB = self.locationAreaToDB
+            vc.locationDetailToDB = self.locationDetailToDB
+            vc.dateToDB = [dateArr[indexPath.row]]
+
+            self.navigationController?.pushViewController(vc, animated: true)
+
+    }
 }

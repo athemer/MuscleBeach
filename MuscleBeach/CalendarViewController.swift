@@ -13,8 +13,13 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
-    let daysLimitation: Int = 10
+    var daysLimitation: Int = 10
     
+    
+    var dateToDB: [String] = []
+    var deliverToDB: String = ""
+    var locationAreaToDB: String = ""
+    var locationDetailToDB: String = ""
     
     @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
@@ -26,6 +31,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print ("bobo \(deliverToDB) \(locationDetailToDB) \(locationAreaToDB)")
         calendarView.dataSource = self
         calendarView.delegate = self
         calendarView.registerCellViewXib(file: "CellView") // Registering your cell is manditory
@@ -91,6 +97,8 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         dateFormatter.timeZone = TimeZone.current
         let localDate = dateFormatter.string(from: date)
         
+        self.dateToDB.append(localDate)
+        
         print ("aHA \(localDate)")
         print ("COUNT \(calendarView.selectedDates.count)")
         handleCellSelection(view: cell, cellState: cellState)
@@ -101,6 +109,8 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         
         let number: Int = daysLimitation - calendarView.selectedDates.count
         daysLeft.text = "\(number)"
+        
+        
         
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
@@ -152,6 +162,19 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             myCustomCell.selectedView.isHidden = true
         }
     }
+    
+    @IBAction func goToSelectiontapped(_ sender: Any) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"MealVariationViewController") as? MealVariationViewController else { return }
+        vc.deliverToDB = self.deliverToDB
+        vc.locationDetailToDB = self.locationDetailToDB
+        vc.locationAreaToDB = self.locationAreaToDB
+        vc.dateToDB = self.dateToDB
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+        
+    }
+    
 }
 
 extension UIColor {
