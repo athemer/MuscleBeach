@@ -12,6 +12,8 @@ class SelfPickUpViewController: UIViewController,UITableViewDelegate,UITableView
 
     @IBOutlet weak var tableView: UITableView!
     
+    var toWhichPage: String = ""
+    
     let nameArr: [String] = ["城市草倉 C-tea loft", "肌肉海灘工作室"]
     let addressArr: [String] = ["台北市大安區羅斯福路三段283巷19弄4號", "信義區和平東路三段391巷8弄30號1樓"]
     let numberArr: [String] = ["02 2366 0381","02 2366 0381"]

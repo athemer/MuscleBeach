@@ -15,6 +15,8 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
     
     @IBOutlet weak var pickerView: UIPickerView!
     
+    var toWhichPage: String = ""
+    
     var addressArr: [String] = []
     
     override func viewDidLoad() {
@@ -80,5 +82,18 @@ class ConfirmDeliverAdViewController: UIViewController, UIPickerViewDelegate, UI
     }
 
     @IBAction func confirmTapped(_ sender: Any) {
+        
+        
+        guard
+            let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SelfPickUpViewController") as? SelfPickUpViewController,
+            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"ConfirmDeliverAdViewController") as? ConfirmDeliverAdViewController else { return }
+        
+            self.navigationController?.pushViewController(vc1, animated: true)
+        
+        if toWhichPage == "single" {
+            
+        }
+        
+        
     }
 }

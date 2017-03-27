@@ -13,6 +13,10 @@ import SideMenu
 
 class MainPageViewController: UIViewController {
 
+    @IBOutlet weak var segOne: UISegmentedControl!
+    
+    @IBOutlet weak var segTwo: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,4 +41,37 @@ class MainPageViewController: UIViewController {
     @IBAction func butTapped(_ sender: Any) {
         
     }
+    
+    
+    @IBAction func start(_ sender: Any) {
+        guard
+            let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SelfPickUpViewController") as? SelfPickUpViewController,
+            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"ConfirmDeliverAdViewController") as? ConfirmDeliverAdViewController else { return }
+        
+        if segOne.selectedSegmentIndex == 0 {
+            
+            switch segTwo.selectedSegmentIndex {
+            case 0:
+                vc1.toWhichPage = "single"
+            case 1:
+                vc1.toWhichPage = "multiple"
+            }
+            
+            self.navigationController?.pushViewController(vc1, animated: true)
+        } else {
+            
+            switch segTwo.selectedSegmentIndex {
+            case 0:
+                vc2.toWhichPage = "single"
+            case 1:
+                vc2.toWhichPage = "multiple"
+            }
+            
+            self.navigationController?.pushViewController(vc2, animated: true)
+        }
+        
+        
+        
+    }
+    
 }

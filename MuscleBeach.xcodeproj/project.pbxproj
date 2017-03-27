@@ -39,6 +39,9 @@
 		D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */; };
 		D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
+		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
+		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
+		D1E211F21E891BE60006B849 /* WeekMenuSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */; };
 		D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F4FDE11E8370AA001233FA /* CellView.xib */; };
 		D1F4FDE41E83710F001233FA /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE31E83710F001233FA /* CellView.swift */; };
 		D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE51E837176001233FA /* CalendarViewController.swift */; };
@@ -84,6 +87,9 @@
 		D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
+		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
+		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
+		D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekMenuSelectionViewController.swift; sourceTree = "<group>"; };
 		D1F4FDE11E8370AA001233FA /* CellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellView.xib; sourceTree = "<group>"; };
 		D1F4FDE31E83710F001233FA /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		D1F4FDE51E837176001233FA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 		D1683C211E7FBF8D00C9D887 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D1E211EC1E8909700006B849 /* SingleOrderPAge */,
 				D181C5D51E85177500A5D87B /* MealVariation */,
 				D1F4FDE01E83708F001233FA /* Calendar */,
 				D121F67F1E817D870049796D /* ProfilePage */,
@@ -163,6 +170,7 @@
 				D181C5DC1E861E6800A5D87B /* CheckOrder */,
 				D181C5DF1E86BB5C00A5D87B /* CheckOrderDetail */,
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
+				D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */,
 				D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */,
 				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
 				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
@@ -248,6 +256,15 @@
 				D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */,
 			);
 			name = CheckOrderDetail;
+			sourceTree = "<group>";
+		};
+		D1E211EC1E8909700006B849 /* SingleOrderPAge */ = {
+			isa = PBXGroup;
+			children = (
+				D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */,
+				D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */,
+			);
+			name = SingleOrderPAge;
 			sourceTree = "<group>";
 		};
 		D1F4FDE01E83708F001233FA /* Calendar */ = {
@@ -412,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */,
 				D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */,
 				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,
 				D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */,
@@ -428,10 +446,12 @@
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
 				D121F6791E815E1F0049796D /* ProfilePageAddressCell.swift in Sources */,
+				D1E211F21E891BE60006B849 /* WeekMenuSelectionViewController.swift in Sources */,
 				D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */,
 				D121F6611E81135F0049796D /* ProfileCell.swift in Sources */,
 				D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
+				D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */,
 				D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */,
 				D121F65E1E8103AE0049796D /* SideMenuTableViewController.swift in Sources */,
 				D181C5D91E85195400A5D87B /* MealVariTableViewCell.swift in Sources */,
