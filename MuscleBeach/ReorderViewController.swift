@@ -11,10 +11,8 @@ import JTAppleCalendar
 import Firebase
 
 class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
-    
-    
-    let dateArray: [String] = ["2017-03-29", "2017-03-28", "2017-03-23"]
 
+    var dateArr: [String] = []
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
@@ -97,11 +95,19 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         
         let cellStateDateString = dateFormatter.string(from: cellState.date)
 
-        for x in 0...(dateArray.count - 1) {
-            if cellStateDateString == dateArray[x] {
-                myCustomCell.dayLabel.textColor = UIColor.red
+        var numberCheck: Int = dateArr.count
+        
+        if numberCheck >= 1 {
+            
+            if dateArr.contains(cellStateDateString) {
+                myCustomCell.dayLabel.textColor = UIColor.yellow
+            } else {
+                return
             }
+        } else {
+            return
         }
+       
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -122,6 +128,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         let localDate = dateFormatter.string(from: date)
         
         assignValueToOrderDetailVC(date: localDate)
+        
        
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"OrderDetailViewController") as? OrderDetailViewController else { return }
         vc.date = localDate
@@ -149,7 +156,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         let localDate = dateFormatter.string(from: date)
         
         if cellState.dateBelongsTo == .thisMonth, cellState.day != .sunday, cellState.day != .saturday {
-            if dateArray.contains(localDate) {
+            if dateArr.contains(localDate) {
                 return true
             } else {
                 return false
@@ -200,14 +207,20 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 for snap in snapData {
 //                    print (" DATA \(snap)")
                     if let data = snap.value as? [String: AnyObject] {
-//                        print ("CD \(data)")
-
-                        
+                       print ("CD \(data)")
                         self.arr.append(data)
+                        
+                        // swiftlint:disable:next force_cast
+                        let date = data["date"] as! String
+                        // swiftlint:disable:previous force_cast
+                        
+                        self.dateArr.append(date)
                         
                     }
                     
                 }
+                print ("ah \(self.dateArr)")
+                self.calendarView.reloadData()
             }
             
 /*            let predicate = NSPredicate(format: "date == %@", "2017-03-29")
