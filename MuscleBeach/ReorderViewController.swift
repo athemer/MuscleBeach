@@ -13,13 +13,22 @@ import Firebase
 class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
     
     
-    let dateArray: [String] = ["2017-03-29", "2017-03-28", "2017-03-25"]
+    let dateArray: [String] = ["2017-03-29", "2017-03-28", "2017-03-23"]
 
+    
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
     @IBOutlet weak var monthLabel: UILabel!
     
     let dateFormatter = DateFormatter()
+    
+    var arr: [[String: AnyObject]] = []
+    
+    var deliverArr: [AnyObject] = []
+    var timeArr: [AnyObject] = []
+    var locationAreaArr: [AnyObject ] = []
+    var locationDetailArr: [AnyObject] = []
+    var mealArr: [String: Int] = [:]
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
@@ -27,6 +36,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         calendarView.dataSource = self
         calendarView.delegate = self
         calendarView.registerCellViewXib(file: "CellView") // Registering your cell is manditory
@@ -36,9 +46,14 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         calendarView.allowsMultipleSelection  = true
         calendarView.rangeSelectionWillBeUsed = true
         // Do any additional setup after loading the view.
+
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.arr.removeAll()
         
-        
-        
+        fetchQueriedDataFromFirebase()
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,7 +102,6 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 myCustomCell.dayLabel.textColor = UIColor.red
             }
         }
-        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -97,31 +111,50 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-
+        
+        self.deliverArr.removeAll()
+        self.locationAreaArr.removeAll()
+        self.locationDetailArr.removeAll()
+        self.timeArr.removeAll()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone.current
         let localDate = dateFormatter.string(from: date)
         
-        print ("aHA \(localDate)")
-        print ("COUNT \(calendarView.selectedDates.count)")
-        handleCellSelection(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
+        assignValueToOrderDetailVC(date: localDate)
+       
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"OrderDetailViewController") as? OrderDetailViewController else { return }
+        vc.date = localDate
+        vc.deliverArr = self.deliverArr
+        vc.locationAreaArr = self.locationAreaArr
+        vc.locationDetailArr = self.locationDetailArr
+        vc.timeArr = self.timeArr
+        self.navigationController?.pushViewController(vc, animated: true)
+
+//        print ("aHA \(localDate)")
+//        print ("COUNT \(calendarView.selectedDates.count)")
+        
     }
 
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         
+        performSegue(withIdentifier: "to", sender: nil)
         
-        
-        handleCellSelection(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleDayCellView, cellState: CellState) -> Bool {
-        
+
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        let localDate = dateFormatter.string(from: date)
         
         if cellState.dateBelongsTo == .thisMonth, cellState.day != .sunday, cellState.day != .saturday {
-            return true
+            if dateArray.contains(localDate) {
+                return true
+            } else {
+                return false
+            }
+
         } else {
             return false
         }
@@ -160,9 +193,6 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     }
     
     func fetchQueriedDataFromFirebase () {
-        var arr: [[String: AnyObject]] = []
-        
-        
         arr.removeAll()
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -173,23 +203,35 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
 //                        print ("CD \(data)")
 
                         
-                        arr.append(data)
+                        self.arr.append(data)
                         
                     }
                     
                 }
             }
-//            print (arr)
             
-            let predicate = NSPredicate(format: "date == %@", "2017-03-29")
-            let filtered = (arr as NSArray).filtered(using: predicate)
+/*            let predicate = NSPredicate(format: "date == %@", "2017-03-29")
+            let filtered = (self.arr as NSArray).filtered(using: predicate)
             
             print ("check \(filtered)")
             
-            
+            for x in 0...filtered.count - 1 {
+                guard
+                    let dict: [String : AnyObject] = filtered[x] as? [String : AnyObject],
+                    let deliverType = dict["deliver"] as? AnyObject,
+                    let deliverTime = dict["time"] as? AnyObject,
+                    let deliverLocationArea = dict["locationArea"] as? AnyObject,
+                    let delvierLocationDetail = dict["locationDetail"] as? AnyObject
+                    else { return }
+                
+                
+                self.deliverArr.append(deliverType)
+                self.timeArr.append(deliverTime)
+                self.locationAreaArr.append(deliverLocationArea)
+                self.locationDetailArr.append(delvierLocationDetail)
+            } */
         })
-
-        
+        print ("fetched")
     }
     
     @IBAction func checkButtonTapped(_ sender: Any) {
@@ -197,6 +239,28 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         
     }
     
-    
+    func assignValueToOrderDetailVC (date: String) {
+        
+        let predicate = NSPredicate(format: "date == %@", date)
+        let filtered = (arr as NSArray).filtered(using: predicate)
+        
+        print ("check \(filtered)")
+        
+        for x in 0...filtered.count - 1 {
+            guard
+                let dict: [String : AnyObject] = filtered[x] as? [String : AnyObject],
+                let deliverType = dict["deliver"] as? AnyObject,
+                let deliverTime = dict["time"] as? AnyObject,
+                let deliverLocationArea = dict["locationArea"] as? AnyObject,
+                let delvierLocationDetail = dict["locationDetail"] as? AnyObject
+                else { return }
+            
+            
+            self.deliverArr.append(deliverType)
+            self.timeArr.append(deliverTime)
+            self.locationAreaArr.append(deliverLocationArea)
+            self.locationDetailArr.append(delvierLocationDetail)
+    }
+    }
     
 }

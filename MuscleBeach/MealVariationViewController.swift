@@ -69,7 +69,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func confirmTapped(_ sender: Any) {
         let uid = FIRAuth.auth()!.currentUser!.uid
         let meal: [String: Int] = ["typeB": 2, "typeC": 6]
-        let orderData: [String: AnyObject] = ["date": "2017-03-29" as AnyObject, "deliver": "deliver" as AnyObject, "locationArea": "台北市信義區" as AnyObject, "locationDetail": "基隆路一段" as AnyObject, "userUID": uid as AnyObject, "time": "dinner" as AnyObject, "meal" : meal as AnyObject]
+        let orderData: [String: AnyObject] = ["date": "2017-03-18" as AnyObject, "deliver": "deliver" as AnyObject, "locationArea": "台北市中山區" as AnyObject, "locationDetail": "吉林路" as AnyObject, "userUID": uid as AnyObject, "time": "lunch" as AnyObject, "meal" : meal as AnyObject]
         FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
         
         
