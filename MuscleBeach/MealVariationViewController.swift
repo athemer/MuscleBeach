@@ -101,7 +101,12 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         mealPrice.text = "\(Int(cell0.stepper.value) * 120 + Int(cell1.stepper.value) * 120 + Int(cell2.stepper.value) * 150)"
         var singleDayDeliverFee: Int = 0
         
-        if numberOfMeal >= 2 && numberOfMeal < 5 {
+        
+        
+        
+        if numberOfMeal <= 1 && deliverToDB != "自取" {
+            
+        } else if numberOfMeal >= 2 && numberOfMeal < 5 {
             
             switch dateToDB.count {
                 
@@ -172,6 +177,17 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
             let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliverToDB as AnyObject, "locationArea": locationAreaToDB as AnyObject, "locationDetail": locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": timeToDB as AnyObject, "meal" : meal as AnyObject]
             FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
         }
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        let localDate = dateFormatter.string(from: date)
         
+        
+        let userUid = FIRAuth.auth()?.currentUser?.uid
+        var shoppingCartData: [String: AnyObject] = ["orderedDate": localDate as AnyObject, "paymentStatus": "unpaid" as AnyObject, "price": totalPrice.text as AnyObject, "userUID": userUid as AnyObject]
+        
+        FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
+    
     }
 }
