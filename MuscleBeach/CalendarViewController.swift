@@ -110,7 +110,14 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         let number: Int = daysLimitation - calendarView.selectedDates.count
         daysLeft.text = "\(number)"
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        let localDate = dateFormatter.string(from: date)
         
+        if let indexInArray = dateToDB.index(of: localDate) {
+            dateToDB.remove(at: indexInArray)
+        }
         
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
@@ -170,9 +177,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         vc.locationAreaToDB = self.locationAreaToDB
         vc.dateToDB = self.dateToDB
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
     }
     
 }
