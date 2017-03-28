@@ -53,7 +53,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     
     override func viewWillAppear(_ animated: Bool) {
         self.arr.removeAll()
-        
+        self.dateArr.removeAll()
         fetchQueriedDataFromFirebase()
     }
 
@@ -209,12 +209,10 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     }
     
     func fetchQueriedDataFromFirebase () {
-        arr.removeAll()
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let snapData = snapshot.value as? [String: AnyObject] {
                 for snap in snapData {
-//                    print (" DATA \(snap)")
                     if let data = snap.value as? [String: AnyObject] {
                        print ("CD \(data)")
                         self.arr.append(data)
@@ -224,11 +222,9 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                         // swiftlint:disable:previous force_cast
                         
                         self.dateArr.append(date)
-                        
                     }
-                    
                 }
-                print ("ah \(self.dateArr)")
+                print ("dateArr eqauls to \(self.dateArr)")
                 self.calendarView.reloadData()
             }
             

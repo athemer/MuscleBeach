@@ -81,10 +81,6 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     @IBAction func confirmTapped(_ sender: Any) {
         
-        // swiftlint:disable:next force_cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MealVariTableViewCell") as! MealVariTableViewCell
-        // swiftlint:disable:previous force_cast
-        
         let indexPath0 = IndexPath(row: 0, section: 0)
         let indexPath1 = IndexPath(row: 1, section: 0)
         let indexPath2 = IndexPath(row: 2, section: 0)
@@ -95,7 +91,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         // swiftlint:disable:next force_cast
         let cell1 = tableView.cellForRow(at: indexPath1) as! MealVariTableViewCell
         // swiftlint:disable:previous force_cast
-        
+
         // swiftlint:disable:next force_cast
         let cell2 = tableView.cellForRow(at: indexPath2) as! MealVariTableViewCell
         // swiftlint:disable:previous force_cast
