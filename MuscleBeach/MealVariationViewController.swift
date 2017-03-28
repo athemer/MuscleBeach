@@ -104,9 +104,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         
-        if numberOfMeal <= 1 && deliverToDB != "自取" {
-            
-        } else if numberOfMeal >= 2 && numberOfMeal < 5 {
+        if numberOfMeal >= 2 && numberOfMeal < 5 {
             
             switch dateToDB.count {
                 
@@ -122,9 +120,17 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                 break
             }
             
-            deliverFee.text = "\(singleDayDeliverFee * dateToDB.count)"
-            totalPrice.text = "\((Int(cell0.stepper.value) * 120 + Int(cell1.stepper.value) * 120 + Int(cell2.stepper.value) * 150 + singleDayDeliverFee) * dateToDB.count)"
-            
+            switch deliverToDB {
+            case "自取":
+                deliverFee.text = "0"
+                totalPrice.text = "\((Int(cell0.stepper.value) * 120 + Int(cell1.stepper.value) * 120 + Int(cell2.stepper.value) * 150) * dateToDB.count)"
+                
+            case "外送" :
+                deliverFee.text = "\(singleDayDeliverFee * dateToDB.count)"
+                totalPrice.text = "\((Int(cell0.stepper.value) * 120 + Int(cell1.stepper.value) * 120 + Int(cell2.stepper.value) * 150 + singleDayDeliverFee) * dateToDB.count)"
+            default:
+                break
+            }
         } else if numberOfMeal >= 5 {
             
             deliverFee.text = "0"
@@ -163,6 +169,20 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         // swiftlint:disable:next force_cast
         let cell2 = tableView.cellForRow(at: indexPath2) as! MealVariTableViewCell
         // swiftlint:disable:previous force_cast
+        var numberOfMeal: Int = 0
+        numberOfMeal = Int(cell0.stepper.value) + Int(cell1.stepper.value) + Int(cell2.stepper.value)
+        
+        if numberOfMeal <= 1 && deliverToDB != "自取" {
+            let alert = UIAlertController(title: "外送數量",
+                                          message: "餐點數量需要滿兩個以上才有外送唷",
+                                          preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "更新數量", style: .destructive, handler: { (action) -> Void in })
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+        } else {
+            print (" meal number passed ")
+        }
         
         if timeSegment.selectedSegmentIndex == 0 {
             timeToDB = "午餐"
@@ -187,7 +207,67 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         let userUid = FIRAuth.auth()?.currentUser?.uid
         var shoppingCartData: [String: AnyObject] = ["orderedDate": localDate as AnyObject, "paymentStatus": "unpaid" as AnyObject, "price": totalPrice.text as AnyObject, "userUID": userUid as AnyObject]
         
-        FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
+         FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
+        
+
     
+        
     }
+    
+    @IBAction func testTapped(_ sender: Any) {
+        
+        addDataToShoppingCart()
+        
+    }
+    
+    
+    func addDataToShoppingCart() {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        let localDate = dateFormatter.string(from: date)
+        let totalPriceValue = totalPrice.text
+        let dataToCart: [String: AnyObject] = ["paymentStatus": "unpaid" as AnyObject, "totalPrice" : totalPriceValue as AnyObject]
+        let userUid = FIRAuth.auth()?.currentUser?.uid
+        
+        FIRDatabase.database().reference().child("shoppingCart").child(userUid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var keyArr: [String] = []
+            if let snaps = snapshot.value as? [String: AnyObject] {
+                for snap in snaps {
+                    // swiftlint:disable:next force_cast
+                    let key = snap.key as! String
+                    // swiftlint:disable:previous force_cast
+                    keyArr.append(key)
+                }
+                
+                if keyArr.contains(localDate) {
+                    print ("QOO")
+                    
+                    FIRDatabase.database().reference().child("shoppingCart").child(userUid!).child(localDate).observeSingleEvent(of: .value , with: { (snap) in
+                        if let dict = snap.value as? [String: AnyObject] {
+                            
+                            print (dict)
+                            // swiftlint:disable:next force_cast
+                            let value = dict["totalPrice"] as! Int
+                            // swiftlint:disable:previous force_cast
+                            
+                            let newTotal = value + Int(self.totalPrice.text!)!
+                            FIRDatabase.database().reference().child("shoppingCart").child(userUid!).child(localDate).child("totalPrice").setValue(newTotal)
+                        }
+                    })
+                    
+                    
+                } else {
+                    FIRDatabase.database().reference().child("shoppingCart").child(userUid!).child(localDate).setValue(dataToCart)
+                }
+            }
+            
+            
+        })
+        
+        
+    }
+        
 }
