@@ -84,5 +84,10 @@ class MainPageViewController: UIViewController {
         
         
     }
+    @IBAction func shoppingCartTapped(_ sender: Any) {
+        
+        
+        
+    }
     
 }

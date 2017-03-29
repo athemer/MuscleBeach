@@ -193,8 +193,11 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         let uid = FIRAuth.auth()!.currentUser!.uid
         let meal: [String: Int] = ["typeA": Int(cell0.stepper.value) ,"typeB": Int(cell1.stepper.value), "typeC": Int(cell2.stepper.value)]
         
+        // Mark: todo
+        let userData: [String: String] = ["userName": "Kuan Hua", "number" : "0963322300"]
+        
         for date in dateToDB {
-            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliverToDB as AnyObject, "locationArea": locationAreaToDB as AnyObject, "locationDetail": locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": timeToDB as AnyObject, "meal" : meal as AnyObject]
+            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliverToDB as AnyObject, "locationArea": locationAreaToDB as AnyObject, "locationDetail": locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": timeToDB as AnyObject, "meal" : meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
             FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
         }
         let date = Date()
@@ -207,7 +210,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         let userUid = FIRAuth.auth()?.currentUser?.uid
         var shoppingCartData: [String: AnyObject] = ["orderedDate": localDate as AnyObject, "paymentStatus": "unpaid" as AnyObject, "price": totalPrice.text as AnyObject, "userUID": userUid as AnyObject]
         
-         FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
+//         FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
         
 
     
