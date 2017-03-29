@@ -13,6 +13,13 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var discountLabel: UILabel!
+    
+    @IBOutlet weak var mealPrice: UILabel!
+    
+    
+    @IBOutlet weak var deliverPrice: UILabel!
+    
     var orderDataToCart: [OrderModel] = []
     
     override func viewDidLoad() {
@@ -33,14 +40,25 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return orderDataToCart.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable:next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartTableViewCell") as! ShoppingCartTableViewCell
         // swiftlint:disable:previous force_cast
-
+            
+        cell.orderDateLabel.text = orderDataToCart[indexPath.row].date
+        cell.address.text = orderDataToCart[indexPath.row].locationArea
+        cell.addressDetail.text = orderDataToCart[indexPath.row].locationDetail
+        cell.deliver.text = orderDataToCart[indexPath.row].delvier
+        cell.typeAAmount.text = "\(orderDataToCart[indexPath.row].mealTypeAAmount)"
+        cell.typeBAmount.text = "\(orderDataToCart[indexPath.row].mealTypeBAmount)"
+        cell.typeCAmount.text = "\(orderDataToCart[indexPath.row].mealTypeCAmount)"
+        cell.price.text = "\(orderDataToCart[indexPath.row].price)"
+        cell.time.text = orderDataToCart[indexPath.row].time
+        cell.deliverFee.text = "\(orderDataToCart[indexPath.row].delvierFee)"
+        
         return cell
     }
     
@@ -53,12 +71,12 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                             print ("CD \(data)")
  
         
-                                let deliverType = data["deliver"]
-                                let deliverTime = data["time"]
-                                let deliverLocationArea = data["locationArea"]
-                                let delvierLocationDetail = data["locationDetail"]
-                            
                             guard
+                                let date = data["date"] as? String,
+                                let deliverTime = data["time"] as? String,
+                                let deliverLocationArea = data["locationArea"] as? String,
+                                let deliverLocationDetail = data["locationDetail"] as? String,
+                                let deliver = data["deliver"] as? String,
                                 let paymentStatus = data["paymentStatus"] as? String,
                                 let meal = data["meal"] as? AnyObject
                                 else { return }
@@ -73,22 +91,16 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                                 let typeAAmount = meal["typeA"] as! Int
                             // swiftlint:disable:previous force_cast
                             
-//                            let filteredData = data.filter({ (key, value) -> Bool in
-//                                
-//                                guard let stringValue = value as? String else { return false }
-//                                
-//                                return key == "paymentStatus" && stringValue == "uppaid"
-//                                
-//                            })
-                            
                             let price: Int = typeAAmount * 120 + typeBAmount * 120 + typeCAmount * 150
                             var deliverFee: Int = 0
                             let totalAmount: Int = typeAAmount + typeBAmount + typeCAmount
                             
-                            if totalAmount > 1 && totalAmount < 5{
-                                deliverFee = 60
-                            } else if totalAmount >= 5  {
+                            
+                            
+                            if totalAmount >= 5 || deliver == "自取" {
                                 deliverFee = 0
+                            } else if totalAmount > 1 && totalAmount < 5 {
+                                deliverFee = 60
                             } else {
                                 print ("overload")
                             }
@@ -98,38 +110,110 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                             if paymentStatus == "unpaid" {
                                 print ("cool")
                                 
+                                let toAppend: OrderModel = OrderModel(date: date, delvier: deliver, locationArea: deliverLocationArea, locationDetail: deliverLocationDetail , mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, price: price, deliverFee: deliverFee)
                                 
+                                self.orderDataToCart.append(toAppend)
                                 
                                 
                             } else {
                                 print ("not cool")
                             }
-                            
-                            
-                            
-                            
-//                            for (key, value) in data {
-//                                if key == "paymentStatus" && value as! String == paymentStatus {
-//                                    
-//                                } else {
-//                                    
-//                                }
-//                            }
-                            
-//                            data.forEach({ (key, value) in
-//                                
-//                            })
+
                             
                         
                         }
                     }
 
                 }
-
+            self.tableView.reloadData()
+            print ("ala \(self.orderDataToCart)")
         })
         
         
     }
     
     
+    
+    
+    @IBAction func butTapped(_ sender: Any) {
+        
+        getPrice()
+    }
+    
+    
+    
+    func getPrice () {
+        
+        let days = orderDataToCart.count
+        
+        var mealPrice: Int = 0
+        
+        
+        
+        var deliverDateNumber: Int = 0
+        
+        
+        for x in 0...days - 1  {
+            let singleDayPrice = orderDataToCart[x].price
+            
+            if orderDataToCart[x].delvier == "外送" {
+                deliverDateNumber += 1
+            }
+            mealPrice += singleDayPrice
+        }
+        
+        self.mealPrice.text = "\(mealPrice)"
+        
+        
+        
+        countDeliverFee(deliverDateNumber: deliverDateNumber)
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    func countDeliverFee (deliverDateNumber: Int) {
+        
+        print ("CHECK HERE \(deliverDateNumber)")
+        
+        let days = orderDataToCart.count
+        var totalDeliverFee: Int = 0
+        var finalDeliverFee: Int = 0
+        
+        for x in 0...days - 1 {
+            
+            totalDeliverFee += orderDataToCart[x].delvierFee
+            
+        }
+        
+        if deliverDateNumber >= 2 && deliverDateNumber <= 10 {
+            
+            finalDeliverFee = (totalDeliverFee / 10 * 8)
+            discountLabel.text = "20%"
+            print ("80%")
+        } else if deliverDateNumber > 11 && deliverDateNumber <= 15 {
+            
+            finalDeliverFee = (totalDeliverFee / 10 * 7)
+            
+            discountLabel.text = "30%"
+            print ("70%")
+        } else if deliverDateNumber > 15 {
+            
+            discountLabel.text = "40%"
+            finalDeliverFee = (totalDeliverFee / 10 * 6)
+            
+            print ("60%")
+        } else {
+            print ("bang bang ")
+        }
+        
+        deliverPrice.text = "\(finalDeliverFee)"
+        
+        
+    }
 }

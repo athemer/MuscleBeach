@@ -117,6 +117,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         
         dateFormatter.dateFormat = "MMMM yyyy"
         monthLabel.text = dateFormatter.string(from: visibleDates.monthDates.first!)
+        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
