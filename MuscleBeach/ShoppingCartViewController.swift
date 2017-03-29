@@ -62,6 +62,45 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            orderDataToCart.remove(at: indexPath.row)
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "刪除") { action, index in
+            self.orderDataToCart.remove(at: index.row)
+            self.tableView.reloadData()
+            
+            let key = self.orderDataToCart[index.row].key
+            FIRDatabase.database().reference().child("order").child(key).removeValue()
+
+            
+            
+            print("more button tapped")
+        }
+        delete.backgroundColor = .red
+        
+        let revise = UITableViewRowAction(style: .normal, title: "更改") { action, index in
+            
+            let key = self.orderDataToCart[index.row].key
+            
+            
+            print("favorite button tapped")
+        }
+        revise.backgroundColor = .yellow
+        
+        
+        return [delete, revise]
+    }
+    
+     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     func fetchDataFromFirebase () {
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -78,7 +117,8 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                                 let deliverLocationDetail = data["locationDetail"] as? String,
                                 let deliver = data["deliver"] as? String,
                                 let paymentStatus = data["paymentStatus"] as? String,
-                                let meal = data["meal"] as? AnyObject
+                                let meal = data["meal"] as? AnyObject,
+                                let key = snap.key as? String
                                 else { return }
                             
                             // swiftlint:disable:next force_cast
@@ -110,7 +150,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                             if paymentStatus == "unpaid" {
                                 print ("cool")
                                 
-                                let toAppend: OrderModel = OrderModel(date: date, delvier: deliver, locationArea: deliverLocationArea, locationDetail: deliverLocationDetail , mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, price: price, deliverFee: deliverFee)
+                                let toAppend: OrderModel = OrderModel(date: date, delvier: deliver, locationArea: deliverLocationArea, locationDetail: deliverLocationDetail , mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, price: price, deliverFee: deliverFee, key: key)
                                 
                                 self.orderDataToCart.append(toAppend)
                                 
@@ -163,19 +203,10 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         }
         
         self.mealPrice.text = "\(mealPrice)"
-        
-        
-        
+   
         countDeliverFee(deliverDateNumber: deliverDateNumber)
-        
-        
-        
+ 
     }
-    
-    
-    
-    
-    
     
     func countDeliverFee (deliverDateNumber: Int) {
         
