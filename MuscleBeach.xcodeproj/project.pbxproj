@@ -41,6 +41,7 @@
 		D1A0BE291E8A66E800F4D36B /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */; };
 		D1A0BE2B1E8A684700F4D36B /* ShoppingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */; };
 		D1A0BE2D1E8B954500F4D36B /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */; };
+		D1A0BE331E8CB1AE00F4D36B /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
@@ -92,6 +93,7 @@
 		D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartTableViewCell.swift; sourceTree = "<group>"; };
 		D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */,
 				D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */,
+				D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */,
 			);
 			name = shoppingCart;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1A0BE331E8CB1AE00F4D36B /* PopoverViewController.swift in Sources */,
 				D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */,
 				D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */,
 				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,

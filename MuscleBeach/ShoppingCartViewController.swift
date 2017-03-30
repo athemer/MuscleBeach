@@ -88,6 +88,37 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             
             let key = self.orderDataToCart[index.row].key
             
+            let alert = UIAlertController(title: "更改數量",
+                                          message: "\n\n\n\n\n\n",
+                                          preferredStyle: .alert)
+            
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            // swiftlint:disable:next force_cast
+            let vc = storyboard.instantiateViewController(withIdentifier: "PopoverViewController") as! PopoverViewController
+            // swiftlint:disable:previous force_cast
+            
+            vc.modalPresentationStyle = UIModalPresentationStyle.popover
+            let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+            let navigation = self.navigationController
+
+            navigation?.addChildViewController(vc)
+            navigation?.view.addSubview(vc.view)
+            vc.didMove(toParentViewController: navigation)
+            
+//            self.present(vc, animated: true, completion:nil)
+            
+//            alert.view.addSubview(view)
+            
+            let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (action) -> Void in })
+            
+            let submitAction = UIAlertAction(title: "更改", style: .default, handler: { (action) -> Void in
+
+                
+            })
+            
+            alert.addAction(submitAction)
+            alert.addAction(cancel)
+//            self.present(alert, animated: true, completion: nil)
             
             print("favorite button tapped")
         }
@@ -247,4 +278,13 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
         
     }
+    
+//    func actionWasTapped(sender: UIBarButtonItem) {
+//        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "PopoverViewController") as! PopoverViewController
+//        vc.modalPresentationStyle = UIModalPresentationStyle.popover
+//        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+//        popover.barButtonItem = sender
+//        present(vc, animated: true, completion:nil)
+//    }
 }
