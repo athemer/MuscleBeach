@@ -9,7 +9,10 @@
 import UIKit
 import Firebase
 
-class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+
+
+
+class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, ValueChangedDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,17 +25,42 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
     
     var orderDataToCart: [OrderModel] = []
     
+    var newAmount: [String: Int] = [:]
+    
+    var keysArray: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
+        PopoverViewController.shared.delegate = self
+        
         fetchDataFromFirebase()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        
+        print ("haha")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount: [String : Int]) {
+        self.newAmount = newAmount
+        
+        
+        
+        
+        print ("LALALAND \(newAmount)")
+    
+        
+//        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,9 +116,6 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             
             let key = self.orderDataToCart[index.row].key
             
-            let alert = UIAlertController(title: "更改數量",
-                                          message: "\n\n\n\n\n\n",
-                                          preferredStyle: .alert)
             
             let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             // swiftlint:disable:next force_cast
@@ -101,25 +126,17 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             let popover: UIPopoverPresentationController = vc.popoverPresentationController!
             let navigation = self.navigationController
 
+            
+            vc.amountA = self.orderDataToCart[index.row].mealTypeAAmount
+            vc.amountB = self.orderDataToCart[index.row].mealTypeBAmount
+            vc.amountC = self.orderDataToCart[index.row].mealTypeCAmount
+            vc.key = self.orderDataToCart[index.row].key
+            
+            
             navigation?.addChildViewController(vc)
             navigation?.view.addSubview(vc.view)
             vc.didMove(toParentViewController: navigation)
-            
-//            self.present(vc, animated: true, completion:nil)
-            
-//            alert.view.addSubview(view)
-            
-            let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (action) -> Void in })
-            
-            let submitAction = UIAlertAction(title: "更改", style: .default, handler: { (action) -> Void in
-
-                
-            })
-            
-            alert.addAction(submitAction)
-            alert.addAction(cancel)
-//            self.present(alert, animated: true, completion: nil)
-            
+ 
             print("favorite button tapped")
         }
         revise.backgroundColor = .yellow
@@ -151,6 +168,10 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                                 let meal = data["meal"] as? AnyObject,
                                 let key = snap.key as? String
                                 else { return }
+                            
+                            
+                            self.keysArray.append(key)
+                            
                             
                             // swiftlint:disable:next force_cast
                                 let typeBAmount = meal["typeB"] as! Int
@@ -279,12 +300,17 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
     }
     
-//    func actionWasTapped(sender: UIBarButtonItem) {
-//        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "PopoverViewController") as! PopoverViewController
-//        vc.modalPresentationStyle = UIModalPresentationStyle.popover
-//        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
-//        popover.barButtonItem = sender
-//        present(vc, animated: true, completion:nil)
-//    }
+
+    @IBAction func informTapped(_ sender: Any) {
+        
+        
+        for key in keysArray {
+            FIRDatabase.database().reference().child("order").child(key).child("paymentClaim").updateChildValues(["paymentClaim" : "true"])
+        }
+        
+        
+    }
+    
+    
+    
 }
