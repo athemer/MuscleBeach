@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol ValueChangedDelegate: class {
-    func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount:[String: Int])
+    func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount:[String: Any])
 }
 
 class PopoverViewController: UIViewController {
@@ -19,11 +19,13 @@ class PopoverViewController: UIViewController {
     
     weak var delegate: ValueChangedDelegate?
     
-    var newAmount: [String: Int] = [:]
+    var newAmount: [String: Any] = [:]
     
+    var deliver: String = ""
     var amountA: Int = 0
     var amountB: Int = 0
     var amountC: Int = 0
+    var index: Int = 0
     var key: String = ""
 
     @IBOutlet weak var amountALable: UILabel!
@@ -54,12 +56,6 @@ class PopoverViewController: UIViewController {
         print ("good")
         // Do any additional setup after loading the view.
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        print ("bye")
-        
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,16 +65,32 @@ class PopoverViewController: UIViewController {
     @IBAction func confirmTapped(_ sender: Any) {
         
         
-        var revisedMealData: [String: Int] = ["typeA": amountA, "typeB": amountB, "typeC": amountC]
-        FIRDatabase.database().reference().child("order").child(key).child("meal").updateChildValues(revisedMealData)
+        let revisedMealData: [String: Int] = ["typeA": amountA, "typeB": amountB, "typeC": amountC]
+//        FIRDatabase.database().reference().child("order").child(key).child("meal").updateChildValues(revisedMealData)
        
 //        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        // swiftlint:disable:next force_cast
 //        let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCartViewController") as! ShoppingCartViewController
 //        // swiftlint:disable:previous force_cast
 
+        let revisedTotalAmount = amountA + amountB + amountC
         
-        getData(data: revisedMealData)
+        print ("YOLO \(deliver)  \(revisedTotalAmount)")
+        
+        if deliver == "外送" && revisedTotalAmount < 2 {
+            let alertController = UIAlertController(title: "錯誤", message:
+                "外送數量不可小於兩個", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "重新選擇數量", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        
+        let dataToParent: [String: Any] = ["typeA": amountA, "typeB": amountB, "typeC": amountC, "index": index, "deliverWay": deliver]
+        FIRDatabase.database().reference().child("order").child(key).child("meal").updateChildValues(revisedMealData)
+        
+        getData(data: dataToParent)
         
         
         self.willMove(toParentViewController: nil)
@@ -126,8 +138,8 @@ class PopoverViewController: UIViewController {
     }
     
     
-    func getData (data: [String: Int]) {
-        newAmount = data
-        self.delegate?.didChangeMealAmount(self, didGet: self.newAmount)
+    func getData (data: [String: Any]) {
+        
+        self.delegate?.didChangeMealAmount(self, didGet: data)
     }
 }

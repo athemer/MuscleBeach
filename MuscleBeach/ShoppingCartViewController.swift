@@ -25,16 +25,12 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
     
     var orderDataToCart: [OrderModel] = []
     
-    var newAmount: [String: Int] = [:]
-    
     var keysArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
-        PopoverViewController.shared.delegate = self
         
         fetchDataFromFirebase()
     }
@@ -51,16 +47,32 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     
-    func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount: [String : Int]) {
-        self.newAmount = newAmount
+    func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount: [String : Any]) {
+        guard
+            let indexRow = newAmount["index"] as? Int,
+            let typeA = newAmount["typeA"] as? Int,
+            let typeB = newAmount["typeB"] as? Int,
+            let typeC = newAmount["typeC"] as? Int,
+            let deliverWay = newAmount["deliverWay"] as? String else { return }
         
         
+        var deliverFee = 60
+        let price = typeA * 120 + typeB * 120 + typeC * 150
+        let amount = typeA + typeB + typeC
+        if amount >= 5 || deliverWay == "自取" {
+            deliverFee = 0
+        }
+        
+        self.orderDataToCart[indexRow].mealTypeAAmount = typeA
+        self.orderDataToCart[indexRow].mealTypeBAmount = typeB
+        self.orderDataToCart[indexRow].mealTypeCAmount = typeC
+        self.orderDataToCart[indexRow].price = price
+        self.orderDataToCart[indexRow].delvierFee = deliverFee
         
         
         print ("LALALAND \(newAmount)")
-    
         
-//        self.tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -122,16 +134,18 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             let vc = storyboard.instantiateViewController(withIdentifier: "PopoverViewController") as! PopoverViewController
             // swiftlint:disable:previous force_cast
             
+            vc.delegate = self
+            
             vc.modalPresentationStyle = UIModalPresentationStyle.popover
             let popover: UIPopoverPresentationController = vc.popoverPresentationController!
             let navigation = self.navigationController
 
-            
+            vc.index = index.row
             vc.amountA = self.orderDataToCart[index.row].mealTypeAAmount
             vc.amountB = self.orderDataToCart[index.row].mealTypeBAmount
             vc.amountC = self.orderDataToCart[index.row].mealTypeCAmount
             vc.key = self.orderDataToCart[index.row].key
-            
+            vc.deliver = self.orderDataToCart[index.row].delvier
             
             navigation?.addChildViewController(vc)
             navigation?.view.addSubview(vc.view)
@@ -305,7 +319,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
         
         for key in keysArray {
-            FIRDatabase.database().reference().child("order").child(key).child("paymentClaim").updateChildValues(["paymentClaim" : "true"])
+            FIRDatabase.database().reference().child("order").child(key).updateChildValues(["paymentClaim" : "true"])
         }
         
         
