@@ -27,6 +27,10 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
     
     var keysArray: [String] = []
     
+    
+    var mealPriceofTotal: Int = 0
+    var finalDeliverFee: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -269,7 +273,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         }
         
         self.mealPrice.text = "\(mealPrice)"
-   
+        self.mealPriceofTotal = mealPrice
         countDeliverFee(deliverDateNumber: deliverDateNumber)
  
     }
@@ -311,16 +315,22 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
         deliverPrice.text = "\(finalDeliverFee)"
         
-        
+        self.finalDeliverFee = finalDeliverFee
     }
     
 
     @IBAction func informTapped(_ sender: Any) {
         
-        
+        let price = self.finalDeliverFee + self.mealPriceofTotal
+        let uid = FIRAuth.auth()?.currentUser?.uid
         for key in keysArray {
             FIRDatabase.database().reference().child("order").child(key).updateChildValues(["paymentClaim" : "true"])
+            
+            FIRDatabase.database().reference().child("shoppingCart").childByAutoId().updateChildValues([key: "true", "userUID" : uid, "price": price])
+            
         }
+        
+        
         
         
     }
