@@ -292,18 +292,25 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             
         }
         
-        if deliverDateNumber >= 2 && deliverDateNumber <= 10 {
+        
+        if deliverDateNumber >= 1 && deliverDateNumber < 5 {
+            
+            finalDeliverFee = totalDeliverFee
+            discountLabel.text = "0%"
+            print ("0%")
+            
+        } else if deliverDateNumber >= 5 && deliverDateNumber < 14 {
             
             finalDeliverFee = (totalDeliverFee / 10 * 8)
             discountLabel.text = "20%"
             print ("80%")
-        } else if deliverDateNumber > 11 && deliverDateNumber <= 15 {
+        } else if deliverDateNumber > 15 && deliverDateNumber <= 19 {
             
             finalDeliverFee = (totalDeliverFee / 10 * 7)
             
             discountLabel.text = "30%"
             print ("70%")
-        } else if deliverDateNumber > 15 {
+        } else if deliverDateNumber > 20 {
             
             discountLabel.text = "40%"
             finalDeliverFee = (totalDeliverFee / 10 * 6)
@@ -323,18 +330,65 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
         let price = self.finalDeliverFee + self.mealPriceofTotal
         let uid = FIRAuth.auth()?.currentUser?.uid
+        
+        var keyDict: [String: Any] = [:]
+        let userUIDToAppend: [String: String] = ["userUID": uid!]
+        let priceToAppend: [String: Int] = ["price": price]
+        
+        var userName: String = "wrong"
+        var number: String = "worng"
+        
         for key in keysArray {
             FIRDatabase.database().reference().child("order").child(key).updateChildValues(["paymentClaim" : "true"])
-            
-            FIRDatabase.database().reference().child("shoppingCart").childByAutoId().updateChildValues([key: "true", "userUID" : uid, "price": price])
-            
+           //做成一個 [key:true] 的array
+
+            keyDict[key] = true
         }
         
         
-        
-        
+        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dict = snapshot.value as? [String: Any] {
+                guard
+                    let theUserName = dict["name"] as? String,
+                    let theNumber = dict["number"] as? String else { return }
+                
+                userName = theUserName
+                number = theNumber
+            
+                
+                keyDict["userData"] = ["userName" : userName, "number": number]
+                keyDict["userUID"] = uid
+                keyDict["price"] = price
+                
+                FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(keyDict)
+                
+                FIRDatabase.database().reference().child("shoppingCart").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dictionary = snapshot.value as? [String: Any] {
+                        for dict in dictionary {
+                            
+                            let valueInDict = dict.value as? [String: Any]
+                            
+                            let keyforShoppingCartId = dict.key
+                            var userUID = valueInDict?["userUID"] as? String
+                            
+                            if userUID == uid {
+                                
+                                for key in self.keysArray {
+                                    FIRDatabase.database().reference().child("order").child(key).setValue(["shoppingCartId": keyforShoppingCartId])
+                                }
+                                
+                            } else {
+                                return
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                })
+            }
+        })
+
     }
-    
-    
-    
+
 }

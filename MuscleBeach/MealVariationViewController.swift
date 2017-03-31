@@ -180,6 +180,9 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
             let cancel = UIAlertAction(title: "更新數量", style: .destructive, handler: { (action) -> Void in })
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
+            
+            return
+            
         } else {
             print (" meal number passed ")
         }
