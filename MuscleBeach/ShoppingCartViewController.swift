@@ -374,7 +374,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                             if userUID == uid {
                                 
                                 for key in self.keysArray {
-                                    FIRDatabase.database().reference().child("order").child(key).setValue(["shoppingCartId": keyforShoppingCartId])
+                                    FIRDatabase.database().reference().child("order").child(key).child("shoppingCartId").setValue(keyforShoppingCartId)
                                 }
                                 
                             } else {
