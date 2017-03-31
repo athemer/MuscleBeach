@@ -222,6 +222,16 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func testTapped(_ sender: Any) {
         
+        
+        
+        // Fetch Order Data -> if dateArray.contain(data) && timeArray
+        //        ["date": "2017-03-28", "time": "lunch"]
+        
+        
+        FIRDatabase.database().reference().child("order").observeSingleEvent(of: <#T##FIRDataEventType#>, with: <#T##(FIRDataSnapshot) -> Void#>)
+        
+        
+        
         addDataToShoppingCart()
         
     }

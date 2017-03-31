@@ -115,11 +115,26 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
      func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        
         let delete = UITableViewRowAction(style: .normal, title: "刪除") { action, index in
+            
+            
+            
+            if self.orderDataToCart[index.row].paymentClaim == "true" {
+                let alertController = UIAlertController(title: "注意", message:
+                    "肌肉海灘確認訂單金額中，無法刪除！", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "確認", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+
+
+            let key = self.orderDataToCart[index.row].key
+            
             self.orderDataToCart.remove(at: index.row)
             self.tableView.reloadData()
-            
-            let key = self.orderDataToCart[index.row].key
+
             FIRDatabase.database().reference().child("order").child(key).removeValue()
 
             
@@ -130,6 +145,17 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
         let revise = UITableViewRowAction(style: .normal, title: "更改") { action, index in
             
+            
+            if self.orderDataToCart[index.row].paymentClaim == "true" {
+                let alertController = UIAlertController(title: "注意", message:
+                    "肌肉海灘確認訂單金額中，無法更改數量！", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "確認", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+
             let key = self.orderDataToCart[index.row].key
             
             
@@ -184,7 +210,8 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                                 let deliver = data["deliver"] as? String,
                                 let paymentStatus = data["paymentStatus"] as? String,
                                 let meal = data["meal"] as? AnyObject,
-                                let key = snap.key as? String
+                                let key = snap.key as? String,
+                                let paymentClaim = data["paymentClaim"] as? String
                                 else { return }
                             
                             
@@ -220,7 +247,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                             if paymentStatus == "unpaid" {
                                 print ("cool")
                                 
-                                let toAppend: OrderModel = OrderModel(date: date, delvier: deliver, locationArea: deliverLocationArea, locationDetail: deliverLocationDetail , mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, price: price, deliverFee: deliverFee, key: key)
+                                let toAppend: OrderModel = OrderModel(date: date, delvier: deliver, locationArea: deliverLocationArea, locationDetail: deliverLocationDetail , mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, price: price, deliverFee: deliverFee, key: key, paymentClaim: paymentClaim)
                                 
                                 self.orderDataToCart.append(toAppend)
                                 
@@ -299,18 +326,19 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             discountLabel.text = "0%"
             print ("0%")
             
-        } else if deliverDateNumber >= 5 && deliverDateNumber < 14 {
+        } else if deliverDateNumber >= 5 && deliverDateNumber < 15 {
             
             finalDeliverFee = (totalDeliverFee / 10 * 8)
             discountLabel.text = "20%"
             print ("80%")
-        } else if deliverDateNumber > 15 && deliverDateNumber <= 19 {
+        } else if deliverDateNumber >= 15 && deliverDateNumber < 20 {
             
             finalDeliverFee = (totalDeliverFee / 10 * 7)
             
             discountLabel.text = "30%"
             print ("70%")
-        } else if deliverDateNumber > 20 {
+            
+        } else if deliverDateNumber >= 20 {
             
             discountLabel.text = "40%"
             finalDeliverFee = (totalDeliverFee / 10 * 6)
@@ -340,9 +368,13 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
         
         for key in keysArray {
             FIRDatabase.database().reference().child("order").child(key).updateChildValues(["paymentClaim" : "true"])
-           //做成一個 [key:true] 的array
 
-            keyDict[key] = true
+            
+            //做成一個 [key:true] 的array
+            let index = keysArray.index(of: key)!
+            keyDict["\(index)"] = key
+            
+            
         }
         
         
@@ -354,7 +386,6 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
                 
                 userName = theUserName
                 number = theNumber
-            
                 
                 keyDict["userData"] = ["userName" : userName, "number": number]
                 keyDict["userUID"] = uid

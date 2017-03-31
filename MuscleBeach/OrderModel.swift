@@ -22,8 +22,9 @@ class OrderModel {
     var price: Int
     var delvierFee: Int
     var key: String
+    var paymentClaim: String
     
-    init (date: String, delvier: String, locationArea: String, locationDetail: String, mealTypeAAmount: Int, mealTypeBAmount: Int, mealTypeCAmount: Int, time: String, price: Int, deliverFee: Int, key: String) {
+    init (date: String, delvier: String, locationArea: String, locationDetail: String, mealTypeAAmount: Int, mealTypeBAmount: Int, mealTypeCAmount: Int, time: String, price: Int, deliverFee: Int, key: String, paymentClaim: String) {
         self.date = date
         self.delvier = delvier
         self.locationArea = locationArea
@@ -35,6 +36,7 @@ class OrderModel {
         self.delvierFee = deliverFee
         self.price = price
         self.key = key
+        self.paymentClaim = paymentClaim
     }
 
 }
