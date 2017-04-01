@@ -167,40 +167,9 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: need to be fixed
     @IBAction func confirmTapped(_ sender: Any) {
+    
         
-        let uid = FIRAuth.auth()!.currentUser!.uid
         
-     
-        for x in 0...testData.count - 1 {
-            let testDate = testData[x].testDate
-            let testDeliver = testData[x].testDeliver
-            let testTime = testData[x].testTime
-            let testLocDetail = testData[x].testLocDetail
-            let testUID = testData[x].testUID
-            
-            if dateToDB.contains(testDate) && testUID == uid {
-                print ("the user is order the repeating date and ....")
-                
-                if timeToDB == testTime && locationDetailToDB == testLocDetail {
-                    print ("lol youre not gonna proceeding")
-                    
-                    let alert = UIAlertController(title: "重複訂購",
-                                                  message: "同日同時段已有餐點在購物車內，\n為避免運費重複計算\n請至購物車內更改數量",
-                                                  preferredStyle: .alert)
-                    
-                    let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (action) -> Void in })
-                    alert.addAction(cancel)
-                    self.present(alert, animated: true, completion: nil)
-                                
-                    return
-  
-                }
-  
-            } else {
-                print ("the order shall pass")
-            }
-  
-        }
 //            if (self.locationDetailToDB, self.timeToDB) == (locationDetail, time) && self.dateToDB.contains(date) {
 //            
 //            
@@ -263,25 +232,43 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                 let userData: [String: String] = ["userName": "Kuan Hua", "number" : "0963322300"]
                 
                 for date in self.dateToDB {
+                    
+                    let uid = FIRAuth.auth()!.currentUser!.uid
+       
+                    for x in 0...testData.count - 1 {
+                        let testDate = testData[x].testDate
+                        let testDeliver = testData[x].testDeliver
+                        let testTime = testData[x].testTime
+                        let testLocDetail = testData[x].testLocDetail
+                        let testUID = testData[x].testUID
+                        
+                        if date == testDate && testUID == uid {
+                            print ("the user is order the repeating date and ....")
+                            
+                            if timeToDB == testTime && locationDetailToDB == testLocDetail {
+                                print ("lol youre not gonna proceeding")
+                                
+                                let alert = UIAlertController(title: "重複訂購",
+                                                              message: "\(date)\(timeToDB)訂單已在購物車內\n為避免運費重複計算\n請至購物車內更改數量",
+                                                              preferredStyle: .alert)
+                                
+                                let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (action) -> Void in })
+                                alert.addAction(cancel)
+                                self.present(alert, animated: true, completion: nil)
+                                
+                                return
+                                
+                            }
+                            
+                        } else {
+                            print ("the order shall pass")
+                        }
+                        
+                    }
+
                     let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal" : meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
                     FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
                 }
-                
-                
-                
-//                let date = Date()
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateFormat = "yyyy-MM-dd"
-//                dateFormatter.timeZone = TimeZone.current
-//                let localDate = dateFormatter.string(from: date)
-//                
-//                
-//                let userUid = FIRAuth.auth()?.currentUser?.uid
-//                let shoppingCartData: [String: AnyObject] = ["orderedDate": localDate as AnyObject, "paymentStatus": "unpaid" as AnyObject, "price": self.totalPrice.text as AnyObject, "userUID": userUid as AnyObject]
-//                
-//                
-//                FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
-  
 
     }
     
