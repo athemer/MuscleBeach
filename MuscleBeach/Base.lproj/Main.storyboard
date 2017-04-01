@@ -1968,7 +1968,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EgE-7R-FgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6304.8000000000002" y="-1843.6281859070466"/>
+            <point key="canvasLocation" x="6606" y="-1613"/>
         </scene>
         <!--訂餐首頁-->
         <scene sceneID="gF2-o8-6se">

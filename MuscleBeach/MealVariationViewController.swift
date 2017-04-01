@@ -268,6 +268,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
 
                     let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal" : meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
                     FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+                    navigationController?.popToRootViewController(animated: true)
                 }
 
     }
@@ -278,16 +279,6 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func testTapped(_ sender: Any) {
         
         
-        
-        // Fetch Order Data -> if dateArray.contain(data) && timeArray
-        //        ["date": "2017-03-28", "time": "lunch"]
-        
-        
-
-        
-        
-        
-        addDataToShoppingCart()
         
     }
     
