@@ -42,6 +42,7 @@
 		D1A0BE2B1E8A684700F4D36B /* ShoppingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */; };
 		D1A0BE2D1E8B954500F4D36B /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */; };
 		D1A0BE331E8CB1AE00F4D36B /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */; };
+		D1A0BE351E8FD63C00F4D36B /* NewOrderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE341E8FD63C00F4D36B /* NewOrderTest.swift */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
@@ -94,6 +95,7 @@
 		D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartTableViewCell.swift; sourceTree = "<group>"; };
 		D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
+		D1A0BE341E8FD63C00F4D36B /* NewOrderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOrderTest.swift; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				D1683C231E7FCADE00C9D887 /* DataService.swift */,
 				D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */,
+				D1A0BE341E8FD63C00F4D36B /* NewOrderTest.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
+				D1A0BE351E8FD63C00F4D36B /* NewOrderTest.swift in Sources */,
 				D121F6791E815E1F0049796D /* ProfilePageAddressCell.swift in Sources */,
 				D1E211F21E891BE60006B849 /* WeekMenuSelectionViewController.swift in Sources */,
 				D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */,

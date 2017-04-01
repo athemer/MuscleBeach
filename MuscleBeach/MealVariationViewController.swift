@@ -27,6 +27,9 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var totalPrice: UILabel!
 
     
+    var testData: [NewOrderTest] = []
+    
+    
     var dateToDB: [String] = []
     var deliverToDB: String = ""
     var locationAreaToDB: String = ""
@@ -43,7 +46,10 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         numberOfDaysOrdered.text = "\(dateToDB.count)"
+     
         
+        //MARK
+        fetchTestData()
         
         print("ahha \(deliverToDB) \(locationDetailToDB) \(dateToDB)")
         // Do any additional setup after loading the view.
@@ -153,72 +159,134 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
             backgroundView.backgroundColor = UIColor.darkGray
         }
     }
+    
+    
+    
+    
+    
+    
+    // MARK: need to be fixed
     @IBAction func confirmTapped(_ sender: Any) {
         
-        let indexPath0 = IndexPath(row: 0, section: 0)
-        let indexPath1 = IndexPath(row: 1, section: 0)
-        let indexPath2 = IndexPath(row: 2, section: 0)
-        // swiftlint:disable:next force_cast
-        let cell0 = tableView.cellForRow(at: indexPath0) as! MealVariTableViewCell
-        // swiftlint:disable:previous force_cast
-        
-        // swiftlint:disable:next force_cast
-        let cell1 = tableView.cellForRow(at: indexPath1) as! MealVariTableViewCell
-        // swiftlint:disable:previous force_cast
-
-        // swiftlint:disable:next force_cast
-        let cell2 = tableView.cellForRow(at: indexPath2) as! MealVariTableViewCell
-        // swiftlint:disable:previous force_cast
-        var numberOfMeal: Int = 0
-        numberOfMeal = Int(cell0.stepper.value) + Int(cell1.stepper.value) + Int(cell2.stepper.value)
-        
-        if numberOfMeal <= 1 && deliverToDB != "自取" {
-            let alert = UIAlertController(title: "外送數量",
-                                          message: "餐點數量需要滿兩個以上才有外送唷",
-                                          preferredStyle: .alert)
-            
-            let cancel = UIAlertAction(title: "更新數量", style: .destructive, handler: { (action) -> Void in })
-            alert.addAction(cancel)
-            present(alert, animated: true, completion: nil)
-            
-            return
-            
-        } else {
-            print (" meal number passed ")
-        }
-        
-        if timeSegment.selectedSegmentIndex == 0 {
-            timeToDB = "午餐"
-        } else if timeSegment.selectedSegmentIndex == 1 {
-            timeToDB = "晚餐"
-        }
-        
         let uid = FIRAuth.auth()!.currentUser!.uid
-        let meal: [String: Int] = ["typeA": Int(cell0.stepper.value) ,"typeB": Int(cell1.stepper.value), "typeC": Int(cell2.stepper.value)]
         
-        // Mark: todo
-        let userData: [String: String] = ["userName": "Kuan Hua", "number" : "0963322300"]
-        
-        for date in dateToDB {
-            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliverToDB as AnyObject, "locationArea": locationAreaToDB as AnyObject, "locationDetail": locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": timeToDB as AnyObject, "meal" : meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
-            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+     
+        for x in 0...testData.count - 1 {
+            let testDate = testData[x].testDate
+            let testDeliver = testData[x].testDeliver
+            let testTime = testData[x].testTime
+            let testLocDetail = testData[x].testLocDetail
+            let testUID = testData[x].testUID
+            
+            if dateToDB.contains(testDate) && testUID == uid {
+                print ("the user is order the repeating date and ....")
+                
+                if timeToDB == testTime && locationDetailToDB == testLocDetail {
+                    print ("lol youre not gonna proceeding")
+                    
+                    let alert = UIAlertController(title: "重複訂購",
+                                                  message: "同日同時段已有餐點在購物車內，\n為避免運費重複計算\n請至購物車內更改數量",
+                                                  preferredStyle: .alert)
+                    
+                    let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (action) -> Void in })
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true, completion: nil)
+                                
+                    return
+  
+                }
+  
+            } else {
+                print ("the order shall pass")
+            }
+  
         }
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone.current
-        let localDate = dateFormatter.string(from: date)
+//            if (self.locationDetailToDB, self.timeToDB) == (locationDetail, time) && self.dateToDB.contains(date) {
+//            
+//            
+//            if uid == userUID {
+//            let alert = UIAlertController(title: "重複訂購",
+//            message: "同日同時段已有餐點在購物車內，\n為避免運費重複計算\n請至購物車內更改數量",
+//            preferredStyle: .alert)
+//            
+//            let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (action) -> Void in })
+//            alert.addAction(cancel)
+//            self.present(alert, animated: true, completion: nil)
+//            
+//            return
+//            }
+//        }
         
         
-        let userUid = FIRAuth.auth()?.currentUser?.uid
-        var shoppingCartData: [String: AnyObject] = ["orderedDate": localDate as AnyObject, "paymentStatus": "unpaid" as AnyObject, "price": totalPrice.text as AnyObject, "userUID": userUid as AnyObject]
-        
-//         FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
-        
+                let indexPath0 = IndexPath(row: 0, section: 0)
+                let indexPath1 = IndexPath(row: 1, section: 0)
+                let indexPath2 = IndexPath(row: 2, section: 0)
+                // swiftlint:disable:next force_cast
+                let cell0 = self.tableView.cellForRow(at: indexPath0) as! MealVariTableViewCell
+                // swiftlint:disable:previous force_cast
+                
+                // swiftlint:disable:next force_cast
+                let cell1 = self.tableView.cellForRow(at: indexPath1) as! MealVariTableViewCell
+                // swiftlint:disable:previous force_cast
+                
+                // swiftlint:disable:next force_cast
+                let cell2 = self.tableView.cellForRow(at: indexPath2) as! MealVariTableViewCell
+                // swiftlint:disable:previous force_cast
+                var numberOfMeal: Int = 0
+                numberOfMeal = Int(cell0.stepper.value) + Int(cell1.stepper.value) + Int(cell2.stepper.value)
+                
+                if numberOfMeal <= 1 && self.deliverToDB != "自取" {
+                    let alert = UIAlertController(title: "外送數量",
+                                                  message: "餐點數量需要滿兩個以上才有外送唷",
+                                                  preferredStyle: .alert)
+                    
+                    let cancel = UIAlertAction(title: "更新數量", style: .destructive, handler: { (action) -> Void in })
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    return
+                    
+                } else {
+                    print (" meal number passed ")
+                }
+                
+                if self.timeSegment.selectedSegmentIndex == 0 {
+                    self.timeToDB = "午餐"
+                } else if self.timeSegment.selectedSegmentIndex == 1 {
+                    self.timeToDB = "晚餐"
+                }
+                
+                
+                let meal: [String: Int] = ["typeA": Int(cell0.stepper.value) ,"typeB": Int(cell1.stepper.value), "typeC": Int(cell2.stepper.value)]
+                
+                // Mark: todo
+                let userData: [String: String] = ["userName": "Kuan Hua", "number" : "0963322300"]
+                
+                for date in self.dateToDB {
+                    let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal" : meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
+                    FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+                }
+                
+                
+                
+//                let date = Date()
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "yyyy-MM-dd"
+//                dateFormatter.timeZone = TimeZone.current
+//                let localDate = dateFormatter.string(from: date)
+//                
+//                
+//                let userUid = FIRAuth.auth()?.currentUser?.uid
+//                let shoppingCartData: [String: AnyObject] = ["orderedDate": localDate as AnyObject, "paymentStatus": "unpaid" as AnyObject, "price": self.totalPrice.text as AnyObject, "userUID": userUid as AnyObject]
+//                
+//                
+//                FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(shoppingCartData)
+  
 
-    
-        
     }
+    
+    
+    
     
     @IBAction func testTapped(_ sender: Any) {
         
@@ -228,7 +296,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         //        ["date": "2017-03-28", "time": "lunch"]
         
         
-        FIRDatabase.database().reference().child("order").observeSingleEvent(of: <#T##FIRDataEventType#>, with: <#T##(FIRDataSnapshot) -> Void#>)
+
         
         
         
@@ -238,6 +306,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func addDataToShoppingCart() {
+        
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -285,5 +354,34 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         
         
     }
+    
+    
+    func fetchTestData () {
         
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        
+        FIRDatabase.database().reference().child("order").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let snaps = snapshot.value as? [String: Any]  {
+                
+                for snap in snaps  {
+                    print (snap)
+                    guard
+                        let dict = snap.value as? [String: Any],
+                        let date = dict["date"] as? String,
+                        let time = dict["time"] as? String,
+                        let locationDetail = dict["locationDetail"] as? String,
+                        let deliver = dict["deliver"] as? String,
+                        let userUID = dict["userUID"] as? String else { return }
+                    
+                    print ("bruh")
+                    
+                    let dataAppendToTest: NewOrderTest = NewOrderTest(testDate: date, testTime: time, testDeliver: deliver, testLocDetail: locationDetail, testUID: userUID)
+                    self.testData.append(dataAppendToTest)
+  
+                }
+            }
+        })
+        
+    }
 }

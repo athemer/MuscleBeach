@@ -148,7 +148,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             
             if self.orderDataToCart[index.row].paymentClaim == "true" {
                 let alertController = UIAlertController(title: "注意", message:
-                    "肌肉海灘確認訂單金額中，無法更改數量！", preferredStyle: UIAlertControllerStyle.alert)
+                    "肌肉海灘確認訂單金額中，\n無法更改數量！", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "確認", style: UIAlertActionStyle.default,handler: nil))
                 
                 self.present(alertController, animated: true, completion: nil)
