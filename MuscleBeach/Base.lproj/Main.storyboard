@@ -1035,6 +1035,66 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
             </objects>
             <point key="canvasLocation" x="4180" y="-2185.4572713643179"/>
         </scene>
+        <!--DigitI Nfo View Controller-->
+        <scene sceneID="bcU-Is-7EB">
+            <objects>
+                <viewController storyboardIdentifier="DigitINfoViewController" id="RTu-NS-kYZ" customClass="DigitINfoViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fK8-AI-AYy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ief-RU-m9F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Zl-EW-XZG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1da-ya-RLT">
+                                <rect key="frame" x="16" y="144" width="343" height="326"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="請輸入匯款帳號後五碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHs-Ix-G2U">
+                                        <rect key="frame" x="84" y="55" width="174" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="raC-9T-2kQ">
+                                        <rect key="frame" x="55" y="128" width="248" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bia-qJ-YxL">
+                                        <rect key="frame" x="212" y="269" width="79" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="確認"/>
+                                        <connections>
+                                            <action selector="confirmTapped:" destination="RTu-NS-kYZ" eventType="touchUpInside" id="hYp-k8-jeD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCy-B3-9yn">
+                                        <rect key="frame" x="45" y="269" width="79" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="取消"/>
+                                        <connections>
+                                            <action selector="cancelTapped:" destination="RTu-NS-kYZ" eventType="touchUpInside" id="s39-TX-yNy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97601670029999998" green="0.87297958139999998" blue="0.092192582790000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="0.625" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="digitTextField" destination="raC-9T-2kQ" id="d7A-P5-5Wp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ttv-HE-NAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5269.6000000000004" y="-2297.0014992503748"/>
+        </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Kmp-zE-t5J">
             <objects>

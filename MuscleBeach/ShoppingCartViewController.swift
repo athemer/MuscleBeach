@@ -148,7 +148,7 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
             
             if self.orderDataToCart[index.row].paymentClaim == "true" {
                 let alertController = UIAlertController(title: "注意", message:
-                    "肌肉海灘確認訂單金額中，\n無法更改數量！", preferredStyle: UIAlertControllerStyle.alert)
+                    "肌肉海灘確認訂單金額中，無法更改數量！", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "確認", style: UIAlertActionStyle.default,handler: nil))
                 
                 self.present(alertController, animated: true, completion: nil)
@@ -356,69 +356,88 @@ class ShoppingCartViewController: UIViewController,UITableViewDelegate, UITableV
 
     @IBAction func informTapped(_ sender: Any) {
         
-        let price = self.finalDeliverFee + self.mealPriceofTotal
-        let uid = FIRAuth.auth()?.currentUser?.uid
         
-        var keyDict: [String: Any] = [:]
-        let userUIDToAppend: [String: String] = ["userUID": uid!]
-        let priceToAppend: [String: Int] = ["price": price]
+        // swiftlint:disable:next force_cast
+        let digitVC = self.storyboard?.instantiateViewController(withIdentifier: "DigitINfoViewController") as! DigitINfoViewController
+        // swiftlint:disable:previous force_cast
         
-        var userName: String = "wrong"
-        var number: String = "worng"
+        let navigation = self.navigationController
         
-        for key in keysArray {
-            FIRDatabase.database().reference().child("order").child(key).updateChildValues(["paymentClaim" : "true"])
+        digitVC.keysArray = keysArray
+        digitVC.finalDeliverFee = finalDeliverFee
+        digitVC.mealPriceofTotal = mealPriceofTotal
+        
+        navigation?.addChildViewController(digitVC)
+        navigation?.view.addSubview(digitVC.view)
+        digitVC.didMove(toParentViewController: navigation)
+        
+        print("favorite button tapped")
 
-            
-            //做成一個 [key:true] 的array
-            let index = keysArray.index(of: key)!
-            keyDict["\(index)"] = key
-            
-            
-        }
+
         
-        
-        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let dict = snapshot.value as? [String: Any] {
-                guard
-                    let theUserName = dict["name"] as? String,
-                    let theNumber = dict["number"] as? String else { return }
-                
-                userName = theUserName
-                number = theNumber
-                
-                keyDict["userData"] = ["userName" : userName, "number": number]
-                keyDict["userUID"] = uid
-                keyDict["price"] = price
-                
-                FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(keyDict)
-                
-                FIRDatabase.database().reference().child("shoppingCart").observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let dictionary = snapshot.value as? [String: Any] {
-                        for dict in dictionary {
-                            
-                            let valueInDict = dict.value as? [String: Any]
-                            
-                            let keyforShoppingCartId = dict.key
-                            var userUID = valueInDict?["userUID"] as? String
-                            
-                            if userUID == uid {
-                                
-                                for key in self.keysArray {
-                                    FIRDatabase.database().reference().child("order").child(key).child("shoppingCartId").setValue(keyforShoppingCartId)
-                                }
-                                
-                            } else {
-                                return
-                            }
-                            
-                            
-                            
-                        }
-                    }
-                })
-            }
-        })
+//        let price = self.finalDeliverFee + self.mealPriceofTotal
+//        let uid = FIRAuth.auth()?.currentUser?.uid
+//        
+//        var keyDict: [String: Any] = [:]
+//        let userUIDToAppend: [String: String] = ["userUID": uid!]
+//        let priceToAppend: [String: Int] = ["price": price]
+//        
+//        var userName: String = "wrong"
+//        var number: String = "worng"
+//        
+//        for key in keysArray {
+//            FIRDatabase.database().reference().child("order").child(key).updateChildValues(["paymentClaim" : "true"])
+//
+//            
+//            //做成一個 [key:true] 的array
+//            let index = keysArray.index(of: key)!
+//            keyDict["\(index)"] = key
+//            
+//            
+//        }
+//        
+//        
+//        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+//            if let dict = snapshot.value as? [String: Any] {
+//                guard
+//                    let theUserName = dict["name"] as? String,
+//                    let theNumber = dict["number"] as? String else { return }
+//                
+//                userName = theUserName
+//                number = theNumber
+//                
+//                keyDict["userData"] = ["userName" : userName, "number": number]
+//                keyDict["userUID"] = uid
+//                keyDict["price"] = price
+//                
+//                FIRDatabase.database().reference().child("shoppingCart").childByAutoId().setValue(keyDict)
+//                
+//                FIRDatabase.database().reference().child("shoppingCart").observeSingleEvent(of: .value, with: { (snapshot) in
+//                    if let dictionary = snapshot.value as? [String: Any] {
+//                        for dict in dictionary {
+//                            
+//                            let valueInDict = dict.value as? [String: Any]
+//                            
+//                            let keyforShoppingCartId = dict.key
+//                            var userUID = valueInDict?["userUID"] as? String
+//                            
+//                            if userUID == uid {
+//                                
+//                                for key in self.keysArray {
+//                                    FIRDatabase.database().reference().child("order").child(key).child("shoppingCartId").setValue(keyforShoppingCartId)
+//                                }
+//                                
+//                            } else {
+//                                return
+//                            }
+//                            
+//                            
+//                            
+//                        }
+//                    }
+//                })
+//            }
+//        })
 
     }
 
