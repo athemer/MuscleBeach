@@ -20,6 +20,13 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     
     let dateFormatter = DateFormatter()
     
+    
+    
+    var reorderData: [ReoderModel] = []
+    var reorderDataToPass: [ReoderModel] = []
+    
+    
+    
     var arr: [[String: AnyObject]] = []
     
     var keyArr: [String] = []
@@ -124,34 +131,28 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         
-        self.deliverArr.removeAll()
-        self.locationAreaArr.removeAll()
-        self.locationDetailArr.removeAll()
-        self.timeArr.removeAll()
-        self.typeAArr.removeAll()
-        self.typeBArr.removeAll()
-        self.typeCArr.removeAll()
+        reorderDataToPass.removeAll()
+        
+        // swiftlint:disable:next force_cast
+        let vc = self.storyboard?.instantiateViewController(withIdentifier:"OrderDetailViewController") as! OrderDetailViewController
+        // swiftlint:disable:previous force_cast
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone.current
         let localDate = dateFormatter.string(from: date)
         
-        assignValueToOrderDetailVC(date: localDate)
-        
-       
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"OrderDetailViewController") as? OrderDetailViewController else { return }
+        for data in reorderData {
+            print ("gonna test")
+            if data.date == localDate {
+                print ("EQUAL")
+               reorderDataToPass.append(data)
+               
+            }
+            
+        }
         vc.date = localDate
-        vc.deliverArr = self.deliverArr
-        vc.locationAreaArr = self.locationAreaArr
-        vc.locationDetailArr = self.locationDetailArr
-        vc.timeArr = self.timeArr
-        vc.typeAAmount = self.typeAArr
-        vc.typeBAmount = self.typeBArr
-        vc.typeCAmount = self.typeCArr
+        vc.reorderDataPassed = self.reorderDataToPass
         self.navigationController?.pushViewController(vc, animated: true)
-
-//        print ("aHA \(localDate)")
-//        print ("COUNT \(calendarView.selectedDates.count)")
         
     }
 
@@ -218,20 +219,30 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 for snap in snapData {
                     
                     let key = snap.key
-                    
                     if let data = snap.value as? [String: AnyObject] {
                        print ("CD \(data)")
                         
                         
                         guard
                             let paymentStatus = data["paymentStatus"] as? String,
-                            let date = data["date"] as? String
+                            let date = data["date"] as? String,
+                            let deliverType = data["deliver"] as? String,
+                            let deliverTime = data["time"] as? String,
+                            let deliverLocationArea = data["locationArea"] as? String,
+                            let delvierLocationDetail = data["locationDetail"] as? String,
+                            let meal = data["meal"] as? AnyObject,
+                            let typeBAmount = meal["typeB"] as? Int,
+                            let typeCAmount = meal["typeC"] as? Int,
+                            let typeAAmount = meal["typeA"] as? Int
                             else { return }
                         
                         if paymentStatus == "paid" {
                            self.arr.append(data)
+                            
+                           self.reorderData.append(ReoderModel(date: date, delvier: deliverType, locationArea: deliverLocationArea, locationDetail: delvierLocationDetail, mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, key: key))
+                            
                            self.dateArr.append(date)
-//                           self.keyArr.append(key)
+
                         } else {
                             print ("some order is not paid yet")
                         }
@@ -243,27 +254,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 print ("dateArr eqauls to \(self.dateArr)")
                 self.calendarView.reloadData()
             }
-            
-/*            let predicate = NSPredicate(format: "date == %@", "2017-03-29")
-            let filtered = (self.arr as NSArray).filtered(using: predicate)
-            
-            print ("check \(filtered)")
-            
-            for x in 0...filtered.count - 1 {
-                guard
-                    let dict: [String : AnyObject] = filtered[x] as? [String : AnyObject],
-                    let deliverType = dict["deliver"] as? AnyObject,
-                    let deliverTime = dict["time"] as? AnyObject,
-                    let deliverLocationArea = dict["locationArea"] as? AnyObject,
-                    let delvierLocationDetail = dict["locationDetail"] as? AnyObject
-                    else { return }
-                
-                
-                self.deliverArr.append(deliverType)
-                self.timeArr.append(deliverTime)
-                self.locationAreaArr.append(deliverLocationArea)
-                self.locationDetailArr.append(delvierLocationDetail)
-            } */
+
         })
         print ("fetched")
     }
@@ -273,38 +264,38 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         
     }
     
-    func assignValueToOrderDetailVC (date: String) {
-        
-        let predicate = NSPredicate(format: "date == %@", date)
-        let filtered = (arr as NSArray).filtered(using: predicate)
-        
-        print ("check \(filtered)")
-        
-        for x in 0...filtered.count - 1 {
-            guard
-                let dict: [String : AnyObject] = filtered[x] as? [String : AnyObject],
-                let deliverType = dict["deliver"] as? AnyObject,
-                let deliverTime = dict["time"] as? AnyObject,
-                let deliverLocationArea = dict["locationArea"] as? AnyObject,
-                let delvierLocationDetail = dict["locationDetail"] as? AnyObject,
-                let meal = dict["meal"] as? AnyObject,
-                let typeBAmount = meal["typeB"] as? AnyObject,
-                let typeCAmount = meal["typeC"] as? AnyObject,
-                let typeAAmount = meal["typeA"] as? AnyObject
-                
-                else { return }
-            
-            print ("NEED \(dict)")
-            
-            
-            self.deliverArr.append(deliverType)
-            self.timeArr.append(deliverTime)
-            self.locationAreaArr.append(deliverLocationArea)
-            self.locationDetailArr.append(delvierLocationDetail)
-            self.typeAArr.append(typeAAmount)
-            self.typeBArr.append(typeBAmount)
-            self.typeCArr.append(typeCAmount)
-    }
-    }
+//    func assignValueToOrderDetailVC (date: String) {
+//        
+//        let predicate = NSPredicate(format: "date == %@", date)
+//        let filtered = (arr as NSArray).filtered(using: predicate)
+//        
+//        print ("check \(filtered)")
+//        
+//        for x in 0...filtered.count - 1 {
+//            guard
+//                let dict: [String : AnyObject] = filtered[x] as? [String : AnyObject],
+//                let deliverType = dict["deliver"] as? AnyObject,
+//                let deliverTime = dict["time"] as? AnyObject,
+//                let deliverLocationArea = dict["locationArea"] as? AnyObject,
+//                let delvierLocationDetail = dict["locationDetail"] as? AnyObject,
+//                let meal = dict["meal"] as? AnyObject,
+//                let typeBAmount = meal["typeB"] as? AnyObject,
+//                let typeCAmount = meal["typeC"] as? AnyObject,
+//                let typeAAmount = meal["typeA"] as? AnyObject
+//                
+//                else { return }
+//            
+//            print ("NEED \(dict)")
+//            
+//            
+//            self.deliverArr.append(deliverType)
+//            self.timeArr.append(deliverTime)
+//            self.locationAreaArr.append(deliverLocationArea)
+//            self.locationDetailArr.append(delvierLocationDetail)
+//            self.typeAArr.append(typeAAmount)
+//            self.typeBArr.append(typeBAmount)
+//            self.typeCArr.append(typeCAmount)
+//    }
+//    }
     
 }

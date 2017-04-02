@@ -17,6 +17,10 @@ class OrderDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     var date: String = ""
     
+    
+    var reorderDataPassed: [ReoderModel] = []
+    
+    
     var arr: [[String: AnyObject]] = []
     
     var deliverArr: [AnyObject] = []
@@ -38,8 +42,10 @@ class OrderDetailViewController: UIViewController, UITableViewDelegate, UITableV
         
         dateLabel.text = date
         
-        
+        print ("isssss \(reorderDataPassed.count)")
 
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -53,7 +59,7 @@ class OrderDetailViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return deliverArr.count
+        return reorderDataPassed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,33 +68,41 @@ class OrderDetailViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailTableViewCell") as! OrderDetailTableViewCell
         // swiftlint:disable:previous force_cast
         
-        // swiftlint:disable:next force_cast
-        cell.deliverInfo.text = deliverArr[indexPath.row] as! String
-        // swiftlint:disable:previous force_cast
+        cell.deliverInfo.text = reorderDataPassed[indexPath.row].delvier
+        cell.timeInfo.text = reorderDataPassed[indexPath.row].time
+        cell.locationInfo.text = reorderDataPassed[indexPath.row].locationArea
+        cell.locationDetail.text = reorderDataPassed[indexPath.row].locationDetail
+        cell.typeAAmount.text = "\(reorderDataPassed[indexPath.row].mealTypeAAmount)"
+        cell.typeBAmount.text = "\(reorderDataPassed[indexPath.row].mealTypeBAmount)"
+        cell.typeCAmount.text = "\(reorderDataPassed[indexPath.row].mealTypeCAmount)"
         
-        // swiftlint:disable:next force_cast
-        cell.timeInfo.text = timeArr[indexPath.row] as! String
-        // swiftlint:disable:previous force_cast
-        
-        // swiftlint:disable:next force_cast
-        cell.locationInfo.text = locationAreaArr[indexPath.row] as! String
-        // swiftlint:disable:previous force_cast
-        
-        // swiftlint:disable:next force_cast
-        cell.locationDetail.text = locationDetailArr[indexPath.row] as! String
-        // swiftlint:disable:previous force_cast
-        
-        // swiftlint:disable:next force_cast
-        cell.typeAAmount.text = "\(typeAAmount[indexPath.row] as! Int)"
-        // swiftlint:disable:previous force_cast
-        
-        // swiftlint:disable:next force_cast
-        cell.typeBAmount.text = "\(typeBAmount[indexPath.row] as! Int)"
-        // swiftlint:disable:previous force_cast
-        
-        // swiftlint:disable:next force_cast
-        cell.typeCAmount.text = "\(typeCAmount[indexPath.row] as! Int)"
-        // swiftlint:disable:previous force_cast
+//        // swiftlint:disable:next force_cast
+//        cell.deliverInfo.text = deliverArr[indexPath.row] as! String
+//        // swiftlint:disable:previous force_cast
+//        
+//        // swiftlint:disable:next force_cast
+//        cell.timeInfo.text = timeArr[indexPath.row] as! String
+//        // swiftlint:disable:previous force_cast
+//        
+//        // swiftlint:disable:next force_cast
+//        cell.locationInfo.text = locationAreaArr[indexPath.row] as! String
+//        // swiftlint:disable:previous force_cast
+//        
+//        // swiftlint:disable:next force_cast
+//        cell.locationDetail.text = locationDetailArr[indexPath.row] as! String
+//        // swiftlint:disable:previous force_cast
+//        
+//        // swiftlint:disable:next force_cast
+//        cell.typeAAmount.text = "\(typeAAmount[indexPath.row] as! Int)"
+//        // swiftlint:disable:previous force_cast
+//        
+//        // swiftlint:disable:next force_cast
+//        cell.typeBAmount.text = "\(typeBAmount[indexPath.row] as! Int)"
+//        // swiftlint:disable:previous force_cast
+//        
+//        // swiftlint:disable:next force_cast
+//        cell.typeCAmount.text = "\(typeCAmount[indexPath.row] as! Int)"
+//        // swiftlint:disable:previous force_cast
         
         return cell
     }
