@@ -22,6 +22,8 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     
     var arr: [[String: AnyObject]] = []
     
+    var keyArr: [String] = []
+    
     var deliverArr: [AnyObject] = []
     var timeArr: [AnyObject] = []
     var locationAreaArr: [AnyObject ] = []
@@ -214,8 +216,12 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
         FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let snapData = snapshot.value as? [String: AnyObject] {
                 for snap in snapData {
+                    
+                    let key = snap.key
+                    
                     if let data = snap.value as? [String: AnyObject] {
                        print ("CD \(data)")
+                        
                         
                         guard
                             let paymentStatus = data["paymentStatus"] as? String,
@@ -225,6 +231,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                         if paymentStatus == "paid" {
                            self.arr.append(data)
                            self.dateArr.append(date)
+//                           self.keyArr.append(key)
                         } else {
                             print ("some order is not paid yet")
                         }
@@ -284,8 +291,10 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 let typeBAmount = meal["typeB"] as? AnyObject,
                 let typeCAmount = meal["typeC"] as? AnyObject,
                 let typeAAmount = meal["typeA"] as? AnyObject
-            
+                
                 else { return }
+            
+            print ("NEED \(dict)")
             
             
             self.deliverArr.append(deliverType)
