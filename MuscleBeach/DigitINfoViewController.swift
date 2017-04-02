@@ -86,12 +86,18 @@ class DigitINfoViewController: UIViewController {
                                     FIRDatabase.database().reference().child("order").child(key).child("shoppingCartId").setValue(keyforShoppingCartId)
                                 }
                                 
+                                
+                                self.willMove(toParentViewController: nil)
+                                
+                                self.view.removeFromSuperview()
+                                
+                                self.removeFromParentViewController()
+                                
+                                
                             } else {
                                 return
                             }
-                            
-                            
-                            
+
                         }
                     }
                 })

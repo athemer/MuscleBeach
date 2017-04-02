@@ -216,13 +216,21 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
                 for snap in snapData {
                     if let data = snap.value as? [String: AnyObject] {
                        print ("CD \(data)")
-                        self.arr.append(data)
                         
-                        // swiftlint:disable:next force_cast
-                        let date = data["date"] as! String
-                        // swiftlint:disable:previous force_cast
+                        guard
+                            let paymentStatus = data["paymentStatus"] as? String,
+                            let date = data["date"] as? String
+                            else { return }
                         
-                        self.dateArr.append(date)
+                        if paymentStatus == "paid" {
+                           self.arr.append(data)
+                           self.dateArr.append(date)
+                        } else {
+                            print ("some order is not paid yet")
+                        }
+                        
+
+                        
                     }
                 }
                 print ("dateArr eqauls to \(self.dateArr)")
