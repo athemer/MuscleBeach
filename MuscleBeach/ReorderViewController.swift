@@ -63,6 +63,7 @@ class ReorderViewController: UIViewController, JTAppleCalendarViewDataSource, JT
     override func viewWillAppear(_ animated: Bool) {
         self.arr.removeAll()
         self.dateArr.removeAll()
+        self.reorderData.removeAll()
         fetchQueriedDataFromFirebase()
     }
 

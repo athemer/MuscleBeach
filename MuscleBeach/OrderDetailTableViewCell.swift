@@ -24,6 +24,8 @@ class OrderDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var typeCAmount: UILabel!
     
+    @IBOutlet weak var reorderButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
