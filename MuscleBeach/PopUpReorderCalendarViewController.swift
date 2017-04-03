@@ -181,6 +181,7 @@ class PopUpReorderCalendarViewController: UIViewController, JTAppleCalendarViewD
         self.view.removeFromSuperview()
         
         self.removeFromParentViewController()
+        navigationController?.popToRootViewController(animated: true)
         
     }
 
