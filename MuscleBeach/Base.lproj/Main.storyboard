@@ -899,10 +899,10 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcb-ol-k7l">
-                                <rect key="frame" x="118" y="219" width="70" height="30"/>
+                                <rect key="frame" x="118" y="219" width="70" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="500"/>
+                                <state key="normal" title="50"/>
                                 <connections>
                                     <action selector="rangeButtonTapped:" destination="CS5-BH-F3w" eventType="touchUpInside" id="NxT-db-xTz"/>
                                 </connections>
@@ -916,10 +916,6 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <action selector="amountButtonTapped:" destination="CS5-BH-F3w" eventType="touchUpInside" id="KDB-oA-vgA"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p8I-gu-rhT">
-                                <rect key="frame" x="94" y="203" width="118" height="71"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lil-b4-mJZ">
                                 <rect key="frame" x="90" y="263" width="127" height="51"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -934,6 +930,10 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Sx-X9-8LS">
                                 <rect key="frame" x="86" y="160" width="273" height="46"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p8I-gu-rhT">
+                                <rect key="frame" x="94" y="202" width="118" height="71"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                         </subviews>

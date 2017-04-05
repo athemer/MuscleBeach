@@ -33,7 +33,10 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     
     var name:String = ""
     
+    var distanceLimitation: Double = 50.0
     var distanceInMeters: Double = 0.0
+    
+    var wishAmount: Int = 1
     var amount: Int = 0
     
     
@@ -154,13 +157,14 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
             rangeButton.setTitle("\(distanceArr[row])", for: .normal)
             rangePicker.isHidden = true
             rangeButton.isHidden = false
+            distanceLimitation = Double(distanceArr[row])
             
         case amountPicker:
             
             amountButton.setTitle("\(amountArr[row])", for: .normal)
             amountPicker.isHidden = true
             amountButton.isHidden = false
-            
+            wishAmount = amountArr[row]
 
         case addressPicker:
             
@@ -224,7 +228,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     @IBAction func findButtonTapped(_ sender: Any) {
-        
+        dataArray.removeAll()
         FIRDatabase.database().reference().child("eatTogether").observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let snaps = snapshot.value as? [String: Any] {
@@ -235,8 +239,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                         guard
                             let location = dict["wishLocation"] as? String,
                             let amount = dict["wishAmount"] as? Int,
-                            let userData = dict["userData"] as? [String: Any],
-                            let name = userData["userName"] as? String
+                            let name = dict["userName"] as? String
                         else
                         { return }
                         
@@ -244,7 +247,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                             {
                                 
                                 self.name = name
-                                self.amount = amount
+//                                self.amount = amount
                                 
                                 let coordinate1 = CLLocation(latitude: self.latCurrent, longitude: self.longiCurrent)
                                 let coordinate2 = CLLocation(latitude: self.latDestination, longitude: self.longiDestination)
@@ -254,11 +257,56 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                 print ("meters \(distanceInMeters)")
                                 
                                 
-                                if roundedDistance <= 2000.0 {
+                                if roundedDistance <= self.distanceLimitation {
                                     
-                                    let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
-                                    self.dataArray.append(dataToAppend)
-                                    print ("this distance should work")
+                                    
+                                    switch self.wishAmount {
+                                    case 1:
+                                        
+                                        if amount == 1 || amount == 4 {
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            self.dataArray.append(dataToAppend)
+                                            
+                                        } else {
+                                            print("amount doesnt match")
+                                        }
+
+                                    case 2:
+                                        
+                                        if amount == 3 {
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            self.dataArray.append(dataToAppend)
+                                            
+                                        } else {
+                                            print("amount doesnt match")
+                                        }
+                                        
+
+                                    case 3:
+                                        
+                                        if amount == 2 {
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            self.dataArray.append(dataToAppend)
+                                            
+                                        } else {
+                                            print("amount doesnt match")
+                                        }
+                                    case 4:
+                                        if amount == 1  {
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            self.dataArray.append(dataToAppend)
+                                            
+                                        } else {
+                                            print("amount doesnt match")
+                                        }
+                                        
+                                        
+                                        print ("")
+                                    default:
+                                        break
+                                        
+                                    }
+                                    
                                     self.tableView.reloadData()
                                     
                                 } else {
@@ -282,6 +330,17 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
 //                    print (" all are too far away")
 //                }
                 
+                let uid = FIRAuth.auth()?.currentUser?.uid
+                FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishAmount": self.wishAmount])
+                FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishLocation": self.addressInput])
+                FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dict = snapshot.value as? [String: Any] {
+                        guard
+                            let name = dict["name"] as? String else { return }
+                        
+                        FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["userName": name])
+                    }
+                })
             }
         })
     }
