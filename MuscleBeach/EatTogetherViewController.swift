@@ -12,16 +12,27 @@ import MapKit
 import AddressBookUI
 import CoreLocation
 
-class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    @IBOutlet weak var addressTextField: UITextField!
+
+    @IBOutlet weak var rangePicker: UIPickerView!
     
-    @IBOutlet weak var amountTestField: UITextField!
+    var distanceArr: [Int] = [50, 100, 150, 200, 250, 300, 400, 500]
+    var amountArr: [Int] = [1, 2, 3, 4]
+    var addressArr: [String] = []
     
-    @IBOutlet weak var distanceTextfield: UITextField!
+    @IBOutlet weak var addressPicker: UIPickerView!
     
+    @IBOutlet weak var amountButton: UIButton!
+    
+    @IBOutlet weak var addressButton: UIButton!
+    
+    @IBOutlet weak var rangeButton: UIButton!
+    
+    @IBOutlet weak var amountPicker: UIPickerView!
     
     var name:String = ""
+    
     var distanceInMeters: Double = 0.0
     var amount: Int = 0
     
@@ -35,15 +46,33 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     
-    let addressInput: String = "台北市士林區天母西路1號"
     
+    
+    var addressInput: String = ""
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        forwardGeocoding2(address: addressInput)
-
+        
+        fetchAddress()
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        rangePicker.delegate = self
+        rangePicker.dataSource = self
+        amountPicker.delegate = self
+        amountPicker.dataSource = self
+        addressPicker.delegate = self
+        addressPicker.dataSource = self
+        
+        
+        
+        rangePicker.isHidden = true
+        addressPicker.isHidden = true
+        amountPicker.isHidden = true
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func didReceiveMemoryWarning() {
@@ -52,6 +81,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 1
     }
     
@@ -71,6 +101,80 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         
         
         return cell
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        switch pickerView {
+        case rangePicker :
+            return 1
+        case amountPicker:
+            return 1
+        case addressPicker:
+            return 1
+        default:
+            return 1
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        switch pickerView {
+        case rangePicker :
+            return self.distanceArr.count
+        case amountPicker:
+            return self.amountArr.count
+        case addressPicker:
+             return addressArr.count
+        default:
+            return 0
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        switch pickerView {
+        case rangePicker :
+            return "\(self.distanceArr[row])"
+        case amountPicker:
+            return "\(self.amountArr[row])"
+        case addressPicker:
+            return addressArr[row]
+        default:
+            return ""
+        }
+
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch pickerView {
+        case rangePicker :
+            
+            rangeButton.setTitle("\(distanceArr[row])", for: .normal)
+            rangePicker.isHidden = true
+            rangeButton.isHidden = false
+            
+        case amountPicker:
+            
+            amountButton.setTitle("\(amountArr[row])", for: .normal)
+            amountPicker.isHidden = true
+            amountButton.isHidden = false
+            
+
+        case addressPicker:
+            
+            addressButton.setTitle(addressArr[row], for: .normal)
+            addressPicker.isHidden = true
+            addressButton.isHidden = false
+            addressInput = addressArr[row]
+            
+            forwardGeocoding2(address: addressInput)
+            
+        default:
+            break
+            
+        }
     }
     
     func forwardGeocoding(address: String, completion: @escaping () -> Void ) {
@@ -154,24 +258,79 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                     
                                     let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
                                     self.dataArray.append(dataToAppend)
+                                    print ("this distance should work")
                                     self.tableView.reloadData()
                                     
                                 } else {
                                     
-                                    let alert = UIAlertController(title: "無搜尋結果",
-                                                                  message: "您所設定的搜尋範圍內無正在揪團的肌友\n若有新的肌友糾團訂購會再進行通知",
-                                                                 preferredStyle: .alert)
-                                    
-                                    let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (action) -> Void in })
-                                    alert.addAction(cancel)
-                                    self.present(alert, animated: true, completion: nil)
-
                                     print ("too far away")
+
                                 }
                         })
                     }
                 }
+                self.tableView.reloadData()
+//                if self.dataArray.count == 0 {
+//                    let alert = UIAlertController(title: "無搜尋結果",
+//                                                  message: "搜尋範圍內無正在揪團的肌友\n請等待其他肌友糾團\n或重新設定搜尋條件",
+//                                                  preferredStyle: .alert)
+//                    
+//                    let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (action) -> Void in })
+//                    alert.addAction(cancel)
+//                    self.present(alert, animated: true, completion: nil)
+//                    
+//                    print (" all are too far away")
+//                }
+                
             }
         })
     }
+    
+    
+    @IBAction func rangeButtonTapped(_ sender: Any) {
+        
+        rangePicker.isHidden = false
+        rangeButton.isHidden = true
+    }
+    
+    @IBAction func amountButtonTapped(_ sender: Any) {
+        
+        amountPicker.isHidden = false
+        amountButton.isHidden = true
+    }
+
+    @IBAction func addressButtonTapped(_ sender: Any) {
+        
+        addressPicker.isHidden = false
+        addressButton.isHidden = true
+        
+    }
+    
+    
+    func fetchAddress() {
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dict = snapshot.value as? [String: AnyObject] {
+                let mainAdd = dict["mainAdd"] as? String
+                let mainDetail = dict["mainDetail"] as? String
+                let add = "\(mainAdd!)\(mainDetail!)"
+                for x in 1...(dict.count / 2) - 1 {
+                    
+                    let street = dict["add\(x)"] as? String
+                    let address = dict["detail\(x)"] as? String
+                    let finalAdd = street! + address!
+                    
+                    self.addressArr.append(finalAdd)
+                    self.addressButton.setTitle("\(mainAdd!)\(mainDetail!)", for: .normal)
+                    
+                    self.forwardGeocoding2(address: add)
+                }
+                
+
+            }
+            
+            self.addressPicker.reloadAllComponents()
+        })
+    }
+
 }
