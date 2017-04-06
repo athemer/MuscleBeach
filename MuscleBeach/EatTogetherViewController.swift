@@ -106,6 +106,17 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc = ChatRoomViewController(collectionViewLayout: UICollectionViewLayout())
+        
+        vc.toID = dataArray[indexPath.row].key
+        vc.toName = dataArray[indexPath.row].name
+        
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         switch pickerView {
@@ -239,7 +250,8 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                         guard
                             let location = dict["wishLocation"] as? String,
                             let amount = dict["wishAmount"] as? Int,
-                            let name = dict["userName"] as? String
+                            let name = dict["userName"] as? String,
+                            let key = snap.key as? String
                         else
                         { return }
                         
@@ -264,7 +276,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                     case 1:
                                         
                                         if amount == 1 || amount == 4 {
-                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
                                             
                                         } else {
@@ -274,7 +286,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                     case 2:
                                         
                                         if amount == 3 {
-                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
                                             
                                         } else {
@@ -285,7 +297,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                     case 3:
                                         
                                         if amount == 2 {
-                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
                                             
                                         } else {
@@ -293,7 +305,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                         }
                                     case 4:
                                         if amount == 1  {
-                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount)
+                                            let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
                                             
                                         } else {

@@ -22,6 +22,8 @@
 		D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F67C1E815E350049796D /* ProfilePageAddCell.xib */; };
 		D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6821E81840C0049796D /* SelfPickUpViewController.swift */; };
 		D121F6851E8185350049796D /* SelfPickUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */; };
+		D15704F61E969D9A00F59894 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15704F51E969D9A00F59894 /* ChatRoomViewController.swift */; };
+		D15704F91E969F6D00F59894 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15704F81E969F6D00F59894 /* ChatListTableViewController.swift */; };
 		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
 		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
 		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
@@ -78,6 +80,8 @@
 		D121F67C1E815E350049796D /* ProfilePageAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePageAddCell.xib; sourceTree = "<group>"; };
 		D121F6821E81840C0049796D /* SelfPickUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfPickUpViewController.swift; sourceTree = "<group>"; };
 		D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfPickUpTableViewCell.swift; sourceTree = "<group>"; };
+		D15704F51E969D9A00F59894 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
+		D15704F81E969F6D00F59894 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
 		D1683C231E7FCADE00C9D887 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
@@ -179,9 +183,27 @@
 			name = SelfPickUp;
 			sourceTree = "<group>";
 		};
+		D15704F41E969D6900F59894 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				D15704F51E969D9A00F59894 /* ChatRoomViewController.swift */,
+			);
+			name = ChatRoom;
+			sourceTree = "<group>";
+		};
+		D15704F71E969F5200F59894 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				D15704F81E969F6D00F59894 /* ChatListTableViewController.swift */,
+			);
+			name = ChatList;
+			sourceTree = "<group>";
+		};
 		D1683C211E7FBF8D00C9D887 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D15704F71E969F5200F59894 /* ChatList */,
+				D15704F41E969D6900F59894 /* ChatRoom */,
 				D1A0BE5F1E93950B00F4D36B /* EatTogether */,
 				D1A0BE271E8A66CE00F4D36B /* shoppingCart */,
 				D1E211EC1E8909700006B849 /* SingleOrderPAge */,
@@ -483,6 +505,7 @@
 				D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */,
 				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,
 				D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */,
+				D15704F61E969D9A00F59894 /* ChatRoomViewController.swift in Sources */,
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
 				D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */,
 				D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */,
@@ -514,6 +537,7 @@
 				D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */,
 				D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */,
 				D121F65E1E8103AE0049796D /* SideMenuTableViewController.swift in Sources */,
+				D15704F91E969F6D00F59894 /* ChatListTableViewController.swift in Sources */,
 				D181C5D91E85195400A5D87B /* MealVariTableViewCell.swift in Sources */,
 				D121F6851E8185350049796D /* SelfPickUpTableViewCell.swift in Sources */,
 			);
