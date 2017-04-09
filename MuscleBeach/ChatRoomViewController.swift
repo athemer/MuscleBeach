@@ -31,13 +31,15 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         super.viewDidLoad()
         
         collectionView?.alwaysBounceVertical = true
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
+        
         
         observeMessages()
         navigationItem.title = toName
         collectionView?.backgroundColor = .white
         collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
         setUpInputComponents()
-        
+        setUpKeyboardObservers()
 
         
         // Do any additional setup after loading the view.
@@ -47,6 +49,8 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -59,16 +63,68 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
         // swiftlint:disable:previous force_cast
         
+        
+        
+        // to be deleted
         cell.backgroundColor = .yellow
+        
+        
         let message = self.message[indexPath.item]
         cell.textView.text = message.text
+        
+        
+        cell.bubbleWidthAnchor?.constant = estimatedFrameForText(text: message.text!).width + 32
+        
+
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
+    
+    private func setupCell(cell: ChatMessageCell, message: Message) {
+        
+//        if let profileImageUrl = self.user.profileImageUrl {
+//            cell.profileImageView.
+//        }
+        
+        if message.fromID == FIRAuth.auth()?.currentUser?.uid {
+            cell.bubbleView.backgroundColor = UIColor(red: 0/255, green: 137/255, blue: 249/255, alpha: 1)
+            cell.textView.textColor = .white
+            cell.profileImageView.isHidden = true
+            
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+        } else {
+            cell.bubbleView.backgroundColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+            cell.textView.textColor = .black
+            
+            cell.profileImageView.isHidden = false
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+        }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var height: CGFloat = 80
+        
+        if let text = message[indexPath.item].text {
+            height = estimatedFrameForText(text: text).height + 20
+        }
+        
+        
+        
+        
+        
+        
+        return CGSize(width: view.frame.width, height: height)
+    }
+    
+    private func estimatedFrameForText(text: String) -> CGRect {
+        let size = CGSize(width: 200, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
+    }
     
 
     
@@ -135,6 +191,8 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         }, withCancel: nil)
     }
 
+    var containerViewBottomAnchor: NSLayoutConstraint?
+    
     
     
     func setUpInputComponents () {
@@ -148,9 +206,13 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         
         //x y w h
         containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+//        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        containerViewBottomAnchor?.isActive = true
+        
         
         //Send Button
         let sendButton = UIButton(type: .system)
@@ -198,6 +260,8 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         let value: [String: Any] = ["text": inputTextField.text!, "toID": toID, "fromID": fromID!, "timeStamp": timeStamp]
         childRef.updateChildValues(value)
         
+        self.inputTextField.text = nil
+        
         let messageID = childRef.key
         
         FIRDatabase.database().reference().child("user-messages").child(fromID!).updateChildValues([messageID: true])
@@ -212,7 +276,25 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         return true
     }
     
-    
+    func setUpKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
 
+    func handleKeyboardWillShow(notification: NSNotification) {
+        let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        containerViewBottomAnchor?.constant = -keyboardFrame!.height
+        UIView.animate(withDuration: keyboardDuration!) { 
+            self.view.layoutIfNeeded()
+        }
+    }
     
+    func keyboardWillHide(notification: NSNotification) {
+        
+        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+
+        containerViewBottomAnchor?.constant = 0
+        
+    }
 }
