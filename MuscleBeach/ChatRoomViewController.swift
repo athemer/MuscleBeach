@@ -38,6 +38,9 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         navigationItem.title = toName
         collectionView?.backgroundColor = .white
         collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
+        
+        collectionView?.keyboardDismissMode = .interactive
+
         setUpInputComponents()
         setUpKeyboardObservers()
 
@@ -45,12 +48,80 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         // Do any additional setup after loading the view.
     }
     
+    
+//    lazy var inputContainerView: UIView = {
+//        let containerView = UIView()
+//        containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+//        containerView.backgroundColor = .white
+//        
+//        
+////        let textField = UITextField()
+////        textField.placeholder = "請輸入訊息"
+////        containerView.addSubview(textField)
+////        textField.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+//        
+//        
+//        //Send Button
+//        let sendButton = UIButton(type: .system)
+//        sendButton.setTitle("Send", for: .normal)
+//        sendButton.translatesAutoresizingMaskIntoConstraints = false
+//        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+//        containerView.addSubview(sendButton)
+//        
+//        //x y w h
+//        sendButton.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+//        sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+//        sendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+//        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+//        
+//        
+//        containerView.addSubview(self.inputTextField)
+//        
+//        self.inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+//        self.inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+//        self.inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+//        self.inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
+//        
+//        let line = UIView()
+//        line.backgroundColor = UIColor.black
+//        line.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addSubview(line)
+//        
+//        line.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+//        line.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+//        line.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+//        line.heightAnchor.constraint(equalToConstant: 1).isActive = true
+//
+//        let lineToSeperate = UIView()
+//        lineToSeperate.backgroundColor = UIColor.black
+//        lineToSeperate.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addSubview(lineToSeperate)
+//        
+//        lineToSeperate.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+//        lineToSeperate.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+//        lineToSeperate.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+//        lineToSeperate.heightAnchor.constraint(equalToConstant: 1).isActive = true
+//        
+//        return containerView
+//    }()
+    
+    
+//    override var inputAccessoryView: UIView? {
+//        get {
+//            return inputContainerView
+//        }
+//    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -62,17 +133,14 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         // swiftlint:disable:next force_cast
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
         // swiftlint:disable:previous force_cast
+        let message = self.message[indexPath.item]
         
-        
+        setupCell(cell: cell, message: message)
         
         // to be deleted
         cell.backgroundColor = .yellow
-        
-        
-        let message = self.message[indexPath.item]
         cell.textView.text = message.text
-        
-        
+    
         cell.bubbleWidthAnchor?.constant = estimatedFrameForText(text: message.text!).width + 32
         
 
@@ -126,43 +194,6 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
     }
     
-
-    
-//    func observeMessages() {
-//        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
-//        let userMessagesRef = FIRDatabase.database().reference().child("user-messsages").child(uid)
-//        
-//        userMessagesRef.observe(.childAdded, with: { (snapshot) in
-//            
-//            let messageID = snapshot.key
-//            print (messageID)
-//            let messagesRef = FIRDatabase.database().reference().child("message").child(messageID)
-//            
-//            
-//            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//                
-//                guard let dictionary = snapshot.value as? [String: Any] else { return }
-//                
-//                print ("LOL \(dictionary)")
-//                
-//                let message = Message()
-//                message.setValuesForKeys(dictionary)
-//                
-//                if message.chatPartnerId() == self.toID {
-//                    self.message.append(message)
-//                    DispatchQueue.main.async(execute: {
-//                        self.collectionView?.reloadData()
-//                    })
-//                }
-//                
-//                
-//            })
-//            
-//        }, withCancel: nil)
-//        
-//    }
-    
-    
     func observeMessages() {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {
             return
@@ -210,7 +241,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         containerViewBottomAnchor?.isActive = true
         
         
@@ -293,8 +324,10 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
     func keyboardWillHide(notification: NSNotification) {
         
         let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-
-        containerViewBottomAnchor?.constant = 0
-        
+        let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        containerViewBottomAnchor?.constant =  -50
+        UIView.animate(withDuration: keyboardDuration!) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
