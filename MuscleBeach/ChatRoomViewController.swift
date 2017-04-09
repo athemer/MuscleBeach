@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate {
+class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     
     var toID: String = ""
     var toName: String = ""
@@ -23,14 +23,17 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate {
         return textField
     } ()
     
+    let cellId = "cellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        observeMessages()
         navigationItem.title = toName
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = .white
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         setUpInputComponents()
         
-        
+
         
         // Do any additional setup after loading the view.
     }
@@ -41,11 +44,65 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate {
     }
     
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        cell.backgroundColor = .yellow
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80)
+    }
+    
+    
+    var message = [Message]()
+    
+    func observeMessages() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+        let userMessagesRef = FIRDatabase.database().reference().child("user-messsages").child(uid)
+        
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageID = snapshot.key
+            let messagesRef = FIRDatabase.database().reference().child("message").child(messageID)
+            
+            
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let dictionary = snapshot.value as? [String: Any] else { return }
+                
+                print ("LOL \(dictionary)")
+                
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                
+                if self.toID == uid {
+                    self.message.append(message)
+                    DispatchQueue.main.async(execute: {
+                        self.collectionView?.reloadData()
+                    })
+                }
+                
+                
+            })
+            
+        }, withCancel: nil)
+        
+    }
+    
     func setUpInputComponents () {
         
         // containerView
         let containerView = UIView()
-        containerView.backgroundColor = UIColor.yellow
+        containerView.backgroundColor = .yellow
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
         
@@ -112,12 +169,15 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate {
         let toID = self.toID
         let timeStamp = Date().timeIntervalSince1970
         
-        let value: [String: Any] = ["text": inputTextField.text!, "toID": toID, "formID": fromID!, "timeStamp": timeStamp]
+        let value: [String: Any] = ["text": inputTextField.text!, "toID": toID, "fromID": fromID!, "timeStamp": timeStamp]
         childRef.updateChildValues(value)
         
         let messageID = childRef.key
         
         FIRDatabase.database().reference().child("user-messages").child(fromID!).updateChildValues([messageID: true])
+        
+        let recipientUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toID)
+        recipientUserMessagesRef.updateChildValues([messageID: true])
         
     }
     

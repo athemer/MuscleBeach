@@ -40,6 +40,8 @@
 		D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5DA1E85FE4300A5D87B /* ReorderViewController.swift */; };
 		D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */; };
 		D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */; };
+		D18ACC011E99EB8900B4F714 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18ACC001E99EB8900B4F714 /* Message.swift */; };
+		D18ACC031E99ED6500B4F714 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18ACC021E99ED6500B4F714 /* ChatMessageCell.swift */; };
 		D1A0BE291E8A66E800F4D36B /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */; };
 		D1A0BE2B1E8A684700F4D36B /* ShoppingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */; };
 		D1A0BE2D1E8B954500F4D36B /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */; };
@@ -101,6 +103,8 @@
 		D181C5DA1E85FE4300A5D87B /* ReorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderViewController.swift; sourceTree = "<group>"; };
 		D181C5E01E86BB7B00A5D87B /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D181C5E21E86BB9800A5D87B /* OrderDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewCell.swift; sourceTree = "<group>"; };
+		D18ACC001E99EB8900B4F714 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D18ACC021E99ED6500B4F714 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartTableViewCell.swift; sourceTree = "<group>"; };
 		D1A0BE2C1E8B954500F4D36B /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				D15704F51E969D9A00F59894 /* ChatRoomViewController.swift */,
+				D18ACC001E99EB8900B4F714 /* Message.swift */,
+				D18ACC021E99ED6500B4F714 /* ChatMessageCell.swift */,
 			);
 			name = ChatRoom;
 			sourceTree = "<group>";
@@ -519,6 +525,7 @@
 				D1F4FDE41E83710F001233FA /* CellView.swift in Sources */,
 				D1A0BE3B1E90B11700F4D36B /* ReorderModel.swift in Sources */,
 				D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */,
+				D18ACC011E99EB8900B4F714 /* Message.swift in Sources */,
 				D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */,
 				D1A0BE3D1E90BDFA00F4D36B /* PopUpReorderCalendarViewController.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
@@ -532,6 +539,7 @@
 				D1A0BE651E93E7C100F4D36B /* EatTogetherModel.swift in Sources */,
 				D1A0BE371E8FFEC300F4D36B /* DigitINfoViewController.swift in Sources */,
 				D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */,
+				D18ACC031E99ED6500B4F714 /* ChatMessageCell.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
 				D1A0BE631E93E71500F4D36B /* EatTogetherTableViewCell.swift in Sources */,
 				D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */,
