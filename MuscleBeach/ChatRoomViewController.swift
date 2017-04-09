@@ -23,14 +23,19 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         return textField
     } ()
     
+    var message = [Message]()
+    
     let cellId = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView?.alwaysBounceVertical = true
+        
         observeMessages()
         navigationItem.title = toName
         collectionView?.backgroundColor = .white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
         setUpInputComponents()
         
 
@@ -45,16 +50,18 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return message.count
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        // swiftlint:disable:next force_cast
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
+        // swiftlint:disable:previous force_cast
         
         cell.backgroundColor = .yellow
-        
+        let message = self.message[indexPath.item]
+        cell.textView.text = message.text
         return cell
     }
     
@@ -63,40 +70,72 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
     }
     
     
-    var message = [Message]()
+
+    
+//    func observeMessages() {
+//        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+//        let userMessagesRef = FIRDatabase.database().reference().child("user-messsages").child(uid)
+//        
+//        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+//            
+//            let messageID = snapshot.key
+//            print (messageID)
+//            let messagesRef = FIRDatabase.database().reference().child("message").child(messageID)
+//            
+//            
+//            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//                
+//                guard let dictionary = snapshot.value as? [String: Any] else { return }
+//                
+//                print ("LOL \(dictionary)")
+//                
+//                let message = Message()
+//                message.setValuesForKeys(dictionary)
+//                
+//                if message.chatPartnerId() == self.toID {
+//                    self.message.append(message)
+//                    DispatchQueue.main.async(execute: {
+//                        self.collectionView?.reloadData()
+//                    })
+//                }
+//                
+//                
+//            })
+//            
+//        }, withCancel: nil)
+//        
+//    }
+    
     
     func observeMessages() {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
-        let userMessagesRef = FIRDatabase.database().reference().child("user-messsages").child(uid)
-        
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid)
         userMessagesRef.observe(.childAdded, with: { (snapshot) in
-            
-            let messageID = snapshot.key
-            let messagesRef = FIRDatabase.database().reference().child("message").child(messageID)
-            
-            
+            let messageId = snapshot.key
+            print (messageId)
+            let messagesRef = FIRDatabase.database().reference().child("message").child(messageId)
             messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                guard let dictionary = snapshot.value as? [String: Any] else { return }
-                
-                print ("LOL \(dictionary)")
-                
+                guard let dictionary = snapshot.value as? [String: Any] else {
+                    return
+                }
                 let message = Message()
+                // Potential of crashing if keys don't match
+                
                 message.setValuesForKeys(dictionary)
                 
-                if self.toID == uid {
+                if message.chatPartnerId() == self.toID {
                     self.message.append(message)
                     DispatchQueue.main.async(execute: {
                         self.collectionView?.reloadData()
                     })
                 }
-                
-                
-            })
-            
+            }, withCancel: nil)
         }, withCancel: nil)
-        
     }
+
+    
     
     func setUpInputComponents () {
         
@@ -144,19 +183,6 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         line.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         line.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        
-        let checkButton = UIButton()
-        checkButton.setTitle("CHECK", for: .normal)
-        checkButton.translatesAutoresizingMaskIntoConstraints = false
-        checkButton.addTarget(self, action: #selector(check), for: .touchUpInside)
-        checkButton.backgroundColor = UIColor.black
-        view.addSubview(checkButton)
-        
-        checkButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        checkButton.bottomAnchor.constraint(equalTo: view.bottomAnchor , constant: -100).isActive = true
-        checkButton.widthAnchor.constraint(equalToConstant:  100).isActive = true
-        checkButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
     }
     
     
@@ -187,9 +213,6 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
     }
     
     
-    func check() {
-        let vc = ChatListTableViewController(style: .plain)
-        navigationController?.pushViewController(vc, animated: true)
-    }
+
     
 }
