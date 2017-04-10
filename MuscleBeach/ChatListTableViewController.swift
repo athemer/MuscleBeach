@@ -72,13 +72,20 @@ class ChatListTableViewController: UITableViewController {
         
         let ref = FIRDatabase.database().reference().child("users").child(chatPartnerId)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let dictionary = snapshot.value as? [String: Any] else {
-                return
-            }
+            guard
+                let dictionary = snapshot.value as? [String: Any]
+                else { return }
+            
+            print ("MEWO", dictionary)
+            
             let user = User()
+            
+            guard let userName = dictionary["name"] as? String else { return }
+            
             user.id = chatPartnerId
-            user.setValuesForKeys(dictionary)
-            self.showChatControllerForUser(user: user)
+//            user.setValuesForKeys(dictionary)
+            self.showChatControllerForUser(userId: chatPartnerId, userName: userName)
+            
             
         }, withCancel: nil)
     }
@@ -150,11 +157,11 @@ class ChatListTableViewController: UITableViewController {
 //        }, withCancel: nil)
 //    }
 
-    func showChatControllerForUser(user: User) {
+    func showChatControllerForUser(userId: String, userName: String) {
         let chatRoomViewController = ChatRoomViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        ChatRoomViewController.user = user
-        chatRoomViewController.toID = user.id!
-        chatRoomViewController.toName = user.name!
+        chatRoomViewController.toID = userId
+        chatRoomViewController.toName = userName
         navigationController?.pushViewController(chatRoomViewController, animated: true)
     }
 }
