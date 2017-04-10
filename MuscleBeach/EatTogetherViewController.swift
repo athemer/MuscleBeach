@@ -176,6 +176,8 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
         switch pickerView {
         case rangePicker :
             
@@ -190,13 +192,18 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
             amountPicker.isHidden = true
             amountButton.isHidden = false
             wishAmount = amountArr[row]
+            
+            FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishAmount": amountArr[row]])
 
         case addressPicker:
+            
             
             addressButton.setTitle(addressArr[row], for: .normal)
             addressPicker.isHidden = true
             addressButton.isHidden = false
             addressInput = addressArr[row]
+            
+            FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishLocation": addressArr[row]])
             
             forwardGeocoding2(address: addressInput)
             
@@ -409,12 +416,14 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                     self.addressButton.setTitle("\(mainAdd!)\(mainDetail!)", for: .normal)
                     
                     self.forwardGeocoding2(address: add)
+                    FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishLocation": finalAdd])
                 }
                 
 
             }
             
             self.addressPicker.reloadAllComponents()
+            
         })
     }
 

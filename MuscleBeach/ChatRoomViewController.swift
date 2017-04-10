@@ -198,7 +198,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {
             return
         }
-        let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid)
+        let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid).child(toID)
         userMessagesRef.observe(.childAdded, with: { (snapshot) in
             let messageId = snapshot.key
             print (messageId)
@@ -212,12 +212,11 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
                 
                 message.setValuesForKeys(dictionary)
                 
-                if message.chatPartnerId() == self.toID {
                     self.message.append(message)
                     DispatchQueue.main.async(execute: {
                         self.collectionView?.reloadData()
                     })
-                }
+                
             }, withCancel: nil)
         }, withCancel: nil)
     }
@@ -295,9 +294,11 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         
         let messageID = childRef.key
         
-        FIRDatabase.database().reference().child("user-messages").child(fromID!).updateChildValues([messageID: true])
         
-        let recipientUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toID)
+        FIRDatabase.database().reference().child("user-messages").child(fromID!).child(toID).updateChildValues([messageID: true])
+        
+        let recipientUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toID).child(fromID!)
+        
         recipientUserMessagesRef.updateChildValues([messageID: true])
         
     }

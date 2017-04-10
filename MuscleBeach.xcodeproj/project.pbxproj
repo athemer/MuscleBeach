@@ -22,6 +22,8 @@
 		D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D121F67C1E815E350049796D /* ProfilePageAddCell.xib */; };
 		D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6821E81840C0049796D /* SelfPickUpViewController.swift */; };
 		D121F6851E8185350049796D /* SelfPickUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */; };
+		D12672681E9BA8550011AB98 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12672671E9BA8550011AB98 /* UserCell.swift */; };
+		D126726A1E9BA8650011AB98 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12672691E9BA8650011AB98 /* User.swift */; };
 		D15704F61E969D9A00F59894 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15704F51E969D9A00F59894 /* ChatRoomViewController.swift */; };
 		D15704F91E969F6D00F59894 /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15704F81E969F6D00F59894 /* ChatListTableViewController.swift */; };
 		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
@@ -82,6 +84,8 @@
 		D121F67C1E815E350049796D /* ProfilePageAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePageAddCell.xib; sourceTree = "<group>"; };
 		D121F6821E81840C0049796D /* SelfPickUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfPickUpViewController.swift; sourceTree = "<group>"; };
 		D121F6841E8185340049796D /* SelfPickUpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfPickUpTableViewCell.swift; sourceTree = "<group>"; };
+		D12672671E9BA8550011AB98 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		D12672691E9BA8650011AB98 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D15704F51E969D9A00F59894 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		D15704F81E969F6D00F59894 /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
 		D1683C231E7FCADE00C9D887 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -200,7 +204,9 @@
 		D15704F71E969F5200F59894 /* ChatList */ = {
 			isa = PBXGroup;
 			children = (
+				D12672691E9BA8650011AB98 /* User.swift */,
 				D15704F81E969F6D00F59894 /* ChatListTableViewController.swift */,
+				D12672671E9BA8550011AB98 /* UserCell.swift */,
 			);
 			name = ChatList;
 			sourceTree = "<group>";
@@ -217,11 +223,11 @@
 				D1F4FDE01E83708F001233FA /* Calendar */,
 				D121F67F1E817D870049796D /* ProfilePage */,
 				D121F6811E817DB90049796D /* Side Menu */,
-				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
 				D121F6861E8185440049796D /* SelfPickUp */,
 				D181C5DC1E861E6800A5D87B /* CheckOrder */,
 				D181C5DF1E86BB5C00A5D87B /* CheckOrderDetail */,
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
+				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
 				D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */,
 				D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */,
 				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
@@ -520,6 +526,7 @@
 				D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */,
 				D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,
+				D12672681E9BA8550011AB98 /* UserCell.swift in Sources */,
 				D1A0BE611E93954300F4D36B /* EatTogetherViewController.swift in Sources */,
 				D1A0BE2B1E8A684700F4D36B /* ShoppingCartTableViewCell.swift in Sources */,
 				D1F4FDE41E83710F001233FA /* CellView.swift in Sources */,
@@ -537,6 +544,7 @@
 				D121F6611E81135F0049796D /* ProfileCell.swift in Sources */,
 				D1A0BE2D1E8B954500F4D36B /* OrderModel.swift in Sources */,
 				D1A0BE651E93E7C100F4D36B /* EatTogetherModel.swift in Sources */,
+				D126726A1E9BA8650011AB98 /* User.swift in Sources */,
 				D1A0BE371E8FFEC300F4D36B /* DigitINfoViewController.swift in Sources */,
 				D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */,
 				D18ACC031E99ED6500B4F714 /* ChatMessageCell.swift in Sources */,
