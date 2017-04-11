@@ -32,10 +32,10 @@ class SignUpViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @IBAction func signInButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -44,7 +44,7 @@ class SignUpViewController: UIViewController {
         if let email = emailTextField.text, let password = passwordTextField.text {
 
                     FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
-                        if error != nil {   
+                        if error != nil {
                             let alertController = UIAlertController(title: "錯誤", message: "email已被註冊", preferredStyle: UIAlertControllerStyle.alert)
                             alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alertController, animated: true, completion: nil)
@@ -71,12 +71,12 @@ class SignUpViewController: UIViewController {
     func completeSignIn(id: String, userData: [String: String], email: [String: String], password: [String: String], name: [String: String], number: [String: String]) {
         DataService.ds.createFirbaseDBUser(uid: id, userData: userData, email: email, password: password, name: name, number: number)
     }
-    
+
     func setUpKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-    
+
     func handleKeyboardWillShow(notification: NSNotification) {
         let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
@@ -86,9 +86,9 @@ class SignUpViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
+
     func keyboardWillHide(notification: NSNotification) {
-        
+
         let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
         let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
         view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -97,5 +97,4 @@ class SignUpViewController: UIViewController {
         }
     }
 
-    
 }

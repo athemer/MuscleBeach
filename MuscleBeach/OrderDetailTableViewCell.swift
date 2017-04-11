@@ -11,21 +11,21 @@ import UIKit
 class OrderDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var deliverInfo: UILabel!
-    
+
     @IBOutlet weak var timeInfo: UILabel!
-    
+
     @IBOutlet weak var locationInfo: UILabel!
-    
+
     @IBOutlet weak var locationDetail: UILabel!
-    
+
     @IBOutlet weak var typeAAmount: UILabel!
-    
+
     @IBOutlet weak var typeBAmount: UILabel!
-    
+
     @IBOutlet weak var typeCAmount: UILabel!
-    
+
     @IBOutlet weak var reorderButton: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

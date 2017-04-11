@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class Message: NSObject {
-    
+
     var fromID: String?
     var text: String?
     var timeStamp: NSNumber?

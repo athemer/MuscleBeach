@@ -9,18 +9,18 @@
 import UIKit
 
 class SideMenuTableViewController: UITableViewController {
-    
+
     enum CellComponents {
         case setting
         case profile
         case orderHistory
     }
-    
+
     var cellComponentsArray: [CellComponents] = [.profile, .orderHistory, .setting ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         registerCell()
 
     }
@@ -39,7 +39,7 @@ class SideMenuTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
+
         switch cellComponentsArray[section] {
         case .profile:
             return 1
@@ -52,32 +52,31 @@ class SideMenuTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let componenets = cellComponentsArray[indexPath.section]
-        
-        
+
         switch componenets {
         case .profile:
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
             // swiftlint:disable:previous force_cast
             return cell
-            
+
         case .orderHistory:
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderHistoryCell", for: indexPath) as! OrderHistoryCell
             // swiftlint:disable:previous force_cast
             return cell
-            
+
         case .setting :
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             // swiftlint:disable:previous force_cast
             return cell
-        
+
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let componenets = cellComponentsArray[indexPath.section]
         switch componenets {
@@ -89,7 +88,7 @@ class SideMenuTableViewController: UITableViewController {
             return 40
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let componenets = cellComponentsArray[indexPath.section]
         switch componenets {
@@ -97,16 +96,16 @@ class SideMenuTableViewController: UITableViewController {
 //            let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController")
 //            self.present(profileViewController!, animated: true, completion: nil)
             performSegue(withIdentifier: "toProfilePage", sender: nil)
-            
+
         case .orderHistory:
             print (3)
-            
+
         case .setting:
             print (4)
-            
+
         }
     }
-    
+
     func registerCell() {
         let proFileNib = UINib(nibName: "ProfileCell", bundle: nil)
         let orderHisNib = UINib(nibName: "OrderHistoryCell", bundle: nil)

@@ -11,11 +11,11 @@ import UIKit
 class EatTogetherTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     @IBOutlet weak var distanceLabel: UILabel!
-    
+
     @IBOutlet weak var amountLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -15,7 +15,7 @@ class SelfPickUpTableViewCell: UITableViewCell {
     @IBOutlet weak var selfPickUpAddress: UILabel!
     @IBOutlet weak var selfPickUpNumber: UILabel!
     @IBOutlet weak var mapButton: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

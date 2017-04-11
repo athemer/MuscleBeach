@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
-    
+
     let textView: UITextView = {
         let tv = UITextView()
         tv.text = "SAMPLE TEXT FOR NOW"
@@ -17,21 +17,20 @@ class ChatMessageCell: UICollectionViewCell {
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = .clear
         tv.textColor = .white
-        
+
         return tv
     }()
-    
-    
+
     let bubbleView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 0/255, green: 137/255, blue: 249/255, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
-        
+
         return view
     } ()
-    
+
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "MBLogo")
@@ -41,56 +40,46 @@ class ChatMessageCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
     var bubbleViewLeftAnchor: NSLayoutConstraint?
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        
         addSubview(profileImageView)
         addSubview(bubbleView)
         addSubview(textView)
-        
-        
+
         // Constraint anchors: x, y, width, height
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        
-        
-        
+
         // Constraint anchors: x, y, width, height
         bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
         bubbleViewLeftAnchor = bubbleView.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8)
-        
-        
-        
-        
+
         bubbleViewRightAnchor?.isActive = true
         bubbleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        
+
         bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-        
+
         bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
         bubbleWidthAnchor?.isActive = true
-        
-        
-        
+
         // Constraint anchors: x, y, width, height
         textView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 8).isActive = true
         textView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        
+
         textView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor).isActive = true
-        
+
 //        textView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

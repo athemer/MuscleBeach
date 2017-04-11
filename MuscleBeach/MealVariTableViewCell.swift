@@ -11,11 +11,11 @@ import UIKit
 class MealVariTableViewCell: UITableViewCell {
 
     @IBOutlet weak var stepper: UIStepper!
-    
+
     @IBOutlet weak var amountLabel: UILabel!
-    
+
     @IBOutlet weak var mealNameLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

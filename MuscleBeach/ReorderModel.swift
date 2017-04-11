@@ -19,7 +19,7 @@ class ReoderModel {
     var mealTypeCAmount: Int
     var time: String
     var key: String
-    
+
     init (date: String, delvier: String, locationArea: String, locationDetail: String, mealTypeAAmount: Int, mealTypeBAmount: Int, mealTypeCAmount: Int, time: String, key: String) {
         self.date = date
         self.delvier = delvier
@@ -31,5 +31,5 @@ class ReoderModel {
         self.time = time
         self.key = key
     }
- 
+
 }

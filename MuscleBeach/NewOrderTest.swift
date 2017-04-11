@@ -9,14 +9,13 @@
 import Foundation
 
 class NewOrderTest {
-    
+
     var testDate: String
     var testTime: String
     var testDeliver: String
     var testLocDetail: String
     var testUID: String
-    
-    
+
     init(testDate: String, testTime: String, testDeliver: String, testLocDetail: String, testUID: String) {
         self.testDate = testDate
         self.testTime = testTime

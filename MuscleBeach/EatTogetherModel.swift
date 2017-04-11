@@ -9,18 +9,18 @@
 import Foundation
 
 class EatTogetherModel {
-    
+
     var name: String
     var distance: Double
     var amount: Int
     var key: String
-    
+
     init (name: String, distance: Double, amount: Int, key: String) {
-        
+
         self.name = name
         self.distance = distance
         self.amount = amount
         self.key = key
-        
+
     }
 }

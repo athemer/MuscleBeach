@@ -10,11 +10,10 @@ import UIKit
 
 class ProfilePageAddressCell: UITableViewCell {
 
-
     @IBOutlet weak var addressLabel: UILabel!
-    
+
     @IBOutlet weak var addressDetailLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,5 +24,5 @@ class ProfilePageAddressCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

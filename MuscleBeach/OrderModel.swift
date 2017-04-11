@@ -8,9 +8,8 @@
 
 import Foundation
 
-
 class OrderModel {
-    
+
     var date: String
     var delvier: String
     var locationArea: String
@@ -23,7 +22,7 @@ class OrderModel {
     var delvierFee: Int
     var key: String
     var paymentClaim: String
-    
+
     init (date: String, delvier: String, locationArea: String, locationDetail: String, mealTypeAAmount: Int, mealTypeBAmount: Int, mealTypeCAmount: Int, time: String, price: Int, deliverFee: Int, key: String, paymentClaim: String) {
         self.date = date
         self.delvier = delvier
