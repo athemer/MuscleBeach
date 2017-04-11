@@ -29,6 +29,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         collectionView?.alwaysBounceVertical = true
         collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
 
@@ -44,7 +45,15 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
 
         // Do any additional setup after loading the view.
     }
+    
 
+
+    func scroll() {
+        let index = IndexPath(item: message.count - 1, section: 0)
+        print ("??", message.count)
+        self.collectionView?.scrollToItem(at: index, at: .bottom, animated: true)
+    }
+    
 //    lazy var inputContainerView: UIView = {
 //        let containerView = UIView()
 //        containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
@@ -154,7 +163,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
             cell.bubbleViewRightAnchor?.isActive = true
             cell.bubbleViewLeftAnchor?.isActive = false
         } else {
-            cell.bubbleView.backgroundColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
+            cell.bubbleView.backgroundColor = UIColor.lightGray
             cell.textView.textColor = .black
 
             cell.profileImageView.isHidden = false
@@ -202,6 +211,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
                     self.message.append(message)
                     DispatchQueue.main.async(execute: {
                         self.collectionView?.reloadData()
+                        self.scroll()
                     })
 
             }, withCancel: nil)
