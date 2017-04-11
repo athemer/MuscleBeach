@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import XLPagerTabStrip
 
-class ChatListTableViewController: UITableViewController {
+class ChatListTableViewController: UITableViewController, IndicatorInfoProvider {
 
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
@@ -158,4 +159,10 @@ class ChatListTableViewController: UITableViewController {
         chatRoomViewController.toName = userName
         navigationController?.pushViewController(chatRoomViewController, animated: true)
     }
+    
+    func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "聊天室")
+    }
+
 }
+

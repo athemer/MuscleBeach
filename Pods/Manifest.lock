@@ -35,6 +35,7 @@ PODS:
   - JTAppleCalendar (6.1.2)
   - SideMenu (2.2.0)
   - SwiftLint (0.16.1)
+  - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - JTAppleCalendar
   - SideMenu
   - SwiftLint
+  - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
@@ -56,7 +58,8 @@ SPEC CHECKSUMS:
   JTAppleCalendar: 4424fdd0daac0daf1db93299c07949505055135d
   SideMenu: eeff6b85456c5c6e14165655691d2033f6b24969
   SwiftLint: b8b683208cc09640898f16318a7a452274e91f61
+  XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 344ef257dc8382bef3e58a056c3c7403ae40fabf
+PODFILE CHECKSUM: f6d9cf12afba67712e3d2b94dd3ebdd787fb8ad2
 
 COCOAPODS: 1.2.0

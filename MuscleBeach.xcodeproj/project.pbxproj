@@ -29,6 +29,7 @@
 		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
 		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
 		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
+		D178363F1E9CBB4800CF8BCA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */; };
 		D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */; };
 		D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */; };
 		D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9091E7FAFC900AB0DA9 /* Main.storyboard */; };
@@ -92,6 +93,7 @@
 		D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
 		D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		D180B9021E7FAFC900AB0DA9 /* MuscleBeach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleBeach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				D121F6861E8185440049796D /* SelfPickUp */,
 				D181C5DC1E861E6800A5D87B /* CheckOrder */,
 				D181C5DF1E86BB5C00A5D87B /* CheckOrderDetail */,
+				D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */,
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
 				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
 				D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */,
@@ -538,6 +541,7 @@
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
 				D1A0BE351E8FD63C00F4D36B /* NewOrderTest.swift in Sources */,
+				D178363F1E9CBB4800CF8BCA /* ParentViewController.swift in Sources */,
 				D121F6791E815E1F0049796D /* ProfilePageAddressCell.swift in Sources */,
 				D1E211F21E891BE60006B849 /* WeekMenuSelectionViewController.swift in Sources */,
 				D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */,

@@ -12,4 +12,5 @@ target 'MuscleBeach' do
   pod 'SwiftLint'
   pod 'SideMenu'
   pod 'JTAppleCalendar'
+  pod 'XLPagerTabStrip'
 end

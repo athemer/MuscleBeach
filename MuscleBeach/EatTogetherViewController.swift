@@ -11,8 +11,9 @@ import Firebase
 import MapKit
 import AddressBookUI
 import CoreLocation
+import XLPagerTabStrip
 
-class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, IndicatorInfoProvider {
 
     @IBOutlet weak var rangePicker: UIPickerView!
 
@@ -409,4 +410,12 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    
+    func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
+                return IndicatorInfo(title: "揪團訂餐")
+           }
+    
 }
+
+
+
