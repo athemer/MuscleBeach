@@ -140,7 +140,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         setupCell(cell: cell, message: message)
 
         // to be deleted
-        cell.backgroundColor = .yellow
+        cell.backgroundColor = .white
         cell.textView.text = message.text
 
         cell.bubbleWidthAnchor?.constant = estimatedFrameForText(text: message.text!).width + 32
@@ -224,7 +224,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
 
         // containerView
         let containerView = UIView()
-        containerView.backgroundColor = .yellow
+        containerView.backgroundColor = .white
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
 
@@ -307,8 +307,13 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
         containerViewBottomAnchor?.constant = -keyboardFrame!.height
+       collectionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 300).isActive = true
+        
         UIView.animate(withDuration: keyboardDuration!) {
             self.view.layoutIfNeeded()
+            DispatchQueue.main.async(execute: {
+                self.scroll()
+            })
         }
     }
 
