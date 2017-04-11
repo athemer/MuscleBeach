@@ -148,6 +148,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         if message.fromID == FIRAuth.auth()?.currentUser?.uid {
             cell.bubbleView.backgroundColor = UIColor(red: 0/255, green: 137/255, blue: 249/255, alpha: 1)
             cell.textView.textColor = .white
+            
             cell.profileImageView.isHidden = true
 
             cell.bubbleViewRightAnchor?.isActive = true
