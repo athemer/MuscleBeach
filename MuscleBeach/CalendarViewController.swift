@@ -62,6 +62,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         return parameters
     }
 
+    
     func calendar(_ calendar: JTAppleCalendarView, willDisplayCell cell: JTAppleDayCellView, date: Date, cellState: CellState) {
 
         guard let myCustomCell = cell as? CellView else { return }
@@ -79,6 +80,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         }
 
     }
+
 
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         let dateFormatter = DateFormatter()

@@ -10,9 +10,10 @@ import UIKit
 import Firebase
 import SideMenu
 
-class MainPageViewController: UIViewController {
+class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var segOne: UISegmentedControl!
 
@@ -23,6 +24,12 @@ class MainPageViewController: UIViewController {
 
         setUpBarItem()
         SideMenuManager.menuWidth = 200
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        let nib1 = UINib(nibName: "MainPageImagesTableViewCell", bundle: nil)
+        tableView.register(nib1, forCellReuseIdentifier: "MainPageImagesTableViewCell")
+
         
         // Do any additional setup after loading the view.
     }
@@ -83,6 +90,27 @@ class MainPageViewController: UIViewController {
             self.navigationController?.pushViewController(vc2, animated: true)
         }
 
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable:next force_cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+        // swiftlint:disable:previous force_cast
+        
+        
+        return cell
     }
     
     func showCart() {

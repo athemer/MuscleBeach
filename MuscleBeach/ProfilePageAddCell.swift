@@ -10,7 +10,9 @@ import UIKit
 
 class ProfilePageAddCell: UITableViewCell {
 
-    @IBOutlet weak var addImage: UIImageView!
+    
+    @IBOutlet weak var addAddressButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

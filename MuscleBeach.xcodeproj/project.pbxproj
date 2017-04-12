@@ -30,6 +30,8 @@
 		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
 		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
 		D178363F1E9CBB4800CF8BCA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */; };
+		D17836431E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */; };
+		D17836441E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */; };
 		D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */; };
 		D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */; };
 		D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9091E7FAFC900AB0DA9 /* Main.storyboard */; };
@@ -94,6 +96,8 @@
 		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
 		D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageImagesTableViewCell.swift; sourceTree = "<group>"; };
+		D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageImagesTableViewCell.xib; sourceTree = "<group>"; };
 		D180B9021E7FAFC900AB0DA9 /* MuscleBeach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleBeach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +232,7 @@
 				D121F6861E8185440049796D /* SelfPickUp */,
 				D181C5DC1E861E6800A5D87B /* CheckOrder */,
 				D181C5DF1E86BB5C00A5D87B /* CheckOrderDetail */,
-				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
+				D17836401E9E0F9600CF8BCA /* MainPage */,
 				D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */,
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
 				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
@@ -251,6 +255,16 @@
 				D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		D17836401E9E0F9600CF8BCA /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
+				D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */,
+				D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */,
+			);
+			name = MainPage;
 			sourceTree = "<group>";
 		};
 		D180B8F91E7FAFC900AB0DA9 = {
@@ -439,6 +453,7 @@
 				D121F6721E81146C0049796D /* SettingsCell.xib in Resources */,
 				D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */,
 				D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */,
+				D17836441E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib in Resources */,
 				D121F66E1E8114450049796D /* OrderHistoryCell.xib in Resources */,
 				D121F6621E81135F0049796D /* ProfileCell.xib in Resources */,
 				D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */,
@@ -550,6 +565,7 @@
 				D1A0BE651E93E7C100F4D36B /* EatTogetherModel.swift in Sources */,
 				D126726A1E9BA8650011AB98 /* User.swift in Sources */,
 				D1A0BE371E8FFEC300F4D36B /* DigitINfoViewController.swift in Sources */,
+				D17836431E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift in Sources */,
 				D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */,
 				D18ACC031E99ED6500B4F714 /* ChatMessageCell.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,

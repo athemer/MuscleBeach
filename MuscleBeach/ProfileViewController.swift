@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         case addCell
     }
 
-    var contentArr: [Content] = [.addressCell, .addCell]
+    var contentArr: [Content] = [.addCell, .addressCell]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +73,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePageAddCell") as! ProfilePageAddCell
             // swiftlint:disable:previous force_cast
 
+            cell.addAddressButton.addTarget(self, action: #selector(setUpAlert), for: .touchUpInside)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
     }
@@ -86,17 +88,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": addressArrFromDatabase[indexPath.row]])
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": addressDetailArrFromDatabase[indexPath.row]])
         case .addCell:
-            setUpAlert()
+//            setUpAlert()
+            print ("do nothing")
 
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch contentArr[indexPath.section] {
         case .addressCell:
-            return 100
+            return 60
         case .addCell:
-            return 100
+            return 60
         }
     }
 
