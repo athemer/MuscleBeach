@@ -32,6 +32,7 @@
 		D178363F1E9CBB4800CF8BCA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */; };
 		D17836431E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */; };
 		D17836441E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */; };
+		D17836461E9E51AF00CF8BCA /* LoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17836451E9E51AF00CF8BCA /* LoginHandler.swift */; };
 		D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */; };
 		D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */; };
 		D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9091E7FAFC900AB0DA9 /* Main.storyboard */; };
@@ -98,6 +99,7 @@
 		D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageImagesTableViewCell.swift; sourceTree = "<group>"; };
 		D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageImagesTableViewCell.xib; sourceTree = "<group>"; };
+		D17836451E9E51AF00CF8BCA /* LoginHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHandler.swift; sourceTree = "<group>"; };
 		D180B9021E7FAFC900AB0DA9 /* MuscleBeach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleBeach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D180B9051E7FAFC900AB0DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				D121F6731E8122D80049796D /* ProfileViewController.swift */,
+				D17836451E9E51AF00CF8BCA /* LoginHandler.swift */,
 				D121F6771E815E1F0049796D /* ProfilePageAddressCell.swift */,
 				D121F6781E815E1F0049796D /* ProfilePageAddressCell.xib */,
 				D121F67B1E815E350049796D /* ProfilePageAddCell.swift */,
@@ -548,6 +551,7 @@
 				D1A0BE611E93954300F4D36B /* EatTogetherViewController.swift in Sources */,
 				D1A0BE2B1E8A684700F4D36B /* ShoppingCartTableViewCell.swift in Sources */,
 				D1F4FDE41E83710F001233FA /* CellView.swift in Sources */,
+				D17836461E9E51AF00CF8BCA /* LoginHandler.swift in Sources */,
 				D1A0BE3B1E90B11700F4D36B /* ReorderModel.swift in Sources */,
 				D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */,
 				D18ACC011E99EB8900B4F714 /* Message.swift in Sources */,

@@ -1405,6 +1405,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     </view>
                     <connections>
                         <outlet property="orderAddress" destination="ZHf-fN-nL3" id="ylf-Rs-8HU"/>
+                        <outlet property="profileImageView" destination="yWh-bz-kxJ" id="u13-Mc-GcV"/>
                         <outlet property="tableView" destination="CFd-ln-a9R" id="B9w-Fl-MsO"/>
                     </connections>
                 </viewController>

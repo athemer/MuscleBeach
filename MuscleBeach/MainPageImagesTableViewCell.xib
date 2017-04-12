@@ -12,42 +12,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MainPageImagesTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainPageImagesTableViewCell" rowHeight="387" id="KGk-i7-Jjw" customClass="MainPageImagesTableViewCell" customModule="MuscleBeach" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="330" height="304"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MainPageImagesTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainPageImagesTableViewCell" rowHeight="353" id="KGk-i7-Jjw" customClass="MainPageImagesTableViewCell" customModule="MuscleBeach" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="330" height="270"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="330" height="304"/>
+                <rect key="frame" x="0.0" y="0.0" width="330" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7s3-ah-dZH">
-                        <rect key="frame" x="0.0" y="0.0" width="330" height="272"/>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7s3-ah-dZH">
+                        <rect key="frame" x="0.0" y="0.0" width="330" height="271"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="270.5" id="zcj-G8-jU7"/>
+                        </constraints>
                     </scrollView>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qIi-3I-lh0">
-                        <rect key="frame" x="47" y="271" width="257" height="33"/>
+                    <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="hEY-0q-A7o">
+                        <rect key="frame" x="145" y="240" width="39" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="hEY-0q-A7o">
-                        <rect key="frame" x="146" y="267" width="39" height="37"/>
                     </pageControl>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hEY-0q-A7o" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="0.5" id="3q8-pB-uEn"/>
-                    <constraint firstAttribute="bottom" secondItem="hEY-0q-A7o" secondAttribute="bottom" id="GJP-hP-yaN"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="7s3-ah-dZH" secondAttribute="bottom" constant="23" id="GSW-aN-Erg"/>
                     <constraint firstItem="7s3-ah-dZH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="O7i-Tc-ede"/>
                     <constraint firstItem="7s3-ah-dZH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Wjh-b3-H2d"/>
-                    <constraint firstItem="hEY-0q-A7o" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="267" id="a3Q-Gd-Ft9"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7s3-ah-dZH" secondAttribute="trailing" constant="-8" id="mvx-fD-tBE"/>
-                    <constraint firstAttribute="trailing" secondItem="hEY-0q-A7o" secondAttribute="trailing" constant="145" id="vgi-d3-RI8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="pageControl" destination="hEY-0q-A7o" id="sls-TP-9wh"/>
                 <outlet property="scrollView" destination="7s3-ah-dZH" id="0lU-dx-PQ5"/>
             </connections>
-            <point key="canvasLocation" x="135" y="223"/>
+            <point key="canvasLocation" x="135" y="206"/>
         </tableViewCell>
     </objects>
 </document>
