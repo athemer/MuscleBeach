@@ -16,7 +16,6 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
       
-        super.viewDidLoad()
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
@@ -34,6 +33,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = self?.purpleInspireColor
         }
         
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 

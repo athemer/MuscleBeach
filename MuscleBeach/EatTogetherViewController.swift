@@ -69,18 +69,6 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         addressPicker.isHidden = true
         amountPicker.isHidden = true
 
-        let checkButton = UIButton()
-        checkButton.setTitle("CHECK", for: .normal)
-        checkButton.translatesAutoresizingMaskIntoConstraints = false
-        checkButton.addTarget(self, action: #selector(check), for: .touchUpInside)
-        checkButton.backgroundColor = UIColor.black
-        view.addSubview(checkButton)
-
-        checkButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        checkButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
-        checkButton.widthAnchor.constraint(equalToConstant:  100).isActive = true
-        checkButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func didReceiveMemoryWarning() {
@@ -405,12 +393,6 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         })
     }
 
-    func check() {
-        let vc = ChatListTableViewController(style: .plain)
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
-    
     func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
                 return IndicatorInfo(title: "揪團訂餐")
            }

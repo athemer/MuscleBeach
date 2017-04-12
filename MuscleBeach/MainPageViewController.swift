@@ -12,6 +12,8 @@ import SideMenu
 
 class MainPageViewController: UIViewController {
 
+
+    
     @IBOutlet weak var segOne: UISegmentedControl!
 
     @IBOutlet weak var segTwo: UISegmentedControl!
@@ -19,7 +21,9 @@ class MainPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpBarItem()
         SideMenuManager.menuWidth = 200
+        
         // Do any additional setup after loading the view.
     }
 
@@ -80,8 +84,48 @@ class MainPageViewController: UIViewController {
         }
 
     }
-    @IBAction func shoppingCartTapped(_ sender: Any) {
-
+    
+    func showCart() {
+        // swiftlint:disable:next force_cast
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ShoppingCartViewController") as! ShoppingCartViewController
+        // swiftlint:disable:previous force_cast
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func goToMenu() {
+        // swiftlint:disable:next force_cast
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationController") as! UISideMenuNavigationController
+        // swiftlint:disable:previous force_cast
+        
+        self.show(vc, sender: nil)
+        
+    }
+    
+    
+    func setUpBarItem() {
+        let menuImage = UIImage(named: "MenuIcon")
+        let leftButton = UIButton(type: .custom)
+        leftButton.setImage(menuImage, for: .normal)
+        leftButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        leftButton.addTarget(self, action: #selector(goToMenu), for: .touchUpInside)
+        leftButton.tintColor = .black
+        
+        let leftBarItem = UIBarButtonItem(customView: leftButton)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        
+        
+        
+        let cartImage = UIImage(named: "cartIcon")
+        let rightButton = UIButton(type: .custom)
+        rightButton.setImage(cartImage, for: .normal)
+        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        rightButton.addTarget(self, action: #selector(showCart), for: .touchUpInside)
+        rightButton.tintColor = .green
+        
+        let rightBarItem = UIBarButtonItem(customView: rightButton)
+        self.navigationItem.rightBarButtonItem = rightBarItem
 
+        
+    }
 }
