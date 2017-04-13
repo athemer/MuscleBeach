@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -43,16 +44,43 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             selectedImageFromPicker = originalImage
         }
         
+        let uid = FIRAuth.auth()?.currentUser?.uid
         
         if let selectedImage = selectedImageFromPicker {
             profileImageView.image = selectedImage
+            
+            let imageName = UUID().uuidString
+            let storageRef = FIRStorage.storage().reference().child("profileImages").child("\(imageName).png")
+            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                    
+                    if error != nil {
+                        print (error)
+                        return
+                    }
+                    
+                    if let urlString = metadata?.downloadURL()?.absoluteString {
+                        print ("good to go")
+                        
+                        let ref = FIRDatabase.database().reference().child("users").child(uid!)
+                        ref.updateChildValues(["prfileImgURL": urlString])
+                        
+                    }
 
+                    print (metadata)
+                    
+                })
+            }
+         
+            
             
         }
         
         
         dismiss(animated: true, completion: nil)
     }
+    
+    
     
 }
 

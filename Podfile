@@ -13,4 +13,5 @@ target 'MuscleBeach' do
   pod 'SideMenu'
   pod 'JTAppleCalendar'
   pod 'XLPagerTabStrip'
+  pod 'Firebase/Storage'
 end
