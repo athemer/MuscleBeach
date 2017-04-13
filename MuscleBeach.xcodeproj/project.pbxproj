@@ -63,6 +63,9 @@
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
 		D1E211F21E891BE60006B849 /* WeekMenuSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */; };
+		D1F45A741E9F1CD300490B4F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45A731E9F1CD300490B4F /* Extensions.swift */; };
+		D1F45A771E9F2D5700490B4F /* HomePageAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45A751E9F2D5700490B4F /* HomePageAddressTableViewCell.swift */; };
+		D1F45A781E9F2D5700490B4F /* HomePageAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F45A761E9F2D5700490B4F /* HomePageAddressTableViewCell.xib */; };
 		D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F4FDE11E8370AA001233FA /* CellView.xib */; };
 		D1F4FDE41E83710F001233FA /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE31E83710F001233FA /* CellView.swift */; };
 		D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE51E837176001233FA /* CalendarViewController.swift */; };
@@ -132,6 +135,9 @@
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
 		D1E211F11E891BDB0006B849 /* WeekMenuSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekMenuSelectionViewController.swift; sourceTree = "<group>"; };
+		D1F45A731E9F1CD300490B4F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D1F45A751E9F2D5700490B4F /* HomePageAddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageAddressTableViewCell.swift; sourceTree = "<group>"; };
+		D1F45A761E9F2D5700490B4F /* HomePageAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageAddressTableViewCell.xib; sourceTree = "<group>"; };
 		D1F4FDE11E8370AA001233FA /* CellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellView.xib; sourceTree = "<group>"; };
 		D1F4FDE31E83710F001233FA /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		D1F4FDE51E837176001233FA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 		D1683C211E7FBF8D00C9D887 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D1F45A731E9F1CD300490B4F /* Extensions.swift */,
 				D15704F71E969F5200F59894 /* ChatList */,
 				D15704F41E969D6900F59894 /* ChatRoom */,
 				D1A0BE5F1E93950B00F4D36B /* EatTogether */,
@@ -265,6 +272,8 @@
 			children = (
 				D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */,
 				D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */,
+				D1F45A751E9F2D5700490B4F /* HomePageAddressTableViewCell.swift */,
+				D1F45A761E9F2D5700490B4F /* HomePageAddressTableViewCell.xib */,
 				D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */,
 			);
 			name = MainPage;
@@ -459,6 +468,7 @@
 				D17836441E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib in Resources */,
 				D121F66E1E8114450049796D /* OrderHistoryCell.xib in Resources */,
 				D121F6621E81135F0049796D /* ProfileCell.xib in Resources */,
+				D1F45A781E9F2D5700490B4F /* HomePageAddressTableViewCell.xib in Resources */,
 				D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */,
 				D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */,
 			);
@@ -551,6 +561,7 @@
 				D1A0BE611E93954300F4D36B /* EatTogetherViewController.swift in Sources */,
 				D1A0BE2B1E8A684700F4D36B /* ShoppingCartTableViewCell.swift in Sources */,
 				D1F4FDE41E83710F001233FA /* CellView.swift in Sources */,
+				D1F45A771E9F2D5700490B4F /* HomePageAddressTableViewCell.swift in Sources */,
 				D17836461E9E51AF00CF8BCA /* LoginHandler.swift in Sources */,
 				D1A0BE3B1E90B11700F4D36B /* ReorderModel.swift in Sources */,
 				D121F67D1E815E350049796D /* ProfilePageAddCell.swift in Sources */,
@@ -576,6 +587,7 @@
 				D1A0BE631E93E71500F4D36B /* EatTogetherTableViewCell.swift in Sources */,
 				D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */,
 				D181C5E11E86BB7B00A5D87B /* OrderDetailViewController.swift in Sources */,
+				D1F45A741E9F1CD300490B4F /* Extensions.swift in Sources */,
 				D121F65E1E8103AE0049796D /* SideMenuTableViewController.swift in Sources */,
 				D15704F91E969F6D00F59894 /* ChatListTableViewController.swift in Sources */,
 				D181C5D91E85195400A5D87B /* MealVariTableViewCell.swift in Sources */,

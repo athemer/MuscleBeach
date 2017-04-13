@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SideMenu
+import FirebaseStorage
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,7 +19,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var segOne: UISegmentedControl!
 
     @IBOutlet weak var segTwo: UISegmentedControl!
-
+    
+    enum components {
+        case homaPageImages
+        case addressSelection
+        case fastOrder
+    }
+    
+    let componentArr: [components] = [.homaPageImages, .addressSelection, .fastOrder]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,23 +102,68 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return componentArr.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch componentArr[section] {
+        case .homaPageImages:
+            return 1
+            
+        case .addressSelection:
+            return 1
+            
+        case .fastOrder:
+            return 1
+        }
         return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        switch componentArr[indexPath.section] {
+        case .homaPageImages:
+            return 240
+            
+        case .addressSelection:
+            return 240
+            
+        case .fastOrder:
+            return 240
+        }
+        return 240
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        switch componentArr[indexPath.section] {
+        case .homaPageImages:
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+            // swiftlint:disable:previous force_cast
+            
+            return cell
+            
+        case .addressSelection:
+            
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+            // swiftlint:disable:previous force_cast
+            return cell
+            
+        case .fastOrder:
+            
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+            // swiftlint:disable:previous force_cast
+            return cell
+        }
+        
+        
         // swiftlint:disable:next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
         // swiftlint:disable:previous force_cast
-        
-        
         return cell
     }
     

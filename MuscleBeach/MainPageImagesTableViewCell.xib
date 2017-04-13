@@ -13,21 +13,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="MainPageImagesTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainPageImagesTableViewCell" rowHeight="353" id="KGk-i7-Jjw" customClass="MainPageImagesTableViewCell" customModule="MuscleBeach" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="330" height="270"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="330" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="239"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7s3-ah-dZH">
-                        <rect key="frame" x="0.0" y="0.0" width="330" height="271"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="270.5" id="zcj-G8-jU7"/>
+                            <constraint firstAttribute="height" constant="240" id="zcj-G8-jU7"/>
                         </constraints>
                     </scrollView>
                     <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="hEY-0q-A7o">
-                        <rect key="frame" x="145" y="240" width="39" height="37"/>
+                        <rect key="frame" x="168" y="200" width="39" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </pageControl>
                 </subviews>
@@ -41,7 +41,7 @@
                 <outlet property="pageControl" destination="hEY-0q-A7o" id="sls-TP-9wh"/>
                 <outlet property="scrollView" destination="7s3-ah-dZH" id="0lU-dx-PQ5"/>
             </connections>
-            <point key="canvasLocation" x="135" y="206"/>
+            <point key="canvasLocation" x="157.5" y="206"/>
         </tableViewCell>
     </objects>
 </document>

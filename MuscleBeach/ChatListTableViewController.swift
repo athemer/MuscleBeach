@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import XLPagerTabStrip
+import FirebaseStorage
 
 class ChatListTableViewController: UITableViewController, IndicatorInfoProvider {
 
@@ -54,6 +55,26 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
 
         let message = messages[indexPath.row]
         cell.message = message
+        
+//        cell.image.contentmode = .scallaspectfit 
+//        if let profileImageUrl = user.profileImageUrl {
+//            let url = URL(string: profileImageUrl)
+//            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+//                if error != nil {
+//                    print (error)
+//                    return
+//                }
+//                DispatchQueue.main.async(execute: {
+//                    
+//                    if let downloadedImage = UIImage(data: data!) {
+//                        imageCache.setObject(downloadedImage, forKey: urlString as NSString)
+//                        self.image = downloadedImage
+//                    }
+//                })
+//            }).resume()
+//            
+//        }
+//        
         return cell
     }
 
@@ -164,5 +185,6 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
         return IndicatorInfo(title: "聊天室")
     }
 
+    
 }
 
