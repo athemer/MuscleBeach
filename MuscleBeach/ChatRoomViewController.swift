@@ -29,7 +29,6 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         collectionView?.alwaysBounceVertical = true
         collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
 
@@ -45,15 +44,13 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
 
         // Do any additional setup after loading the view.
     }
-    
-
 
     func scroll() {
         let index = IndexPath(item: message.count - 1, section: 0)
         print ("??", message.count)
         self.collectionView?.scrollToItem(at: index, at: .bottom, animated: true)
     }
-    
+
 //    lazy var inputContainerView: UIView = {
 //        let containerView = UIView()
 //        containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
@@ -157,7 +154,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         if message.fromID == FIRAuth.auth()?.currentUser?.uid {
             cell.bubbleView.backgroundColor = UIColor(red: 0/255, green: 137/255, blue: 249/255, alpha: 1)
             cell.textView.textColor = .white
-            
+
             cell.profileImageView.isHidden = true
 
             cell.bubbleViewRightAnchor?.isActive = true
@@ -308,7 +305,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
         containerViewBottomAnchor?.constant = -keyboardFrame!.height
        collectionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 300).isActive = true
-        
+
         UIView.animate(withDuration: keyboardDuration!) {
             self.view.layoutIfNeeded()
             DispatchQueue.main.async(execute: {

@@ -1,5 +1,5 @@
 //
-//  HomePageAddressTableViewCell.swift
+//  SecondTableViewCell.swift
 //  MuscleBeach
 //
 //  Created by 陳冠華 on 2017/4/13.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class HomePageAddressTableViewCell: UITableViewCell {
+class SecondTableViewCell: UITableViewCell {
 
+    var vc: UICollectionViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

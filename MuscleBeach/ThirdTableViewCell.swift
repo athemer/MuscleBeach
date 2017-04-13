@@ -1,16 +1,14 @@
 //
-//  ProfilePageAddCell.swift
+//  ThirdTableViewCell.swift
 //  MuscleBeach
 //
-//  Created by 陳冠華 on 2017/3/21.
+//  Created by 陳冠華 on 2017/4/13.
 //  Copyright © 2017年 my app. All rights reserved.
 //
 
 import UIKit
 
-class ProfilePageAddCell: UITableViewCell {
-
-    @IBOutlet weak var addAddressButton: UIButton!
+class ThirdTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +20,5 @@ class ProfilePageAddCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

@@ -11,11 +11,10 @@ import XLPagerTabStrip
 
 class ParentViewController: ButtonBarPagerTabStripViewController {
 
-    
     let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
-    
+
     override func viewDidLoad() {
-      
+
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
@@ -32,7 +31,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             oldCell?.label.textColor = .black
             newCell?.label.textColor = self?.purpleInspireColor
         }
-        
+
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
@@ -41,12 +40,11 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EatTogetherViewController")
         let child_2 = ChatListTableViewController(style: .plain)
         return [child_1, child_2]
     }
-
 
 }

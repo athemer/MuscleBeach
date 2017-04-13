@@ -55,7 +55,7 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
 
         let message = messages[indexPath.row]
         cell.message = message
-        
+
 //        cell.image.contentmode = .scallaspectfit 
 //        if let profileImageUrl = user.profileImageUrl {
 //            let url = URL(string: profileImageUrl)
@@ -180,11 +180,9 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
         chatRoomViewController.toName = userName
         navigationController?.pushViewController(chatRoomViewController, animated: true)
     }
-    
+
     func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "聊天室")
     }
 
-    
 }
-

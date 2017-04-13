@@ -11,10 +11,8 @@ import Firebase
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    
-    
     @IBOutlet weak var profileImageView: UIImageView!
-    
+
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var orderAddress: UITextField!
@@ -43,7 +41,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
         profileImageView.isUserInteractionEnabled = true
-        
+
         registerCell()
         fetchAddressFromDatabase()
     }
@@ -100,7 +98,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch contentArr[indexPath.section] {
         case .addressCell:
@@ -257,5 +255,4 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
 
-    
 }

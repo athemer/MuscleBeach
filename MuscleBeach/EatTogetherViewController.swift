@@ -396,8 +396,5 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
                 return IndicatorInfo(title: "揪團訂餐")
            }
-    
+
 }
-
-
-
