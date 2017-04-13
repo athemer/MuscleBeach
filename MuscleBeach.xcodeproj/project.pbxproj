@@ -69,6 +69,10 @@
 		D1F45AB41E9F7D1500490B4F /* ThirdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45AB21E9F7D1500490B4F /* ThirdTableViewCell.swift */; };
 		D1F45AB51E9F7D1500490B4F /* ThirdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F45AB31E9F7D1500490B4F /* ThirdTableViewCell.xib */; };
 		D1F45AB71E9F806900490B4F /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45AB61E9F806900490B4F /* MainCollectionViewController.swift */; };
+		D1F45ABB1E9F84EC00490B4F /* FirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45AB91E9F84EC00490B4F /* FirstCollectionViewCell.swift */; };
+		D1F45ABC1E9F84EC00490B4F /* FirstCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F45ABA1E9F84EC00490B4F /* FirstCollectionViewCell.xib */; };
+		D1F45ABF1E9F850100490B4F /* SecondCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45ABD1E9F850100490B4F /* SecondCollectionViewCell.swift */; };
+		D1F45AC01E9F850100490B4F /* SecondCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F45ABE1E9F850100490B4F /* SecondCollectionViewCell.xib */; };
 		D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F4FDE11E8370AA001233FA /* CellView.xib */; };
 		D1F4FDE41E83710F001233FA /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE31E83710F001233FA /* CellView.swift */; };
 		D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F4FDE51E837176001233FA /* CalendarViewController.swift */; };
@@ -144,6 +148,10 @@
 		D1F45AB21E9F7D1500490B4F /* ThirdTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTableViewCell.swift; sourceTree = "<group>"; };
 		D1F45AB31E9F7D1500490B4F /* ThirdTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdTableViewCell.xib; sourceTree = "<group>"; };
 		D1F45AB61E9F806900490B4F /* MainCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		D1F45AB91E9F84EC00490B4F /* FirstCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCollectionViewCell.swift; sourceTree = "<group>"; };
+		D1F45ABA1E9F84EC00490B4F /* FirstCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstCollectionViewCell.xib; sourceTree = "<group>"; };
+		D1F45ABD1E9F850100490B4F /* SecondCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondCollectionViewCell.swift; sourceTree = "<group>"; };
+		D1F45ABE1E9F850100490B4F /* SecondCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1F4FDE11E8370AA001233FA /* CellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellView.xib; sourceTree = "<group>"; };
 		D1F4FDE31E83710F001233FA /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		D1F4FDE51E837176001233FA /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -281,7 +289,7 @@
 				D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */,
 				D1F45AAE1E9F7D0400490B4F /* SecondTableViewCell.swift */,
 				D1F45AB21E9F7D1500490B4F /* ThirdTableViewCell.swift */,
-				D1F45AB61E9F806900490B4F /* MainCollectionViewController.swift */,
+				D1F45AB81E9F84C700490B4F /* collectionView */,
 				D1F45AAF1E9F7D0400490B4F /* SecondTableViewCell.xib */,
 				D1F45AB31E9F7D1500490B4F /* ThirdTableViewCell.xib */,
 			);
@@ -388,6 +396,18 @@
 			name = SingleOrderPAge;
 			sourceTree = "<group>";
 		};
+		D1F45AB81E9F84C700490B4F /* collectionView */ = {
+			isa = PBXGroup;
+			children = (
+				D1F45AB61E9F806900490B4F /* MainCollectionViewController.swift */,
+				D1F45AB91E9F84EC00490B4F /* FirstCollectionViewCell.swift */,
+				D1F45ABD1E9F850100490B4F /* SecondCollectionViewCell.swift */,
+				D1F45ABA1E9F84EC00490B4F /* FirstCollectionViewCell.xib */,
+				D1F45ABE1E9F850100490B4F /* SecondCollectionViewCell.xib */,
+			);
+			name = collectionView;
+			sourceTree = "<group>";
+		};
 		D1F4FDE01E83708F001233FA /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +487,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F45AC01E9F850100490B4F /* SecondCollectionViewCell.xib in Resources */,
 				D121F67A1E815E1F0049796D /* ProfilePageAddressCell.xib in Resources */,
 				D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */,
 				D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */,
@@ -474,6 +495,7 @@
 				D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */,
 				D121F6721E81146C0049796D /* SettingsCell.xib in Resources */,
 				D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */,
+				D1F45ABC1E9F84EC00490B4F /* FirstCollectionViewCell.xib in Resources */,
 				D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */,
 				D17836441E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib in Resources */,
 				D1F45AB51E9F7D1500490B4F /* ThirdTableViewCell.xib in Resources */,
@@ -564,6 +586,7 @@
 				D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */,
 				D11A2A371E826C1900D5D6B7 /* PickUpLocationViewController.swift in Sources */,
 				D1A0BE291E8A66E800F4D36B /* ShoppingCartViewController.swift in Sources */,
+				D1F45ABB1E9F84EC00490B4F /* FirstCollectionViewCell.swift in Sources */,
 				D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */,
 				D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,
@@ -577,6 +600,7 @@
 				D18ACC011E99EB8900B4F714 /* Message.swift in Sources */,
 				D181C5E31E86BB9800A5D87B /* OrderDetailTableViewCell.swift in Sources */,
 				D1A0BE3D1E90BDFA00F4D36B /* PopUpReorderCalendarViewController.swift in Sources */,
+				D1F45ABF1E9F850100490B4F /* SecondCollectionViewCell.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
 				D1A0BE351E8FD63C00F4D36B /* NewOrderTest.swift in Sources */,
