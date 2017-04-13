@@ -118,9 +118,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             return 1
 
         case .fastOrder:
-            return 1
+            return 10
         }
-        return 1
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,9 +131,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             return 240
 
         case .fastOrder:
-            return 240
+            return 120
         }
-        return 240
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

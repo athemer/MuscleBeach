@@ -12,6 +12,14 @@ private let reuseIdentifier = "Cell"
 
 class MainCollectionViewController: UICollectionViewController {
 
+    
+    enum Components {
+        case one
+        case two
+    }
+    
+    let componentArr: [Components] = [.one, .two]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,8 +27,12 @@ class MainCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
+        self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
+        let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
+        self.collectionView?.register(nib2, forCellWithReuseIdentifier: "SecondCollectionViewCell")
         // Do any additional setup after loading the view.
     }
 
@@ -43,21 +55,48 @@ class MainCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return componentArr.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        
+        switch componentArr[section] {
+        case .one :
+            return 1
+        case .two :
+            return 1
+        }
+
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        // Configure the cell
-        cell.backgroundColor = .red
-        return cell
+        
+        switch componentArr[indexPath.section] {
+        case .one :
+            // swiftlint:disable:next force_cast
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath) as! FirstCollectionViewCell
+            // swiftlint:disable:previous force_cast
+            
+            
+            cell.backgroundColor = .black
+            cell.label.text = "bitch"
+            cell.label.textColor = .white
+            
+            return cell
+        case .two :
+            // swiftlint:disable:next force_cast
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCollectionViewCell", for: indexPath) as! SecondCollectionViewCell
+            // swiftlint:disable:previous force_cast
+            
+            cell.backgroundColor = .yellow
+
+            
+            return cell
+        }
     }
 
     // MARK: UICollectionViewDelegate
