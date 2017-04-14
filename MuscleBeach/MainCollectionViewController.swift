@@ -13,6 +13,13 @@ private let reuseIdentifier = "Cell"
 
 class MainCollectionViewController: UICollectionViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    
+    var detailAddToDB: String = ""
+    var mainAddToDB: String = ""
+    var deliverToDB: String = ""
+    
+    
+    
     var addressArr: [AddressModel] = []
     
     
@@ -146,11 +153,26 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": mainAddressLabel.text])
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": detailAddressLabel.text])
         
+        self.deliverToDB = "外送"
+        self.mainAddToDB = addressArr[row].mainAdd
+        self.detailAddToDB = addressArr[row].detailAdd
+     
     }
 
     
     
     func bonbon() {
+        
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+        
+        vc.deliverToDB = self.deliverToDB
+        vc.locationDetailToDB = self.detailAddToDB
+        vc.locationAreaToDB = self.mainAddToDB
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
         
         print ("1234567")
     }
@@ -165,6 +187,10 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         
         cell.addressLabel.text = "城市草倉 C TEA"
         cell.detailLAbel.text = "台北市大安區羅斯福路三段283巷19弄4號"
+        self.deliverToDB = "自取"
+        self.mainAddToDB = "自取地點一"
+        self.detailAddToDB = "城市草倉"
+        
         
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
@@ -179,6 +205,10 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         
         cell.addressLabel.text = "肌肉海灘工作室"
         cell.detailLAbel.text = "信義區和平東路三段391巷8弄30號1樓"
+        self.deliverToDB = "自取"
+        self.mainAddToDB = "自取地點二"
+        self.detailAddToDB = "肌肉海灘工作室"
+        
         
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }

@@ -13,7 +13,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
-    var daysLimitation: Int = 10
+    var daysLimitation: Int = 0
 
     var dateToDB: [String] = []
     var deliverToDB: String = ""
