@@ -14,6 +14,8 @@ class SecondTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+//        setup()
         // Initialization code
     }
 
@@ -23,4 +25,24 @@ class SecondTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
+//    func setup() {
+//        
+//       
+//        
+//        
+//        let but = UIButton(type: .system)
+//        but.translatesAutoresizingMaskIntoConstraints = false
+//        but.backgroundColor = .green
+//        but.tintColor = .black
+//        but.setTitle("開始", for: .normal)
+//        
+//        but.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 10).isActive = true
+//        but.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 10).isActive = true
+//        but.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        but.widthAnchor.constraint(equalToConstant: 250).isActive = true
+//        
+//        self.contentView.addSubview(but)
+//    }
 }

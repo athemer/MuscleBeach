@@ -59,6 +59,7 @@
 		D1A0BE611E93954300F4D36B /* EatTogetherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE601E93954300F4D36B /* EatTogetherViewController.swift */; };
 		D1A0BE631E93E71500F4D36B /* EatTogetherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE621E93E71500F4D36B /* EatTogetherTableViewCell.swift */; };
 		D1A0BE651E93E7C100F4D36B /* EatTogetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */; };
+		D1D36CB81EA07F9000F4E01F /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CB71EA07F9000F4E01F /* AddressModel.swift */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
@@ -138,6 +139,7 @@
 		D1A0BE601E93954300F4D36B /* EatTogetherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatTogetherViewController.swift; sourceTree = "<group>"; };
 		D1A0BE621E93E71500F4D36B /* EatTogetherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatTogetherTableViewCell.swift; sourceTree = "<group>"; };
 		D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatTogetherModel.swift; sourceTree = "<group>"; };
+		D1D36CB71EA07F9000F4E01F /* AddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				D1A0BE341E8FD63C00F4D36B /* NewOrderTest.swift */,
 				D1A0BE3A1E90B11700F4D36B /* ReorderModel.swift */,
 				D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */,
+				D1D36CB71EA07F9000F4E01F /* AddressModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				D1F45ABB1E9F84EC00490B4F /* FirstCollectionViewCell.swift in Sources */,
 				D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */,
 				D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */,
+				D1D36CB81EA07F9000F4E01F /* AddressModel.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,
 				D12672681E9BA8550011AB98 /* UserCell.swift in Sources */,
 				D1A0BE611E93954300F4D36B /* EatTogetherViewController.swift in Sources */,

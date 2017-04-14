@@ -10,7 +10,12 @@ import UIKit
 
 class FirstCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    @IBOutlet weak var startButton: UIButton!
+    
+    @IBOutlet weak var detailLAbel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

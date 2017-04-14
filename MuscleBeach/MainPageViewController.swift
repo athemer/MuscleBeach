@@ -129,9 +129,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
         case .addressSelection:
             return 240
+            
 
         case .fastOrder:
-            return 120
+            return 80
         }
     }
 
@@ -151,6 +152,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
             // swiftlint:disable:previous force_cast
             
+            cell.backgroundColor = .green
+            
             
             let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
             
@@ -163,9 +166,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
         case .fastOrder:
 
-            // swiftlint:disable:next force_cast
+            //swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
-            // swiftlint:disable:previous force_cast
+            //swiftlint:disable:previous force_cast
             return cell
         }
 
@@ -211,4 +214,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.rightBarButtonItem = rightBarItem
 
     }
+    
+    
 }

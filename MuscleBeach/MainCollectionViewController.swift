@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 private let reuseIdentifier = "Cell"
 
-class MainCollectionViewController: UICollectionViewController {
+class MainCollectionViewController: UICollectionViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    var addressArr: [AddressModel] = []
+    
     
     enum Components {
         case one
@@ -23,11 +26,7 @@ class MainCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        fetchAddress()
         
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
@@ -83,9 +82,7 @@ class MainCollectionViewController: UICollectionViewController {
             
             
             cell.backgroundColor = .black
-            cell.label.text = "bitch"
-            cell.label.textColor = .white
-            
+            cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
             return cell
         case .two :
             // swiftlint:disable:next force_cast
@@ -93,41 +90,136 @@ class MainCollectionViewController: UICollectionViewController {
             // swiftlint:disable:previous force_cast
             
             cell.backgroundColor = .yellow
-
-            
+            cell.pickerView.delegate = self
+            cell.pickerView.dataSource = self
+            cell.firstButton.addTarget(self, action: #selector(changeAddress), for: .touchUpInside)
+            cell.secondButton.addTarget(self, action: #selector(changeAddress2), for: .touchUpInside)
+            cell.deliverAddButton.addTarget(self, action: #selector(delivAddBtnTapped), for: .touchUpInside)
             return cell
         }
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
-    */
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return addressArr.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return addressArr[row].finalAdd
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        
+        let index1: IndexPath = IndexPath(item: 0, section: 0)
+        
+        // swiftlint:disable:next force_cast
+        let cell1 = collectionView?.cellForItem(at: index1) as! FirstCollectionViewCell
+        // swiftlint:disable:previous force_cast
+        
+        cell1.addressLabel.text = addressArr[row].mainAdd
+        cell1.detailLAbel.text = addressArr[row].detailAdd
+ 
+        
+        
+        
+        let index2: IndexPath = IndexPath(item: 0, section: 1)
+        
+        // swiftlint:disable:next force_cast
+        let cell2 = collectionView?.cellForItem(at: index2) as! SecondCollectionViewCell
+        // swiftlint:disable:previous force_cast
+        
+        
+    
+        cell2.pickerView.isHidden = true
+        cell2.deliverAddButton.isHidden = false
+        cell2.deliverAddButton.setTitle(addressArr[row].finalAdd, for: .normal)
+        
+//        let uid = FIRAuth.auth()?.currentUser?.uid
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": mainAddressLabel.text])
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": detailAddressLabel.text])
+        
+    }
 
+    
+    func bonbon() {
+        
+        print ("1234567")
+    }
+
+    func changeAddress() {
+        
+        let index: IndexPath = IndexPath(item: 0, section: 0)
+        
+        // swiftlint:disable:next force_cast
+        let cell = collectionView?.cellForItem(at: index) as! FirstCollectionViewCell
+        // swiftlint:disable:previous force_cast
+        
+        cell.addressLabel.text = "城市草倉 C TEA"
+        cell.detailLAbel.text = "台北市大安區羅斯福路三段283巷19弄4號"
+    }
+    
+    func changeAddress2() {
+        
+        let index: IndexPath = IndexPath(item: 0, section: 0)
+        
+        // swiftlint:disable:next force_cast
+        let cell = collectionView?.cellForItem(at: index) as! FirstCollectionViewCell
+        // swiftlint:disable:previous force_cast
+        
+        cell.addressLabel.text = "肌肉海灘工作室"
+        cell.detailLAbel.text = "信義區和平東路三段391巷8弄30號1樓"
+    }
+    
+    func fetchAddress() {
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dict = snapshot.value as? [String: AnyObject] {
+                let mainAdd = dict["mainAdd"] as? String
+                let mainDetail = dict["mainDetail"] as? String
+                
+                for x in 1...(dict.count / 2) - 1 {
+                    
+                    let street = dict["add\(x)"] as? String
+                    let address = dict["detail\(x)"] as? String
+                    let finalAdd = street! + address!
+                    
+                    let toAppend = AddressModel(mainAdd: street!, detailAdd: address!, finalAdd: finalAdd)
+                    
+                    self.addressArr.append(toAppend)
+                    
+                }
+                
+            } else {
+                
+                print ("no address to fetch")
+                return
+            }
+      
+            let index: IndexPath = IndexPath(item: 0, section: 1)
+            
+            // swiftlint:disable:next force_cast
+            let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+            // swiftlint:disable:previous force_cast
+            cell.pickerView.reloadAllComponents()
+            
+        })
+    }
+    
+    func delivAddBtnTapped() {
+        
+        let index: IndexPath = IndexPath(item: 0, section: 1)
+        
+        // swiftlint:disable:next force_cast
+        let cell = collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+        // swiftlint:disable:previous force_cast
+        cell.pickerView.isHidden = false
+        cell.deliverAddButton.isHidden = true
+        
+    }
 }
