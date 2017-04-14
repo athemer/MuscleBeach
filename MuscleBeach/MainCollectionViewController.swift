@@ -140,12 +140,15 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         cell2.deliverAddButton.isHidden = false
         cell2.deliverAddButton.setTitle(addressArr[row].finalAdd, for: .normal)
         
+        self.collectionView?.scrollToItem(at: index1, at: .left, animated: true)
+        
 //        let uid = FIRAuth.auth()?.currentUser?.uid
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": mainAddressLabel.text])
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": detailAddressLabel.text])
         
     }
 
+    
     
     func bonbon() {
         
@@ -162,6 +165,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         
         cell.addressLabel.text = "城市草倉 C TEA"
         cell.detailLAbel.text = "台北市大安區羅斯福路三段283巷19弄4號"
+        
+        self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
     
     func changeAddress2() {
@@ -174,6 +179,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         
         cell.addressLabel.text = "肌肉海灘工作室"
         cell.detailLAbel.text = "信義區和平東路三段391巷8弄30號1樓"
+        
+        self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
     
     func fetchAddress() {
