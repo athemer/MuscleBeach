@@ -19,6 +19,9 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var deliverPrice: UILabel!
 
+    @IBOutlet weak var totalPRice: UILabel!
+    
+    
     var orderDataToCart: [OrderModel] = []
 
     var keysArray: [String] = []
@@ -30,15 +33,14 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-
+        fetchDataFromFirebase()
         navigationItem.title = "購物車"
         
-        fetchDataFromFirebase()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-
+        super.viewWillAppear(true)
+        
         print ("haha")
     }
 
@@ -46,7 +48,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount: [String : Any]) {
         guard
             let indexRow = newAmount["index"] as? Int,
@@ -69,7 +71,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         self.orderDataToCart[indexRow].delvierFee = deliverFee
 
         print ("LALALAND \(newAmount)")
-
+        fetchDataFromFirebase()
         self.tableView.reloadData()
     }
 
@@ -124,10 +126,14 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             let key = self.orderDataToCart[index.row].key
 
             self.orderDataToCart.remove(at: index.row)
-            self.tableView.reloadData()
+            
+            
+            self.fetchDataFromFirebasewith {
+                self.tableView.reloadData()
+            }
 
             FIRDatabase.database().reference().child("order").child(key).removeValue()
-
+            
             print("more button tapped")
         }
         delete.backgroundColor = .red
@@ -178,7 +184,82 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         return true
     }
 
+    
+    func fetchDataFromFirebasewith(completion: @escaping () -> Void) {
+        
+        orderDataToCart.removeAll()
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let snapData = snapshot.value as? [String: AnyObject] {
+                for snap in snapData {
+                    if let data = snap.value as? [String: AnyObject] {
+                        print ("CD \(data)")
+                        
+                        guard
+                            let date = data["date"] as? String,
+                            let deliverTime = data["time"] as? String,
+                            let deliverLocationArea = data["locationArea"] as? String,
+                            let deliverLocationDetail = data["locationDetail"] as? String,
+                            let deliver = data["deliver"] as? String,
+                            let paymentStatus = data["paymentStatus"] as? String,
+                            let meal = data["meal"] as? AnyObject,
+                            let key = snap.key as? String,
+                            let paymentClaim = data["paymentClaim"] as? String
+                            else { return }
+                        
+                        self.keysArray.append(key)
+                        
+                        // swiftlint:disable:next force_cast
+                        let typeBAmount = meal["typeB"] as! Int
+                        // swiftlint:disable:previous force_cast
+                        // swiftlint:disable:next force_cast
+                        let typeCAmount = meal["typeC"] as! Int
+                        // swiftlint:disable:previous force_cast
+                        // swiftlint:disable:next force_cast
+                        let typeAAmount = meal["typeA"] as! Int
+                        // swiftlint:disable:previous force_cast
+                        
+                        let price: Int = typeAAmount * 120 + typeBAmount * 120 + typeCAmount * 150
+                        var deliverFee: Int = 0
+                        let totalAmount: Int = typeAAmount + typeBAmount + typeCAmount
+                        
+                        if totalAmount >= 5 || deliver == "自取" {
+                            deliverFee = 0
+                        } else if totalAmount > 1 && totalAmount < 5 {
+                            deliverFee = 60
+                        } else {
+                            print ("overload")
+                        }
+                        
+                        if paymentStatus == "unpaid" {
+                            print ("cool")
+                            
+                            let toAppend: OrderModel = OrderModel(date: date, delvier: deliver, locationArea: deliverLocationArea, locationDetail: deliverLocationDetail, mealTypeAAmount: typeAAmount, mealTypeBAmount: typeBAmount, mealTypeCAmount: typeCAmount, time: deliverTime, price: price, deliverFee: deliverFee, key: key, paymentClaim: paymentClaim)
+                            
+                            self.orderDataToCart.append(toAppend)
+                            
+                        } else {
+                            print ("not cool")
+                        }
+                        
+                    }
+                }
+                
+            }
+            
+            self.tableView.reloadData()
+            print ("ala \(self.orderDataToCart)")
+            self.getPrice()
+            completion()
+        })
+        
+    }
+
+    
+    
     func fetchDataFromFirebase () {
+        
+        orderDataToCart.removeAll()
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("order").queryOrdered(byChild: "userUID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let snapData = snapshot.value as? [String: AnyObject] {
@@ -237,8 +318,10 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                     }
 
                 }
+            
             self.tableView.reloadData()
             print ("ala \(self.orderDataToCart)")
+            self.getPrice()
         })
 
     }
@@ -269,6 +352,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         self.mealPriceofTotal = mealPrice
         countDeliverFee(deliverDateNumber: deliverDateNumber)
 
+        let totalprice: Int = mealPriceofTotal + self.finalDeliverFee
+        self.totalPRice.text = "\(totalprice)"
     }
 
     func countDeliverFee (deliverDateNumber: Int) {
@@ -318,23 +403,6 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         self.finalDeliverFee = finalDeliverFee
     }
 
-    @IBAction func informTapped(_ sender: Any) {
-
-        // swiftlint:disable:next force_cast
-        let digitVC = self.storyboard?.instantiateViewController(withIdentifier: "DigitINfoViewController") as! DigitINfoViewController
-        // swiftlint:disable:previous force_cast
-
-        let navigation = self.navigationController
-
-        digitVC.keysArray = keysArray
-        digitVC.finalDeliverFee = finalDeliverFee
-        digitVC.mealPriceofTotal = mealPriceofTotal
-
-        navigation?.addChildViewController(digitVC)
-        navigation?.view.addSubview(digitVC.view)
-        digitVC.didMove(toParentViewController: navigation)
-
-        print("favorite button tapped")
 
 //        let price = self.finalDeliverFee + self.mealPriceofTotal
 //        let uid = FIRAuth.auth()?.currentUser?.uid
@@ -400,6 +468,24 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
 //            }
 //        })
 
+    
+    @IBAction func informMBTapped(_ sender: Any) {
+        // swiftlint:disable:next force_cast
+        let digitVC = self.storyboard?.instantiateViewController(withIdentifier: "DigitINfoViewController") as! DigitINfoViewController
+        // swiftlint:disable:previous force_cast
+        
+        let navigation = self.navigationController
+        
+        digitVC.keysArray = keysArray
+        digitVC.finalDeliverFee = finalDeliverFee
+        digitVC.mealPriceofTotal = mealPriceofTotal
+        
+        navigation?.addChildViewController(digitVC)
+        navigation?.view.addSubview(digitVC.view)
+        digitVC.didMove(toParentViewController: navigation)
+        
+        print("favorite button tapped")
+        
     }
 
 }

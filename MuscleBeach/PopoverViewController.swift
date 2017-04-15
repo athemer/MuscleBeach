@@ -105,6 +105,8 @@ class PopoverViewController: UIViewController {
         self.view.removeFromSuperview()
 
         self.removeFromParentViewController()
+        
+        
 
     }
 
