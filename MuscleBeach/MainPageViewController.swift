@@ -18,7 +18,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var segOne: UISegmentedControl!
 
     @IBOutlet weak var segTwo: UISegmentedControl!
-    
 
     enum Components {
         case homaPageImages
@@ -42,7 +41,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.register(nib2, forCellReuseIdentifier: "SecondTableViewCell")
         let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
         tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
-        
+
         // Do any additional setup after loading the view.
     }
 
@@ -129,7 +128,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
         case .addressSelection:
             return 240
-            
 
         case .fastOrder:
             return 80
@@ -151,17 +149,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
             // swiftlint:disable:previous force_cast
-            
+
             cell.backgroundColor = .green
-            
-            
+
             let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
-            
+
             cell.vc = vcToAdd
             cell.contentView.addSubview((vcToAdd?.view)!)
             self.addChildViewController(vcToAdd!)
 
-            
             return cell
 
         case .fastOrder:
@@ -174,7 +170,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
 
-    
     func showCart() {
         // swiftlint:disable:next force_cast
         let vc = storyboard?.instantiateViewController(withIdentifier: "ShoppingCartViewController") as! ShoppingCartViewController
@@ -214,6 +209,5 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.rightBarButtonItem = rightBarItem
 
     }
-    
-    
+
 }

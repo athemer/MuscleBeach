@@ -14,10 +14,9 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
     @IBOutlet weak var moreDaysToGo: UILabel!
-    
+
     @IBOutlet weak var discountLabel: UILabel!
-    
-    
+
     var daysToGo: Int = 0
     var dateToDB: [String] = []
     var deliverToDB: String = ""
@@ -95,9 +94,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         let number: Int = calendarView.selectedDates.count
         daysLeft.text = "\(number)"
 
-        
-        
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone.current
@@ -109,8 +105,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         print ("COUNT \(calendarView.selectedDates.count)")
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
-        
-        
+
         countDiscount(number: number)
     }
 
@@ -130,8 +125,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
-        
-        
+
         countDiscount(number: number)
     }
 
@@ -184,34 +178,32 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         vc.dateToDB = self.dateToDB
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+
     func countDiscount(number: Int) {
-        
+
         if number <= 5 {
-            
+
             self.daysToGo = 5 - number
             self.discountLabel.text = "80% off"
-            
-            
+
         } else if number > 5 && number <= 10 {
-            
+
             self.daysToGo = 10 - number
             self.discountLabel.text = "70% off"
-            
+
         } else if number > 10 && number <= 15 {
-            
+
             self.daysToGo = 15 - number
             self.discountLabel.text = "60% off"
-            
+
         } else if number > 15 {
-            
+
             self.daysToGo = 20 - number
             self.discountLabel.text = "50% off"
         }
-        
+
         self.moreDaysToGo.text = "\(self.daysToGo)"
-        
+
     }
 
 }

@@ -60,6 +60,8 @@
 		D1A0BE631E93E71500F4D36B /* EatTogetherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE621E93E71500F4D36B /* EatTogetherTableViewCell.swift */; };
 		D1A0BE651E93E7C100F4D36B /* EatTogetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */; };
 		D1D36CB81EA07F9000F4E01F /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CB71EA07F9000F4E01F /* AddressModel.swift */; };
+		D1D36CBB1EA2106D00F4E01F /* PriceAccountingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */; };
+		D1D36CBC1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
@@ -140,6 +142,8 @@
 		D1A0BE621E93E71500F4D36B /* EatTogetherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatTogetherTableViewCell.swift; sourceTree = "<group>"; };
 		D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatTogetherModel.swift; sourceTree = "<group>"; };
 		D1D36CB71EA07F9000F4E01F /* AddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceAccountingTableViewCell.swift; sourceTree = "<group>"; };
+		D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceAccountingTableViewCell.xib; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 			children = (
 				D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */,
 				D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */,
+				D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */,
+				D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */,
 				D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */,
 				D1A0BE361E8FFEC300F4D36B /* DigitINfoViewController.swift */,
 			);
@@ -493,6 +499,7 @@
 				D1F45AC01E9F850100490B4F /* SecondCollectionViewCell.xib in Resources */,
 				D121F67A1E815E1F0049796D /* ProfilePageAddressCell.xib in Resources */,
 				D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */,
+				D1D36CBC1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib in Resources */,
 				D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */,
 				D1F45AB11E9F7D0400490B4F /* SecondTableViewCell.xib in Resources */,
 				D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */,
@@ -591,6 +598,7 @@
 				D1A0BE291E8A66E800F4D36B /* ShoppingCartViewController.swift in Sources */,
 				D1F45ABB1E9F84EC00490B4F /* FirstCollectionViewCell.swift in Sources */,
 				D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */,
+				D1D36CBB1EA2106D00F4E01F /* PriceAccountingTableViewCell.swift in Sources */,
 				D1F4FDE61E837176001233FA /* CalendarViewController.swift in Sources */,
 				D1D36CB81EA07F9000F4E01F /* AddressModel.swift in Sources */,
 				D121F6711E81146C0049796D /* SettingsCell.swift in Sources */,

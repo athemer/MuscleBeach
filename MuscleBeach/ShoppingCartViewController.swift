@@ -31,6 +31,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         tableView.delegate = self
 
+        navigationItem.title = "購物車"
+        
         fetchDataFromFirebase()
     }
 

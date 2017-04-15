@@ -1,14 +1,14 @@
 //
-//  ThirdTableViewCell.swift
+//  PriceAccountingTableViewCell.swift
 //  MuscleBeach
 //
-//  Created by 陳冠華 on 2017/4/13.
+//  Created by 陳冠華 on 2017/4/15.
 //  Copyright © 2017年 my app. All rights reserved.
 //
 
 import UIKit
 
-class ThirdTableViewCell: UITableViewCell {
+class PriceAccountingTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +20,5 @@ class ThirdTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

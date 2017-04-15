@@ -9,13 +9,13 @@
 import Foundation
 
 class AddressModel {
-    
+
     var mainAdd: String
     var detailAdd: String
     var finalAdd: String
-    
+
     init (mainAdd: String, detailAdd: String, finalAdd: String) {
-        
+
         self.mainAdd = mainAdd
         self.detailAdd = detailAdd
         self.finalAdd = finalAdd

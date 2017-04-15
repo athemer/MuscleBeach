@@ -11,10 +11,10 @@ import UIKit
 class SecondTableViewCell: UITableViewCell {
 
     var vc: UICollectionViewController?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
 //        setup()
         // Initialization code
     }
@@ -24,9 +24,7 @@ class SecondTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    
-    
+
 //    func setup() {
 //        
 //       
