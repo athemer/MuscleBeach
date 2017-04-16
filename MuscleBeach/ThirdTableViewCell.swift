@@ -10,6 +10,12 @@ import UIKit
 
 class ThirdTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var date: UILabel!
+    
+    @IBOutlet weak var mealName: UILabel!
+    
+    @IBOutlet weak var addToCartButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

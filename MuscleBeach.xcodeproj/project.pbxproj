@@ -62,6 +62,7 @@
 		D1D36CB81EA07F9000F4E01F /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CB71EA07F9000F4E01F /* AddressModel.swift */; };
 		D1D36CBB1EA2106D00F4E01F /* PriceAccountingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */; };
 		D1D36CBC1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */; };
+		D1D36CBE1EA3352400F4E01F /* ShoppingCartDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
@@ -144,6 +145,7 @@
 		D1D36CB71EA07F9000F4E01F /* AddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceAccountingTableViewCell.swift; sourceTree = "<group>"; };
 		D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceAccountingTableViewCell.xib; sourceTree = "<group>"; };
+		D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartDetailViewController.swift; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			children = (
 				D1A0BE281E8A66E800F4D36B /* ShoppingCartViewController.swift */,
 				D1A0BE2A1E8A684700F4D36B /* ShoppingCartTableViewCell.swift */,
+				D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */,
 				D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */,
 				D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */,
 				D1A0BE321E8CB1AE00F4D36B /* PopoverViewController.swift */,
@@ -614,6 +617,7 @@
 				D1A0BE3D1E90BDFA00F4D36B /* PopUpReorderCalendarViewController.swift in Sources */,
 				D1F45ABF1E9F850100490B4F /* SecondCollectionViewCell.swift in Sources */,
 				D121F66D1E8114450049796D /* OrderHistoryCell.swift in Sources */,
+				D1D36CBE1EA3352400F4E01F /* ShoppingCartDetailViewController.swift in Sources */,
 				D121F6741E8122D80049796D /* ProfileViewController.swift in Sources */,
 				D1A0BE351E8FD63C00F4D36B /* NewOrderTest.swift in Sources */,
 				D178363F1E9CBB4800CF8BCA /* ParentViewController.swift in Sources */,

@@ -89,9 +89,9 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         // swiftlint:disable:previous force_cast
 
         cell.orderDateLabel.text = orderDataToCart[indexPath.row].date
-        cell.address.text = orderDataToCart[indexPath.row].locationArea
-        cell.addressDetail.text = orderDataToCart[indexPath.row].locationDetail
-        cell.deliver.text = orderDataToCart[indexPath.row].delvier
+//        cell.address.text = orderDataToCart[indexPath.row].locationArea
+//        cell.addressDetail.text = orderDataToCart[indexPath.row].locationDetail
+//        cell.deliver.text = orderDataToCart[indexPath.row].delvier
         cell.typeAAmount.text = "\(orderDataToCart[indexPath.row].mealTypeAAmount)"
         cell.typeBAmount.text = "\(orderDataToCart[indexPath.row].mealTypeBAmount)"
         cell.typeCAmount.text = "\(orderDataToCart[indexPath.row].mealTypeCAmount)"
@@ -100,6 +100,18 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         cell.deliverFee.text = "\(orderDataToCart[indexPath.row].delvierFee)"
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // swiftlint:disable:next force_cast
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ShoppingCartDetailViewController") as! ShoppingCartDetailViewController
+        // swiftlint:disable:previous force_cast
+        
+        
+        vc.orderDataToCart = orderDataToCart[indexPath.row]
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

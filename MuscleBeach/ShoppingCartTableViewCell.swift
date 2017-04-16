@@ -12,14 +12,6 @@ class ShoppingCartTableViewCell: UITableViewCell {
 
     @IBOutlet weak var orderDateLabel: UILabel!
 
-    @IBOutlet weak var deliver: UILabel!
-
-    @IBOutlet weak var time: UILabel!
-
-    @IBOutlet weak var address: UILabel!
-
-    @IBOutlet weak var addressDetail: UILabel!
-
     @IBOutlet weak var price: UILabel!
 
     @IBOutlet weak var deliverFee: UILabel!
@@ -30,6 +22,8 @@ class ShoppingCartTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeCAmount: UILabel!
 
+    @IBOutlet weak var time: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
