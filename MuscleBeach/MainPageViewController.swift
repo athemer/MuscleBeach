@@ -22,6 +22,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var mealPreference: [String: Any] = [:]
     var mealPrefExsit: Bool = false
 
+    
+    var locationArea: String = ""
+    var locationDetail: String = ""
+    var deliver: String = ""
+    
+    
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
     
@@ -175,8 +181,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             //swiftlint:disable:previous force_cast
             cell.date.text = dateArr[indexPath.row]
             cell.mealName.text = mealNameArr[indexPath.row]
-//            cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
-            
+            cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
+            cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
+            cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
+
             return cell
         }
 
@@ -222,7 +230,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
     
-    func fastAdd() {
+    func fastAdd(_ sender: UIButton) {
         
         if  mealPrefExsit == false {
             
@@ -231,15 +239,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         } else if mealPrefExsit == true {
             
             
-            
+            guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
+            cell.timeView.isHidden = false
+            cell.addToCartButton.isHidden = true
             
             print ("now show seg and add to cart")
-//
-//            
-//            let uid = FIRAuth.auth()?.currentUser?.uid
-//            let orderData: [String: Any] = ["date":  , "deliver":  , "locationArea":, "locationDetail":  , "userUID": uid!, "time": , "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
-//            
-//            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+
+            
+
             
         }
     }
@@ -262,5 +269,29 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         })
         
     }
-
+    
+    
+    func lunchAdded(_ sender: UIButton) {
+        
+        guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let date = cell.date.text
+        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail, "userUID": uid!, "time": "午餐", "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
+        
+        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        
+    }
+    
+    
+    func dinnerAdded(_ sender: UIButton) {
+        
+        guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
+        let date = cell.date.text
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail  , "userUID": uid!, "time": "晚餐", "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
+        
+        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        
+    }
 }

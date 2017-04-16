@@ -33,13 +33,5 @@ class ThirdTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func addToCartTapped(_ sender: Any) {
-        
-        addToCartButton.isHidden = true
-        timeView.isHidden = false
-        
-    }
-    
-    
 
 }
