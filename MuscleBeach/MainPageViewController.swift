@@ -268,6 +268,30 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             
         })
         
+
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let snap = snapshot.value as? [String: Any]
+                else {
+                    
+                    print ("no preference yet")
+                    return
+            }
+            
+            guard
+                let locationArea = snap["mainAdd"] as? String,
+                let locationDetail = snap["mainDetail"] as? String,
+                let deliver = snap["deliver"] as? String else { return }
+
+            
+            self.locationArea = locationArea
+            self.locationDetail = locationDetail
+            self.deliver = deliver
+            
+        })
+        
+        
+
     }
     
     

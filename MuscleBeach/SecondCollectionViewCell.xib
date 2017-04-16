@@ -82,7 +82,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCt-uY-ejl">
                                         <rect key="frame" x="38" y="48" width="223" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="外送地址一"/>
+                                        <state key="normal" title="選擇外送地址"/>
                                     </button>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-fr-9d7">
                                         <rect key="frame" x="0.0" y="0.0" width="330" height="136"/>

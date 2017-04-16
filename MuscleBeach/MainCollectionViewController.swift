@@ -30,7 +30,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         super.viewDidLoad()
 
         fetchAddress()
-
+        
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
@@ -133,13 +133,13 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         cell2.deliverAddButton.isHidden = false
         cell2.deliverAddButton.setTitle(addressArr[row].finalAdd, for: .normal)
 
-        self.collectionView?.scrollToItem(at: index1, at: .left, animated: true)
+        
 
 //        let uid = FIRAuth.auth()?.currentUser?.uid
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": mainAddressLabel.text])
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": detailAddressLabel.text])
         
-        guard let parentVC = UIViewController.self as? MainPageViewController else { return }
+        guard let parentVC = self.parent as? MainPageViewController else { return }
         parentVC.locationArea = addressArr[row].mainAdd
         parentVC.locationDetail = addressArr[row].detailAdd
         parentVC.deliver = "外送"
@@ -147,7 +147,13 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.deliverToDB = "外送"
         self.mainAddToDB = addressArr[row].mainAdd
         self.detailAddToDB = addressArr[row].detailAdd
-
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(addressArr[row].mainAdd)
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(addressArr[row].detailAdd)
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("外送")
+        
+        self.collectionView?.scrollToItem(at: index1, at: .left, animated: true)
     }
 
     func bonbon() {
@@ -184,6 +190,12 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.mainAddToDB = "自取地點一"
         self.detailAddToDB = "城市草倉"
 
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點一")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("城市草倉")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
+        
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
 
@@ -209,7 +221,13 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.deliverToDB = "自取"
         self.mainAddToDB = "自取地點二"
         self.detailAddToDB = "肌肉海灘工作室"
-
+        
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點二")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("肌肉海灘工作室")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
+        
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
 
@@ -219,7 +237,18 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             if let dict = snapshot.value as? [String: AnyObject] {
                 let mainAdd = dict["mainAdd"] as? String
                 let mainDetail = dict["mainDetail"] as? String
+                
+                
+                let index = IndexPath(item: 0, section: 0)
+                
+                 // swiftlint:disable:next force_cast
+                let cell = self.collectionView?.cellForItem(at: index) as! FirstCollectionViewCell
+                // swiftlint:disable:previous force_cast
 
+                cell.addressLabel.text = mainAdd
+                cell.detailLAbel.text = mainDetail
+                
+                
                 for x in 1...(dict.count / 2) - 1 {
 
                     let street = dict["add\(x)"] as? String
