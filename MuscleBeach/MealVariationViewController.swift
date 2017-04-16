@@ -231,7 +231,10 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
 
                     let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
                     FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+                    FIRDatabase.database().reference().child("users").child(uid).child("mealPreference").updateChildValues(meal)
                     navigationController?.popToRootViewController(animated: true)
+                    
+                    
                 }
 
     }

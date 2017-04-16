@@ -10,6 +10,12 @@ import UIKit
 
 class ThirdTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lunchButton: UIButton!
+    
+    @IBOutlet weak var dinnerButton: UIButton!
+    
+    @IBOutlet weak var timeView: UIView!
+    
     @IBOutlet weak var date: UILabel!
     
     @IBOutlet weak var mealName: UILabel!
@@ -18,6 +24,7 @@ class ThirdTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        timeView.isHidden = true
         // Initialization code
     }
 
@@ -26,5 +33,13 @@ class ThirdTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    @IBAction func addToCartTapped(_ sender: Any) {
+        
+        addToCartButton.isHidden = true
+        timeView.isHidden = false
+        
+    }
+    
+    
 
 }
