@@ -197,7 +197,6 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                 let meal: [String: Int] = ["typeA": Int(cell0.stepper.value), "typeB": Int(cell1.stepper.value), "typeC": Int(cell2.stepper.value)]
 
                 // Mark: todo
-                let userData: [String: String] = ["userName": "Kuan Hua", "number": "0963322300"]
 
                 for date in self.dateToDB {
 
@@ -234,8 +233,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
 //
 //                    }
 
-                    let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
-                    FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+                    
 //                    FIRDatabase.database().reference().child("users").child(uid).child("mealPreference").updateChildValues(meal)
                 
                     
@@ -249,23 +247,29 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                         
                         if results.count > 0 {
                             
+                            let userName = results[0].name
+                            let userNumber = results[0].number
                             results[0].prefA = Int16(cell0.stepper.value)
                             results[0].prefB = Int16(cell1.stepper.value)
                             results[0].prefC = Int16(cell2.stepper.value)
+                            
+                            let userData: [String: String] = ["userName": userName!, "userNumber": userNumber!]
+                            
+                            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
+                            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
                             
                         } else {
                             
                             print ("not possibly gonna happen")
                         }
-                        
+     
                         try context.save()
                         print ("kinda saved")
                         
                     } catch {
                         print (error.localizedDescription)
                     }
-
-                    
+    
                     navigationController?.popToRootViewController(animated: true)
 
                 }

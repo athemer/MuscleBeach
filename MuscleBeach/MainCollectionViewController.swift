@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 private let reuseIdentifier = "Cell"
 
@@ -17,6 +18,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     var mainAddToDB: String = ""
     var deliverToDB: String = ""
 
+    
+    var dataArray: [NSManagedObject] = []
+    
     var addressArr: [AddressModel] = []
 
     enum Components {
@@ -147,9 +151,40 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.detailAddToDB = addressArr[row].detailAdd
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(addressArr[row].mainAdd)
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(addressArr[row].detailAdd)
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("外送")
+        
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+        request.predicate = NSPredicate(format: "id == %@", uid!)
+        
+        do {
+            guard let results = try context.fetch(request) as? [UserMO] else { return }
+            
+            if results.count > 0 {
+                
+                results[0].addressMain = addressArr[row].mainAdd
+                results[0].addressDetail = addressArr[row].detailAdd
+                results[0].deliver = "外送"
+                
+            } else {
+                
+                print ("not possibly gonna happen")
+            }
+            
+            try context.save()
+            print ("kinda saved")
+            
+        } catch {
+            print (error.localizedDescription)
+        }
+        
+        
+        
+        
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(addressArr[row].mainAdd)
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(addressArr[row].detailAdd)
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("外送")
 
         self.collectionView?.scrollToItem(at: index1, at: .left, animated: true)
     }
@@ -186,10 +221,38 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.mainAddToDB = "自取地點一"
         self.detailAddToDB = "城市草倉"
 
+        
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點一")
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("城市草倉")
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+        request.predicate = NSPredicate(format: "id == %@", uid!)
+        
+        do {
+            guard let results = try context.fetch(request) as? [UserMO] else { return }
+            
+            if results.count > 0 {
+                
+                results[0].addressMain = "自取地點一"
+                results[0].addressDetail = "城市草倉"
+                results[0].deliver = "自取"
+                
+            } else {
+                
+                print ("not possibly gonna happen")
+            }
+            
+            try context.save()
+            print ("kinda saved")
+            
+        } catch {
+            print (error.localizedDescription)
+        }
+        
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點一")
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("城市草倉")
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
 
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
@@ -217,9 +280,41 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.detailAddToDB = "肌肉海灘工作室"
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點二")
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("肌肉海灘工作室")
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
+        
+        
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+        request.predicate = NSPredicate(format: "id == %@", uid!)
+        
+        do {
+            guard let results = try context.fetch(request) as? [UserMO] else { return }
+            
+            if results.count > 0 {
+                
+                results[0].addressMain = "自取地點二"
+                results[0].addressDetail = "肌肉海灘工作室"
+                results[0].deliver = "自取"
+                
+            } else {
+                
+                print ("not possibly gonna happen")
+            }
+            
+            try context.save()
+            print ("kinda saved")
+            
+        } catch {
+            print (error.localizedDescription)
+        }
+
+//        
+//        
+//        
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點二")
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("肌肉海灘工作室")
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
 
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
