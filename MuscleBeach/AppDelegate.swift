@@ -75,8 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").updateChildValues(["typeA": prefA, "typeB": prefB, "typeC": prefC, "deliver": deliverFromFetch])
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(locationAreaFromFetch)
+        
+        
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(locationDetailFromFetch)
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(locationAreaFromFetch)
+        print("PPPPP", locationDetailFromFetch, locationAreaFromFetch)
     }
 
     // MARK: - Core Data stack

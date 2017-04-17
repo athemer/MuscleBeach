@@ -85,6 +85,36 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath) as! FirstCollectionViewCell
             // swiftlint:disable:previous force_cast
 
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return cell}
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+            request.predicate = NSPredicate(format: "id == %@", uid!)
+            
+            do {
+                guard let results = try context.fetch(request) as? [UserMO] else { return cell }
+                
+                if results.count > 0 {
+                    
+                    
+                    print ("WERID", results[0].addressMain, results[0].addressDetail)
+                    
+                    cell.addressLabel.text = results[0].addressMain
+                    cell.detailLAbel.text = results[0].addressDetail
+                    
+                } else {
+                    
+                    print ("not possibly gonna happen")
+                }
+                
+                try context.save()
+                
+            } catch {
+                print (error.localizedDescription)
+            }
+            
+            
             cell.backgroundColor = .black
             cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
             return cell
@@ -165,6 +195,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                 
                 results[0].addressMain = addressArr[row].mainAdd
                 results[0].addressDetail = addressArr[row].detailAdd
+                print ("CHECK", addressArr[row].detailAdd)
                 results[0].deliver = "外送"
                 
             } else {
@@ -321,24 +352,44 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
     func fetchAddress() {
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//        
+//        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+//        
+//            if let dict = snapshot.value as? [String: AnyObject] {
+//                let mainAdd = dict["mainAdd"] as? String
+//                let mainDetail = dict["mainDetail"] as? String
+//                
+//                let index = IndexPath(item: 0, section: 0)
+//                
+//                // swiftlint:disable:next force_cast
+//                let cell = self.collectionView?.cellForItem(at: index) as! FirstCollectionViewCell
+//                // swiftlint:disable:previous force_cast
+//                
+//                print ("how", mainAdd, mainDetail)
+//                
+//                cell.addressLabel.text = mainAdd
+//                cell.detailLAbel.text = mainDetail
+//                
+//            } else {
+//                return
+//            }
+//            
+//        })
+        
+        
+        FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {
-                let mainAdd = dict["mainAdd"] as? String
-                let mainDetail = dict["mainDetail"] as? String
 
-                let index = IndexPath(item: 0, section: 0)
+                for x in 0...(dict.count / 2) - 1 {
 
-                 // swiftlint:disable:next force_cast
-                let cell = self.collectionView?.cellForItem(at: index) as! FirstCollectionViewCell
-                // swiftlint:disable:previous force_cast
-
-                cell.addressLabel.text = mainAdd
-                cell.detailLAbel.text = mainDetail
-
-                for x in 1...(dict.count / 2) - 1 {
-
+                    print ("YOLO COME HERE", dict.count)
+                    
                     let street = dict["add\(x)"] as? String
                     let address = dict["detail\(x)"] as? String
+                    
+                    print ("XOXO", street, address)
+                    
                     let finalAdd = street! + address!
 
                     let toAppend = AddressModel(mainAdd: street!, detailAdd: address!, finalAdd: finalAdd)
@@ -353,7 +404,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                 let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
                 // swiftlint:disable:previous force_cast
 
-                cell.deliverAddButton.setTitle("請至個人頁面新增地址", for: .normal)
+                cell.deliverAddButton.setTitle("請先至個人頁面新增地址", for: .normal)
                 cell.deliverAddButton.isEnabled = false
 
                 print ("no address to fetch")

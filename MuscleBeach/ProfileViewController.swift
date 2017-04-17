@@ -92,6 +92,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": addressArrFromDatabase[indexPath.row]])
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": addressDetailArrFromDatabase[indexPath.row]])
+            
+            
+            
         case .addCell:
 //            setUpAlert()
             print ("do nothing")
@@ -202,9 +205,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
             let finalAddress = "\(street) \(address)"
             let uid = FIRAuth.auth()?.currentUser?.uid
-            let x = self.addressArrFromDatabase.count + 1
-            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("add\(x)").setValue(street)
-            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("detail\(x)").setValue(address)
+            let x = self.addressArrFromDatabase.count
+            FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").child("add\(x)").setValue(street)
+            FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").child("detail\(x)").setValue(address)
 
             self.addressArrFromDatabase.append(street)
             self.addressDetailArrFromDatabase.append(address)
@@ -229,12 +232,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func fetchAddressFromDatabase() {
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+        FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
             if let addressDict = snapshot.value as? [String: AnyObject] {
 
                 print("hoho \(addressDict )")
 
-                for x in 1...(addressDict.count / 2) - 1 {
+                for x in 0...(addressDict.count / 2) - 1 {
 
                     // swiftlint:disable:next force_cast
                     let street = addressDict["add\(x)"] as! String
@@ -249,10 +252,47 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 }
                 print (self.addressArrFromDatabase)
 
+            } else {
+                print ("no data yet")
+            return
             }
             self.tableView.reloadData()
         })
 
+    }
+    
+    func fetchAddressFromDatabaseTest() {
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let addressDict = snapshot.value as? [String: Any] {
+                
+                print("hoho \(addressDict )")
+                
+                for x in 0...(addressDict.count / 2) - 1 {
+                    
+                    // swiftlint:disable:next force_cast
+                    let street = addressDict["add\(x)"] as! String
+                    // swiftlint:disable:previous force_cast
+                    
+                    // swiftlint:disable:next force_cast
+                    let address = addressDict["detail\(x)"] as! String
+                    // swiftlint:disable:previous force_cast
+                    
+                    self.addressArrFromDatabase.append(street)
+                    self.addressDetailArrFromDatabase.append(address)
+                }
+                print (self.addressArrFromDatabase)
+                
+            } else {
+                
+                
+                print ("no data yet")
+                return
+            }
+            self.tableView.reloadData()
+        })
+        
     }
 
 }
