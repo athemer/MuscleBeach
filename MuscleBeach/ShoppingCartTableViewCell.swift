@@ -23,7 +23,7 @@ class ShoppingCartTableViewCell: UITableViewCell {
     @IBOutlet weak var typeCAmount: UILabel!
 
     @IBOutlet weak var time: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

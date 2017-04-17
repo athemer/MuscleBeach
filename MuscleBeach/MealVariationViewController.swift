@@ -234,8 +234,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                     FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
                     FIRDatabase.database().reference().child("users").child(uid).child("mealPreference").updateChildValues(meal)
                     navigationController?.popToRootViewController(animated: true)
-                    
-                    
+
                 }
 
     }

@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
 
         checkLoginStatus()
+
+        print(NSPersistentContainer.defaultDirectoryURL())
         return true
     }
 
@@ -107,6 +109,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
         }
     }
-    
-   
+
 }

@@ -11,19 +11,17 @@ import CoreData
 import UIKit
 
 class CoreDataManager {
-    
-    
+
     static let shared = CoreDataManager()
-    
+
     // swiftlint:disable:next force_cast
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     // swiftlint:disable:previous force_cast
-    
+
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "userMO")
-    
+
     let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: true)
-    
-    
+
 //    
 //    func createCoreData(name: String, addressMain: String, addressDetail: String, deliver: String, prefA: Int, prefB: Int, prefC: Int, profileImage: NSData, email: String, number: String) {
 //        
@@ -43,19 +41,16 @@ class CoreDataManager {
 //        userMO.number = number
 //        
 //    }
-    
+
     func readCoreData(id: NSManagedObjectID) -> UserMO? {
-        
+
         let moc = appDelegate.persistentContainer.viewContext
-        
+
         let results = try? moc.existingObject(with: id)
-        
+
         return results as? UserMO
     }
-    
-    
-    
-    
+
 //    func update(row: Int, title: String?, content: String?) {
 //        
 //        let moc = appDelegate.persistentContainer.viewContext
@@ -85,54 +80,46 @@ class CoreDataManager {
 //        
 //    }
 
-    
-    
-    
-    
     func delete(id: NSManagedObjectID) {
-        
+
         let moc = appDelegate.persistentContainer.viewContext
-        
+
         do {
-            
+
             let userInfo = try moc.existingObject(with: id)
-            
+
             moc.delete(userInfo)
-            
+
         } catch {
-            
+
             fatalError("\(error)")
         }
-        
+
     }
-    
-    
+
     func deleteAll() {
-        
-        
+
         let moc = appDelegate.persistentContainer.viewContext
-        
+
         do {
-            
+
             guard let results = try moc.fetch(request) as? [UserMO] else {
                 return
             }
-            
+
             for result in results {
-                
+
                 moc.delete(result)
             }
 
             appDelegate.saveContext()
-            
-        } catch {
-            
-            fatalError("\(error)")
-            
-        }
-        
-        
-    }
-    
-}
 
+        } catch {
+
+            fatalError("\(error)")
+
+        }
+
+    }
+
+}

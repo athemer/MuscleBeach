@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SideMenu
 import FirebaseStorage
+import CoreData
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,19 +19,21 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var segOne: UISegmentedControl!
 
     @IBOutlet weak var segTwo: UISegmentedControl!
+
+    
+    var fetchData: [NSManagedObject] = []
+    
     
     var mealPreference: [String: Any] = [:]
     var mealPrefExsit: Bool = false
 
-    
     var locationArea: String = ""
     var locationDetail: String = ""
     var deliver: String = ""
-    
-    
+
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
-    
+
     enum Components {
         case homaPageImages
         case addressSelection
@@ -43,8 +46,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
 
         fetchUserInfoWhenLaunchIfLoggedIn()
-        fetchUserPreference()
-        
+//        fetchUserPreference()
+
         setUpBarItem()
         SideMenuManager.menuWidth = 200
         tableView.delegate = self
@@ -230,150 +233,241 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.rightBarButtonItem = rightBarItem
 
     }
-    
+
     func fastAdd(_ sender: UIButton) {
+
         
-        if  mealPrefExsit == false {
-            
-            
-            // Go to MealVariation
-            print ("no pref yet plz add one first")
-            
-        } else if mealPrefExsit == true {
-            
-            
-            guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
-            cell.timeView.isHidden = false
-            cell.addToCartButton.isHidden = true
-            
-            print ("now show seg and add to cart")
-
-            
-
-            
-        }
+        guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
+        cell.timeView.isHidden = false
+        cell.addToCartButton.isHidden = true
+        
+        
+//        if  mealPrefExsit == false {
+//
+//            // Go to MealVariation
+//            print ("no pref yet plz add one first")
+//
+//        } else if mealPrefExsit == true {
+//
+//            guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
+//            cell.timeView.isHidden = false
+//            cell.addToCartButton.isHidden = true
+//
+//            print ("now show seg and add to cart")
+//
+//        }
     }
-    
-    
+
     func fetchUserPreference() {
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").observeSingleEvent(of: .value, with: { (snapshot) in
-            
+
             guard let snap = snapshot.value as? [String: Any]
                 else {
-                    
-                    
+
                     print ("no preference yet")
                     return
             }
-            
+
             self.mealPreference = snap
             self.mealPrefExsit = true
-            
+
         })
-        
 
         FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
-            
+
             guard let snap = snapshot.value as? [String: Any]
                 else {
-                    
+
                     print ("no preference yet")
                     return
             }
-            
+
             guard
                 let locationArea = snap["mainAdd"] as? String,
                 let locationDetail = snap["mainDetail"] as? String,
                 let deliver = snap["deliver"] as? String else { return }
 
-            
             self.locationArea = locationArea
             self.locationDetail = locationDetail
             self.deliver = deliver
-            
+
         })
-        
-        
 
     }
-    
-    
+
     func lunchAdded(_ sender: UIButton) {
-        
+
         guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
         
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        let date = cell.date.text
-        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail, "userUID": uid!, "time": "午餐", "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
-        if mealPrefExsit == true {
-            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-        } else if mealPrefExsit == false {
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+        
+        do {
             
-            guard let vc = storyboard?.instantiateViewController(withIdentifier: "MealVariationViewController") as? MealVariationViewController else { return }
-            navigationController?.pushViewController(vc, animated: true)
-            print ("cant do fast order because no pref yet")
-            return
+            self.fetchData = try context.fetch(fetchRequest)
+            
+            
+        } catch let error as NSError {
+            print (error)
+            print("Could not fetch.")
         }
         
+        
+        
+        let date = cell.date.text
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        
+        let fetchedResult = fetchData[0]
+        guard
+            let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
+            let userNumber = fetchedResult.value(forKey: "number") as? String,
+            let deliverFromFetch = fetchedResult.value(forKey: "deliver") as? String,
+            let locationAreaFromFetch = fetchedResult.value(forKey: "addressMain") as? String,
+            let locationDetailFromFetch = fetchedResult.value(forKey: "addressDetail") as? String,
+            let prefA = fetchedResult.value(forKey: "prefA") as? Int,
+            let prefB = fetchedResult.value(forKey: "prefB") as? Int,
+            let prefC = fetchedResult.value(forKey: "prefC") as? Int
+            else { return }
+        
+        let mealPreferenceFromFetch = ["typeA": prefA, "typeB": prefB, "typeC": prefC]
+        let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
+        
+        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "午餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
+        
+        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+    
+
+
     }
-    
-    
+
     func dinnerAdded(_ sender: UIButton) {
-        
+
         guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
-        let date = cell.date.text
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail  , "userUID": uid!, "time": "晚餐", "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
         
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
-        if mealPrefExsit == true {
-            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-        } else if mealPrefExsit == false {
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+        
+        do {
             
-            guard let vc = storyboard?.instantiateViewController(withIdentifier: "MealVariationViewController") as? MealVariationViewController else { return }
-            navigationController?.pushViewController(vc, animated: true)
-            print ("cant do fast order because no pref yet")
-            return
+           self.fetchData = try context.fetch(fetchRequest)
+            
+            
+        } catch let error as NSError {
+            print (error)
+            print("Could not fetch.")
         }
         
-    }
-    
-    
-    func fetchUserInfoWhenLaunchIfLoggedIn() {
         
+        
+        let date = cell.date.text
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let snap = snapshot.value as? [String: Any] {
-                guard
-                    let name = snap["name"] as? String,
-                    let number = snap["number"] as? String,
-                    let address = snap["address"] as? [String: Any],
-                    let mainAdd = address["mainAdd"] as? String,
-                    let mainDetail = address["mainDetail"] as? String,
-                    let pref = snap["mealPreference"] as? [String: Any],
-                    let prefA = pref["typeA"] as? Int,
-                    let prefB = pref["typeB"] as? Int,
-                    let prefC = pref["typeC"] as? Int,
-                    let email = snap["email"] as? String,
-                    let ImageUrl = snap["prfileImgURL"] as? String
-                    else { return }
-                
-                print ("?????", name, number, mainAdd, mainDetail, email, prefA, prefB,prefC, ImageUrl)
-                
-                
-                
-            } else {
-                
-                
-                
-            }
-            
-        })
         
+        let fetchedResult = fetchData[0]
+        guard
+            let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
+            let userNumber = fetchedResult.value(forKey: "number") as? String,
+            let deliverFromFetch = fetchedResult.value(forKey: "deliver") as? String,
+            let locationAreaFromFetch = fetchedResult.value(forKey: "addressMain") as? String,
+            let locationDetailFromFetch = fetchedResult.value(forKey: "addressDetail") as? String,
+            let prefA = fetchedResult.value(forKey: "prefA") as? Int,
+            let prefB = fetchedResult.value(forKey: "prefB") as? Int,
+            let prefC = fetchedResult.value(forKey: "prefC") as? Int
+        else { return }
         
-    }
+        let mealPreferenceFromFetch = ["typeA": prefA, "typeB": prefB, "typeC": prefC]
+        let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
+        
+       let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "晚餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
+        
     
+//        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail, "userUID": uid!, "time": "晚餐", "meal": self.mealPreference, "userData": "wait to be done", "paymentStatus": "unpaid", "paymentClaim": "false"]
+
+           FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        
+        
+//        if mealPrefExsit == true {
+//            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+//        } else if mealPrefExsit == false {
+//
+//            guard let vc = storyboard?.instantiateViewController(withIdentifier: "MealVariationViewController") as? MealVariationViewController else { return }
+//            navigationController?.pushViewController(vc, animated: true)
+//            print ("cant do fast order because no pref yet")
+//            return
+//        }
+
+    }
+
+    func fetchUserInfoWhenLaunchIfLoggedIn() {
+
+        let uid = FIRAuth.auth()?.currentUser?.uid
+
+        if uid != nil {
+
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+            let userMO = UserMO(context: context)
+
+            FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+
+                if let snap = snapshot.value as? [String: Any] {
+                    guard
+                        let name = snap["name"] as? String,
+                        let number = snap["number"] as? String,
+                        let address = snap["address"] as? [String: Any],
+                        let mainAdd = address["mainAdd"] as? String,
+                        let mainDetail = address["mainDetail"] as? String,
+                        let pref = snap["mealPreference"] as? [String: Any],
+                        let prefA = pref["typeA"] as? Int,
+                        let prefB = pref["typeB"] as? Int,
+                        let prefC = pref["typeC"] as? Int,
+                        let email = snap["email"] as? String,
+                        let ImageUrl = snap["prfileImgURL"] as? String,
+                        let deliver = address["deliver"] as? String
+                        else { return }
+
+                    print ("?????", name, number, mainAdd, mainDetail, email, prefA, prefB, prefC, ImageUrl)
+
+                    do {
+
+                        userMO.name = name
+                        userMO.number = number
+                        userMO.deliver = deliver
+                        userMO.addressMain = mainAdd
+                        userMO.addressDetail = mainDetail
+                        userMO.email = email
+                        userMO.prefA = Int16(prefA)
+                        userMO.prefB = Int16(prefB)
+                        userMO.prefC = Int16(prefC)
+
+                        try context.save()
+
+                    } catch {
+                        print (error.localizedDescription)
+                    }
+
+                } else {
+
+                   // Handle User Info has not complete yet
+
+                }
+
+            })
+
+        } else {
+
+            // Handle No user has Logged in
+
+            print ("do nothing yet")
+        }
+
+    }
+
 }

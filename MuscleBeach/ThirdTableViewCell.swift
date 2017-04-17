@@ -11,17 +11,17 @@ import UIKit
 class ThirdTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lunchButton: UIButton!
-    
+
     @IBOutlet weak var dinnerButton: UIButton!
-    
+
     @IBOutlet weak var timeView: UIView!
-    
+
     @IBOutlet weak var date: UILabel!
-    
+
     @IBOutlet weak var mealName: UILabel!
-    
+
     @IBOutlet weak var addToCartButton: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         timeView.isHidden = true

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class User: NSObject {
 
@@ -14,4 +15,5 @@ class User: NSObject {
     var name: String?
     var email: String?
     var profileImageUrl: String?
+    var fetechData: [NSManagedObject]?
 }
