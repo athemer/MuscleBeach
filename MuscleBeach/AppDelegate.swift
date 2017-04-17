@@ -47,6 +47,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+        
+        //Here gonna save coreData userinformation into Firebase Database
+        //減少與Firebase database 聯繫的次數
+     
+        
+        
+        
+        
+//        var theArray: [NSManagedObject] = []
+//        let context = self.persistentContainer.viewContext
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+//        do {
+//            theArray = try context.fetch(fetchRequest)
+//            
+//            
+//        } catch let error as NSError {
+//            
+//            print("Could not fetch.")
+//        }
+//        let fetchedResult = theArray[0]
+//        guard
+//            let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
+//            let userNumber = fetchedResult.value(forKey: "number") as? String,
+//            let deliverFromFetch = fetchedResult.value(forKey: "deliver") as? String,
+//            let locationAreaFromFetch = fetchedResult.value(forKey: "addressMain") as? String,
+//            let locationDetailFromFetch = fetchedResult.value(forKey: "addressDetail") as? String,
+//            let prefA = fetchedResult.value(forKey: "prefA") as? Int,
+//            let prefB = fetchedResult.value(forKey: "prefB") as? Int,
+//            let prefC = fetchedResult.value(forKey: "prefC") as? Int else { return }
+//        
+//        let uid = FIRAuth.auth()?.currentUser?.uid
+//        FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").updateChildValues(["typeA": prefA, "typeB": prefB, "typeC": prefC])
+        
+        
+        
+        
+        
     }
 
     // MARK: - Core Data stack

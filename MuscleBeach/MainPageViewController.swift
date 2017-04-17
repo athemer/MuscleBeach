@@ -436,17 +436,18 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     print ("?????", name, number, mainAdd, mainDetail, email, prefA, prefB, prefC, ImageUrl)
 
                     do {
-
-                        userMO.name = name
-                        userMO.number = number
-                        userMO.deliver = deliver
-                        userMO.addressMain = mainAdd
-                        userMO.addressDetail = mainDetail
-                        userMO.email = email
-                        userMO.prefA = Int16(prefA)
-                        userMO.prefB = Int16(prefB)
-                        userMO.prefC = Int16(prefC)
-
+                        guard let results = try context.fetch(request) as? [UserMO] else { return }
+                        
+                        results[0].name = name
+                        results[0].number = number
+                        results[0].deliver = deliver
+                        results[0].addressMain = mainAdd
+                        results[0].addressDetail = mainDetail
+                        results[0].email = email
+                        results[0].prefA = Int16(prefA)
+                        results[0].prefB = Int16(prefB)
+                        results[0].prefC = Int16(prefC)
+                        
                         try context.save()
 
                     } catch {
