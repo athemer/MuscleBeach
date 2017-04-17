@@ -63,6 +63,7 @@
 		D1D36CBB1EA2106D00F4E01F /* PriceAccountingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */; };
 		D1D36CBC1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */; };
 		D1D36CBE1EA3352400F4E01F /* ShoppingCartDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */; };
+		D1D36CC01EA44DC100F4E01F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CBF1EA44DC100F4E01F /* CoreDataManager.swift */; };
 		D1E211EB1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */; };
 		D1E211EE1E8909920006B849 /* SingleOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */; };
 		D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */; };
@@ -146,6 +147,7 @@
 		D1D36CB91EA2106D00F4E01F /* PriceAccountingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceAccountingTableViewCell.swift; sourceTree = "<group>"; };
 		D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceAccountingTableViewCell.xib; sourceTree = "<group>"; };
 		D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartDetailViewController.swift; sourceTree = "<group>"; };
+		D1D36CBF1EA44DC100F4E01F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D1E211EA1E88FBEE0006B849 /* ConfirmDeliverAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmDeliverAdViewController.swift; sourceTree = "<group>"; };
 		D1E211ED1E8909920006B849 /* SingleOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderViewController.swift; sourceTree = "<group>"; };
 		D1E211EF1E8909AF0006B849 /* SingleOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				D1A0BE3A1E90B11700F4D36B /* ReorderModel.swift */,
 				D1A0BE641E93E7C100F4D36B /* EatTogetherModel.swift */,
 				D1D36CB71EA07F9000F4E01F /* AddressModel.swift */,
+				D1D36CBF1EA44DC100F4E01F /* CoreDataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				D1A0BE331E8CB1AE00F4D36B /* PopoverViewController.swift in Sources */,
 				D1E211F01E8909B00006B849 /* SingleOrderTableViewCell.swift in Sources */,
 				D121F6831E81840C0049796D /* SelfPickUpViewController.swift in Sources */,
+				D1D36CC01EA44DC100F4E01F /* CoreDataManager.swift in Sources */,
 				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,
 				D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */,
 				D15704F61E969D9A00F59894 /* ChatRoomViewController.swift in Sources */,

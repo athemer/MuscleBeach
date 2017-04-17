@@ -42,6 +42,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchUserInfoWhenLaunchIfLoggedIn()
         fetchUserPreference()
         
         setUpBarItem()
@@ -234,6 +235,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         if  mealPrefExsit == false {
             
+            
+            // Go to MealVariation
             print ("no pref yet plz add one first")
             
         } else if mealPrefExsit == true {
@@ -258,6 +261,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             
             guard let snap = snapshot.value as? [String: Any]
                 else {
+                    
                     
                     print ("no preference yet")
                     return
@@ -303,7 +307,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let date = cell.date.text
         let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail, "userUID": uid!, "time": "午餐", "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
         
-        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        if mealPrefExsit == true {
+            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        } else if mealPrefExsit == false {
+            
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "MealVariationViewController") as? MealVariationViewController else { return }
+            navigationController?.pushViewController(vc, animated: true)
+            print ("cant do fast order because no pref yet")
+            return
+        }
         
     }
     
@@ -315,7 +327,53 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let uid = FIRAuth.auth()?.currentUser?.uid
         let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail  , "userUID": uid!, "time": "晚餐", "meal": self.mealPreference , "userData": "wait to be done" , "paymentStatus": "unpaid", "paymentClaim": "false"]
         
-        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        
+        if mealPrefExsit == true {
+            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
+        } else if mealPrefExsit == false {
+            
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "MealVariationViewController") as? MealVariationViewController else { return }
+            navigationController?.pushViewController(vc, animated: true)
+            print ("cant do fast order because no pref yet")
+            return
+        }
         
     }
+    
+    
+    func fetchUserInfoWhenLaunchIfLoggedIn() {
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let snap = snapshot.value as? [String: Any] {
+                guard
+                    let name = snap["name"] as? String,
+                    let number = snap["number"] as? String,
+                    let address = snap["address"] as? [String: Any],
+                    let mainAdd = address["mainAdd"] as? String,
+                    let mainDetail = address["mainDetail"] as? String,
+                    let pref = snap["mealPreference"] as? [String: Any],
+                    let prefA = pref["typeA"] as? Int,
+                    let prefB = pref["typeB"] as? Int,
+                    let prefC = pref["typeC"] as? Int,
+                    let email = snap["email"] as? String,
+                    let ImageUrl = snap["prfileImgURL"] as? String
+                    else { return }
+                
+                print ("?????", name, number, mainAdd, mainDetail, email, prefA, prefB,prefC, ImageUrl)
+                
+                
+                
+            } else {
+                
+                
+                
+            }
+            
+        })
+        
+        
+    }
+    
 }

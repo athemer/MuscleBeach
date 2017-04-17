@@ -33,6 +33,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
     var locationDetailToDB: String = ""
     var mealToDB: [String: AnyObject] = [:]
     var timeToDB: String = ""
+    var userData: [String: String] = [:]
 
     var mealArr: [String] = ["仙女餐", "享瘦餐", "猛男餐"]
 

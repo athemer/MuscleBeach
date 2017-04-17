@@ -165,8 +165,6 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         vc.locationAreaToDB = self.mainAddToDB
 
         self.navigationController?.pushViewController(vc, animated: true)
-
-        print ("1234567")
     }
 
     func changeAddress() {
@@ -262,7 +260,14 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                 }
 
             } else {
-
+                let index: IndexPath = IndexPath(item: 0, section: 1)
+                // swiftlint:disable:next force_cast
+                let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+                // swiftlint:disable:previous force_cast
+                
+                cell.deliverAddButton.setTitle("請至個人頁面新增地址", for: .normal)
+                cell.deliverAddButton.isEnabled = false
+                
                 print ("no address to fetch")
                 return
             }
