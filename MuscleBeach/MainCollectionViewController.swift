@@ -33,20 +33,23 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchAddress()
-
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib2, forCellWithReuseIdentifier: "SecondCollectionViewCell")
         // Do any additional setup after loading the view.
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchAddress()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     /*
     // MARK: - Navigation
 
@@ -396,6 +399,14 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
                     self.addressArr.append(toAppend)
 
+                    
+                    let index: IndexPath = IndexPath(item: 0, section: 1)
+                    // swiftlint:disable:next force_cast
+                    let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+                    // swiftlint:disable:previous force_cast
+                    
+                    cell.deliverAddButton.setTitle("請選擇地址", for: .normal)
+                    cell.deliverAddButton.isEnabled = true
                 }
 
             } else {
