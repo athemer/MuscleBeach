@@ -419,7 +419,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         let prefC = pref["typeC"] as? Int,
                         let email = snap["email"] as? String,
                         let ImageUrl = snap["prfileImgURL"] as? String,
-                        let deliver = address["deliver"] as? String
+                        let deliver = pref["deliver"] as? String
                         else { return }
 
                     print ("?????", name, number, mainAdd, mainDetail, email, prefA, prefB, prefC, ImageUrl)

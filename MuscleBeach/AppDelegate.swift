@@ -74,8 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let prefC = fetchedResult.value(forKey: "prefC") as? Int else { return }
         
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").updateChildValues(["typeA": prefA, "typeB": prefB, "typeC": prefC])
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue(deliverFromFetch)
+        FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").updateChildValues(["typeA": prefA, "typeB": prefB, "typeC": prefC, "deliver": deliverFromFetch])
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(locationAreaFromFetch)
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(locationDetailFromFetch)
     }

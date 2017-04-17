@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var addressArrFromDatabase: [String] = []
     var addressDetailArrFromDatabase: [String] = []
 
-    let arr: [String] = ["台北市中山區", "台北市大同區", "台北市南港區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區"]
+    let arr: [String] = ["台北市中山區", "台北市大同區", "台北市中正區", "台北市信義區", "台北市大安區", "台北市文山區", "台北市北投區", "台北市士林區", "台北市萬華區", "台北市內湖區", "台北市南港區"]
 
     var areaTextField: UITextField?
     var addressTextField: UITextField?
