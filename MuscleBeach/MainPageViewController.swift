@@ -20,10 +20,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var segTwo: UISegmentedControl!
 
-    
     var fetchData: [NSManagedObject] = []
-    
-    
+
     var mealPreference: [String: Any] = [:]
     var mealPrefExsit: Bool = false
 
@@ -46,6 +44,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
 
         fetchUserInfoWhenLaunchIfLoggedIn()
+
 //        fetchUserPreference()
 
         setUpBarItem()
@@ -236,12 +235,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     func fastAdd(_ sender: UIButton) {
 
-        
         guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
         cell.timeView.isHidden = false
         cell.addToCartButton.isHidden = true
-        
-        
+
 //        if  mealPrefExsit == false {
 //
 //            // Go to MealVariation
@@ -299,28 +296,25 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     func lunchAdded(_ sender: UIButton) {
 
         guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
-        
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
+
         let context = appDelegate.persistentContainer.viewContext
-        
+
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
-        
+
         do {
-            
+
             self.fetchData = try context.fetch(fetchRequest)
-            
-            
+
         } catch let error as NSError {
             print (error)
             print("Could not fetch.")
         }
-        
-        
-        
+
         let date = cell.date.text
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         let fetchedResult = fetchData[0]
         guard
             let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
@@ -332,43 +326,38 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             let prefB = fetchedResult.value(forKey: "prefB") as? Int,
             let prefC = fetchedResult.value(forKey: "prefC") as? Int
             else { return }
-        
+
         let mealPreferenceFromFetch = ["typeA": prefA, "typeB": prefB, "typeC": prefC]
         let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
-        
-        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "午餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
-        
-        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-    
 
+        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "午餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
+
+        FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
 
     }
 
     func dinnerAdded(_ sender: UIButton) {
 
         guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
-        
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
+
         let context = appDelegate.persistentContainer.viewContext
-        
+
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
-        
+
         do {
-            
+
            self.fetchData = try context.fetch(fetchRequest)
-            
-            
+
         } catch let error as NSError {
             print (error)
             print("Could not fetch.")
         }
-        
-        
-        
+
         let date = cell.date.text
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         let fetchedResult = fetchData[0]
         guard
             let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
@@ -380,18 +369,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             let prefB = fetchedResult.value(forKey: "prefB") as? Int,
             let prefC = fetchedResult.value(forKey: "prefC") as? Int
         else { return }
-        
+
         let mealPreferenceFromFetch = ["typeA": prefA, "typeB": prefB, "typeC": prefC]
         let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
-        
+
        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "晚餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
-        
-    
+
 //        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail, "userUID": uid!, "time": "晚餐", "meal": self.mealPreference, "userData": "wait to be done", "paymentStatus": "unpaid", "paymentClaim": "false"]
 
            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-        
-        
+
 //        if mealPrefExsit == true {
 //            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
 //        } else if mealPrefExsit == false {
@@ -413,7 +400,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             let context = appDelegate.persistentContainer.viewContext
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
-            let userMO = UserMO(context: context)
+            request.predicate = NSPredicate(format: "id == %@", uid!)
+
+//            let userMO = UserMO(context: context)
 
             FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
 
@@ -437,26 +426,43 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
                     do {
                         guard let results = try context.fetch(request) as? [UserMO] else { return }
-                        
-                        results[0].name = name
-                        results[0].number = number
-                        results[0].deliver = deliver
-                        results[0].addressMain = mainAdd
-                        results[0].addressDetail = mainDetail
-                        results[0].email = email
-                        results[0].prefA = Int16(prefA)
-                        results[0].prefB = Int16(prefB)
-                        results[0].prefC = Int16(prefC)
-                        
+
+                        if results.count > 0 {
+
+                            results[0].name = name
+                            results[0].number = number
+                            results[0].deliver = deliver
+                            results[0].addressMain = mainAdd
+                            results[0].addressDetail = mainDetail
+                            results[0].email = email
+                            results[0].prefA = Int16(prefA)
+                            results[0].prefB = Int16(prefB)
+                            results[0].prefC = Int16(prefC)
+
+                        } else {
+
+                            let user = NSEntityDescription.insertNewObject(forEntityName: "UserMO", into: context)
+
+                            print("insert object")
+                            
+                            user.setValue(name, forKey: "name")
+                            user.setValue(number, forKey: "number")
+                            user.setValue(mainAdd, forKey: "addressMain")
+                            user.setValue(mainDetail, forKey: "addressDetail")
+                            user.setValue(email, forKey: "email")
+                            user.setValue(prefA, forKey: "prefA")
+                            user.setValue(prefB, forKey: "prefB")
+                            user.setValue(prefC, forKey: "prefC")
+                            user.setValue(deliver, forKey: "deliver")
+                            user.setValue(uid!, forKey: "id")
+                        }
+
                         try context.save()
+                        print ("kinda saved")
 
                     } catch {
                         print (error.localizedDescription)
                     }
-
-                } else {
-
-                   // Handle User Info has not complete yet
 
                 }
 
