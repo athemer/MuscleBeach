@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -19,6 +20,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     var addressArray: [String] = ["中山區"]
 
+    @IBOutlet weak var nameTextField: UITextField!
+    
+    @IBOutlet weak var emailAccountTextField: UITextField!
+    
+    @IBOutlet weak var numberTextField: UITextField!
+    
     var addressArrFromDatabase: [String] = []
     var addressDetailArrFromDatabase: [String] = []
 
@@ -39,10 +46,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
 
+        
+        
+        
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
         profileImageView.isUserInteractionEnabled = true
 
         registerCell()
+        setUpInformInField()
         fetchAddressFromDatabase()
     }
 
@@ -203,11 +214,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
                 }
 
+            
             let finalAddress = "\(street) \(address)"
+            self.orderAddress.text = finalAddress
             let uid = FIRAuth.auth()?.currentUser?.uid
             let x = self.addressArrFromDatabase.count
             FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").child("add\(x)").setValue(street)
             FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").child("detail\(x)").setValue(address)
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(street)
+            FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(address)
 
             self.addressArrFromDatabase.append(street)
             self.addressDetailArrFromDatabase.append(address)
@@ -294,5 +309,43 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
         
     }
+    
+    
+    func setUpInformInField() {
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        
+        var theArray: [NSManagedObject] = []
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+        request.predicate = NSPredicate(format: "id == %@", uid!)
+        
+        do {
+            theArray = try context.fetch(request)
+            
+            
+        } catch let error as NSError {
+            
+            print("Could not fetch.")
+        }
+        let fetchedResult = theArray[0]
+        
+        guard
+            let name = fetchedResult.value(forKey: "name") as? String,
+            let number = fetchedResult.value(forKey: "number") as? String,
+            let email = fetchedResult.value(forKey: "email") as? String,
+            let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
+            let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
+        else { return }
+        
+        self.emailAccountTextField.text = email
+        self.nameTextField.text = name
+        self.numberTextField.text = number
+        self.orderAddress.text = mainAdd + mainDetail
+        
+        
+    }
+    
 
 }

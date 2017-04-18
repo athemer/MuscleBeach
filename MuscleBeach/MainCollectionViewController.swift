@@ -380,6 +380,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 //            
 //        })
         
+        self.addressArr.removeAll()
         
         FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {

@@ -1578,6 +1578,9 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="emailAccountTextField" destination="pgU-nR-AI3" id="goP-FH-nDF"/>
+                        <outlet property="nameTextField" destination="NOb-7A-3KT" id="cMB-Dz-1lV"/>
+                        <outlet property="numberTextField" destination="qzQ-00-nWq" id="fr2-u4-gYw"/>
                         <outlet property="orderAddress" destination="ZHf-fN-nL3" id="ylf-Rs-8HU"/>
                         <outlet property="profileImageView" destination="yWh-bz-kxJ" id="u13-Mc-GcV"/>
                         <outlet property="tableView" destination="CFd-ln-a9R" id="B9w-Fl-MsO"/>

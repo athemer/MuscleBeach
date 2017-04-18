@@ -15,7 +15,7 @@ class DataService {
 
     func createFirbaseDBUser(uid: String, userData: [String: String], email: [String: String], password: [String: String], name: [String: String], number: [String: String]) {
 
-        let mealPref: [String: Any] = ["mealPreference": ["typeA": 0, "typeB": 0, "typeC": 0]]
+        let mealPref: [String: Any] = ["mealPreference": ["deliver": "自取","typeA": 0, "typeB": 0, "typeC": 0]]
         let img: [String: String] = ["prfileImgURL": " "]
         let add: [String: Any] = ["address": ["mainAdd": "自取地點一", "mainDetail": "城市草倉"]]
 
