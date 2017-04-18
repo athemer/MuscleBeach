@@ -99,11 +99,14 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
 
             let user = User()
 
-            guard let userName = dictionary["name"] as? String else { return }
+            guard
+                let userName = dictionary["name"] as? String,
+                let profileImageURL = dictionary["prfileImageURL"] as? String
+                    else { return }
 
             user.id = chatPartnerId
 //            user.setValuesForKeys(dictionary)
-            self.showChatControllerForUser(userId: chatPartnerId, userName: userName)
+            self.showChatControllerForUser(userId: chatPartnerId, userName: userName, url: profileImageURL)
 
         }, withCancel: nil)
     }
@@ -173,11 +176,12 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
 //        }, withCancel: nil)
 //    }
 
-    func showChatControllerForUser(userId: String, userName: String) {
+    func showChatControllerForUser(userId: String, userName: String, url: String) {
         let chatRoomViewController = ChatRoomViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        ChatRoomViewController.user = user
         chatRoomViewController.toID = userId
         chatRoomViewController.toName = userName
+        chatRoomViewController.url = url
         navigationController?.pushViewController(chatRoomViewController, animated: true)
     }
 

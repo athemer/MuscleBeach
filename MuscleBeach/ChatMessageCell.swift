@@ -32,9 +32,9 @@ class ChatMessageCell: UICollectionViewCell {
         return view
     } ()
 
-    let profileImageView: UIImageView = {
+    var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "MBLogo")
+//        imageView.image = UIImage(named: "MBLogo")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
@@ -53,6 +53,8 @@ class ChatMessageCell: UICollectionViewCell {
         addSubview(bubbleView)
         addSubview(textView)
 
+        
+        
         // Constraint anchors: x, y, width, height
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

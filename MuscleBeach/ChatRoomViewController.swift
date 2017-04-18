@@ -13,6 +13,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
 
     var toID: String = ""
     var toName: String = ""
+    var url: String = ""
 
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
@@ -42,6 +43,9 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         setUpInputComponents()
         setUpKeyboardObservers()
 
+        
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -164,6 +168,28 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
             cell.textView.textColor = .black
 
             cell.profileImageView.isHidden = false
+            
+            // do url
+            
+            let url = URL(string: self.url)
+            
+            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                DispatchQueue.main.async(execute: {
+                    
+                    if let downloadedImage = UIImage(data: data!) {
+                        imageCache.setObject(downloadedImage, forKey: self.url as AnyObject)
+                        cell.profileImageView.image = downloadedImage
+                    }
+                })
+            }).resume()
+            
+            
+            
             cell.bubbleViewRightAnchor?.isActive = false
             cell.bubbleViewLeftAnchor?.isActive = true
         }

@@ -12,6 +12,7 @@ import MapKit
 import AddressBookUI
 import CoreLocation
 import XLPagerTabStrip
+import CoreData
 
 class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, IndicatorInfoProvider {
 
@@ -368,21 +369,21 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
 
     func fetchAddress() {
         let uid = FIRAuth.auth()?.currentUser?.uid
-        FIRDatabase.database().reference().child("users").child(uid!).child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+        FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {
-                let mainAdd = dict["mainAdd"] as? String
-                let mainDetail = dict["mainDetail"] as? String
-                let add = "\(mainAdd!)\(mainDetail!)"
-                for x in 1...(dict.count / 2) - 1 {
+//                let mainAdd = dict["mainAdd"] as? String
+//                let mainDetail = dict["mainDetail"] as? String
+//                let add = "\(mainAdd!)\(mainDetail!)"
+                for x in 0...(dict.count / 2) - 1 {
 
                     let street = dict["add\(x)"] as? String
                     let address = dict["detail\(x)"] as? String
                     let finalAdd = street! + address!
 
                     self.addressArr.append(finalAdd)
-                    self.addressButton.setTitle("\(mainAdd!)\(mainDetail!)", for: .normal)
+//                    self.addressButton.setTitle("\(mainAdd!)\(mainDetail!)", for: .normal)
 
-                    self.forwardGeocoding2(address: add)
+//                    self.forwardGeocoding2(address: add)
                     FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishLocation": finalAdd])
                 }
 
@@ -391,6 +392,32 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
             self.addressPicker.reloadAllComponents()
 
         })
+        
+        
+        
+        var theArray: [NSManagedObject] = []
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+        request.predicate = NSPredicate(format: "id == %@", uid!)
+        
+        do {
+            theArray = try context.fetch(request)
+            
+        } catch let error as NSError {
+            
+            print("Could not fetch.")
+        }
+        let fetchedResult = theArray[0]
+        
+        guard
+            let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
+            let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
+            else { return }
+        let add = "\(mainAdd)\(mainDetail)"
+        self.forwardGeocoding2(address: add)
+        self.addressButton.setTitle(add, for: .normal)
+        
     }
 
     func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
