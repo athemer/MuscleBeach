@@ -249,10 +249,14 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                             results[0].prefA = Int16(cell0.stepper.value)
                             results[0].prefB = Int16(cell1.stepper.value)
                             results[0].prefC = Int16(cell2.stepper.value)
-
+                            let mainAdd = results[0].addressMain!
+                            let mainDetail = results[0].addressDetail!
+                            let deliver = results[0].deliver!
                             let userData: [String: String] = ["userName": userName!, "userNumber": userNumber!]
 
-                            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
+                            print ("check userdata", userData)
+                            
+                            let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliver as AnyObject, "locationArea": mainAdd as AnyObject, "locationDetail": mainDetail as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
                             FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
 
                         } else {

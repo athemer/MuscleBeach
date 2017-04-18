@@ -75,6 +75,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         } catch let error {
             print ("not logged out \(error)")
         }
+        
+        deleteAll()
+        
+        
     }
     @IBAction func butTapped(_ sender: Any) {
 
@@ -433,6 +437,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
                         if results.count > 0 {
 
+                            let url = URL(string: ImageUrl)
+                            URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                                
+                                results[0].profileImage = NSData(data: data!)
+                                
+                                
+                                }.resume()
+                            
                             results[0].id = uid!
                             results[0].name = name
                             results[0].number = number
@@ -450,6 +462,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
                             print("insert object")
 
+                            let url = URL(string: ImageUrl)
+                            URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                                
+                                user.setValue(data, forKey: "profileImage")
+                                
+                                
+                                }.resume()
+                            
                             user.setValue(name, forKey: "name")
                             user.setValue(number, forKey: "number")
                             user.setValue(mainAdd, forKey: "addressMain")
@@ -460,6 +480,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             user.setValue(prefC, forKey: "prefC")
                             user.setValue(deliver, forKey: "deliver")
                             user.setValue(uid!, forKey: "id")
+                            
                         }
 
                         try context.save()
@@ -482,4 +503,34 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
 
+    func deleteAll() {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+        
+        let moc = appDelegate.persistentContainer.viewContext
+        
+        do {
+            
+            guard let results = try moc.fetch(request) as? [UserMO] else {
+                return
+            }
+            
+            for result in results {
+                
+                moc.delete(result)
+                
+            }
+            
+            appDelegate.saveContext()
+            
+        } catch {
+            
+            fatalError("\(error)")
+        }
+        
+    }
+
+    
 }

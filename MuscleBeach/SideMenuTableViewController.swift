@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class SideMenuTableViewController: UITableViewController {
 
@@ -61,6 +62,54 @@ class SideMenuTableViewController: UITableViewController {
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
             // swiftlint:disable:previous force_cast
+            
+            
+            cell.profileImage.clipsToBounds = true
+            cell.profileImage.contentMode = .scaleToFill
+            cell.profileImage.layer.cornerRadius = 37.5
+            
+            var dataArray: [NSManagedObject] = []
+            
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return cell
+            }
+            
+            let context = appDelegate.persistentContainer.viewContext
+            
+            let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+            
+            request.predicate = NSPredicate(format: "id == %@", uid!)
+            
+            do {
+                dataArray = try context.fetch(request)
+                
+            } catch let error as NSError {
+                
+                print("Could not fetch.")
+            }
+            
+            
+            if dataArray.count > 0 {
+                
+                let fetchedResult = dataArray[0]
+                
+                guard let imgData = fetchedResult.value(forKey: "profileImage") as? Data else {
+                    print ("not data type")
+                    return cell
+                }
+                
+                cell.profileImage.image = UIImage(data: imgData)
+                
+            } else {
+                cell.profileImage.image = UIImage(named: "profileIcon")
+                
+                print ("no profile image to show")
+                
+            }
+
             return cell
 
         case .orderHistory:
@@ -82,7 +131,7 @@ class SideMenuTableViewController: UITableViewController {
         let componenets = cellComponentsArray[indexPath.section]
         switch componenets {
         case .profile:
-            return 120
+            return 88
         case .orderHistory:
             return 40
         case .setting:
