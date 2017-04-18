@@ -101,13 +101,13 @@ class ChatListTableViewController: UITableViewController, IndicatorInfoProvider 
 
             guard
                 let userName = dictionary["name"] as? String,
-                let profileImageURL = dictionary["prfileImageURL"] as? String
+                let profileImageURL = dictionary["prfileImgURL"] as? String
                     else { return }
 
             user.id = chatPartnerId
 //            user.setValuesForKeys(dictionary)
             self.showChatControllerForUser(userId: chatPartnerId, userName: userName, url: profileImageURL)
-
+            print ("come check", chatPartnerId, userName)
         }, withCancel: nil)
     }
 

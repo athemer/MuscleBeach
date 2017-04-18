@@ -33,8 +33,8 @@ class UserCell: UITableViewCell {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: Any] {
                     self.textLabel?.text = dictionary["name"] as? String
-                    self.profileImageView.image = UIImage(named: "MBLogo")
-                    if let profileImageUrl = dictionary["prfileImageURL"] as? String {
+//                    self.profileImageView.image = UIImage(named: "MBLogo")
+                    if let profileImageUrl = dictionary["prfileImgURL"] as? String {
                         self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
                     }
                 }
