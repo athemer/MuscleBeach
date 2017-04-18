@@ -31,6 +31,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
+    let imageNameArr: [String] = ["sample", "sample4", "sample2", "sample3", "sample4", "sample", "sample2" ]
 
     enum Components {
         case homaPageImages
@@ -151,7 +152,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             return 240
 
         case .fastOrder:
-            return 80
+            return 100
         }
     }
 
@@ -191,7 +192,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
             cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
             cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
-
+            cell.mealImage.image = UIImage(named: imageNameArr[indexPath.row])
+            cell.mealImage.contentMode = .scaleAspectFill
+            cell.mealImage.clipsToBounds = true
+            cell.mealImage.layer.cornerRadius = 15
+            
             return cell
         }
 

@@ -21,6 +21,10 @@ class ThirdTableViewCell: UITableViewCell {
     @IBOutlet weak var mealName: UILabel!
 
     @IBOutlet weak var addToCartButton: UIButton!
+    
+    
+    @IBOutlet weak var mealImage: UIImageView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

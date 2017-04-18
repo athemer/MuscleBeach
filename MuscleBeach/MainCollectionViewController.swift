@@ -32,6 +32,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.collectionView?.frame = CGRect(x: 0, y: 0, width: 375, height: 240)
+        
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
