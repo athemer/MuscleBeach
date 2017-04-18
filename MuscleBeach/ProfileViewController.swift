@@ -20,6 +20,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     var addressArray: [String] = ["中山區"]
 
+    
+    
+    @IBOutlet weak var nameTv: UITextView!
+    
+    @IBOutlet weak var numberTv: UITextView!
+    
+    @IBOutlet weak var emailTv: UITextView!
+    
+    @IBOutlet weak var addTv: UITextView!
+    
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var emailAccountTextField: UITextField!
@@ -46,7 +56,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
 
-        
+        nameTv.isEditable = false
+        numberTv.isEditable = false
+        emailTv.isEditable = false
+        addTv.isEditable = false
         
         
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
@@ -99,7 +112,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         switch contentArr[indexPath.section] {
         case .addressCell:
             let uid = FIRAuth.auth()?.currentUser?.uid
-            orderAddress.text = addressArrFromDatabase[indexPath.row] + addressDetailArrFromDatabase[indexPath.row]
+            addTv.text = addressArrFromDatabase[indexPath.row] + addressDetailArrFromDatabase[indexPath.row]
 
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": addressArrFromDatabase[indexPath.row]])
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": addressDetailArrFromDatabase[indexPath.row]])
@@ -216,7 +229,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
             
             let finalAddress = "\(street) \(address)"
-            self.orderAddress.text = finalAddress
+            self.addTv.text = finalAddress
             let uid = FIRAuth.auth()?.currentUser?.uid
             let x = self.addressArrFromDatabase.count
             FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").child("add\(x)").setValue(street)
@@ -339,10 +352,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
         else { return }
         
-        self.emailAccountTextField.text = email
-        self.nameTextField.text = name
-        self.numberTextField.text = number
-        self.orderAddress.text = mainAdd + mainDetail
+        self.emailTv.text = email
+        self.nameTv.text = name
+        self.numberTv.text = number
+        self.addTv.text = mainAdd + mainDetail
         
         
     }
