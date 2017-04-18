@@ -16,26 +16,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var orderAddress: UITextField!
-
     var addressArray: [String] = ["中山區"]
 
-    
-    
     @IBOutlet weak var nameTv: UITextView!
-    
+
     @IBOutlet weak var numberTv: UITextView!
-    
+
     @IBOutlet weak var emailTv: UITextView!
-    
+
     @IBOutlet weak var addTv: UITextView!
-    
-    @IBOutlet weak var nameTextField: UITextField!
-    
-    @IBOutlet weak var emailAccountTextField: UITextField!
-    
-    @IBOutlet weak var numberTextField: UITextField!
-    
+
     var addressArrFromDatabase: [String] = []
     var addressDetailArrFromDatabase: [String] = []
 
@@ -60,10 +50,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         numberTv.isEditable = false
         emailTv.isEditable = false
         addTv.isEditable = false
-        
-        
+
+        setUpProfileImageIfAny()
+
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
         profileImageView.isUserInteractionEnabled = true
+        profileImageView.layer.cornerRadius = 65
+        profileImageView.clipsToBounds = true
 
         registerCell()
         setUpInformInField()
@@ -116,9 +109,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainAdd": addressArrFromDatabase[indexPath.row]])
             FIRDatabase.database().reference().child("users").child(uid!).child("address").updateChildValues(["mainDetail": addressDetailArrFromDatabase[indexPath.row]])
-            
-            
-            
+
         case .addCell:
 //            setUpAlert()
             print ("do nothing")
@@ -227,7 +218,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
                 }
 
-            
             let finalAddress = "\(street) \(address)"
             self.addTv.text = finalAddress
             let uid = FIRAuth.auth()?.currentUser?.uid
@@ -288,62 +278,59 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
 
     }
-    
+
     func fetchAddressFromDatabaseTest() {
-        
+
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
             if let addressDict = snapshot.value as? [String: Any] {
-                
+
                 print("hoho \(addressDict )")
-                
+
                 for x in 0...(addressDict.count / 2) - 1 {
-                    
+
                     // swiftlint:disable:next force_cast
                     let street = addressDict["add\(x)"] as! String
                     // swiftlint:disable:previous force_cast
-                    
+
                     // swiftlint:disable:next force_cast
                     let address = addressDict["detail\(x)"] as! String
                     // swiftlint:disable:previous force_cast
-                    
+
                     self.addressArrFromDatabase.append(street)
                     self.addressDetailArrFromDatabase.append(address)
                 }
                 print (self.addressArrFromDatabase)
-                
+
             } else {
-                
-                
+
                 print ("no data yet")
                 return
             }
             self.tableView.reloadData()
         })
-        
+
     }
-    
-    
+
     func setUpInformInField() {
-        
+
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         var theArray: [NSManagedObject] = []
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             theArray = try context.fetch(request)
-            
-            
+
         } catch let error as NSError {
-            
+
             print("Could not fetch.")
         }
         let fetchedResult = theArray[0]
-        
+
         guard
             let name = fetchedResult.value(forKey: "name") as? String,
             let number = fetchedResult.value(forKey: "number") as? String,
@@ -351,14 +338,58 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
             let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
         else { return }
-        
+
         self.emailTv.text = email
         self.nameTv.text = name
         self.numberTv.text = number
         self.addTv.text = mainAdd + mainDetail
-        
-        
+
     }
-    
+
+    func setUpProfileImageIfAny() {
+
+        var dataArray: [NSManagedObject] = []
+
+        let uid = FIRAuth.auth()?.currentUser?.uid
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+
+        let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+
+        request.predicate = NSPredicate(format: "id == %@", uid!)
+
+        do {
+            dataArray = try context.fetch(request)
+
+        } catch let error as NSError {
+
+            print("Could not fetch.")
+        }
+
+
+        if dataArray.count > 0 {
+            
+            let fetchedResult = dataArray[0]
+            
+            guard let imgData = fetchedResult.value(forKey: "profileImage") as? Data else {
+                print ("not data type")
+                return
+            }
+            
+            profileImageView.image = UIImage(data: imgData)
+            
+        } else {
+            print ("no profile image to show")
+            
+        }
+        
+        
+
+    }
 
 }

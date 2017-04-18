@@ -1505,8 +1505,8 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                 <rect key="frame" x="0.0" y="64" width="375" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yWh-bz-kxJ">
-                                        <rect key="frame" x="67" y="7" width="240" height="128"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yWh-bz-kxJ">
+                                        <rect key="frame" x="122" y="6" width="130" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -1604,12 +1604,9 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     </view>
                     <connections>
                         <outlet property="addTv" destination="W5T-FE-xpU" id="cT9-OU-Eco"/>
-                        <outlet property="emailAccountTextField" destination="pgU-nR-AI3" id="goP-FH-nDF"/>
                         <outlet property="emailTv" destination="o74-YH-Iyg" id="bZ9-kG-oaL"/>
                         <outlet property="nameTv" destination="frr-8w-by0" id="XUC-VG-bre"/>
-                        <outlet property="numberTextField" destination="qzQ-00-nWq" id="fr2-u4-gYw"/>
                         <outlet property="numberTv" destination="XUq-MA-Lpx" id="WWU-5a-Kar"/>
-                        <outlet property="orderAddress" destination="ZHf-fN-nL3" id="ylf-Rs-8HU"/>
                         <outlet property="profileImageView" destination="yWh-bz-kxJ" id="u13-Mc-GcV"/>
                         <outlet property="tableView" destination="CFd-ln-a9R" id="B9w-Fl-MsO"/>
                     </connections>

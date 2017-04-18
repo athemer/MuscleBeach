@@ -18,9 +18,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     var mainAddToDB: String = ""
     var deliverToDB: String = ""
 
-    
     var dataArray: [NSManagedObject] = []
-    
+
     var addressArr: [AddressModel] = []
 
     enum Components {
@@ -39,8 +38,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.collectionView?.register(nib2, forCellWithReuseIdentifier: "SecondCollectionViewCell")
         // Do any additional setup after loading the view.
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchAddress()
@@ -89,35 +87,33 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             // swiftlint:disable:previous force_cast
 
             let uid = FIRAuth.auth()?.currentUser?.uid
-            
+
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return cell}
             let context = appDelegate.persistentContainer.viewContext
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
             request.predicate = NSPredicate(format: "id == %@", uid!)
-            
+
             do {
                 guard let results = try context.fetch(request) as? [UserMO] else { return cell }
-                
+
                 if results.count > 0 {
-                    
-                    
+
                     print ("WERID", results[0].addressMain, results[0].addressDetail)
-                    
+
                     cell.addressLabel.text = results[0].addressMain
                     cell.detailLAbel.text = results[0].addressDetail
-                    
+
                 } else {
-                    
+
                     print ("not possibly gonna happen")
                 }
-                
+
                 try context.save()
-                
+
             } catch {
                 print (error.localizedDescription)
             }
-            
-            
+
             cell.backgroundColor = .black
             cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
             return cell
@@ -184,38 +180,34 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.detailAddToDB = addressArr[row].detailAdd
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
-        
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             guard let results = try context.fetch(request) as? [UserMO] else { return }
-            
+
             if results.count > 0 {
-                
+
                 results[0].addressMain = addressArr[row].mainAdd
                 results[0].addressDetail = addressArr[row].detailAdd
                 print ("CHECK", addressArr[row].detailAdd)
                 results[0].deliver = "外送"
-                
+
             } else {
-                
+
                 print ("not possibly gonna happen")
             }
-            
+
             try context.save()
             print ("kinda saved")
-            
+
         } catch {
             print (error.localizedDescription)
         }
-        
-        
-        
-        
+
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(addressArr[row].mainAdd)
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(addressArr[row].detailAdd)
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("外送")
@@ -255,35 +247,34 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.mainAddToDB = "自取地點一"
         self.detailAddToDB = "城市草倉"
 
-        
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             guard let results = try context.fetch(request) as? [UserMO] else { return }
-            
+
             if results.count > 0 {
-                
+
                 results[0].addressMain = "自取地點一"
                 results[0].addressDetail = "城市草倉"
                 results[0].deliver = "自取"
-                
+
             } else {
-                
+
                 print ("not possibly gonna happen")
             }
-            
+
             try context.save()
             print ("kinda saved")
-            
+
         } catch {
             print (error.localizedDescription)
         }
-        
+
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點一")
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("城市草倉")
 //        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
@@ -314,31 +305,29 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         self.detailAddToDB = "肌肉海灘工作室"
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
-        
-        
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             guard let results = try context.fetch(request) as? [UserMO] else { return }
-            
+
             if results.count > 0 {
-                
+
                 results[0].addressMain = "自取地點二"
                 results[0].addressDetail = "肌肉海灘工作室"
                 results[0].deliver = "自取"
-                
+
             } else {
-                
+
                 print ("not possibly gonna happen")
             }
-            
+
             try context.save()
             print ("kinda saved")
-            
+
         } catch {
             print (error.localizedDescription)
         }
@@ -379,33 +368,32 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 //            }
 //            
 //        })
-        
+
         self.addressArr.removeAll()
-        
+
         FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {
 
                 for x in 0...(dict.count / 2) - 1 {
 
                     print ("YOLO COME HERE", dict.count)
-                    
+
                     let street = dict["add\(x)"] as? String
                     let address = dict["detail\(x)"] as? String
-                    
+
                     print ("XOXO", street, address)
-                    
+
                     let finalAdd = street! + address!
 
                     let toAppend = AddressModel(mainAdd: street!, detailAdd: address!, finalAdd: finalAdd)
 
                     self.addressArr.append(toAppend)
 
-                    
                     let index: IndexPath = IndexPath(item: 0, section: 1)
                     // swiftlint:disable:next force_cast
                     let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
                     // swiftlint:disable:previous force_cast
-                    
+
                     cell.deliverAddButton.setTitle("請選擇地址", for: .normal)
                     cell.deliverAddButton.isEnabled = true
                 }

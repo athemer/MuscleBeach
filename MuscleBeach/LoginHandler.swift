@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseStorage
+import CoreData
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -45,7 +46,29 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         let uid = FIRAuth.auth()?.currentUser?.uid
 
         if let selectedImage = selectedImageFromPicker {
+
             profileImageView.image = selectedImage
+
+            let selectedImgData = NSData(data: UIImagePNGRepresentation(selectedImage)!)
+
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
+            request.predicate = NSPredicate(format: "id == %@", uid!)
+
+            do {
+                guard let results = try context.fetch(request) as? [UserMO] else {
+
+                    return }
+
+                    results[0].profileImage = selectedImgData
+
+                try context.save()
+                print ("kinda saved")
+
+            } catch {
+                print (error.localizedDescription)
+            }
 
             let imageName = UUID().uuidString
             let storageRef = FIRStorage.storage().reference().child("profileImages").child("\(imageName).png")

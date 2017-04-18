@@ -428,7 +428,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
                     do {
                         guard let results = try context.fetch(request) as? [UserMO] else {
-                            
+
                             return }
 
                         if results.count > 0 {
@@ -449,7 +449,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             let user = NSEntityDescription.insertNewObject(forEntityName: "UserMO", into: context)
 
                             print("insert object")
-                            
+
                             user.setValue(name, forKey: "name")
                             user.setValue(number, forKey: "number")
                             user.setValue(mainAdd, forKey: "addressMain")

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
 
         checkLoginStatus()
-        
+
         print(NSPersistentContainer.defaultDirectoryURL())
         return true
     }
@@ -30,30 +30,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
-
-    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
-        
+
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         var theArray: [NSManagedObject] = []
         let context = self.persistentContainer.viewContext
         let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             theArray = try context.fetch(request)
-            
-            
+
         } catch let error as NSError {
-            
+
             print("Could not fetch.")
         }
         let fetchedResult = theArray[0]
-        
+
         guard
             let deliverFromFetch = fetchedResult.value(forKey: "deliver") as? String,
             let locationAreaFromFetch = fetchedResult.value(forKey: "addressMain") as? String,
@@ -61,14 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let prefA = fetchedResult.value(forKey: "prefA") as? Int,
             let prefB = fetchedResult.value(forKey: "prefB") as? Int,
             let prefC = fetchedResult.value(forKey: "prefC") as? Int else { return }
-        
-        
-        
+
         FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").updateChildValues(["typeA": prefA, "typeB": prefB, "typeC": prefC, "deliver": deliverFromFetch])
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(locationDetailFromFetch)
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(locationAreaFromFetch)
-        
-        
+
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -82,14 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        
 
         //Here gonna save coreData userinformation into Firebase Database
         //減少與Firebase database 聯繫的次數
 
         self.saveContext()
-        
-        
+
     }
 
     // MARK: - Core Data stack

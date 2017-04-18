@@ -12,9 +12,8 @@ import CoreData
 
 class MealVariationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
     var dataArr: [NSManagedObject] = []
-    
+
     @IBOutlet weak var timeSegment: UISegmentedControl!
 
     @IBOutlet weak var tableView: UITableView!
@@ -233,43 +232,41 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
 //
 //                    }
 
-                    
 //                    FIRDatabase.database().reference().child("users").child(uid).child("mealPreference").updateChildValues(meal)
-                
-                    
+
                     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
                     let context = appDelegate.persistentContainer.viewContext
                     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
                     request.predicate = NSPredicate(format: "id == %@", uid)
-                    
+
                     do {
                         guard let results = try context.fetch(request) as? [UserMO] else { return }
-                        
+
                         if results.count > 0 {
-                            
+
                             let userName = results[0].name
                             let userNumber = results[0].number
                             results[0].prefA = Int16(cell0.stepper.value)
                             results[0].prefB = Int16(cell1.stepper.value)
                             results[0].prefC = Int16(cell2.stepper.value)
-                            
+
                             let userData: [String: String] = ["userName": userName!, "userNumber": userNumber!]
-                            
+
                             let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": self.deliverToDB as AnyObject, "locationArea": self.locationAreaToDB as AnyObject, "locationDetail": self.locationDetailToDB as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
                             FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-                            
+
                         } else {
-                            
+
                             print ("not possibly gonna happen")
                         }
-     
+
                         try context.save()
                         print ("kinda saved")
-                        
+
                     } catch {
                         print (error.localizedDescription)
                     }
-    
+
                     navigationController?.popToRootViewController(animated: true)
 
                 }

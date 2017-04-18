@@ -15,8 +15,8 @@ class DataService {
 
     func createFirbaseDBUser(uid: String, userData: [String: String], email: [String: String], password: [String: String], name: [String: String], number: [String: String]) {
 
-        let mealPref: [String: Any] = ["mealPreference": ["deliver": "自取","typeA": 0, "typeB": 0, "typeC": 0]]
-        let img: [String: String] = ["prfileImgURL": " "]
+        let mealPref: [String: Any] = ["mealPreference": ["deliver": "自取", "typeA": 0, "typeB": 0, "typeC": 0]]
+        let img: [String: String] = ["prfileImgURL": "https://firebasestorage.googleapis.com/v0/b/musclebeach-dae30.appspot.com/o/defaultImage.png?alt=media&token=8116b1e9-2aad-4675-99da-7c133c8d9965"]
         let add: [String: Any] = ["address": ["mainAdd": "自取地點一", "mainDetail": "城市草倉"]]
 
         FIRDatabase.database().reference().child("users").child(uid).updateChildValues(userData)
