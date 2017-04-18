@@ -46,17 +46,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        
 
         //Here gonna save coreData userinformation into Firebase Database
         //減少與Firebase database 聯繫的次數
 
+        self.saveContext()
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        
         var theArray: [NSManagedObject] = []
         let context = self.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+        let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
+        request.predicate = NSPredicate(format: "id == %@", uid!)
         
         do {
-            theArray = try context.fetch(fetchRequest)
+            theArray = try context.fetch(request)
             
             
         } catch let error as NSError {
@@ -73,13 +78,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let prefB = fetchedResult.value(forKey: "prefB") as? Int,
             let prefC = fetchedResult.value(forKey: "prefC") as? Int else { return }
         
-        let uid = FIRAuth.auth()?.currentUser?.uid
+
         FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").updateChildValues(["typeA": prefA, "typeB": prefB, "typeC": prefC, "deliver": deliverFromFetch])
         
         
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(locationDetailFromFetch)
         FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(locationAreaFromFetch)
         print("PPPPP", locationDetailFromFetch, locationAreaFromFetch)
+        
+        
     }
 
     // MARK: - Core Data stack

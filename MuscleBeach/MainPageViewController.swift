@@ -420,15 +420,20 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         let email = snap["email"] as? String,
                         let ImageUrl = snap["prfileImgURL"] as? String,
                         let deliver = pref["deliver"] as? String
-                        else { return }
+                        else {
+                            print ("BUGBUGBUG")
+                            return }
 
                     print ("?????", name, number, mainAdd, mainDetail, email, prefA, prefB, prefC, ImageUrl)
 
                     do {
-                        guard let results = try context.fetch(request) as? [UserMO] else { return }
+                        guard let results = try context.fetch(request) as? [UserMO] else {
+                            
+                            return }
 
                         if results.count > 0 {
 
+                            results[0].id = uid!
                             results[0].name = name
                             results[0].number = number
                             results[0].deliver = deliver
