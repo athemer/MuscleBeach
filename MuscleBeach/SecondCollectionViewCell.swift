@@ -24,6 +24,11 @@ class SecondCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var pickerView: UIPickerView!
 
+    
+    @IBOutlet weak var firstInfoButton: UIButton!
+    
+    @IBOutlet weak var secondInfoButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 

@@ -20,7 +20,7 @@ class SelfPickUpViewController: UIViewController, UITableViewDelegate, UITableVi
 
     let theNameArr: [String] = ["自取地點一", "自取地點二"]
     let nameArr: [String] = ["城市草倉 C-tea loft", "肌肉海灘工作室"]
-    let addressArr: [String] = ["台北市大安區羅斯福路三段283巷19弄4號", "信義區和平東路三段391巷8弄30號1樓"]
+    let addressArr: [String] = ["台北市大安區羅斯福路三段283巷19弄4號", "台北市信義區和平東路三段391巷8弄30號1樓"]
     let numberArr: [String] = ["02 2366 0381", "02 2366 0381"]
     let latitudeArr: [Double] = [25.0194332, 25.020501]
     let longitudeArr: [Double] = [121.5314772, 121.557314]

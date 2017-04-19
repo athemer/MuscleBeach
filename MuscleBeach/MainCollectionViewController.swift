@@ -131,6 +131,10 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             cell.firstButton.addTarget(self, action: #selector(changeAddress), for: .touchUpInside)
             cell.secondButton.addTarget(self, action: #selector(changeAddress2), for: .touchUpInside)
             cell.deliverAddButton.addTarget(self, action: #selector(delivAddBtnTapped), for: .touchUpInside)
+            
+            
+            cell.firstInfoButton.addTarget(self, action: #selector(showInfoOne), for: .touchUpInside)
+            cell.secondInfoButton.addTarget(self, action: #selector(showInfoTwo), for: .touchUpInside)
             return cell
         }
     }
@@ -435,4 +439,33 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         cell.deliverAddButton.isHidden = true
 
     }
+    
+    func showInfoOne() {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "PickUpLocationViewController") as? PickUpLocationViewController else { return }
+        vc.address = "台北市大安區羅斯福路三段283巷19弄4號"
+        vc.latitude = 25.0194332
+        vc.longitude = 121.5314772
+        vc.name = "城市草倉 C-tea loft"
+        vc.number = "02 2366 0381"
+        vc.imageName = "c-tea"
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func showInfoTwo() {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "PickUpLocationViewController") as? PickUpLocationViewController else { return }
+        vc.address = "台北市信義區和平東路三段391巷8弄30號1樓"
+        vc.latitude = 25.020501
+        vc.longitude = 121.557314
+        vc.name = "肌肉海灘工作室"
+        vc.number = "02 2366 0381"
+        vc.imageName = "MBLogo"
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
 }

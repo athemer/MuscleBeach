@@ -186,7 +186,7 @@
         <scene sceneID="yg0-Jv-lUN">
             <objects>
                 <navigationController id="2uB-t5-QMv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="更改時段" id="jlg-1f-Ae9"/>
+                    <tabBarItem key="tabBarItem" title="更改時段" image="calendar" id="jlg-1f-Ae9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdP-PW-xNo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -622,13 +622,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFC-ZD-3im" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3537" y="704"/>
+            <point key="canvasLocation" x="3502" y="665"/>
         </scene>
         <!--購物車-->
         <scene sceneID="fZz-Vf-cLD">
             <objects>
                 <navigationController id="UNb-6Y-QQD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="購物車" id="8il-tr-ZM4"/>
+                    <tabBarItem key="tabBarItem" title="購物車" image="shopping-cart" id="8il-tr-ZM4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9OB-fW-TMR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -723,7 +723,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
         <scene sceneID="5Xr-Ug-K4C">
             <objects>
                 <navigationController id="FDo-Ao-ajM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="揪團訂餐" id="A72-fp-z0l"/>
+                    <tabBarItem key="tabBarItem" title="揪團訂餐" image="message" id="A72-fp-z0l"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PJF-Zj-YCV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1197,7 +1197,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRb-b1-3OY">
                                         <rect key="frame" x="112" y="66" width="58" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.99564907449999995" green="0.20681522599999999" blue="0.17195809519999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1215,7 +1215,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="再新增兩個時段可達運費30%off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-FJ-tY9">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="再新增兩個時段可達運費30%off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-FJ-tY9">
                                         <rect key="frame" x="173" y="68" width="207" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -1665,7 +1665,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttv-HE-NAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6362" y="733"/>
+            <point key="canvasLocation" x="6337" y="785"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Kmp-zE-t5J">
@@ -1756,7 +1756,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
         <scene sceneID="y6u-T5-2j2">
             <objects>
                 <collectionViewController storyboardIdentifier="MainCollectionViewController" id="99A-Tu-Iku" customClass="MainCollectionViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="yil-uW-rbx">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yil-uW-rbx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.53415132229999995" green="0.66438914010000005" blue="0.49258139400000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2118,6 +2118,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="oUn-Yy-Wd2" id="xnX-x4-hOm"/>
+                        <outlet property="imageView" destination="CuG-vW-KYb" id="dBM-xD-pX8"/>
                         <outlet property="mapView" destination="Xig-JJ-yPP" id="pd6-Z1-J0x"/>
                         <outlet property="nameLabel" destination="9pp-xe-qHg" id="Z4O-VC-ldL"/>
                         <outlet property="numberLabel" destination="wOj-r4-wp0" id="IuO-Yu-ZEe"/>
@@ -2627,13 +2628,13 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EgE-7R-FgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5609" y="784"/>
+            <point key="canvasLocation" x="5628" y="785"/>
         </scene>
         <!--訂餐首頁-->
         <scene sceneID="gF2-o8-6se">
             <objects>
                 <navigationController id="J21-dv-0BO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="訂餐首頁" id="4eU-JO-GV1"/>
+                    <tabBarItem key="tabBarItem" title="訂餐首頁" image="fork-knife" id="4eU-JO-GV1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cgr-sO-Ywn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2669,9 +2670,13 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
     </scenes>
     <resources>
         <image name="MBLogo" width="491" height="491"/>
+        <image name="calendar" width="29" height="30"/>
         <image name="deliverIcon" width="200" height="200"/>
+        <image name="fork-knife" width="30" height="30"/>
         <image name="mealIcon" width="200" height="200"/>
+        <image name="message" width="30" height="30"/>
         <image name="profileIcon" width="512" height="512"/>
+        <image name="shopping-cart" width="29" height="30"/>
         <image name="toRight" width="400" height="400"/>
     </resources>
 </document>
