@@ -211,9 +211,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             print (error.localizedDescription)
         }
 
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(addressArr[row].mainAdd)
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(addressArr[row].detailAdd)
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("外送")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(addressArr[row].mainAdd)
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(addressArr[row].detailAdd)
+        FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").child("deliver").setValue("外送")
 
         self.collectionView?.scrollToItem(at: index1, at: .left, animated: true)
     }
@@ -278,9 +278,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             print (error.localizedDescription)
         }
 
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點一")
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("城市草倉")
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點一")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("城市草倉")
+        FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").child("deliver").setValue("自取")
 
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
@@ -338,9 +338,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 //        
 //        
 //        
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點二")
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("肌肉海灘工作室")
-//        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("deliver").setValue("自取")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue("自取地點二")
+        FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue("肌肉海灘工作室")
+        FIRDatabase.database().reference().child("users").child(uid!).child("mealPreference").child("deliver").setValue("自取")
 
         self.collectionView?.scrollToItem(at: index, at: .left, animated: true)
     }
