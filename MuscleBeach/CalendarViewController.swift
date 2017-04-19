@@ -15,8 +15,11 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
     @IBOutlet weak var moreDaysToGo: UILabel!
 
+    @IBOutlet weak var haveAlreay: UILabel!
+    
     @IBOutlet weak var discountLabel: UILabel!
 
+    @IBOutlet weak var toHide: UILabel!
     var daysToGo: Int = 0
     var dateToDB: [String] = []
     var deliverToDB: String = ""
@@ -196,10 +199,16 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             self.daysToGo = 15 - number
             self.discountLabel.text = "60% off"
 
-        } else if number > 15 {
+        } else if number > 15 && number <= 20{
 
             self.daysToGo = 20 - number
             self.discountLabel.text = "50% off"
+            
+        } else {
+            self.discountLabel.isHidden = true
+            self.toHide.isHidden = true
+            self.moreDaysToGo.isHidden = true
+            self.haveAlreay.text = "已經達成最高運費折扣！"
         }
 
         self.moreDaysToGo.text = "\(self.daysToGo)"

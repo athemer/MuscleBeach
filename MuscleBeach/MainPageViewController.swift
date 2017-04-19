@@ -230,15 +230,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let leftBarItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.leftBarButtonItem = leftBarItem
 
-        let cartImage = UIImage(named: "cartIcon")
-        let rightButton = UIButton(type: .custom)
-        rightButton.setImage(cartImage, for: .normal)
-        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        rightButton.addTarget(self, action: #selector(showCart), for: .touchUpInside)
-        rightButton.tintColor = .green
-
-        let rightBarItem = UIBarButtonItem(customView: rightButton)
-        self.navigationItem.rightBarButtonItem = rightBarItem
+//        let cartImage = UIImage(named: "cartIcon")
+//        let rightButton = UIButton(type: .custom)
+//        rightButton.setImage(cartImage, for: .normal)
+//        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+//        rightButton.addTarget(self, action: #selector(showCart), for: .touchUpInside)
+//        rightButton.tintColor = .green
+//
+//        let rightBarItem = UIBarButtonItem(customView: rightButton)
+//        self.navigationItem.rightBarButtonItem = rightBarItem
 
     }
 
