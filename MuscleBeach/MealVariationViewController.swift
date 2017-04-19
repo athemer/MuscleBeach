@@ -255,7 +255,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
                             let userData: [String: String] = ["userName": userName!, "userNumber": userNumber!]
 
                             print ("check userdata", userData)
-                            
+
                             let orderData: [String: AnyObject] = ["date": date as AnyObject, "deliver": deliver as AnyObject, "locationArea": mainAdd as AnyObject, "locationDetail": mainDetail as AnyObject, "userUID": uid as AnyObject, "time": self.timeToDB as AnyObject, "meal": meal as AnyObject, "userData": userData as AnyObject, "paymentStatus": "unpaid" as AnyObject, "paymentClaim": "false" as AnyObject ]
                             FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
 

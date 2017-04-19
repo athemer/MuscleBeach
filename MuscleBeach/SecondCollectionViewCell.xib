@@ -106,6 +106,7 @@
                     </view>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <size key="customSize" width="364" height="220"/>
             <connections>
                 <outlet property="deliverAddButton" destination="lCt-uY-ejl" id="nMi-eH-o3O"/>

@@ -57,8 +57,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         fetchAddress()
 
         setNameAndAmount()
-        
-        
+
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -69,9 +68,6 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         addressPicker.delegate = self
         addressPicker.dataSource = self
 
-        
-        
-        
         rangePicker.isHidden = true
         addressPicker.isHidden = true
         amountPicker.isHidden = true
@@ -158,7 +154,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
     }
-    
+
 //    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 //        switch pickerView {
 //    
@@ -450,24 +446,22 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
             self.addressPicker.reloadAllComponents()
 
         })
-        
-        
-        
+
         var theArray: [NSManagedObject] = []
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             theArray = try context.fetch(request)
-            
+
         } catch let error as NSError {
-            
+
             print("Could not fetch.")
         }
         let fetchedResult = theArray[0]
-        
+
         guard
             let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
             let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
@@ -475,38 +469,36 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         let add = "\(mainAdd)\(mainDetail)"
         self.forwardGeocoding2(address: add)
         self.addressButton.setTitle(add, for: .normal)
-        
+
     }
 
     func indicatorInfo(for pagerTablStripController: PagerTabStripViewController) -> IndicatorInfo {
                 return IndicatorInfo(title: "揪團訂餐")
            }
-    
+
     func setNameAndAmount() {
-        
-        
+
         let uid = FIRAuth.auth()?.currentUser?.uid
         FIRDatabase.database().reference().child("eatTogether").child(uid!).child("wishAmount").setValue(1)
-        
+
         var theArray: [NSManagedObject] = []
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
         request.predicate = NSPredicate(format: "id == %@", uid!)
-        
+
         do {
             theArray = try context.fetch(request)
-            
+
         } catch let error as NSError {
-            
+
             print("Could not fetch.")
         }
         let fetchedResult = theArray[0]
-        
+
         guard let userName = fetchedResult.value(forKey: "name") as? String else { return }
         FIRDatabase.database().reference().child("eatTogether").child(uid!).child("userName").setValue(name)
 
-        
     }
 
 }

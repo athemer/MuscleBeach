@@ -371,24 +371,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             print("Could not fetch.")
         }
 
-
         if dataArray.count > 0 {
-            
+
             let fetchedResult = dataArray[0]
-            
+
             guard let imgData = fetchedResult.value(forKey: "profileImage") as? Data else {
                 print ("not data type")
                 return
             }
-            
+
             profileImageView.image = UIImage(data: imgData)
-            
+
         } else {
             print ("no profile image to show")
-            
+
         }
-        
-        
 
     }
 

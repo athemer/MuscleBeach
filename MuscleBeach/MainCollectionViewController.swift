@@ -32,9 +32,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         self.collectionView?.frame = CGRect(x: 0, y: 0, width: 375, height: 240)
-        
+
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
@@ -125,14 +124,13 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCollectionViewCell", for: indexPath) as! SecondCollectionViewCell
             // swiftlint:disable:previous force_cast
 
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = .black
             cell.pickerView.delegate = self
             cell.pickerView.dataSource = self
             cell.firstButton.addTarget(self, action: #selector(changeAddress), for: .touchUpInside)
             cell.secondButton.addTarget(self, action: #selector(changeAddress2), for: .touchUpInside)
             cell.deliverAddButton.addTarget(self, action: #selector(delivAddBtnTapped), for: .touchUpInside)
-            
-            
+
             cell.firstInfoButton.addTarget(self, action: #selector(showInfoOne), for: .touchUpInside)
             cell.secondInfoButton.addTarget(self, action: #selector(showInfoTwo), for: .touchUpInside)
             return cell
@@ -439,9 +437,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         cell.deliverAddButton.isHidden = true
 
     }
-    
+
     func showInfoOne() {
-        
+
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "PickUpLocationViewController") as? PickUpLocationViewController else { return }
         vc.address = "台北市大安區羅斯福路三段283巷19弄4號"
         vc.latitude = 25.0194332
@@ -450,11 +448,11 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         vc.number = "02 2366 0381"
         vc.imageName = "c-tea"
         navigationController?.pushViewController(vc, animated: true)
-        
+
     }
-    
+
     func showInfoTwo() {
-        
+
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "PickUpLocationViewController") as? PickUpLocationViewController else { return }
         vc.address = "台北市信義區和平東路三段391巷8弄30號1樓"
         vc.latitude = 25.020501
@@ -462,10 +460,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         vc.name = "肌肉海灘工作室"
         vc.number = "02 2366 0381"
         vc.imageName = "MBLogo"
-        
+
         navigationController?.pushViewController(vc, animated: true)
-        
+
     }
-    
-    
+
 }

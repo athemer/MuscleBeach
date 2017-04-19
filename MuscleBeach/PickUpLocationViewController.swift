@@ -18,7 +18,7 @@ class PickUpLocationViewController: UIViewController, CLLocationManagerDelegate,
     @IBOutlet weak var numberLabel: UILabel!
 
     @IBOutlet weak var imageView: UIImageView!
-    
+
     let locationManager: CLLocationManager = CLLocationManager()
 
     var longitude: Double = 0
@@ -27,16 +27,15 @@ class PickUpLocationViewController: UIViewController, CLLocationManagerDelegate,
     var number: String = ""
     var address: String = ""
     var imageName: String = ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         self.locationManager.delegate = self
         self.mapView.mapType = MKMapType.standard
 
-        
         imageView.image = UIImage(named: imageName)
-        
+
         let latDelta = 0.01
         let longDelta = 0.01
         let currentLocationSpan: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)

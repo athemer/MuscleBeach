@@ -76,10 +76,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         } catch let error {
             print ("not logged out \(error)")
         }
-        
+
         deleteAll()
-        
-        
+
     }
     @IBAction func butTapped(_ sender: Any) {
 
@@ -196,10 +195,44 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.mealImage.contentMode = .scaleAspectFill
             cell.mealImage.clipsToBounds = true
             cell.mealImage.layer.cornerRadius = 15
-            
+
             return cell
         }
 
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch componentArr[section] {
+
+        case .homaPageImages:
+
+            return ""
+
+        case .addressSelection:
+
+            return "選擇訂餐地址"
+
+        case .fastOrder:
+
+            return "快速訂餐"
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch componentArr[section] {
+
+        case .homaPageImages:
+
+            return 0
+
+        case .addressSelection:
+
+            return 40
+
+        case .fastOrder:
+
+            return 40
+        }
     }
 
     func showCart() {
@@ -443,13 +476,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         if results.count > 0 {
 
                             let url = URL(string: ImageUrl)
-                            URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                                
+                            URLSession.shared.dataTask(with: url!) { (data, _, _) in
+
                                 results[0].profileImage = NSData(data: data!)
-                                
-                                
+
                                 }.resume()
-                            
+
                             results[0].id = uid!
                             results[0].name = name
                             results[0].number = number
@@ -468,13 +500,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             print("insert object")
 
                             let url = URL(string: ImageUrl)
-                            URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                                
+                            URLSession.shared.dataTask(with: url!) { (data, _, _) in
+
                                 user.setValue(data, forKey: "profileImage")
-                                
-                                
+
                                 }.resume()
-                            
+
                             user.setValue(name, forKey: "name")
                             user.setValue(number, forKey: "number")
                             user.setValue(mainAdd, forKey: "addressMain")
@@ -485,7 +516,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             user.setValue(prefC, forKey: "prefC")
                             user.setValue(deliver, forKey: "deliver")
                             user.setValue(uid!, forKey: "id")
-                            
+
                         }
 
                         try context.save()
@@ -509,33 +540,32 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func deleteAll() {
-        
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
+
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMO")
-        
+
         let moc = appDelegate.persistentContainer.viewContext
-        
+
         do {
-            
+
             guard let results = try moc.fetch(request) as? [UserMO] else {
                 return
             }
-            
+
             for result in results {
-                
+
                 moc.delete(result)
-                
+
             }
-            
+
             appDelegate.saveContext()
-            
+
         } catch {
-            
+
             fatalError("\(error)")
         }
-        
+
     }
 
-    
 }
