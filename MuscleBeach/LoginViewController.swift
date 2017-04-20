@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Spring
 
 class LoginViewController: UIViewController {
 
@@ -18,11 +19,15 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var signUpButton: UIButton!
 
+    @IBOutlet weak var loginBtn: SpringButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.hideKeyboardWhenTappedAround()
+        
 
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -50,6 +55,16 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
+        
+        loginBtn.animation = "pop"
+        loginBtn.curve = "easeIn"
+        loginBtn.force = 2.0
+        loginBtn.duration = 0.5
+        loginBtn.damping = 1.0
+        loginBtn.velocity = 1.0
+        loginBtn.animate()
+        
+        
         if let email = emailTextField.text, let password = passwordTextField.text {
             FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
                 if error == nil {

@@ -14,4 +14,6 @@ target 'MuscleBeach' do
   pod 'JTAppleCalendar'
   pod 'XLPagerTabStrip'
   pod 'Firebase/Storage'
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+
 end

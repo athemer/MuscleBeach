@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Spring
+
 
 class SignUpViewController: UIViewController {
 
@@ -19,6 +21,7 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var numberTextField: UITextField!
 
+    @IBOutlet weak var singUpBtn: SpringButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setUpKeyboardObservers()
@@ -45,6 +48,15 @@ class SignUpViewController: UIViewController {
     }
 
     @IBAction func userSignUpButtonTapped(_ sender: Any) {
+        
+        singUpBtn.animation = "pop"
+        singUpBtn.curve = "easeIn"
+        singUpBtn.force = 2.0
+        singUpBtn.duration = 0.5
+        singUpBtn.damping = 1.0
+        singUpBtn.velocity = 1.0
+        singUpBtn.animate()
+        
         if let email = emailTextField.text, let password = passwordTextField.text {
 
                     FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
