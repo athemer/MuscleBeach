@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Spring
 
 protocol ValueChangedDelegate: class {
     func didChangeMealAmount(_ manager: PopoverViewController, didGet newAmount: [String: Any])
@@ -40,6 +41,8 @@ class PopoverViewController: UIViewController {
 
     @IBOutlet weak var stepperC: UIStepper!
 
+    @IBOutlet var background: SpringView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,12 +56,18 @@ class PopoverViewController: UIViewController {
 
         print ("good")
         // Do any additional setup after loading the view.
+        
+        
+        background.animation = "zoomIn"
+        background.animate()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
+    
 
     @IBAction func confirmTapped(_ sender: Any) {
 
@@ -88,23 +97,39 @@ class PopoverViewController: UIViewController {
 
         getData(data: dataToParent)
 
-        self.willMove(toParentViewController: nil)
-
-        self.view.removeFromSuperview()
-
-        self.removeFromParentViewController()
+        background.animation = "zoomOut"
+        background.animate()
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.willMove(toParentViewController: nil)
+            
+            self.view.removeFromSuperview()
+            
+            self.removeFromParentViewController()
+        }
 
         print ("QOO")
 
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
+        
+        
+        
+        background.animation = "zoomOut"
+        background.animate()
+        
+        let when = DispatchTime.now() + 1 
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.willMove(toParentViewController: nil)
+            
+            self.view.removeFromSuperview()
+            
+            self.removeFromParentViewController()
+        }
 
-        self.willMove(toParentViewController: nil)
-
-        self.view.removeFromSuperview()
-
-        self.removeFromParentViewController()
 
     }
 
@@ -130,4 +155,11 @@ class PopoverViewController: UIViewController {
 
         self.delegate?.didChangeMealAmount(self, didGet: data)
     }
+    
+    func animationFirst(completion: @escaping ()-> Void) {
+        
+        completion()
+    }
+    
+    
 }

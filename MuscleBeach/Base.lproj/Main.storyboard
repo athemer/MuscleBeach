@@ -1662,7 +1662,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                         <viewControllerLayoutGuide type="top" id="fK8-AI-AYy"/>
                         <viewControllerLayoutGuide type="bottom" id="Ief-RU-m9F"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3Zl-EW-XZG">
+                    <view key="view" contentMode="scaleToFill" id="3Zl-EW-XZG" customClass="SpringView" customModule="Spring">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1715,6 +1715,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                         <color key="backgroundColor" white="0.33333333329999998" alpha="0.625" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="background" destination="3Zl-EW-XZG" id="oEx-xD-moy"/>
                         <outlet property="digitTextField" destination="raC-9T-2kQ" id="d7A-P5-5Wp"/>
                     </connections>
                 </viewController>
@@ -2544,7 +2545,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                         <viewControllerLayoutGuide type="top" id="SMQ-h3-MZG"/>
                         <viewControllerLayoutGuide type="bottom" id="dPy-3f-v2n"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1Xv-5Z-Bli">
+                    <view key="view" contentMode="scaleToFill" id="1Xv-5Z-Bli" customClass="SpringView" customModule="Spring">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -2682,6 +2683,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                         <outlet property="amountALable" destination="7ab-GL-Chh" id="XRn-zj-m5S"/>
                         <outlet property="amountBLable" destination="J1y-Tw-5RM" id="IVJ-TF-tnw"/>
                         <outlet property="amountCLAbel" destination="Rh1-Rm-g6l" id="QbM-UA-nTv"/>
+                        <outlet property="background" destination="1Xv-5Z-Bli" id="kte-lq-EcK"/>
                         <outlet property="stepperA" destination="D5t-A0-Z5d" id="WhS-WE-L3r"/>
                         <outlet property="stepperB" destination="gxD-Pv-c25" id="gdz-vF-vF9"/>
                         <outlet property="stepperC" destination="moB-Pp-bDW" id="3L7-LS-IL6"/>

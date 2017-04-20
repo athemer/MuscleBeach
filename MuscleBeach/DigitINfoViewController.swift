@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Spring
+
 
 class DigitINfoViewController: UIViewController {
 
@@ -16,12 +18,21 @@ class DigitINfoViewController: UIViewController {
 
     var keysArray: [String] = []
 
+    @IBOutlet var background: SpringView!
+
     @IBOutlet weak var digitTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        background.animation = "zoomIn"
+        background.animate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,11 +92,18 @@ class DigitINfoViewController: UIViewController {
                                     FIRDatabase.database().reference().child("order").child(key).child("shoppingCartId").setValue(keyforShoppingCartId)
                                 }
 
-                                self.willMove(toParentViewController: nil)
+                                self.background.animation = "zoomOut"
+                                self.background.animate()
+                                
+                                let when = DispatchTime.now() + 1
+                                DispatchQueue.main.asyncAfter(deadline: when) {
+                                    self.willMove(toParentViewController: nil)
+                                    
+                                    self.view.removeFromSuperview()
+                                    
+                                    self.removeFromParentViewController()
+                                }
 
-                                self.view.removeFromSuperview()
-
-                                self.removeFromParentViewController()
 
                             } else {
                                 return
@@ -101,10 +119,17 @@ class DigitINfoViewController: UIViewController {
 
     @IBAction func cancelTapped(_ sender: Any) {
 
-        self.willMove(toParentViewController: nil)
+        background.animation = "zoomOut"
+        background.animate()
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.willMove(toParentViewController: nil)
+            
+            self.view.removeFromSuperview()
+            
+            self.removeFromParentViewController()
+        }
 
-        self.view.removeFromSuperview()
-
-        self.removeFromParentViewController()
     }
 }
