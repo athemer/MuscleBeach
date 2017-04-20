@@ -62,19 +62,11 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonTapped(_ sender: Any) {
         
-        loginBtn.animation = "pop"
-        loginBtn.curve = "easeIn"
-        loginBtn.force = 2.0
-        loginBtn.duration = 0.5
-        loginBtn.damping = 1.0
-        loginBtn.velocity = 1.0
-        loginBtn.animate()
-        
         activityIndicator("帳號登入中")
         
         let when = DispatchTime.now() + 1
         
-        DispatchQueue.main.asyncAfter(deadline:when) {
+        DispatchQueue.main.asyncAfter(deadline: when) {
             if let email = self.emailTextField.text, let password = self.passwordTextField.text {
                 FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
                     

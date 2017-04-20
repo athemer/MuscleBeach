@@ -12,6 +12,12 @@ import Spring
 
 
 class SignUpViewController: UIViewController {
+    
+    var activityIndicator = UIActivityIndicatorView()
+    var strLabel = UILabel()
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+
+    @IBOutlet weak var backgroundView: UIView!
 
     @IBOutlet weak var emailTextField: UITextField!
 
@@ -49,41 +55,49 @@ class SignUpViewController: UIViewController {
 
     @IBAction func userSignUpButtonTapped(_ sender: Any) {
         
-        singUpBtn.animation = "pop"
-        singUpBtn.curve = "easeIn"
-        singUpBtn.force = 2.0
-        singUpBtn.duration = 0.5
-        singUpBtn.damping = 1.0
-        singUpBtn.velocity = 1.0
-        singUpBtn.animate()
         
-        if let email = emailTextField.text, let password = passwordTextField.text {
-
-                    FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
-                        if error != nil {
-                            let alertController = UIAlertController(title: "錯誤", message: "email已被註冊", preferredStyle: UIAlertControllerStyle.alert)
-                            alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alertController, animated: true, completion: nil)
-                            print(error)
-                            print("Unable to authenticate with Firebase using email")
-                        } else {
-                            print("Successfully authenticated with Firebase")
-                            if let user = user {
-                                let id = FIRAuth.auth()!.currentUser!.uid
-                                let userData = ["provider": user.providerID]
-                                let email = ["email": self.emailTextField.text!]
-                                let password = ["password": self.passwordTextField.text!]
-                                let name = ["name": self.nameTextField.text!]
-                                let number = ["number": self.numberTextField.text!]
-                                self.completeSignIn(id: id, userData: userData, email: email, password: password, name: name, number: number)
-                                let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
-                                self.present(signUpViewController!, animated: true, completion: nil)
-
-                            }
+        
+        activityIndicator("帳號登入中")
+        
+        let when = DispatchTime.now() + 1
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            if let email = self.emailTextField.text, let password = self.passwordTextField.text {
+                
+                FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+                    if error != nil {
+                        let alertController = UIAlertController(title: "錯誤", message: "email已被註冊", preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        print(error)
+                        print("Unable to authenticate with Firebase using email")
+                    } else {
+                        print("Successfully authenticated with Firebase")
+                        if let user = user {
+                            let id = FIRAuth.auth()!.currentUser!.uid
+                            let userData = ["provider": user.providerID]
+                            let email = ["email": self.emailTextField.text!]
+                            let password = ["password": self.passwordTextField.text!]
+                            let name = ["name": self.nameTextField.text!]
+                            let number = ["number": self.numberTextField.text!]
+                            self.completeSignIn(id: id, userData: userData, email: email, password: password, name: name, number: number)
+                            let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
+                            self.present(signUpViewController!, animated: true, completion: nil)
+                            
                         }
-                    })
+                    }
+                })
+            }
+
+            DispatchQueue.main.async {
+                self.effectView.removeFromSuperview()
+                
+            }
         }
-    }
+
+        
+        
+            }
     func completeSignIn(id: String, userData: [String: String], email: [String: String], password: [String: String], name: [String: String], number: [String: String]) {
         DataService.ds.createFirbaseDBUser(uid: id, userData: userData, email: email, password: password, name: name, number: number)
     }
@@ -103,5 +117,30 @@ class SignUpViewController: UIViewController {
             }
         }
     }
+    
+    func activityIndicator(_ title: String) {
+        
+        strLabel.removeFromSuperview()
+        activityIndicator.removeFromSuperview()
+        effectView.removeFromSuperview()
+        
+        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 160, height: 46))
+        strLabel.text = title
+        strLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        strLabel.textColor = UIColor(white: 0.9, alpha: 0.7)
+        
+        effectView.frame = CGRect(x: view.frame.midX - strLabel.frame.width/2, y: view.frame.midY - strLabel.frame.height/2 , width: 160, height: 46)
+        effectView.layer.cornerRadius = 15
+        effectView.layer.masksToBounds = true
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 46, height: 46)
+        activityIndicator.startAnimating()
+        
+        effectView.addSubview(activityIndicator)
+        effectView.addSubview(strLabel)
+        backgroundView.addSubview(effectView)
+    }
+
 
 }

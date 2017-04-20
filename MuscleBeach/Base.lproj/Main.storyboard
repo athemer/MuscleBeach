@@ -180,6 +180,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="IYV-jm-EEc" id="SqM-mf-UOI"/>
                         <outlet property="emailTextField" destination="9uD-5V-sxj" id="dJ2-nL-Y6l"/>
                         <outlet property="nameTextField" destination="vE7-4y-nqK" id="qaG-dY-C3I"/>
                         <outlet property="numberTextField" destination="tnY-ng-GzN" id="Be0-bm-Vpi"/>
