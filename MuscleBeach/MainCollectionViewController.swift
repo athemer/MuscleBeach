@@ -119,6 +119,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             cell.backgroundColor = .black
             cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
             return cell
+            
         case .two :
             // swiftlint:disable:next force_cast
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCollectionViewCell", for: indexPath) as! SecondCollectionViewCell
@@ -134,6 +135,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             cell.firstInfoButton.addTarget(self, action: #selector(showInfoOne), for: .touchUpInside)
             cell.secondInfoButton.addTarget(self, action: #selector(showInfoTwo), for: .touchUpInside)
             return cell
+            
         }
     }
 
