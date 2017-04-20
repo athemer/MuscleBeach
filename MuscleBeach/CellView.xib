@@ -17,7 +17,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GP1-u8-7Dm">
                     <rect key="frame" x="66" y="66" width="40" height="40"/>
-                    <color key="backgroundColor" red="0.58637028930000001" green="0.7886295915" blue="0.2368576527" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.95184928179999995" green="0.64627349379999999" blue="0.18585330250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="jwC-HK-i0a"/>
                         <constraint firstAttribute="height" constant="40" id="y3o-az-KG7"/>
@@ -30,7 +30,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.22745098039215686" green="0.15686274509803921" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.58637028930000001" green="0.7886295915" blue="0.2368576527" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="lQV-iO-nZP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3Nw-fn-E3y"/>
                 <constraint firstItem="GP1-u8-7Dm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GHl-rs-vcz"/>
