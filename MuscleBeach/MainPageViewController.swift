@@ -234,6 +234,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             return 40
         }
     }
+    
 
     func showCart() {
         // swiftlint:disable:next force_cast
@@ -281,6 +282,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         cell.timeView.isHidden = false
         cell.addToCartButton.isHidden = true
 
+        
+        tabBarController?.tabBar.items?[2].badgeValue = "2"
+        
 //        if  mealPrefExsit == false {
 //
 //            // Go to MealVariation
