@@ -21,9 +21,15 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var loginBtn: SpringButton!
     
+    
+    var activityIndicator = UIActivityIndicatorView()
+    var strLabel = UILabel()
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.hideKeyboardWhenTappedAround()
         
 
@@ -64,21 +70,50 @@ class LoginViewController: UIViewController {
         loginBtn.velocity = 1.0
         loginBtn.animate()
         
+        activityIndicator("帳號登入中")
         
-        if let email = emailTextField.text, let password = passwordTextField.text {
-            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
-                if error == nil {
-                    print("Email user authenticated with Firebase")
+        let when = DispatchTime.now() + 1
+        
+        DispatchQueue.main.asyncAfter(deadline:when) {
+            if let email = self.emailTextField.text, let password = self.passwordTextField.text {
+                FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
+                    
+                    if error == nil {
+                        print("Email user authenticated with Firebase")
                         let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
                         self.present(signUpViewController!, animated: true, completion: nil)
-                } else {
-                    let alertController = UIAlertController(title: "錯誤", message: "帳號不存在或密碼錯誤", preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
+                    } else {
+                        let alertController = UIAlertController(title: "錯誤", message: "帳號不存在或密碼錯誤", preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                })
+                
+            }
+            DispatchQueue.main.async {
+                self.effectView.removeFromSuperview()
 
+            }
         }
+        
+//        DispatchQueue.main.asyncAfter(deadline: when)
+        
+        
+//        if let email = emailTextField.text, let password = passwordTextField.text {
+//            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
+//                
+//                if error == nil {
+//                    print("Email user authenticated with Firebase")
+//                        let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
+//                        self.present(signUpViewController!, animated: true, completion: nil)
+//                } else {
+//                    let alertController = UIAlertController(title: "錯誤", message: "帳號不存在或密碼錯誤", preferredStyle: UIAlertControllerStyle.alert)
+//                    alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
+//                    self.present(alertController, animated: true, completion: nil)
+//                }
+//            })
+//
+//        }
     }
 
     func checkLoginStatus () {
@@ -107,6 +142,30 @@ class LoginViewController: UIViewController {
                 self.view.frame.origin.y = 0
             }
         }
+    }
+    
+    func activityIndicator(_ title: String) {
+        
+        strLabel.removeFromSuperview()
+        activityIndicator.removeFromSuperview()
+        effectView.removeFromSuperview()
+        
+        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 160, height: 46))
+        strLabel.text = title
+        strLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        strLabel.textColor = UIColor(white: 0.9, alpha: 0.7)
+        
+        effectView.frame = CGRect(x: view.frame.midX - strLabel.frame.width/2, y: view.frame.midY - strLabel.frame.height/2 , width: 160, height: 46)
+        effectView.layer.cornerRadius = 15
+        effectView.layer.masksToBounds = true
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 46, height: 46)
+        activityIndicator.startAnimating()
+        
+        effectView.addSubview(activityIndicator)
+        effectView.addSubview(strLabel)
+        backgroundView.addSubview(effectView)
     }
 
 }
