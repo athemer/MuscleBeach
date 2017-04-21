@@ -32,14 +32,14 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        fetchDataFromFirebase()
+        
         navigationItem.title = "購物車"
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
+        fetchDataFromFirebase()
         print ("haha")
     }
 
@@ -344,22 +344,31 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         var mealPrice: Int = 0
 
         var deliverDateNumber: Int = 0
-
-        for x in 0...days - 1 {
-            let singleDayPrice = orderDataToCart[x].price
-
-            if orderDataToCart[x].delvier == "外送" {
-                deliverDateNumber += 1
+        
+        
+        // needtobedone
+        
+        if days > 0 {
+            for x in 0...days - 1 {
+                let singleDayPrice = orderDataToCart[x].price
+                
+                if orderDataToCart[x].delvier == "外送" {
+                    deliverDateNumber += 1
+                }
+                mealPrice += singleDayPrice
             }
-            mealPrice += singleDayPrice
+            
+            self.mealPrice.text = "\(mealPrice)"
+            self.mealPriceofTotal = mealPrice
+            countDeliverFee(deliverDateNumber: deliverDateNumber)
+            
+            let totalprice: Int = mealPriceofTotal + self.finalDeliverFee
+            self.totalPRice.text = "\(totalprice)"
+        } else {
+            print ("day is zero")
         }
-
-        self.mealPrice.text = "\(mealPrice)"
-        self.mealPriceofTotal = mealPrice
-        countDeliverFee(deliverDateNumber: deliverDateNumber)
-
-        let totalprice: Int = mealPriceofTotal + self.finalDeliverFee
-        self.totalPRice.text = "\(totalprice)"
+        
+        
     }
 
     func countDeliverFee (deliverDateNumber: Int) {

@@ -45,12 +45,15 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
 
         // Do any additional setup after loading the view.
     }
-
-    func scroll() {
-        let index = IndexPath(item: message.count - 1, section: 0)
-        print ("??", message.count)
-        self.collectionView?.scrollToItem(at: index, at: .bottom, animated: true)
-    }
+    
+    //needtobedone
+    
+    
+//    func scroll() {
+//        let index = IndexPath(item: message.count - 1, section: 0)
+//        print ("??", message.count)
+//        self.collectionView?.scrollToItem(at: index, at: .bottom, animated: true)
+//    }
 
 //    lazy var inputContainerView: UIView = {
 //        let containerView = UIView()
@@ -169,7 +172,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
             // do url
 
             let url = URL(string: self.url)
-
+            //needtobedone
             URLSession.shared.dataTask(with: url!, completionHandler: { (data, _, error) in
 
                 if error != nil {
@@ -229,7 +232,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
                     self.message.append(message)
                     DispatchQueue.main.async(execute: {
                         self.collectionView?.reloadData()
-                        self.scroll()
+//                        self.scroll()
                     })
 
             }, withCancel: nil)
@@ -330,7 +333,7 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
         UIView.animate(withDuration: keyboardDuration!) {
             self.view.layoutIfNeeded()
             DispatchQueue.main.async(execute: {
-                self.scroll()
+//                self.scroll()
             })
         }
     }
