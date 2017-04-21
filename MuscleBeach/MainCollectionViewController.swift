@@ -14,9 +14,9 @@ private let reuseIdentifier = "Cell"
 
 class MainCollectionViewController: UICollectionViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    var detailAddToDB: String = ""
-    var mainAddToDB: String = ""
-    var deliverToDB: String = ""
+    var detailAddToDB: String = "城市草倉"
+    var mainAddToDB: String = "自取地點一"
+    var deliverToDB: String = "自取"
 
     var dataArray: [NSManagedObject] = []
 
@@ -110,14 +110,15 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                     print ("not possibly gonna happen")
                 }
 
+                
                 try context.save()
-
             } catch {
                 print (error.localizedDescription)
             }
 
             cell.backgroundColor = .black
             cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
+        
             return cell
             
         case .two :
