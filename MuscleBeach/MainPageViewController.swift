@@ -162,7 +162,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
             // swiftlint:disable:previous force_cast
-
+            
+            cell.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 240)
+            
+            
             return cell
 
         case .addressSelection:

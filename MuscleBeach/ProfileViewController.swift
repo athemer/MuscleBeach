@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
         profileImageView.isUserInteractionEnabled = true
-        profileImageView.layer.cornerRadius = 65
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         profileImageView.clipsToBounds = true
 
         registerCell()

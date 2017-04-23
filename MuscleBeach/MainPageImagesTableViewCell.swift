@@ -35,7 +35,7 @@ class MainPageImagesTableViewCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     func setUpScrollView() {
-        self.scrollView.frame = CGRect(x: 0, y: 0, width:375, height:240)
+//        self.scrollView.frame = CGRect(x: 0, y: 0, width: 375, height: 240)
         let scrollViewWidth: CGFloat = self.scrollView.frame.width
         let scrollViewHeight: CGFloat = self.scrollView.frame.height
 
