@@ -23,15 +23,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </scrollView>
-                    <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Wus-cM-u6Z">
+                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Wus-cM-u6Z">
                         <rect key="frame" x="168" y="200" width="39" height="37"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="t4L-en-gtE"/>
+                        </constraints>
                     </pageControl>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="7s3-ah-dZH" secondAttribute="bottom" id="Fy8-tn-Dgm"/>
+                    <constraint firstAttribute="trailing" secondItem="Wus-cM-u6Z" secondAttribute="trailing" constant="168" id="GN3-2K-6U8"/>
                     <constraint firstItem="7s3-ah-dZH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="O7i-Tc-ede"/>
                     <constraint firstItem="7s3-ah-dZH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Wjh-b3-H2d"/>
+                    <constraint firstAttribute="bottom" secondItem="Wus-cM-u6Z" secondAttribute="bottom" constant="2" id="hSH-Or-BF6"/>
+                    <constraint firstItem="Wus-cM-u6Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="168" id="k6k-0Z-OJM"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7s3-ah-dZH" secondAttribute="trailing" constant="-8" id="mvx-fD-tBE"/>
                 </constraints>
             </tableViewCellContentView>

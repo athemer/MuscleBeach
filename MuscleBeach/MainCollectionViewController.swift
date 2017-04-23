@@ -27,13 +27,20 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         case two
     }
 
+    let screensize = UIScreen.main.bounds
     let componentArr: [Components] = [.one, .two]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView?.frame = CGRect(x: 0, y: 0, width: 375, height: 240)
-
+        
+        
+        self.collectionView?.frame = CGRect(x: 0, y: 0, width: screensize.width, height: screensize.height * 0.35)
+        
+        print ("WIDTH", self.collectionView?.frame.width)
+        print ("KILLing me", self.collectionView?.bounds, self.collectionView?.frame)
+//        self.collectionView?.bounds = CGRect(x: 0, y: 0, width: screensize.width, height: screensize.height * 0.35)
+        
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
@@ -88,6 +95,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath) as! FirstCollectionViewCell
             // swiftlint:disable:previous force_cast
 
+            
+            cell.bounds = CGRect(x: 0, y: 0, width: screensize.width * 0.85, height: screensize.height * 0.3)
+            
             let uid = FIRAuth.auth()?.currentUser?.uid
 
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return cell}
@@ -126,6 +136,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCollectionViewCell", for: indexPath) as! SecondCollectionViewCell
             // swiftlint:disable:previous force_cast
 
+            cell.bounds = CGRect(x: 0, y: 0, width: screensize.width * 0.85, height: screensize.height * 0.3)
+            
             cell.backgroundColor = .black
             cell.pickerView.delegate = self
             cell.pickerView.dataSource = self
@@ -399,7 +411,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
                     let index: IndexPath = IndexPath(item: 0, section: 1)
                     // swiftlint:disable:next force_cast
-                    let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+                    guard let cell = self.collectionView?.cellForItem(at: index) as? SecondCollectionViewCell else { return }
                     // swiftlint:disable:previous force_cast
 
                     cell.deliverAddButton.setTitle("請選擇地址", for: .normal)
@@ -409,7 +421,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             } else {
                 let index: IndexPath = IndexPath(item: 0, section: 1)
                 // swiftlint:disable:next force_cast
-                let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+                guard let cell = self.collectionView?.cellForItem(at: index) as? SecondCollectionViewCell else { return }
                 // swiftlint:disable:previous force_cast
 
                 cell.deliverAddButton.setTitle("請先至個人頁面新增地址", for: .normal)
@@ -422,7 +434,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             let index: IndexPath = IndexPath(item: 0, section: 1)
 
             // swiftlint:disable:next force_cast
-            let cell = self.collectionView?.cellForItem(at: index) as! SecondCollectionViewCell
+            guard let cell = self.collectionView?.cellForItem(at: index) as? SecondCollectionViewCell else { return }
             // swiftlint:disable:previous force_cast
             cell.pickerView.reloadAllComponents()
 

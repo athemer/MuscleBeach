@@ -15,6 +15,8 @@ class MainPageImagesTableViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    let screenSize = UIScreen.main.bounds
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpScrollView()
@@ -35,7 +37,7 @@ class MainPageImagesTableViewCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     func setUpScrollView() {
-//        self.scrollView.frame = CGRect(x: 0, y: 0, width: 375, height: 240)
+        self.scrollView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.35)
         let scrollViewWidth: CGFloat = self.scrollView.frame.width
         let scrollViewHeight: CGFloat = self.scrollView.frame.height
 

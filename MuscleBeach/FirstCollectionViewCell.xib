@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,45 +20,70 @@
                 <rect key="frame" x="0.0" y="0.0" width="345" height="220"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-qg-QlL">
-                        <rect key="frame" x="8" y="8" width="330" height="204"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-qg-QlL">
+                        <rect key="frame" x="18" y="8" width="310.5" height="204"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="預設詳細地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqo-1M-M5R">
-                                <rect key="frame" x="12" y="76" width="284" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="預設詳細地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqo-1M-M5R">
+                                <rect key="frame" x="12" y="76" width="110.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="S8r-TH-UAg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tQ-x7-15O">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tQ-x7-15O">
                                 <rect key="frame" x="74" y="139" width="175" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="pvD-Tr-1Yt"/>
+                                </constraints>
                                 <state key="normal" title="開始選擇訂餐日期">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="取餐地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbd-tv-wi8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="取餐地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbd-tv-wi8">
                                 <rect key="frame" x="12" y="11" width="70" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="LZa-3t-PFo"/>
+                                    <constraint firstAttribute="width" constant="70" id="buf-rL-vFD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="預設主要地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLs-bK-eal">
-                                <rect key="frame" x="12" y="49" width="284" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="預設主要地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLs-bK-eal">
+                                <rect key="frame" x="12" y="49" width="110.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SBD-ax-Ysf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rbd-tv-wi8" firstAttribute="leading" secondItem="aW8-qg-QlL" secondAttribute="leading" constant="12" id="1qI-Cv-gif"/>
+                            <constraint firstAttribute="bottom" secondItem="3tQ-x7-15O" secondAttribute="bottom" constant="16" id="7Bn-cl-ULH"/>
+                            <constraint firstItem="iLs-bK-eal" firstAttribute="top" secondItem="rbd-tv-wi8" secondAttribute="bottom" constant="17" id="Gif-t9-U34"/>
+                            <constraint firstItem="rbd-tv-wi8" firstAttribute="top" secondItem="aW8-qg-QlL" secondAttribute="top" constant="11" id="Oxi-kf-Izp"/>
+                            <constraint firstItem="Rqo-1M-M5R" firstAttribute="top" secondItem="rbd-tv-wi8" secondAttribute="bottom" constant="44" id="PYN-kh-zmg"/>
+                            <constraint firstItem="3tQ-x7-15O" firstAttribute="leading" secondItem="aW8-qg-QlL" secondAttribute="leading" constant="74" id="QNE-Is-QuK"/>
+                            <constraint firstItem="Rqo-1M-M5R" firstAttribute="leading" secondItem="aW8-qg-QlL" secondAttribute="leading" constant="12" id="XDV-rH-lig"/>
+                            <constraint firstItem="iLs-bK-eal" firstAttribute="leading" secondItem="aW8-qg-QlL" secondAttribute="leading" constant="12" id="cuw-FL-wNh"/>
+                            <constraint firstAttribute="trailing" secondItem="3tQ-x7-15O" secondAttribute="trailing" constant="61.5" id="xg5-mt-QFj"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="aW8-qg-QlL" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="H6N-TW-ZWk"/>
+                <constraint firstItem="aW8-qg-QlL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="KMd-JH-yqD"/>
+                <constraint firstItem="aW8-qg-QlL" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="fcn-uy-Ima"/>
+                <constraint firstItem="aW8-qg-QlL" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.9" id="lKs-dX-710"/>
+            </constraints>
             <size key="customSize" width="422" height="269"/>
             <connections>
                 <outlet property="addressLabel" destination="iLs-bK-eal" id="gBz-e9-yAb"/>

@@ -33,6 +33,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
     let imageNameArr: [String] = ["sample", "sample4", "sample2", "sample3", "sample4", "sample", "sample2" ]
 
+    
+    let screenSize = UIScreen.main.bounds
+    
     enum Components {
         case homaPageImages
         case addressSelection
@@ -59,7 +62,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.register(nib2, forCellReuseIdentifier: "SecondTableViewCell")
         let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
         tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
-
+        
+        
+//        let width = self.tableView.frame.width
+//        let scWidth = UIScreen.main.bounds.width
+//        print ("FORWD", width, scWidth)
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -145,10 +154,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch componentArr[indexPath.section] {
         case .homaPageImages:
-            return 240
+            return screenSize.height * 0.35
 
         case .addressSelection:
-            return 240
+            return screenSize.height * 0.35
 
         case .fastOrder:
             return 100
@@ -163,9 +172,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
             // swiftlint:disable:previous force_cast
             
-            cell.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width , height: 240)
-            
-            
+//            cell.frame = CGRect(x: 0, y: 0, width: screenSize.width , height: screenSize.height * 0.35)
+
             return cell
 
         case .addressSelection:
@@ -174,6 +182,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
             // swiftlint:disable:previous force_cast
 
+            
+//            cell.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.35)
             cell.backgroundColor = .green
 
             let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
