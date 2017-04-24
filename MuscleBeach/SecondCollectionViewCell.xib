@@ -36,9 +36,9 @@
                                                     <constraint firstAttribute="height" constant="30" id="XYf-DR-6vA"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="肌肉海灘工作室"/>
+                                                <state key="normal" title="工作室"/>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="0Fl-FX-ynn">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Fl-FX-ynn">
                                                 <rect key="frame" x="11" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="JTk-5P-7oU"/>
@@ -191,7 +191,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="MBLogo" width="491" height="491"/>
         <image name="c-tea" width="315" height="315"/>
+        <image name="icon" width="300" height="300"/>
     </resources>
 </document>

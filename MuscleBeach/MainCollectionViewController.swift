@@ -301,7 +301,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         let cell = collectionView?.cellForItem(at: index) as! FirstCollectionViewCell
         // swiftlint:disable:previous force_cast
 
-        cell.addressLabel.text = "肌肉海灘工作室"
+        cell.addressLabel.text = "工作室"
         cell.detailLAbel.text = "信義區和平東路三段391巷8弄30號1樓"
 
         guard let parentVC = self.parent as? MainPageViewController else {
@@ -313,7 +313,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
         self.deliverToDB = "自取"
         self.mainAddToDB = "自取地點二"
-        self.detailAddToDB = "肌肉海灘工作室"
+        self.detailAddToDB = "工作室"
 
         let uid = FIRAuth.auth()?.currentUser?.uid
 
@@ -328,7 +328,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             if results.count > 0 {
 
                 results[0].addressMain = "自取地點二"
-                results[0].addressDetail = "肌肉海灘工作室"
+                results[0].addressDetail = "工作室"
                 results[0].deliver = "自取"
 
             } else {
@@ -463,9 +463,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         vc.address = "台北市信義區和平東路三段391巷8弄30號1樓"
         vc.latitude = 25.020501
         vc.longitude = 121.557314
-        vc.name = "肌肉海灘工作室"
+        vc.name = "工作室"
         vc.number = "02 2366 0381"
-        vc.imageName = "MBLogo"
+        vc.imageName = "icon"
 
         navigationController?.pushViewController(vc, animated: true)
 

@@ -31,7 +31,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
-    let imageNameArr: [String] = ["sample", "sample4", "sample2", "sample3", "sample4", "sample", "sample2" ]
+    let imageNameArr: [String] = ["sample", "sample4", "sample", "sample3", "sample4", "sample", "sample3" ]
 
     let screenSize = UIScreen.main.bounds
 
@@ -87,46 +87,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
     @IBAction func butTapped(_ sender: Any) {
-
-    }
-
-    @IBAction func start(_ sender: Any) {
-        guard
-            let vc1 = self.storyboard?.instantiateViewController(withIdentifier:"SelfPickUpViewController") as? SelfPickUpViewController,
-            let vc2 = self.storyboard?.instantiateViewController(withIdentifier:"ConfirmDeliverAdViewController") as?ConfirmDeliverAdViewController
-         else { return }
-
-        if segOne.selectedSegmentIndex == 0 {
-
-            vc1.deliverToDB = "自取"
-
-            switch segTwo.selectedSegmentIndex {
-            case 0:
-                vc1.toWhichPage = "single"
-            case 1:
-                vc1.toWhichPage = "multiple"
-
-            default: break
-
-            }
-
-            self.navigationController?.pushViewController(vc1, animated: true)
-        } else {
-
-            vc2.deliverToDB = "外送"
-
-            switch segTwo.selectedSegmentIndex {
-            case 0:
-                vc2.toWhichPage = "single"
-            case 1:
-                vc2.toWhichPage = "multiple"
-
-            default: break
-
-            }
-
-            self.navigationController?.pushViewController(vc2, animated: true)
-        }
 
     }
 
