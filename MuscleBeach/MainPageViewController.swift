@@ -33,9 +33,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
     let imageNameArr: [String] = ["sample", "sample4", "sample2", "sample3", "sample4", "sample", "sample2" ]
 
-    
     let screenSize = UIScreen.main.bounds
-    
+
     enum Components {
         case homaPageImages
         case addressSelection
@@ -62,13 +61,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.register(nib2, forCellReuseIdentifier: "SecondTableViewCell")
         let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
         tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
-        
-        
+
 //        let width = self.tableView.frame.width
 //        let scWidth = UIScreen.main.bounds.width
 //        print ("FORWD", width, scWidth)
-        
-        
+
         // Do any additional setup after loading the view.
     }
 
@@ -171,7 +168,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
             // swiftlint:disable:previous force_cast
-            
+
 //            cell.frame = CGRect(x: 0, y: 0, width: screenSize.width , height: screenSize.height * 0.35)
 
             return cell
@@ -181,17 +178,33 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
             // swiftlint:disable:previous force_cast
-
             
-//            cell.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.35)
-            cell.backgroundColor = .green
+            cell.contentView.backgroundColor = .red
 
             let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
-
-            cell.vc = vcToAdd
-            cell.contentView.addSubview((vcToAdd?.view)!)
+            
+            
             self.addChildViewController(vcToAdd!)
+            
+            vcToAdd?.willMove(toParentViewController: self)
+            
+            cell.contentView.addSubview((vcToAdd?.collectionView)!)
 
+            
+            
+            
+            vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
+            
+            vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
+            vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
+            vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
+            vcToAdd?.collectionView?.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
+
+            vcToAdd?.didMove(toParentViewController: self)
+            
+            
+            print("test frame", vcToAdd!.view!.frame)
+            
             return cell
 
         case .fastOrder:
@@ -247,7 +260,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             return 40
         }
     }
-    
 
     func showCart() {
         // swiftlint:disable:next force_cast
@@ -295,9 +307,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         cell.timeView.isHidden = false
         cell.addToCartButton.isHidden = true
 
-        
         tabBarController?.tabBar.items?[2].badgeValue = "2"
-        
+
 //        if  mealPrefExsit == false {
 //
 //            // Go to MealVariation

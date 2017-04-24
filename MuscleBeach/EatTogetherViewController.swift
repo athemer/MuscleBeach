@@ -304,53 +304,52 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                             let key = snap.key as? String
                         else
                         { return }
-                        
-                        
+
                         let uid = FIRAuth.auth()?.currentUser?.uid
-                        
+
                         if key != uid {
-                            
+
                             self.forwardGeocoding(address: location, completion: {
-                                
+
                                 self.name = name
                                 //                                self.amount = amount
-                                
+
                                 let coordinate1 = CLLocation(latitude: self.latCurrent, longitude: self.longiCurrent)
                                 let coordinate2 = CLLocation(latitude: self.latDestination, longitude: self.longiDestination)
-                                
+
                                 let distanceInMeters = coordinate1.distance(from: coordinate2) // result is in meters
                                 let roundedDistance = Double(round(distanceInMeters * 10)/10)
                                 print ("meters \(distanceInMeters)")
-                                
+
                                 if roundedDistance <= self.distanceLimitation {
-                                    
+
                                     switch self.wishAmount {
                                     case 1:
-                                        
+
                                         if amount == 1 || amount == 4 {
                                             let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
-                                            
+
                                         } else {
                                             print("amount doesnt match")
                                         }
-                                        
+
                                     case 2:
-                                        
+
                                         if amount == 3 {
                                             let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
-                                            
+
                                         } else {
                                             print("amount doesnt match")
                                         }
-                                        
+
                                     case 3:
-                                        
+
                                         if amount == 2 {
                                             let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
-                                            
+
                                         } else {
                                             print("amount doesnt match")
                                         }
@@ -358,23 +357,23 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                         if amount == 1 {
                                             let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                             self.dataArray.append(dataToAppend)
-                                            
+
                                         } else {
                                             print("amount doesnt match")
                                         }
-                                        
+
                                         print ("")
                                     default:
                                         break
-                                        
+
                                     }
-                                    
+
                                     self.tableView.reloadData()
-                                    
+
                                 } else {
-                                    
+
                                     print ("too far away")
-                                    
+
                                 }
                             })
 
@@ -399,22 +398,21 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                 let uid = FIRAuth.auth()?.currentUser?.uid
                 FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishAmount": self.wishAmount])
 
-                
                 var theArray: [NSManagedObject] = []
                 guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
                 let context = appDelegate.persistentContainer.viewContext
                 let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
                 request.predicate = NSPredicate(format: "id == %@", uid!)
-                
+
                 do {
                     theArray = try context.fetch(request)
-                    
+
                 } catch let error as NSError {
-                    
+
                     print("Could not fetch.")
                 }
                 let fetchedResult = theArray[0]
-                
+
                 guard
                     let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
                     let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String

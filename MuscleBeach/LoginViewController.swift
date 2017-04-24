@@ -20,20 +20,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
 
     @IBOutlet weak var loginBtn: SpringButton!
-    
-    
+
     var activityIndicator = UIActivityIndicatorView()
     var strLabel = UILabel()
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.hideKeyboardWhenTappedAround()
-        
 
-        
+        self.hideKeyboardWhenTappedAround()
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -61,15 +57,15 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
-        
+
         activityIndicator("帳號登入中")
-        
+
         let when = DispatchTime.now() + 1
-        
+
         DispatchQueue.main.asyncAfter(deadline: when) {
             if let email = self.emailTextField.text, let password = self.passwordTextField.text {
                 FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
-                    
+
                     if error == nil {
                         print("Email user authenticated with Firebase")
                         let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
@@ -80,17 +76,16 @@ class LoginViewController: UIViewController {
                         self.present(alertController, animated: true, completion: nil)
                     }
                 })
-                
+
             }
             DispatchQueue.main.async {
                 self.effectView.removeFromSuperview()
 
             }
         }
-        
+
 //        DispatchQueue.main.asyncAfter(deadline: when)
-        
-        
+
 //        if let email = emailTextField.text, let password = passwordTextField.text {
 //            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (_, error) in
 //                
@@ -135,26 +130,26 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+
     func activityIndicator(_ title: String) {
-        
+
         strLabel.removeFromSuperview()
         activityIndicator.removeFromSuperview()
         effectView.removeFromSuperview()
-        
+
         strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 160, height: 46))
         strLabel.text = title
         strLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         strLabel.textColor = UIColor(white: 0.9, alpha: 0.7)
-        
-        effectView.frame = CGRect(x: view.frame.midX - strLabel.frame.width/2, y: view.frame.midY - strLabel.frame.height/2 , width: 160, height: 46)
+
+        effectView.frame = CGRect(x: view.frame.midX - strLabel.frame.width/2, y: view.frame.midY - strLabel.frame.height/2, width: 160, height: 46)
         effectView.layer.cornerRadius = 15
         effectView.layer.masksToBounds = true
-        
+
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 46, height: 46)
         activityIndicator.startAnimating()
-        
+
         effectView.addSubview(activityIndicator)
         effectView.addSubview(strLabel)
         backgroundView.addSubview(effectView)

@@ -53,9 +53,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         setUpProfileImageIfAny()
 
-        
         print("CHECK", profileImageView.frame.width, profileImageView.bounds.width)
-        
+
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
         profileImageView.isUserInteractionEnabled = true
         profileImageView.layer.cornerRadius = UIScreen.main.bounds.width * 0.365 / 2

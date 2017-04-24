@@ -33,14 +33,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
         self.collectionView?.frame = CGRect(x: 0, y: 0, width: screensize.width, height: screensize.height * 0.35)
-        
-        print ("WIDTH", self.collectionView?.frame.width)
-        print ("KILLing me", self.collectionView?.bounds, self.collectionView?.frame)
-//        self.collectionView?.bounds = CGRect(x: 0, y: 0, width: screensize.width, height: screensize.height * 0.35)
-        
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
@@ -95,9 +88,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath) as! FirstCollectionViewCell
             // swiftlint:disable:previous force_cast
 
-            
             cell.bounds = CGRect(x: 0, y: 0, width: screensize.width * 0.85, height: screensize.height * 0.3)
-            
+
             let uid = FIRAuth.auth()?.currentUser?.uid
 
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return cell}
@@ -120,7 +112,6 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                     print ("not possibly gonna happen")
                 }
 
-                
                 try context.save()
             } catch {
                 print (error.localizedDescription)
@@ -128,16 +119,16 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
             cell.backgroundColor = .black
             cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
-        
+
             return cell
-            
+
         case .two :
             // swiftlint:disable:next force_cast
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCollectionViewCell", for: indexPath) as! SecondCollectionViewCell
             // swiftlint:disable:previous force_cast
 
             cell.bounds = CGRect(x: 0, y: 0, width: screensize.width * 0.85, height: screensize.height * 0.3)
-            
+
             cell.backgroundColor = .black
             cell.pickerView.delegate = self
             cell.pickerView.dataSource = self
@@ -148,7 +139,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             cell.firstInfoButton.addTarget(self, action: #selector(showInfoOne), for: .touchUpInside)
             cell.secondInfoButton.addTarget(self, action: #selector(showInfoTwo), for: .touchUpInside)
             return cell
-            
+
         }
     }
 

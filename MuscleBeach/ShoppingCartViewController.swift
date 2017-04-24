@@ -32,7 +32,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+
         navigationItem.title = "購物車"
 
     }
@@ -344,31 +344,29 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         var mealPrice: Int = 0
 
         var deliverDateNumber: Int = 0
-        
-        
+
         // needtobedone
-        
+
         if days > 0 {
             for x in 0...days - 1 {
                 let singleDayPrice = orderDataToCart[x].price
-                
+
                 if orderDataToCart[x].delvier == "外送" {
                     deliverDateNumber += 1
                 }
                 mealPrice += singleDayPrice
             }
-            
+
             self.mealPrice.text = "\(mealPrice)"
             self.mealPriceofTotal = mealPrice
             countDeliverFee(deliverDateNumber: deliverDateNumber)
-            
+
             let totalprice: Int = mealPriceofTotal + self.finalDeliverFee
             self.totalPRice.text = "\(totalprice)"
         } else {
             print ("day is zero")
         }
-        
-        
+
     }
 
     func countDeliverFee (deliverDateNumber: Int) {

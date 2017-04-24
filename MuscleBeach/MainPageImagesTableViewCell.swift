@@ -16,7 +16,7 @@ class MainPageImagesTableViewCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
 
     let screenSize = UIScreen.main.bounds
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpScrollView()

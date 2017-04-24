@@ -45,10 +45,9 @@ class ChatRoomViewController: UICollectionViewController, UITextFieldDelegate, U
 
         // Do any additional setup after loading the view.
     }
-    
+
     //needtobedone
-    
-    
+
 //    func scroll() {
 //        let index = IndexPath(item: message.count - 1, section: 0)
 //        print ("??", message.count)

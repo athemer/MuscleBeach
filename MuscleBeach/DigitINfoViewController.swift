@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import Spring
 
-
 class DigitINfoViewController: UIViewController {
 
     var mealPriceofTotal: Int = 0
@@ -27,10 +26,10 @@ class DigitINfoViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+
         background.animation = "zoomIn"
         background.animate()
     }
@@ -94,16 +93,15 @@ class DigitINfoViewController: UIViewController {
 
                                 self.background.animation = "zoomOut"
                                 self.background.animate()
-                                
+
                                 let when = DispatchTime.now() + 1
                                 DispatchQueue.main.asyncAfter(deadline: when) {
                                     self.willMove(toParentViewController: nil)
-                                    
+
                                     self.view.removeFromSuperview()
-                                    
+
                                     self.removeFromParentViewController()
                                 }
-
 
                             } else {
                                 return
@@ -121,13 +119,13 @@ class DigitINfoViewController: UIViewController {
 
         background.animation = "zoomOut"
         background.animate()
-        
+
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.willMove(toParentViewController: nil)
-            
+
             self.view.removeFromSuperview()
-            
+
             self.removeFromParentViewController()
         }
 

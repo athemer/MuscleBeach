@@ -17,9 +17,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="239"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <color key="backgroundColor" red="0.99564907449999995" green="0.20681522599999999" blue="0.17195809519999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.99564907449999995" green="0.20681522599999999" blue="0.17195809519999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="69.5" y="153.5"/>
         </tableViewCell>
     </objects>
