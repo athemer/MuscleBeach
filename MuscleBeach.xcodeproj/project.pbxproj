@@ -37,7 +37,6 @@
 		D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D180B90C1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld */; };
 		D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */; };
 		D180B9131E7FAFC900AB0DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B9111E7FAFC900AB0DA9 /* LaunchScreen.storyboard */; };
-		D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */; };
 		D180B91E1E7FB2F100AB0DA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */; };
 		D181C5D71E85179200A5D87B /* MealVariationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5D61E85179200A5D87B /* MealVariationViewController.swift */; };
 		D181C5D91E85195400A5D87B /* MealVariTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C5D81E85195400A5D87B /* MealVariTableViewCell.swift */; };
@@ -116,7 +115,6 @@
 		D180B90F1E7FAFC900AB0DA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D180B9121E7FAFC900AB0DA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D180B9141E7FAFC900AB0DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D181C5D61E85179200A5D87B /* MealVariationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealVariationViewController.swift; sourceTree = "<group>"; };
 		D181C5D81E85195400A5D87B /* MealVariTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealVariTableViewCell.swift; sourceTree = "<group>"; };
@@ -333,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				D180B9091E7FAFC900AB0DA9 /* Main.storyboard */,
-				D180B91B1E7FB03A00AB0DA9 /* Login.storyboard */,
 			);
 			name = StoryBoard;
 			sourceTree = "<group>";
@@ -498,7 +495,6 @@
 				D121F66E1E8114450049796D /* OrderHistoryCell.xib in Resources */,
 				D121F6621E81135F0049796D /* ProfileCell.xib in Resources */,
 				D180B90B1E7FAFC900AB0DA9 /* Main.storyboard in Resources */,
-				D180B91C1E7FB03A00AB0DA9 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
