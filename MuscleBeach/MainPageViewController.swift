@@ -62,10 +62,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
         tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
 
-//        let width = self.tableView.frame.width
-//        let scWidth = UIScreen.main.bounds.width
-//        print ("FORWD", width, scWidth)
-
         // Do any additional setup after loading the view.
     }
 
@@ -84,9 +80,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
 
         deleteAll()
-
-    }
-    @IBAction func butTapped(_ sender: Any) {
 
     }
 
@@ -149,9 +142,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             vcToAdd?.willMove(toParentViewController: self)
             
             cell.contentView.addSubview((vcToAdd?.collectionView)!)
-
-            
-            
             
             vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
             
