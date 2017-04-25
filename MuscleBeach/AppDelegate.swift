@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         checkLoginStatus()
 
+        Fabric.with([Crashlytics.self])
         print(NSPersistentContainer.defaultDirectoryURL())
         return true
     }

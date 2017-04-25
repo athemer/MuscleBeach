@@ -70,7 +70,7 @@ class SignUpViewController: UIViewController {
 //                        print("Unable to authenticate with Firebase using email")
                     } else {
 //                        print("Successfully authenticated with Firebase")
-                        
+
                         if let user = user {
                             let id = FIRAuth.auth()!.currentUser!.uid
                             let userData = ["provider": user.providerID]

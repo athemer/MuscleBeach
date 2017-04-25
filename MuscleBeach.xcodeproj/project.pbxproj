@@ -27,6 +27,8 @@
 		D1683C241E7FCADE00C9D887 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C231E7FCADE00C9D887 /* DataService.swift */; };
 		D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */; };
 		D1683C2B1E8024C500C9D887 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */; };
+		D173D5721EAF22AB00CC533B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D173D5701EAF22AB00CC533B /* Fabric.framework */; };
+		D173D5731EAF22AB00CC533B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D173D5711EAF22AB00CC533B /* Crashlytics.framework */; };
 		D178363F1E9CBB4800CF8BCA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */; };
 		D17836431E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */; };
 		D17836441E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */; };
@@ -103,6 +105,8 @@
 		D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1683C291E801C7E00C9D887 /* MuscleBeach.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuscleBeach.entitlements; sourceTree = "<group>"; };
 		D1683C2A1E8024C500C9D887 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		D173D5701EAF22AB00CC533B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D173D5711EAF22AB00CC533B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D178363E1E9CBB4800CF8BCA /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		D17836411E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageImagesTableViewCell.swift; sourceTree = "<group>"; };
 		D17836421E9E11F900CF8BCA /* MainPageImagesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageImagesTableViewCell.xib; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFC1E6A5E02CDF738FBE4685 /* Pods_MuscleBeach.framework in Frameworks */,
+				D173D5731EAF22AB00CC533B /* Crashlytics.framework in Frameworks */,
+				D173D5721EAF22AB00CC533B /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +329,8 @@
 				D180B91D1E7FB2F100AB0DA9 /* GoogleService-Info.plist */,
 				D180B9141E7FAFC900AB0DA9 /* Info.plist */,
 				D180B90C1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld */,
+				D173D5701EAF22AB00CC533B /* Fabric.framework */,
+				D173D5711EAF22AB00CC533B /* Crashlytics.framework */,
 			);
 			path = MuscleBeach;
 			sourceTree = "<group>";
@@ -421,6 +429,7 @@
 				69EECD20FF7AC2F8757B2B8A /* [CP] Embed Pods Frameworks */,
 				A6C3217E3AAC5E9174A10A9B /* [CP] Copy Pods Resources */,
 				D1683C1F1E7FB66E00C9D887 /* SwiftLint */,
+				D173D56F1EAF226400CC533B /* crashlytic */,
 			);
 			buildRules = (
 			);
@@ -559,6 +568,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		D173D56F1EAF226400CC533B /* crashlytic */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = crashlytic;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 306e69bb5a7f7f0c1bedf33ec3494948b0144ac4 c22d1a794215d7700b4331544383f9a18d1d6b141e8d92da3679da90bbc52b96";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -742,6 +765,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MuscleBeach/MuscleBeach.entitlements;
 				DEVELOPMENT_TEAM = 73GBZ239BR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MuscleBeach",
+				);
 				INFOPLIST_FILE = MuscleBeach/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "my-app.MuscleBeach";
@@ -757,6 +784,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MuscleBeach/MuscleBeach.entitlements;
 				DEVELOPMENT_TEAM = 73GBZ239BR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MuscleBeach",
+				);
 				INFOPLIST_FILE = MuscleBeach/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "my-app.MuscleBeach";

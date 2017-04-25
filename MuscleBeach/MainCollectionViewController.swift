@@ -23,8 +23,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     var addressArr: [AddressModel] = []
 
     var deliverButtonTitle: String = "XX"
-    
-    
+
     enum Components {
         case one
         case two
@@ -37,14 +36,14 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
         super.viewDidLoad()
 
         fetchAddress()
-        
+
         self.collectionView?.frame = CGRect(x: 0, y: 0, width: screensize.width, height: screensize.height * 0.35)
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
         let nib2 = UINib(nibName: "SecondCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib2, forCellWithReuseIdentifier: "SecondCollectionViewCell")
         // Do any additional setup after loading the view.
-        
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -120,15 +119,13 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
             return cell
 
         case .two :
-            
-            
+
             // swiftlint:disable:next force_cast
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCollectionViewCell", for: indexPath) as! SecondCollectionViewCell
             // swiftlint:disable:previous force_cast
 
             cell.bounds = CGRect(x: 0, y: 0, width: screensize.width * 0.85, height: screensize.height * 0.3)
 
-            
 //            if deliverButtonTitle == "請先至個人頁面新增地址" {
 //                cell.deliverAddButton.isEnabled = false
 //            } else {
@@ -136,7 +133,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 //            }
 //            
 //            cell.deliverAddButton.setTitle(deliverButtonTitle, for: .normal)
-            
+
             cell.backgroundColor = .black
             cell.pickerView.delegate = self
             cell.pickerView.dataSource = self
@@ -363,9 +360,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     }
 
     func fetchAddress() {
-        
+
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         self.addressArr.removeAll()
 
         FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -384,9 +381,8 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
                     self.addressArr.append(toAppend)
 
-                    
                     self.deliverButtonTitle = "請選擇地址"
-                    
+
                     let index: IndexPath = IndexPath(item: 0, section: 1)
                     // swiftlint:disable:next force_cast
                     guard let cell = self.collectionView?.cellForItem(at: index) as? SecondCollectionViewCell else { return }
@@ -398,10 +394,9 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                 }
 
             } else {
-                
-                
+
                 self.deliverButtonTitle = "請先至個人頁面新增地址"
-                
+
                 let index: IndexPath = IndexPath(item: 0, section: 1)
                 // swiftlint:disable:next force_cast
                 guard let cell = self.collectionView?.cellForItem(at: index) as? SecondCollectionViewCell else { return }
@@ -413,7 +408,6 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                 print ("no address to fetch")
                 return
             }
-
 
         })
     }

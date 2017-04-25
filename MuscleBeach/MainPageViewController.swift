@@ -131,30 +131,28 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
             // swiftlint:disable:previous force_cast
-            
+
             cell.contentView.backgroundColor = .red
 
             let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
-            
-            
+
             self.addChildViewController(vcToAdd!)
-            
+
             vcToAdd?.willMove(toParentViewController: self)
-            
+
             cell.contentView.addSubview((vcToAdd?.collectionView)!)
-            
+
             vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
-            
+
             vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
             vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
             vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
             vcToAdd?.collectionView?.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
 
             vcToAdd?.didMove(toParentViewController: self)
-            
-            
+
             print("test frame", vcToAdd!.view!.frame)
-            
+
             return cell
 
         case .fastOrder:
