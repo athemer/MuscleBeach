@@ -67,6 +67,8 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             
+            
+            addressButton.setTitle("請先登入以取得地址", for: .normal)
             let alert = UIAlertController(title: "尚未登入",
                                           message: "請先登入後再進行操作",
                                           preferredStyle: .alert)
