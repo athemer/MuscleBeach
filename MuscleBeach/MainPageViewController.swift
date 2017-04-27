@@ -34,7 +34,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     let imageNameArr: [String] = ["sample", "sample4", "sample", "sample3", "sample4", "sample", "sample3" ]
 
     let screenSize = UIScreen.main.bounds
-
+    
     enum Components {
         case homaPageImages
         case addressSelection
@@ -114,6 +114,23 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // didmove
+        
+
+        
+        print ("disappear")
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch componentArr[indexPath.section] {
@@ -138,7 +155,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
             self.addChildViewController(vcToAdd!)
 
-            vcToAdd?.willMove(toParentViewController: self)
+//            vcToAdd?.willMove(toParentViewController: self)
 
             cell.contentView.addSubview((vcToAdd?.collectionView)!)
 
@@ -412,6 +429,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     func fetchUserInfoWhenLaunchIfLoggedIn() {
 
         let uid = FIRAuth.auth()?.currentUser?.uid
+        
+        
+        let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
 
         if uid != nil {
 

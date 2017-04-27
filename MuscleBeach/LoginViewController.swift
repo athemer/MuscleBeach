@@ -154,6 +154,42 @@ class LoginViewController: UIViewController {
         effectView.addSubview(strLabel)
         backgroundView.addSubview(effectView)
     }
+    
+    
+    @IBAction func loginAsGuest(_ sender: Any) {
+        
+        activityIndicator("訪客登入中")
+        
+        let when = DispatchTime.now() + 1
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+                FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
+                    
+                    if error == nil {
+                        
+                        print("user signInAnonymously with Firebase")
+                        let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
+                        self.present(signUpViewController!, animated: true, completion: nil)
+                    } else {
+                        
+                        print ("check error", error)
+                        
+                        let alertController = UIAlertController(title: "錯誤", message: "帳號不存在或密碼錯誤", preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "重試", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                })
+
+            DispatchQueue.main.async {
+                self.effectView.removeFromSuperview()
+                
+            }
+        }
+
+        
+    }
 
 }
 
