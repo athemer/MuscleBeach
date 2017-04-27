@@ -46,11 +46,6 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        fetchAddress()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -234,13 +229,37 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
     func bonbon() {
 
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+        let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
+        
+        if !isAnonymous! {
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+            
+            vc.deliverToDB = self.deliverToDB
+            vc.locationDetailToDB = self.detailAddToDB
+            vc.locationAreaToDB = self.mainAddToDB
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            
+            let alert = UIAlertController(title: "尚未登入",
+                                          message: "請先登入後再進行操作",
+                                           preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (_) -> Void in })
+            let loging = UIAlertAction(title: "登入", style: .default, handler: { (_) in
+                do {
+                    try FIRAuth.auth()?.signOut()
+                    let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+                    self.present(signUpViewController!, animated: true, completion: nil)
+                } catch let error {
+                    print ("not logged out \(error)")
+                }
 
-        vc.deliverToDB = self.deliverToDB
-        vc.locationDetailToDB = self.detailAddToDB
-        vc.locationAreaToDB = self.mainAddToDB
-
-        self.navigationController?.pushViewController(vc, animated: true)
+            })
+            alert.addAction(cancel)
+            alert.addAction(loging)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     func changeAddress() {

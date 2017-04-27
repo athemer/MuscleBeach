@@ -267,27 +267,43 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func fastAdd(_ sender: UIButton) {
+        
+        let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
+        
+        if !isAnonymous! {
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+            
+            guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
+            cell.timeView.isHidden = false
+            cell.addToCartButton.isHidden = true
+            
+            tabBarController?.tabBar.items?[2].badgeValue = "2"
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            
+            let alert = UIAlertController(title: "尚未登入",
+                                          message: "請先登入後再進行操作",
+                                          preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (_) -> Void in })
+            let loging = UIAlertAction(title: "登入", style: .default, handler: { (_) in
+                do {
+                    try FIRAuth.auth()?.signOut()
+                    let signUpViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+                    self.present(signUpViewController!, animated: true, completion: nil)
+                } catch let error {
+                    print ("not logged out \(error)")
+                }
+                
+            })
+            alert.addAction(cancel)
+            alert.addAction(loging)
+            self.present(alert, animated: true, completion: nil)
+        }
 
-        guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
-        cell.timeView.isHidden = false
-        cell.addToCartButton.isHidden = true
-
-        tabBarController?.tabBar.items?[2].badgeValue = "2"
-
-//        if  mealPrefExsit == false {
-//
-//            // Go to MealVariation
-//            print ("no pref yet plz add one first")
-//
-//        } else if mealPrefExsit == true {
-//
-//            guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
-//            cell.timeView.isHidden = false
-//            cell.addToCartButton.isHidden = true
-//
-//            print ("now show seg and add to cart")
-//
-//        }
+        
+        
     }
 
     func fetchUserPreference() {
@@ -433,7 +449,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
 
-        if uid != nil {
+        if uid != nil && !isAnonymous! {
 
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             let context = appDelegate.persistentContainer.viewContext
