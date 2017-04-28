@@ -108,6 +108,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         print ("COUNT \(calendarView.selectedDates.count)")
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        
 
         countDiscount(number: number)
     }
@@ -168,6 +169,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         if cellState.isSelected {
             myCustomCell.selectedView.layer.cornerRadius = 20
             myCustomCell.selectedView.isHidden = false
+            
         } else {
             myCustomCell.selectedView.isHidden = true
         }

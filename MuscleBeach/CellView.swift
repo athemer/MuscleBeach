@@ -8,6 +8,7 @@
 
 import Foundation
 import JTAppleCalendar
+import Spring
 
 class CellView: JTAppleDayCellView {
 
