@@ -170,10 +170,35 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             myCustomCell.selectedView.layer.cornerRadius = 20
             myCustomCell.selectedView.isHidden = false
             
+            let layer = myCustomCell.selectedView!
+            layer.animation = "pop"
+            layer.curve = "easeInOutQuad"
+            layer.force = 1.7
+            layer.duration = 0.8
+            layer.animate()
+            
+            
+            
         } else {
-            myCustomCell.selectedView.isHidden = true
+            
+            
+            let layer = myCustomCell.selectedView!
+            layer.animation = "zoomOut"
+            layer.curve = "easeInOutQuad"
+            layer.force = 1.7
+            layer.duration = 0.8
+
+            layer.animate()
+
+            let when = DispatchTime.now() + 0.5
+
+            DispatchQueue.main.asyncAfter(deadline: when){
+                myCustomCell.selectedView.isHidden = true
+            }
         }
-    }
+        
+        }
+    
 
     @IBAction func goToSelectiontapped(_ sender: Any) {
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"MealVariationViewController") as? MealVariationViewController else { return }

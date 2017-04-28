@@ -40,7 +40,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="dayLabel" destination="lQV-iO-nZP" id="5PQ-4c-wnO"/>
-                <outlet property="selectedView" destination="GP1-u8-7Dm" id="4Rm-fB-Bqe"/>
+                <outlet property="selectedView" destination="GP1-u8-7Dm" id="NYf-7J-NTs"/>
             </connections>
             <point key="canvasLocation" x="-17" y="-160.5"/>
         </view>
