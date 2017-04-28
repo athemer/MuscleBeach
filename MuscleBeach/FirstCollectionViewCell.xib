@@ -53,11 +53,11 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tQ-x7-15O">
                                 <rect key="frame" x="31" y="161" width="250" height="27"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.92297196059999997" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="pvD-Tr-1Yt"/>
                                 </constraints>
-                                <state key="normal" title="開始選擇訂餐日期">
+                                <state key="normal" title="確認地址並選擇日期">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -77,7 +77,7 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="aW8-qg-QlL" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="H6N-TW-ZWk"/>
                 <constraint firstItem="aW8-qg-QlL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="KMd-JH-yqD"/>

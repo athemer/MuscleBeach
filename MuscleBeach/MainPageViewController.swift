@@ -32,7 +32,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行餐", "必備涼拌餐", "八方雲集餐", "四海遊龍餐"]
-    let imageNameArr: [String] = ["sample2", "sample3", "sample2", "sample3", "sample3", "sample2", "sample3" ]
+    let imageNameArr: [String] = ["sample2", "sample", "sample2", "sample3", "sample", "sample2", "sample3" ]
 
     let screenSize = UIScreen.main.bounds
 
@@ -117,44 +117,55 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        switch componentArr[indexPath.section] {
-        case .homaPageImages:
-            // swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
-            // swiftlint:disable:previous force_cast
-
-            
-            return
-            
-        case .addressSelection:
-            
-            // swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
-            // swiftlint:disable:previous force_cast
-            
-            
-            return
-            
-        case .fastOrder:
-            
-            
-            //swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
-            //swiftlint:disable:previous force_cast
-            
-            
-            
-            return
-        }
-        
-        
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        switch componentArr[indexPath.section] {
+//        case .homaPageImages:
+//            // swiftlint:disable:next force_cast
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+//            // swiftlint:disable:previous force_cast
+//
+//            
+//            return
+//            
+//        case .addressSelection:
+//            
+//            // swiftlint:disable:next force_cast
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
+//            // swiftlint:disable:previous force_cast
+//            
+//            
+//            return
+//            
+//        case .fastOrder:
+//            
+//            
+//            //swiftlint:disable:next force_cast
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
+//            //swiftlint:disable:previous force_cast
+//
+//            return
+//        }
+//        
+//        
+//    }
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // didmove
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
+        
+        let layer = cell.mealImage!
+        
+        layer.animation = "fadeOutLeft"
+        layer.curve = "easeInOutQuad"
+        layer.duration = 1.0
+        layer.scaleX = 1.5
+        layer.scaleY = 1.5
+        layer.damping = 0.9
+        layer.velocity = 0.5
+        layer.animate()
 
-        print ("disappear")
+        return
+        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

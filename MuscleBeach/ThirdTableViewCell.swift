@@ -25,6 +25,8 @@ class ThirdTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mealImage: SpringImageView!
     
+    @IBOutlet weak var addBtn: UIButton!
+    
     var gradientLayer: CAGradientLayer!
     
     var dateLabelonLayer: UILabel!
@@ -35,7 +37,14 @@ class ThirdTableViewCell: UITableViewCell {
         timeView.isHidden = true
         addGradientLayer()
         addLabel()
+        animation()
         // Initialization code
+        
+        
+        addBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+        addBtn.layer.shadowOffset = CGSize(width: 0, height: 5)
+        addBtn.layer.shadowOpacity = 1.0
+        addBtn.layer.masksToBounds = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,6 +66,7 @@ class ThirdTableViewCell: UITableViewCell {
         dateLabelonLayer.frame = CGRect(x: self.bounds.width - 5 - self.bounds.width / 4, y: self.bounds.height / 4 * 3, width:  self.bounds.width / 4, height: self.bounds.height / 4)
         dateLabelonLayer.textColor = .white
         dateLabelonLayer.text = "TEST LABEL"
+        dateLabelonLayer.font = UIFont(name: "AvenirNext-Bold", size: 14)
         dateLabelonLayer.adjustsFontSizeToFitWidth = true
         
         mealLabelonLayer = UILabel()
@@ -70,5 +80,18 @@ class ThirdTableViewCell: UITableViewCell {
         self.contentView.addSubview(dateLabelonLayer)
         self.contentView.addSubview(mealLabelonLayer)
 
+    }
+    
+    func animation() {
+        let layer = self.mealImage!
+        layer.animation = "fadeInLeft"
+        layer.curve = "easeInOutQuad"
+        layer.duration = 1.0
+        layer.scaleX = 1.5
+        layer.scaleY = 1.5
+        layer.damping = 0.9
+        layer.velocity = 0.5
+        layer.animate()
+        
     }
 }

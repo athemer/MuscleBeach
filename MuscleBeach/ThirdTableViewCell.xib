@@ -19,9 +19,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a57-IV-kbV" customClass="SpringImageView" customModule="Spring">
-                        <rect key="frame" x="5" y="4.5" width="365" height="97"/>
+                        <rect key="frame" x="5" y="5" width="365" height="88"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="97" id="NHn-24-QZ0"/>
+                            <constraint firstAttribute="height" constant="88" id="NHn-24-QZ0"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFJ-bS-tcc">
@@ -84,6 +84,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addBtn" destination="ZFJ-bS-tcc" id="TyZ-aT-QNA"/>
                 <outlet property="addToCartButton" destination="ZFJ-bS-tcc" id="VsE-tj-LkQ"/>
                 <outlet property="dinnerButton" destination="1nk-aC-HyO" id="be6-7C-IFQ"/>
                 <outlet property="lunchButton" destination="vmo-5b-VSy" id="vkx-EC-WsO"/>

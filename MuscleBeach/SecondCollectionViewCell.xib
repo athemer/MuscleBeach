@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,13 +30,16 @@
                                         <rect key="frame" x="13" y="81" width="302" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-WQ-dfo">
-                                                <rect key="frame" x="69" y="8" width="156" height="30"/>
+                                                <rect key="frame" x="63" y="8" width="156" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="156" id="0Dr-vb-lWm"/>
                                                     <constraint firstAttribute="height" constant="30" id="XYf-DR-6vA"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="工作室"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="工作室">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Fl-FX-ynn">
                                                 <rect key="frame" x="11" y="0.0" width="50" height="50"/>
@@ -46,21 +49,22 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fh-hb-Grt">
-                                                <rect key="frame" x="252" y="12" width="22" height="22"/>
+                                                <rect key="frame" x="244" y="12" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="37n-s9-aur"/>
                                                     <constraint firstAttribute="height" constant="22" id="M4b-5U-a7j"/>
                                                 </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.92297196059999997" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Ucb-WQ-dfo" firstAttribute="leading" secondItem="0Fl-FX-ynn" secondAttribute="trailing" constant="8" id="JuU-ui-guE"/>
+                                            <constraint firstItem="Ucb-WQ-dfo" firstAttribute="leading" secondItem="0Fl-FX-ynn" secondAttribute="trailing" constant="2" id="JuU-ui-guE"/>
                                             <constraint firstItem="0Fl-FX-ynn" firstAttribute="leading" secondItem="uLR-NT-NUT" secondAttribute="leading" constant="11" id="L69-jT-LZv"/>
                                             <constraint firstItem="0Fl-FX-ynn" firstAttribute="top" secondItem="uLR-NT-NUT" secondAttribute="top" id="Sz8-al-zjg"/>
                                             <constraint firstItem="Ucb-WQ-dfo" firstAttribute="top" secondItem="uLR-NT-NUT" secondAttribute="top" constant="8" id="kjT-73-0VR"/>
                                             <constraint firstItem="9fh-hb-Grt" firstAttribute="top" secondItem="uLR-NT-NUT" secondAttribute="top" constant="12" id="nYC-w7-h1X"/>
-                                            <constraint firstItem="9fh-hb-Grt" firstAttribute="leading" secondItem="Ucb-WQ-dfo" secondAttribute="trailing" constant="27" id="xkO-j1-Clj"/>
+                                            <constraint firstItem="9fh-hb-Grt" firstAttribute="leading" secondItem="Ucb-WQ-dfo" secondAttribute="trailing" constant="25" id="xkO-j1-Clj"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxX-5B-j0o">
@@ -74,11 +78,12 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhL-sQ-LL0">
-                                                <rect key="frame" x="252" y="14" width="22" height="22"/>
+                                                <rect key="frame" x="246" y="14" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="JSf-9M-3qp"/>
                                                     <constraint firstAttribute="width" constant="22" id="Q0A-JA-OrL"/>
                                                 </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pn3-bi-cUJ">
                                                 <rect key="frame" x="73" y="10" width="148" height="30"/>
@@ -87,18 +92,20 @@
                                                     <constraint firstAttribute="height" constant="30" id="JKf-52-4Ah"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="城市草倉"/>
+                                                <state key="normal" title="城市草倉">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="firstButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ts2-aJ-8VG"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.92297196059999997" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="QzX-kp-Dzp" firstAttribute="top" secondItem="oxX-5B-j0o" secondAttribute="top" id="00I-IC-1X8"/>
                                             <constraint firstItem="QzX-kp-Dzp" firstAttribute="leading" secondItem="oxX-5B-j0o" secondAttribute="leading" constant="12" id="8Vr-U6-sYk"/>
                                             <constraint firstItem="pn3-bi-cUJ" firstAttribute="top" secondItem="oxX-5B-j0o" secondAttribute="top" constant="10" id="EQ4-XW-HeY"/>
-                                            <constraint firstItem="PhL-sQ-LL0" firstAttribute="leading" secondItem="pn3-bi-cUJ" secondAttribute="trailing" constant="31" id="uzx-AI-7R0"/>
+                                            <constraint firstItem="PhL-sQ-LL0" firstAttribute="leading" secondItem="pn3-bi-cUJ" secondAttribute="trailing" constant="25" id="uzx-AI-7R0"/>
                                             <constraint firstItem="pn3-bi-cUJ" firstAttribute="leading" secondItem="QzX-kp-Dzp" secondAttribute="trailing" constant="11" id="xqR-Ez-bB8"/>
                                             <constraint firstItem="PhL-sQ-LL0" firstAttribute="top" secondItem="oxX-5B-j0o" secondAttribute="top" constant="14" id="yXw-oa-sdm"/>
                                         </constraints>
@@ -122,13 +129,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCt-uY-ejl">
                                         <rect key="frame" x="112" y="54" width="92" height="30"/>
+                                        <color key="tintColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.92297196059999997" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="選擇外送地址"/>
                                     </button>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-fr-9d7">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="137"/>
                                     </pickerView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="F7B-fr-9d7" firstAttribute="width" secondItem="tBv-S6-n13" secondAttribute="width" id="Ala-Vq-bQY"/>
                                     <constraint firstItem="lCt-uY-ejl" firstAttribute="centerY" secondItem="tBv-S6-n13" secondAttribute="centerY" id="K5a-gI-xAe"/>
@@ -142,13 +150,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="lAX-l5-THr" secondAttribute="bottom" constant="8" id="1cd-bI-M9B"/>
-                            <constraint firstAttribute="bottom" secondItem="tBv-S6-n13" secondAttribute="bottom" constant="24" id="532-Xd-2nb"/>
+                            <constraint firstItem="lAX-l5-THr" firstAttribute="top" secondItem="LOn-qv-E3M" secondAttribute="top" constant="44" id="2iL-wQ-88i"/>
                             <constraint firstAttribute="trailing" secondItem="tBv-S6-n13" secondAttribute="trailing" constant="8" id="A8z-CW-BD4"/>
                             <constraint firstAttribute="trailing" secondItem="lAX-l5-THr" secondAttribute="trailing" constant="1" id="F2A-qJ-pBf"/>
                             <constraint firstAttribute="width" secondItem="LOn-qv-E3M" secondAttribute="height" multiplier="165:103" id="Jsj-9p-8nB"/>
                             <constraint firstItem="tBv-S6-n13" firstAttribute="leading" secondItem="LOn-qv-E3M" secondAttribute="leading" constant="7" id="b1g-pK-NCB"/>
                             <constraint firstItem="lAX-l5-THr" firstAttribute="leading" secondItem="LOn-qv-E3M" secondAttribute="leading" id="igU-oy-6wM"/>
+                            <constraint firstItem="tBv-S6-n13" firstAttribute="top" secondItem="LOn-qv-E3M" secondAttribute="top" constant="45" id="oAn-4z-IYq"/>
                         </constraints>
                     </view>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aqE-Qm-Em6">
@@ -160,13 +168,14 @@
                             <segment title="自取"/>
                             <segment title="外送"/>
                         </segments>
+                        <color key="tintColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.92297196059999997" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <action selector="segmentValueChanged:" destination="gTV-IL-0wX" eventType="valueChanged" id="Kc3-9P-mRY"/>
                         </connections>
                     </segmentedControl>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="LOn-qv-E3M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="4lh-Ro-hqz"/>
                 <constraint firstItem="LOn-qv-E3M" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="RV5-PO-Lax"/>
@@ -186,6 +195,8 @@
                 <outlet property="secondInfoButton" destination="9fh-hb-Grt" id="G0T-WZ-Kmp"/>
                 <outlet property="segmentControl" destination="aqE-Qm-Em6" id="AYa-om-OcG"/>
                 <outlet property="selfPickUpView" destination="lAX-l5-THr" id="JGX-sB-tyM"/>
+                <outlet property="viewOne" destination="uLR-NT-NUT" id="8eD-Fg-r1n"/>
+                <outlet property="viewTwo" destination="oxX-5B-j0o" id="xln-YJ-fiF"/>
             </connections>
             <point key="canvasLocation" x="46.5" y="52"/>
         </collectionViewCell>
