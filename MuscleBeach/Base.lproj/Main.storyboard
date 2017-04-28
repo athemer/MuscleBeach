@@ -2463,6 +2463,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="94" id="wVs-vL-2Hp"/>
                                                             </constraints>
+                                                            <color key="tintColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </stepper>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auk-Sw-dXv">
                                                             <rect key="frame" x="116" y="22" width="15" height="29"/>
@@ -2505,22 +2506,26 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                             <segment title="午餐"/>
                                             <segment title="晚餐"/>
                                         </segments>
+                                        <color key="tintColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="segmentChange:" destination="GMo-f0-pRK" eventType="valueChanged" id="dVj-uF-035"/>
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sc9-Xk-oZl">
-                                        <rect key="frame" x="106" y="583" width="159" height="30"/>
+                                        <rect key="frame" x="22" y="591" width="337" height="30"/>
+                                        <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="y8b-o2-a1j"/>
                                         </constraints>
-                                        <state key="normal" title="加入購物車"/>
+                                        <state key="normal" title="加入購物車">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="confirmTapped:" destination="GMo-f0-pRK" eventType="touchUpInside" id="XAw-a2-nSY"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="天數" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbb-s7-fi6">
-                                        <rect key="frame" x="123" y="523" width="53" height="35"/>
+                                        <rect key="frame" x="123" y="523" width="53" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2553,7 +2558,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="餐點價格" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jD-Eo-ave">
-                                        <rect key="frame" x="22" y="520" width="70" height="41"/>
+                                        <rect key="frame" x="22" y="520" width="70" height="49"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2565,7 +2570,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="運費" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96q-gH-pVt">
-                                        <rect key="frame" x="193" y="520" width="70" height="41"/>
+                                        <rect key="frame" x="193" y="520" width="70" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="q60-hi-CS9"/>
                                         </constraints>
@@ -2583,7 +2588,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="總價格" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwg-DG-1N1">
-                                        <rect key="frame" x="282" y="520" width="70" height="41"/>
+                                        <rect key="frame" x="282" y="520" width="70" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="QAV-z2-9O9"/>
                                         </constraints>
@@ -2643,13 +2648,13 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <constraint firstItem="yYI-yW-8Kt" firstAttribute="leading" secondItem="Pg2-rc-UoS" secondAttribute="leading" id="VOo-uf-b7b"/>
                                     <constraint firstItem="YMg-cJ-g1s" firstAttribute="leading" secondItem="Pg2-rc-UoS" secondAttribute="leading" constant="22" id="YWG-Ae-kQg"/>
                                     <constraint firstItem="Pji-o1-Nqn" firstAttribute="leading" secondItem="Pg2-rc-UoS" secondAttribute="leading" constant="15" id="Yob-hq-WFj"/>
-                                    <constraint firstAttribute="bottom" secondItem="Sc9-Xk-oZl" secondAttribute="bottom" constant="8" id="Z4z-4F-hXL"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sc9-Xk-oZl" secondAttribute="bottom" id="Z4z-4F-hXL"/>
                                     <constraint firstItem="sKn-9Y-Wp9" firstAttribute="top" secondItem="YMg-cJ-g1s" secondAttribute="bottom" constant="2" id="Z8a-a2-14Z"/>
                                     <constraint firstItem="96q-gH-pVt" firstAttribute="leading" secondItem="YMg-cJ-g1s" secondAttribute="trailing" constant="101" id="ZqP-hN-vW5"/>
                                     <constraint firstItem="0jD-Eo-ave" firstAttribute="leading" secondItem="x5J-hX-IIu" secondAttribute="leading" id="Zwi-mi-oYZ"/>
                                     <constraint firstItem="4FF-zU-xlA" firstAttribute="firstBaseline" secondItem="x5J-hX-IIu" secondAttribute="firstBaseline" id="a3E-L5-RfK"/>
                                     <constraint firstAttribute="trailing" secondItem="yYI-yW-8Kt" secondAttribute="trailing" id="crC-Yf-5J8"/>
-                                    <constraint firstItem="Sc9-Xk-oZl" firstAttribute="leading" secondItem="Pg2-rc-UoS" secondAttribute="leading" constant="106" id="enq-Lc-YYT"/>
+                                    <constraint firstItem="Sc9-Xk-oZl" firstAttribute="leading" secondItem="Pg2-rc-UoS" secondAttribute="leading" constant="22" id="enq-Lc-YYT"/>
                                     <constraint firstItem="yYI-yW-8Kt" firstAttribute="top" secondItem="Pji-o1-Nqn" secondAttribute="bottom" id="fjp-cb-mtD"/>
                                     <constraint firstItem="LuN-vC-Wme" firstAttribute="leading" secondItem="Pg2-rc-UoS" secondAttribute="leading" constant="164" id="jDb-L2-idG"/>
                                     <constraint firstItem="96q-gH-pVt" firstAttribute="baseline" secondItem="0jD-Eo-ave" secondAttribute="baseline" id="kPX-XJ-FSY"/>
@@ -2659,7 +2664,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <constraint firstAttribute="trailing" secondItem="Pji-o1-Nqn" secondAttribute="trailing" constant="16" id="oIV-e9-TVE"/>
                                     <constraint firstItem="96q-gH-pVt" firstAttribute="baseline" secondItem="jwg-DG-1N1" secondAttribute="baseline" id="pDC-gf-bKY"/>
                                     <constraint firstItem="4QC-HP-NnK" firstAttribute="top" secondItem="sKn-9Y-Wp9" secondAttribute="bottom" constant="18" id="qiJ-lJ-CDX"/>
-                                    <constraint firstAttribute="trailing" secondItem="Sc9-Xk-oZl" secondAttribute="trailing" constant="110" id="rro-Zs-cmp"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sc9-Xk-oZl" secondAttribute="trailing" constant="16" id="rro-Zs-cmp"/>
                                     <constraint firstItem="4QC-HP-NnK" firstAttribute="firstBaseline" secondItem="LuN-vC-Wme" secondAttribute="firstBaseline" id="s9J-yp-K4f"/>
                                     <constraint firstItem="jwg-DG-1N1" firstAttribute="leading" secondItem="4QC-HP-NnK" secondAttribute="leading" id="shc-gH-bUJ"/>
                                     <constraint firstItem="Qbb-s7-fi6" firstAttribute="leading" secondItem="ix7-Es-gtS" secondAttribute="leading" id="wqZ-KR-FCd"/>
@@ -2678,6 +2683,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="Pg2-rc-UoS" id="qEv-QS-Efn"/>
+                        <outlet property="confirmButton" destination="Sc9-Xk-oZl" id="NTh-Hz-uzW"/>
                         <outlet property="deliverFee" destination="4FF-zU-xlA" id="rwd-Qe-CM2"/>
                         <outlet property="mealPrice" destination="x5J-hX-IIu" id="TEl-fe-mmO"/>
                         <outlet property="numberOfDaysOrdered" destination="ix7-Es-gtS" id="Pg2-If-zSH"/>
@@ -2688,7 +2694,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6R9-aT-Rt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6398" y="-824"/>
+            <point key="canvasLocation" x="6397.6000000000004" y="-824.43778110944538"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="pAl-Kf-wss">
@@ -2774,16 +2780,6 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <constraint firstAttribute="height" constant="48" id="tRb-oK-0aJ"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF8-Qx-UWF">
-                                <rect key="frame" x="116" y="562" width="123" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="SQ2-Fv-Y57"/>
-                                </constraints>
-                                <state key="normal" title="繼續餐點種類選擇"/>
-                                <connections>
-                                    <action selector="goToSelectiontapped:" destination="u7M-cC-mPz" eventType="touchUpInside" id="ZqH-ay-djp"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 已選擇天數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7pA-SC-u9E">
                                 <rect key="frame" x="37" y="502" width="92" height="21"/>
                                 <constraints>
@@ -2800,11 +2796,11 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <constraint firstAttribute="width" constant="305" id="Xn3-Bl-z5R"/>
                                     <constraint firstAttribute="height" constant="21" id="YLO-wf-eOf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03n-iw-OTF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03n-iw-OTF" customClass="SpringLabel" customModule="Spring">
                                 <rect key="frame" x="84" y="531" width="36" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="393-DG-jDM"/>
@@ -2830,7 +2826,7 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                     <constraint firstAttribute="width" constant="104" id="AAD-Ji-8Fn"/>
                                     <constraint firstAttribute="height" constant="21" id="Trl-WP-vDW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2844,16 +2840,29 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF8-Qx-UWF">
+                                <rect key="frame" x="16" y="637" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.33725490200000002" green="0.72549019609999998" blue="0.28627450980000002" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="vgg-Np-0uJ"/>
+                                </constraints>
+                                <state key="normal" title="繼續餐點種類選擇">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToSelectiontapped:" destination="u7M-cC-mPz" eventType="touchUpInside" id="ZqH-ay-djp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oF8-Qx-UWF" firstAttribute="top" secondItem="TGk-4b-POf" secondAttribute="bottom" constant="10" id="4me-2F-eMM"/>
                             <constraint firstItem="7pA-SC-u9E" firstAttribute="leading" secondItem="jaz-fz-ifb" secondAttribute="leadingMargin" constant="21" id="4nQ-O4-4gr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="oF8-Qx-UWF" secondAttribute="trailing" constant="120" id="BQL-RT-cuR"/>
+                            <constraint firstItem="oF8-Qx-UWF" firstAttribute="leading" secondItem="jaz-fz-ifb" secondAttribute="leadingMargin" id="9fF-J5-8Lf"/>
                             <constraint firstItem="v2y-X5-vxK" firstAttribute="leading" secondItem="7pA-SC-u9E" secondAttribute="trailing" constant="16" id="BmE-HO-9Zt"/>
                             <constraint firstAttribute="trailing" secondItem="H1l-vq-Fns" secondAttribute="trailing" id="ESc-o3-b8a"/>
                             <constraint firstItem="TGk-4b-POf" firstAttribute="leading" secondItem="03n-iw-OTF" secondAttribute="trailing" constant="8" id="Q3x-BN-YP4"/>
                             <constraint firstItem="03n-iw-OTF" firstAttribute="leading" secondItem="jaz-fz-ifb" secondAttribute="leadingMargin" constant="68" id="QIZ-Ze-Bcc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oF8-Qx-UWF" secondAttribute="trailing" id="QMe-V7-1Gf"/>
                             <constraint firstItem="MCS-WK-avM" firstAttribute="top" secondItem="H1l-vq-Fns" secondAttribute="bottom" id="S1W-Df-BT7"/>
                             <constraint firstAttribute="trailing" secondItem="MCS-WK-avM" secondAttribute="trailing" id="U7p-KU-lpL"/>
                             <constraint firstItem="aWc-QN-x1M" firstAttribute="leading" secondItem="jaz-fz-ifb" secondAttribute="leadingMargin" constant="25" id="VVD-ph-ZlH"/>
@@ -2862,9 +2871,9 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                             <constraint firstItem="v2y-X5-vxK" firstAttribute="top" secondItem="MCS-WK-avM" secondAttribute="bottom" constant="8" id="ZRX-AL-gk0"/>
                             <constraint firstItem="8D8-DS-2Rd" firstAttribute="top" secondItem="MCS-WK-avM" secondAttribute="bottom" constant="37" id="cmn-MR-X8L"/>
                             <constraint firstItem="MCS-WK-avM" firstAttribute="leading" secondItem="jaz-fz-ifb" secondAttribute="leading" id="ctB-fv-D5c"/>
+                            <constraint firstItem="mkb-oM-XRD" firstAttribute="top" secondItem="oF8-Qx-UWF" secondAttribute="bottom" id="g4e-oz-cKe"/>
                             <constraint firstItem="03n-iw-OTF" firstAttribute="top" secondItem="7pA-SC-u9E" secondAttribute="bottom" constant="8" id="he2-VF-VLC"/>
                             <constraint firstItem="8D8-DS-2Rd" firstAttribute="leading" secondItem="TGk-4b-POf" secondAttribute="trailing" constant="8" id="je0-7f-6gL"/>
-                            <constraint firstItem="oF8-Qx-UWF" firstAttribute="leading" secondItem="jaz-fz-ifb" secondAttribute="leadingMargin" constant="100" id="lV9-OM-1x3"/>
                             <constraint firstItem="7pA-SC-u9E" firstAttribute="top" secondItem="MCS-WK-avM" secondAttribute="bottom" constant="8" id="lfG-cL-4KX"/>
                             <constraint firstItem="MCS-WK-avM" firstAttribute="centerX" secondItem="jaz-fz-ifb" secondAttribute="centerX" id="v7p-Sh-QYN"/>
                             <constraint firstItem="MCS-WK-avM" firstAttribute="centerY" secondItem="jaz-fz-ifb" secondAttribute="centerY" constant="-1" id="wDZ-GW-UFN"/>
@@ -2873,11 +2882,12 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
                     </view>
                     <connections>
                         <outlet property="calendarView" destination="MCS-WK-avM" id="p1s-VK-08e"/>
+                        <outlet property="continueButton" destination="oF8-Qx-UWF" id="mdP-47-D1R"/>
                         <outlet property="daysLeft" destination="v2y-X5-vxK" id="wdp-YY-tZt"/>
                         <outlet property="discountLabel" destination="8D8-DS-2Rd" id="Hgl-CS-IAF"/>
                         <outlet property="haveAlreay" destination="aWc-QN-x1M" id="Xgb-JE-ub9"/>
                         <outlet property="monthLabel" destination="PSb-Si-bXu" id="pKb-kg-C6l"/>
-                        <outlet property="moreDaysToGo" destination="03n-iw-OTF" id="P1I-BL-iPx"/>
+                        <outlet property="moreDaysToGo" destination="03n-iw-OTF" id="cAd-NY-iNA"/>
                         <outlet property="toHide" destination="TGk-4b-POf" id="CJQ-NM-Zsk"/>
                     </connections>
                 </viewController>

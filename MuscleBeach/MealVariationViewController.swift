@@ -28,6 +28,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBOutlet weak var totalPrice: UILabel!
 
+    @IBOutlet weak var confirmButton: UIButton!
     var testData: [NewOrderTest] = []
 
     var dateToDB: [String] = []
@@ -50,6 +51,11 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         //MARK
         fetchTestData()
 
+        confirmButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+        confirmButton.layer.shadowOffset = CGSize(width: 0, height: 5)
+        confirmButton.layer.shadowOpacity = 1.0
+        confirmButton.layer.masksToBounds = false
+        
         print("ahha \(deliverToDB) \(locationDetailToDB) \(dateToDB)")
         // Do any additional setup after loading the view.
     }

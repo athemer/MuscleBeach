@@ -8,12 +8,14 @@
 
 import UIKit
 import JTAppleCalendar
+import Spring
+
 
 class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
 
-    @IBOutlet weak var moreDaysToGo: UILabel!
+    @IBOutlet weak var moreDaysToGo: SpringLabel!
 
     @IBOutlet weak var haveAlreay: UILabel!
 
@@ -33,6 +35,8 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
     let dimPurple = UIColor(colorWithHexValue: 0x574865)
 
+    @IBOutlet weak var continueButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +49,11 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
         calendarView.allowsMultipleSelection  = true
         calendarView.rangeSelectionWillBeUsed = true
+        
+        continueButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+        continueButton.layer.shadowOffset = CGSize(width: 0, height: 5)
+        continueButton.layer.shadowOpacity = 1.0
+        continueButton.layer.masksToBounds = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -177,6 +186,16 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             layer.duration = 0.8
             layer.animate()
             
+            let layer2 = moreDaysToGo!
+            layer2.animation = "pop"
+            layer2.curve = "linear"
+            layer2.force = 1.5
+            layer2.duration = 0.8
+            layer2.scaleX = 2.0
+            layer2.scaleY = 2.0
+            layer2.damping = 0.5
+            layer2.velocity = 0.5
+            layer2.animate()
             
             
         } else {
@@ -186,7 +205,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             layer.animation = "zoomOut"
             layer.curve = "easeInOutQuad"
             layer.force = 1.7
-            layer.duration = 0.8
+            layer.duration = 0.5
 
             layer.animate()
 
