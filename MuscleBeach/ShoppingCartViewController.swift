@@ -481,31 +481,30 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
 //        })
 
     @IBAction func informMBTapped(_ sender: Any) {
-        
+
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
-        if !isAnonymous!  {
-            
+
+        if !isAnonymous! {
+
             // swiftlint:disable:next force_cast
             let digitVC = self.storyboard?.instantiateViewController(withIdentifier: "DigitINfoViewController") as! DigitINfoViewController
             // swiftlint:disable:previous force_cast
-            
+
             let navigation = self.navigationController
-            
+
             digitVC.keysArray = keysArray
             digitVC.finalDeliverFee = finalDeliverFee
             digitVC.mealPriceofTotal = mealPriceofTotal
-            
+
             navigation?.addChildViewController(digitVC)
             navigation?.view.addSubview(digitVC.view)
             digitVC.didMove(toParentViewController: navigation)
-            
+
             print("favorite button tapped")
         } else {
-            
+
             print ("do nothing")
         }
-        
 
     }
 

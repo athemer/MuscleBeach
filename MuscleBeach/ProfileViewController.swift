@@ -53,25 +53,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         setUpProfileImageIfAny()
 
-        
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
-        
-        
+
         if !isAnonymous! {
-            
+
             profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectImage)))
-            
+
             tableView.allowsSelection = true
         } else {
             tableView.allowsSelection = false
         }
 
-        
         print("CHECK", profileImageView.frame.width, profileImageView.bounds.width)
 
-        
-        
         profileImageView.isUserInteractionEnabled = true
         profileImageView.layer.cornerRadius = UIScreen.main.bounds.width * 0.365 / 2
         profileImageView.clipsToBounds = true
@@ -130,14 +124,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         case .addCell:
 //            setUpAlert()
-            
-            
+
             print ("do nothing")
 
         }
     }
 
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch contentArr[indexPath.section] {
         case .addressCell:
@@ -175,11 +167,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     func setUpAlert() {
 
-        
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
+
         if !isAnonymous! {
-            
+
             let alert = UIAlertController(title: "新增外送地址",
                                           message: "請輸入外地址\n\n\n\n\n\n",
                                           preferredStyle: .alert)
@@ -189,7 +180,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             picker.dataSource = self
             picker.delegate = self
             alert.view.addSubview(picker)
-            
+
             alert.addTextField { (textField: UITextField) in
                 self.areaTextField = textField
                 textField.keyboardAppearance = .dark
@@ -198,7 +189,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 textField.placeholder = "行政區"
                 textField.clearButtonMode = .whileEditing
             }
-            
+
             alert.addTextField { (textField: UITextField) in
                 self.addressTextField = textField
                 textField.keyboardAppearance = .dark
@@ -207,43 +198,43 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 textField.placeholder = "地址"
                 textField.clearButtonMode = .whileEditing
             }
-            
+
             let submitAction = UIAlertAction(title: "確定", style: .default, handler: { (_) -> Void in
                 // Get 1st TextField's text
                 //let textField = self.alert.textFields![0]
                 //print(textField.text!)
-                
+
                 guard
                     let textFields = alert.textFields,
                     textFields.count >= 2
                     else {
-                        
+
                         // todo: error handling
-                        
+
                         return
-                        
+
                 }
-                
+
                 guard
                     let street = textFields[0].text
                     else {
-                        
+
                         // todo: error handling
-                        
+
                         return
-                        
+
                 }
-                
+
                 guard
                     let address = textFields[1].text
                     else {
-                        
+
                         // todo: error handling
-                        
+
                         return
-                        
+
                 }
-                
+
                 let finalAddress = "\(street) \(address)"
                 self.addTv.text = finalAddress
                 let uid = FIRAuth.auth()?.currentUser?.uid
@@ -252,11 +243,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").child("detail\(x)").setValue(address)
                 FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainAdd").setValue(street)
                 FIRDatabase.database().reference().child("users").child(uid!).child("address").child("mainDetail").setValue(address)
-                
+
                 self.addressArrFromDatabase.append(street)
                 self.addressDetailArrFromDatabase.append(address)
                 self.tableView.reloadData()
-                
+
                 //            if alert.textFields?[0] != nil && alert.textFields?[1] != nil {
                 //                let address = "\((alert.textFields?[0].text)!) \((alert.textFields?[1].text)!)"
                 //                print(address)
@@ -267,47 +258,45 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 //            }
             })
             let cancel = UIAlertAction(title: "取消", style: .destructive, handler: { (_) -> Void in })
-            
+
             alert.addAction(submitAction)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
-            
+
         } else {
             print ("guset user")
         }
-        
-        
-      
+
     }
 
     func fetchAddressFromDatabase() {
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
+
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
+
         if !isAnonymous! {
-            
+
             FIRDatabase.database().reference().child("users").child(uid!).child("addressPool").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let addressDict = snapshot.value as? [String: AnyObject] {
-                    
+
                     print("hoho \(addressDict )")
-                    
+
                     for x in 0...(addressDict.count / 2) - 1 {
-                        
+
                         // swiftlint:disable:next force_cast
                         let street = addressDict["add\(x)"] as! String
                         // swiftlint:disable:previous force_cast
-                        
+
                         // swiftlint:disable:next force_cast
                         let address = addressDict["detail\(x)"] as! String
                         // swiftlint:disable:previous force_cast
-                        
+
                         self.addressArrFromDatabase.append(street)
                         self.addressDetailArrFromDatabase.append(address)
                     }
                     print (self.addressArrFromDatabase)
-                    
+
                 } else {
                     print ("no data yet")
                     return
@@ -315,8 +304,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.tableView.reloadData()
             })
         }
-        
-        
 
     }
 
@@ -358,23 +345,23 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let uid = FIRAuth.auth()?.currentUser?.uid
 
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
+
         if !isAnonymous! {
             var theArray: [NSManagedObject] = []
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             let context = appDelegate.persistentContainer.viewContext
             let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
             request.predicate = NSPredicate(format: "id == %@", uid!)
-            
+
             do {
                 theArray = try context.fetch(request)
-                
+
             } catch let error as NSError {
-                
+
                 print("Could not fetch.")
             }
             let fetchedResult = theArray[0]
-            
+
             guard
                 let name = fetchedResult.value(forKey: "name") as? String,
                 let number = fetchedResult.value(forKey: "number") as? String,
@@ -382,62 +369,59 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
                 let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
                 else { return }
-            
+
             self.emailTv.text = email
             self.nameTv.text = name
             self.numberTv.text = number
             self.addTv.text = mainAdd + mainDetail
         }
-        
 
     }
 
     func setUpProfileImageIfAny() {
 
-        
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
+
         if !isAnonymous! {
             var dataArray: [NSManagedObject] = []
-            
+
             let uid = FIRAuth.auth()?.currentUser?.uid
-            
+
             guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
                     return
             }
-            
+
             let context = appDelegate.persistentContainer.viewContext
-            
+
             let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
-            
+
             request.predicate = NSPredicate(format: "id == %@", uid!)
-            
+
             do {
                 dataArray = try context.fetch(request)
-                
+
             } catch let error as NSError {
-                
+
                 print("Could not fetch.")
             }
-            
+
             if dataArray.count > 0 {
-                
+
                 let fetchedResult = dataArray[0]
-                
+
                 guard let imgData = fetchedResult.value(forKey: "profileImage") as? Data else {
                     print ("not data type")
                     return
                 }
-                
+
                 profileImageView.image = UIImage(data: imgData)
-                
+
             } else {
                 print ("no profile image to show")
-                
+
             }
         }
-       
 
     }
 

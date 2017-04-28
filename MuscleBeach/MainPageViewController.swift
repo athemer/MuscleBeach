@@ -11,6 +11,7 @@ import Firebase
 import SideMenu
 import FirebaseStorage
 import CoreData
+import Spring
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -30,11 +31,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var deliver: String = ""
 
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
-    let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行", "必備涼拌", "八方雲集", "四海遊龍"]
-    let imageNameArr: [String] = ["sample", "sample4", "sample", "sample3", "sample4", "sample", "sample3" ]
+    let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行餐", "必備涼拌餐", "八方雲集餐", "四海遊龍餐"]
+    let imageNameArr: [String] = ["sample2", "sample3", "sample2", "sample3", "sample3", "sample2", "sample3" ]
 
     let screenSize = UIScreen.main.bounds
-    
+
     enum Components {
         case homaPageImages
         case addressSelection
@@ -55,6 +56,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
 
+        tableView.allowsSelection = false
+        
         let nib1 = UINib(nibName: "MainPageImagesTableViewCell", bundle: nil)
         tableView.register(nib1, forCellReuseIdentifier: "MainPageImagesTableViewCell")
         let nib2 = UINib(nibName: "SecondTableViewCell", bundle: nil)
@@ -114,23 +117,46 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+        switch componentArr[indexPath.section] {
+        case .homaPageImages:
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+            // swiftlint:disable:previous force_cast
+
+            
+            return
+            
+        case .addressSelection:
+            
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
+            // swiftlint:disable:previous force_cast
+            
+            
+            return
+            
+        case .fastOrder:
+            
+            
+            //swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
+            //swiftlint:disable:previous force_cast
+            
+            
+            
+            return
+        }
         
         
     }
-    
+
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // didmove
-        
 
-        
         print ("disappear")
     }
-    
-    
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch componentArr[indexPath.section] {
@@ -174,18 +200,19 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
         case .fastOrder:
 
+
             //swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
             //swiftlint:disable:previous force_cast
-            cell.date.text = dateArr[indexPath.row]
-            cell.mealName.text = mealNameArr[indexPath.row]
+            cell.dateLabelonLayer.text = dateArr[indexPath.row]
+            cell.mealLabelonLayer.text = mealNameArr[indexPath.row]
             cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
             cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
             cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
             cell.mealImage.image = UIImage(named: imageNameArr[indexPath.row])
             cell.mealImage.contentMode = .scaleAspectFill
             cell.mealImage.clipsToBounds = true
-            cell.mealImage.layer.cornerRadius = 15
+//            cell.mealImage.layer.cornerRadius = 15
 
             return cell
         }
@@ -267,25 +294,25 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func fastAdd(_ sender: UIButton) {
-        
+
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
+
         if !isAnonymous! {
             guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
-            
+
             guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
             cell.timeView.isHidden = false
             cell.addToCartButton.isHidden = true
-            
+
             tabBarController?.tabBar.items?[2].badgeValue = "2"
-            
+
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            
+
             let alert = UIAlertController(title: "尚未登入",
                                           message: "請先登入後再進行操作",
                                           preferredStyle: .alert)
-            
+
             let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (_) -> Void in })
             let loging = UIAlertAction(title: "登入", style: .default, handler: { (_) in
                 do {
@@ -295,15 +322,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 } catch let error {
                     print ("not logged out \(error)")
                 }
-                
+
             })
             alert.addAction(cancel)
             alert.addAction(loging)
             self.present(alert, animated: true, completion: nil)
         }
 
-        
-        
     }
 
     func fetchUserPreference() {
@@ -445,8 +470,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     func fetchUserInfoWhenLaunchIfLoggedIn() {
 
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
-        
+
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
 
         if uid != nil && !isAnonymous! {

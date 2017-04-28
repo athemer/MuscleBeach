@@ -55,27 +55,24 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
+
         if !isAnonymous! {
             guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
-            
-            
+
             fetchAddress()
-            
+
             setNameAndAmount()
-            
+
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            
-            
+
             addressButton.setTitle("請先登入以取得地址", for: .normal)
             let alert = UIAlertController(title: "尚未登入",
                                           message: "請先登入後再進行操作",
                                           preferredStyle: .alert)
-            
+
             let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (_)  in
 
-            
             })
             let loging = UIAlertAction(title: "登入", style: .default, handler: { (_) in
                 do {
@@ -85,14 +82,12 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                 } catch let error {
                     print ("not logged out \(error)")
                 }
-                
+
             })
             alert.addAction(cancel)
             alert.addAction(loging)
             self.present(alert, animated: true, completion: nil)
         }
-
-
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -325,17 +320,17 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     @IBAction func findButtonTapped(_ sender: Any) {
-        
+
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
-        if !isAnonymous!  {
+
+        if !isAnonymous! {
             dataArray.removeAll()
             FIRDatabase.database().reference().child("eatTogether").observeSingleEvent(of: .value, with: { (snapshot) in
-                
+
                 if let snaps = snapshot.value as? [String: Any] {
-                    
+
                     for snap in snaps {
-                        
+
                         if let dict = snap.value as? [String: Any] {
                             guard
                                 let location = dict["wishLocation"] as? String,
@@ -344,52 +339,52 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                 let key = snap.key as? String
                                 else
                             { return }
-                            
+
                             let uid = FIRAuth.auth()?.currentUser?.uid
-                            
+
                             if key != uid {
-                                
+
                                 self.forwardGeocoding(address: location, completion: {
-                                    
+
                                     self.name = name
                                     //                                self.amount = amount
-                                    
+
                                     let coordinate1 = CLLocation(latitude: self.latCurrent, longitude: self.longiCurrent)
                                     let coordinate2 = CLLocation(latitude: self.latDestination, longitude: self.longiDestination)
-                                    
+
                                     let distanceInMeters = coordinate1.distance(from: coordinate2) // result is in meters
                                     let roundedDistance = Double(round(distanceInMeters * 10)/10)
                                     print ("meters \(distanceInMeters)")
-                                    
+
                                     if roundedDistance <= self.distanceLimitation {
-                                        
+
                                         switch self.wishAmount {
                                         case 1:
-                                            
+
                                             if amount == 1 || amount == 4 {
                                                 let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                                 self.dataArray.append(dataToAppend)
-                                                
+
                                             } else {
                                                 print("amount doesnt match")
                                             }
-                                            
+
                                         case 2:
-                                            
+
                                             if amount == 3 {
                                                 let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                                 self.dataArray.append(dataToAppend)
-                                                
+
                                             } else {
                                                 print("amount doesnt match")
                                             }
-                                            
+
                                         case 3:
-                                            
+
                                             if amount == 2 {
                                                 let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                                 self.dataArray.append(dataToAppend)
-                                                
+
                                             } else {
                                                 print("amount doesnt match")
                                             }
@@ -397,26 +392,26 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                                             if amount == 1 {
                                                 let dataToAppend: EatTogetherModel = EatTogetherModel(name: name, distance: roundedDistance, amount: amount, key: key)
                                                 self.dataArray.append(dataToAppend)
-                                                
+
                                             } else {
                                                 print("amount doesnt match")
                                             }
-                                            
+
                                             print ("")
                                         default:
                                             break
-                                            
+
                                         }
-                                        
+
                                         self.tableView.reloadData()
-                                        
+
                                     } else {
-                                        
+
                                         print ("too far away")
-                                        
+
                                     }
                                 })
-                                
+
                             } else {
                                 print ("this is yourself")
                             }
@@ -434,25 +429,25 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                     //
                     //                    print (" all are too far away")
                     //                }
-                    
+
                     let uid = FIRAuth.auth()?.currentUser?.uid
                     FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["wishAmount": self.wishAmount])
-                    
+
                     var theArray: [NSManagedObject] = []
                     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
                     let context = appDelegate.persistentContainer.viewContext
                     let request = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
                     request.predicate = NSPredicate(format: "id == %@", uid!)
-                    
+
                     do {
                         theArray = try context.fetch(request)
-                        
+
                     } catch let error as NSError {
-                        
+
                         print("Could not fetch.")
                     }
                     let fetchedResult = theArray[0]
-                    
+
                     guard
                         let mainAdd = fetchedResult.value(forKey: "addressMain") as? String,
                         let mainDetail = fetchedResult.value(forKey: "addressDetail") as? String
@@ -463,7 +458,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                         if let dict = snapshot.value as? [String: Any] {
                             guard
                                 let name = dict["name"] as? String else { return }
-                            
+
                             FIRDatabase.database().reference().child("eatTogether").child(uid!).updateChildValues(["userName": name])
                         }
                     })
@@ -471,14 +466,13 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
             })
 
         } else {
-            
+
             let alert = UIAlertController(title: "尚未登入",
                                           message: "請先登入後再進行操作",
                                           preferredStyle: .alert)
-            
+
             let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (_)  in
-                
-                
+
             })
             let loging = UIAlertAction(title: "登入", style: .default, handler: { (_) in
                 do {
@@ -488,7 +482,7 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
                 } catch let error {
                     print ("not logged out \(error)")
                 }
-                
+
             })
             alert.addAction(cancel)
             alert.addAction(loging)
@@ -511,17 +505,16 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     @IBAction func addressButtonTapped(_ sender: Any) {
-        
+
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
-        
-        if !isAnonymous!  {
+
+        if !isAnonymous! {
             addressPicker.isHidden = false
             addressButton.isHidden = true
         } else {
-            
+
             print ("do nothing")
         }
-        
 
     }
 
