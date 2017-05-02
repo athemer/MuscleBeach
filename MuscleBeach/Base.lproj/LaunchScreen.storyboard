@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,17 +25,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="PuM-9c-OVO">
-                                        <rect key="frame" x="51" y="190" width="272" height="286"/>
+                                        <rect key="frame" x="51" y="190" width="280" height="280"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="286" id="Uzk-fD-wUG"/>
-                                            <constraint firstAttribute="width" constant="272" id="bhd-Sm-Hba"/>
+                                            <constraint firstAttribute="height" constant="280" id="Uzk-fD-wUG"/>
+                                            <constraint firstAttribute="width" constant="280" id="bhd-Sm-Hba"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.58823529411764708" green="0.78823529411764703" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="PuM-9c-OVO" firstAttribute="centerY" secondItem="oHW-Nu-cHT" secondAttribute="centerY" id="CfF-Pl-web"/>
-                                    <constraint firstItem="PuM-9c-OVO" firstAttribute="centerX" secondItem="oHW-Nu-cHT" secondAttribute="centerX" id="iho-CF-t15"/>
+                                    <constraint firstItem="PuM-9c-OVO" firstAttribute="centerY" secondItem="oHW-Nu-cHT" secondAttribute="centerY" constant="-3.5" id="CfF-Pl-web"/>
+                                    <constraint firstItem="PuM-9c-OVO" firstAttribute="centerX" secondItem="oHW-Nu-cHT" secondAttribute="centerX" constant="3.5" id="iho-CF-t15"/>
                                 </constraints>
                             </view>
                         </subviews>

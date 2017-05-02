@@ -15,5 +15,6 @@ target 'MuscleBeach' do
   pod 'XLPagerTabStrip'
   pod 'Firebase/Storage'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+  pod 'Eureka'
 
 end

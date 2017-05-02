@@ -16,9 +16,10 @@ class SideMenuTableViewController: UITableViewController {
         case setting
         case profile
         case orderHistory
+        case settingCell
     }
 
-    var cellComponentsArray: [CellComponents] = [.profile, .orderHistory, .setting ]
+    var cellComponentsArray: [CellComponents] = [.profile, .orderHistory, .setting, .settingCell]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,8 @@ class SideMenuTableViewController: UITableViewController {
         case .orderHistory:
             return 1
         case .setting:
+            return 1
+        case .settingCell:
             return 1
         }
 
@@ -120,8 +123,16 @@ class SideMenuTableViewController: UITableViewController {
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             // swiftlint:disable:previous force_cast
+            
+            
             return cell
+        case .settingCell:
+            
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingPageTableViewCell", for: indexPath) as! SettingPageTableViewCell
+            // swiftlint:disable:previous force_cast
 
+            return cell
         }
     }
 
@@ -133,6 +144,8 @@ class SideMenuTableViewController: UITableViewController {
         case .orderHistory:
             return 40
         case .setting:
+            return 40
+        case .settingCell:
             return 40
         }
     }
@@ -154,6 +167,10 @@ class SideMenuTableViewController: UITableViewController {
         case .setting:
 //            logOutFromFirebase()
             print (4)
+        case .settingCell:
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else { return }
+            
+            self.navigationController?.pushViewController(vc, animated: true)
 
         }
     }
@@ -162,9 +179,12 @@ class SideMenuTableViewController: UITableViewController {
         let proFileNib = UINib(nibName: "ProfileCell", bundle: nil)
         let orderHisNib = UINib(nibName: "OrderHistoryCell", bundle: nil)
         let settingsNib = UINib(nibName: "SettingsCell", bundle: nil)
+        let settingsCellNib = UINib(nibName: "SettingPageTableViewCell", bundle: nil)
         tableView.register(proFileNib, forCellReuseIdentifier: "ProfileCell")
         tableView.register(orderHisNib, forCellReuseIdentifier: "OrderHistoryCell")
         tableView.register(settingsNib, forCellReuseIdentifier: "SettingsCell")
+        tableView.register(settingsCellNib, forCellReuseIdentifier: "SettingPageTableViewCell")
+        
     }
 
     func logOutFromFirebase() {

@@ -11,11 +11,14 @@ import Firebase
 import CoreData
 import Fabric
 import Crashlytics
+import Spring
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var mask: CALayer?
+    var imageView: UIImageView?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -140,10 +143,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentuser = FIRAuth.auth()?.currentUser
         if currentuser != nil {
             self.window?.rootViewController = MainPageInitialViewController
+
             self.window?.makeKeyAndVisible()
+
+
         } else {
             self.window?.rootViewController = LoginInitialViewController
+
             self.window?.makeKeyAndVisible()
+
         }
     }
 

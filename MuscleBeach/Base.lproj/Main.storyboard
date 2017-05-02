@@ -2240,6 +2240,24 @@ A:包週餐運費與滿五個免運費可合併計算，滿五個可以將運費
             </objects>
             <point key="canvasLocation" x="6336.8000000000002" y="784.85757121439292"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="y8K-Lf-gte">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="b9l-JM-fKl" customClass="SettingsViewController" customModule="MuscleBeach" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZRC-K5-itr"/>
+                        <viewControllerLayoutGuide type="bottom" id="LP4-1k-bw5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7B9-4Y-AMj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntk-4a-Bhi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2567" y="-1834"/>
+        </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Kmp-zE-t5J">
             <objects>

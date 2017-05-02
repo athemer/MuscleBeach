@@ -64,6 +64,9 @@
 		D1D36CBC1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */; };
 		D1D36CBE1EA3352400F4E01F /* ShoppingCartDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */; };
 		D1D36CC01EA44DC100F4E01F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D36CBF1EA44DC100F4E01F /* CoreDataManager.swift */; };
+		D1D7F2F71EB85E4100A799FE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7F2F61EB85E4000A799FE /* SettingsViewController.swift */; };
+		D1D7F2FA1EB85EDB00A799FE /* SettingPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7F2F81EB85EDB00A799FE /* SettingPageTableViewCell.swift */; };
+		D1D7F2FB1EB85EDB00A799FE /* SettingPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D7F2F91EB85EDB00A799FE /* SettingPageTableViewCell.xib */; };
 		D1F45A741E9F1CD300490B4F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45A731E9F1CD300490B4F /* Extensions.swift */; };
 		D1F45AB01E9F7D0400490B4F /* SecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F45AAE1E9F7D0400490B4F /* SecondTableViewCell.swift */; };
 		D1F45AB11E9F7D0400490B4F /* SecondTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F45AAF1E9F7D0400490B4F /* SecondTableViewCell.xib */; };
@@ -144,6 +147,9 @@
 		D1D36CBA1EA2106D00F4E01F /* PriceAccountingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceAccountingTableViewCell.xib; sourceTree = "<group>"; };
 		D1D36CBD1EA3352400F4E01F /* ShoppingCartDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartDetailViewController.swift; sourceTree = "<group>"; };
 		D1D36CBF1EA44DC100F4E01F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D1D7F2F61EB85E4000A799FE /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D1D7F2F81EB85EDB00A799FE /* SettingPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPageTableViewCell.swift; sourceTree = "<group>"; };
+		D1D7F2F91EB85EDB00A799FE /* SettingPageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingPageTableViewCell.xib; sourceTree = "<group>"; };
 		D1F45A731E9F1CD300490B4F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D1F45AAE1E9F7D0400490B4F /* SecondTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTableViewCell.swift; sourceTree = "<group>"; };
 		D1F45AAF1E9F7D0400490B4F /* SecondTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondTableViewCell.xib; sourceTree = "<group>"; };
@@ -262,9 +268,12 @@
 				D1683C271E7FD1FD00C9D887 /* SignUpViewController.swift */,
 				D180B9071E7FAFC900AB0DA9 /* LoginViewController.swift */,
 				D1B5E9B31EA7428B008482AD /* OrderRulesViewController.swift */,
+				D1D7F2F61EB85E4000A799FE /* SettingsViewController.swift */,
 				D121F65D1E8103AE0049796D /* SideMenuTableViewController.swift */,
 				D121F66F1E81146C0049796D /* SettingsCell.swift */,
 				D121F6701E81146C0049796D /* SettingsCell.xib */,
+				D1D7F2F81EB85EDB00A799FE /* SettingPageTableViewCell.swift */,
+				D1D7F2F91EB85EDB00A799FE /* SettingPageTableViewCell.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -495,6 +504,7 @@
 				D180B9101E7FAFC900AB0DA9 /* Assets.xcassets in Resources */,
 				D1F45AB11E9F7D0400490B4F /* SecondTableViewCell.xib in Resources */,
 				D1F4FDE21E8370AA001233FA /* CellView.xib in Resources */,
+				D1D7F2FB1EB85EDB00A799FE /* SettingPageTableViewCell.xib in Resources */,
 				D121F6721E81146C0049796D /* SettingsCell.xib in Resources */,
 				D121F67E1E815E350049796D /* ProfilePageAddCell.xib in Resources */,
 				D1F45ABC1E9F84EC00490B4F /* FirstCollectionViewCell.xib in Resources */,
@@ -593,6 +603,7 @@
 				D1A0BE331E8CB1AE00F4D36B /* PopoverViewController.swift in Sources */,
 				D1D36CC01EA44DC100F4E01F /* CoreDataManager.swift in Sources */,
 				D180B9081E7FAFC900AB0DA9 /* LoginViewController.swift in Sources */,
+				D1D7F2FA1EB85EDB00A799FE /* SettingPageTableViewCell.swift in Sources */,
 				D180B90E1E7FAFC900AB0DA9 /* MuscleBeach.xcdatamodeld in Sources */,
 				D15704F61E969D9A00F59894 /* ChatRoomViewController.swift in Sources */,
 				D180B9061E7FAFC900AB0DA9 /* AppDelegate.swift in Sources */,
@@ -633,6 +644,7 @@
 				D1A0BE371E8FFEC300F4D36B /* DigitINfoViewController.swift in Sources */,
 				D17836431E9E11F900CF8BCA /* MainPageImagesTableViewCell.swift in Sources */,
 				D181C5DB1E85FE4300A5D87B /* ReorderViewController.swift in Sources */,
+				D1D7F2F71EB85E4100A799FE /* SettingsViewController.swift in Sources */,
 				D18ACC031E99ED6500B4F714 /* ChatMessageCell.swift in Sources */,
 				D1683C281E7FD1FD00C9D887 /* SignUpViewController.swift in Sources */,
 				D1A0BE631E93E71500F4D36B /* EatTogetherTableViewCell.swift in Sources */,
