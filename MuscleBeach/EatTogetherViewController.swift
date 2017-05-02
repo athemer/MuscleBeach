@@ -57,13 +57,11 @@ class EatTogetherViewController: UIViewController, UITableViewDelegate, UITableV
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
 
         if !isAnonymous! {
-            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
 
             fetchAddress()
 
             setNameAndAmount()
 
-            self.navigationController?.pushViewController(vc, animated: true)
         } else {
 
             addressButton.setTitle("請先登入以取得地址", for: .normal)

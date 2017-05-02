@@ -309,7 +309,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
 
         if !isAnonymous! {
-            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
+            
+//            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
 
             guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
             cell.timeView.isHidden = false
@@ -317,14 +318,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
             tabBarController?.tabBar.items?[2].badgeValue = "2"
 
-            self.navigationController?.pushViewController(vc, animated: true)
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
         } else {
 
             let alert = UIAlertController(title: "尚未登入",
                                           message: "請先登入後再進行操作",
                                           preferredStyle: .alert)
 
-            let cancel = UIAlertAction(title: "瞭解", style: .destructive, handler: { (_) -> Void in })
+            let cancel = UIAlertAction(title: "返回", style: .destructive, handler: { (_) -> Void in })
             let loging = UIAlertAction(title: "登入", style: .default, handler: { (_) in
                 do {
                     try FIRAuth.auth()?.signOut()
@@ -399,7 +401,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             print("Could not fetch.")
         }
 
-        let date = cell.date.text
+        let date = cell.dateLabelonLayer.text
         let uid = FIRAuth.auth()?.currentUser?.uid
 
         let fetchedResult = fetchData[0]
