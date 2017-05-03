@@ -108,7 +108,6 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
                 print (error.localizedDescription)
             }
 
-           
             cell.startButton.addTarget(self, action: #selector(bonbon), for: .touchUpInside)
 
             return cell
@@ -129,7 +128,6 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 //            
 //            cell.deliverAddButton.setTitle(deliverButtonTitle, for: .normal)
 
-            
             cell.pickerView.delegate = self
             cell.pickerView.dataSource = self
             cell.pickerView.reloadAllComponents()

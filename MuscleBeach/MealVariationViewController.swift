@@ -55,7 +55,7 @@ class MealVariationViewController: UIViewController, UITableViewDelegate, UITabl
         confirmButton.layer.shadowOffset = CGSize(width: 0, height: 5)
         confirmButton.layer.shadowOpacity = 1.0
         confirmButton.layer.masksToBounds = false
-        
+
         print("ahha \(deliverToDB) \(locationDetailToDB) \(dateToDB)")
         // Do any additional setup after loading the view.
     }

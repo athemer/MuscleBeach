@@ -123,11 +123,10 @@ class SideMenuTableViewController: UITableViewController {
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
             // swiftlint:disable:previous force_cast
-            
-            
+
             return cell
         case .settingCell:
-            
+
             // swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingPageTableViewCell", for: indexPath) as! SettingPageTableViewCell
             // swiftlint:disable:previous force_cast
@@ -169,7 +168,7 @@ class SideMenuTableViewController: UITableViewController {
             print (4)
         case .settingCell:
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else { return }
-            
+
             self.navigationController?.pushViewController(vc, animated: true)
 
         }
@@ -184,7 +183,7 @@ class SideMenuTableViewController: UITableViewController {
         tableView.register(orderHisNib, forCellReuseIdentifier: "OrderHistoryCell")
         tableView.register(settingsNib, forCellReuseIdentifier: "SettingsCell")
         tableView.register(settingsCellNib, forCellReuseIdentifier: "SettingPageTableViewCell")
-        
+
     }
 
     func logOutFromFirebase() {

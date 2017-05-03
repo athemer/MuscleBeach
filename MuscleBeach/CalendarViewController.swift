@@ -10,7 +10,6 @@ import UIKit
 import JTAppleCalendar
 import Spring
 
-
 class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
@@ -36,7 +35,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     let dimPurple = UIColor(colorWithHexValue: 0x574865)
 
     @IBOutlet weak var continueButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +48,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
         calendarView.allowsMultipleSelection  = true
         calendarView.rangeSelectionWillBeUsed = true
-        
+
         continueButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
         continueButton.layer.shadowOffset = CGSize(width: 0, height: 5)
         continueButton.layer.shadowOpacity = 1.0
@@ -117,7 +116,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         print ("COUNT \(calendarView.selectedDates.count)")
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
-        
 
         countDiscount(number: number)
     }
@@ -178,14 +176,14 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         if cellState.isSelected {
             myCustomCell.selectedView.layer.cornerRadius = 20
             myCustomCell.selectedView.isHidden = false
-            
+
             let layer = myCustomCell.selectedView!
             layer.animation = "pop"
             layer.curve = "easeInOutQuad"
             layer.force = 1.7
             layer.duration = 0.8
             layer.animate()
-            
+
             let layer2 = moreDaysToGo!
             layer2.animation = "pop"
             layer2.curve = "linear"
@@ -196,11 +194,9 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             layer2.damping = 0.5
             layer2.velocity = 0.5
             layer2.animate()
-            
-            
+
         } else {
-            
-            
+
             let layer = myCustomCell.selectedView!
             layer.animation = "zoomOut"
             layer.curve = "easeInOutQuad"
@@ -211,13 +207,12 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
 
             let when = DispatchTime.now() + 0.5
 
-            DispatchQueue.main.asyncAfter(deadline: when){
+            DispatchQueue.main.asyncAfter(deadline: when) {
                 myCustomCell.selectedView.isHidden = true
             }
         }
-        
+
         }
-    
 
     @IBAction func goToSelectiontapped(_ sender: Any) {
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"MealVariationViewController") as? MealVariationViewController else { return }

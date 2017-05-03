@@ -13,7 +13,7 @@ import FirebaseStorage
 import CoreData
 import Spring
 
-class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainPageViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -24,22 +24,29 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var fetchData: [NSManagedObject] = []
 
     var mealPreference: [String: Any] = [:]
+
     var mealPrefExsit: Bool = false
 
     var locationArea: String = ""
+
     var locationDetail: String = ""
+
     var deliver: String = ""
 
     let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
+
     let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行餐", "必備涼拌餐", "八方雲集餐", "四海遊龍餐"]
-    let imageNameArr: [String] = ["sample2", "sample", "sample2", "sample3", "sample", "sample2", "sample3" ]
+
+    let imageNameArr: [String] = ["one", "two", "three", "one", "two", "three", "one" ]
 
     let screenSize = UIScreen.main.bounds
 
     enum Components {
+        
         case homaPageImages
         case addressSelection
         case fastOrder
+        
     }
 
     let componentArr: [Components] = [.homaPageImages, .addressSelection, .fastOrder]
@@ -57,7 +64,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
 
         tableView.allowsSelection = false
-        
+
         let nib1 = UINib(nibName: "MainPageImagesTableViewCell", bundle: nil)
         tableView.register(nib1, forCellReuseIdentifier: "MainPageImagesTableViewCell")
         let nib2 = UINib(nibName: "SecondTableViewCell", bundle: nil)
@@ -65,12 +72,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
         tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func logoutTapped(_ sender: Any) {
@@ -86,24 +87,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return componentArr.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        switch componentArr[section] {
-        case .homaPageImages:
-            return 1
-
-        case .addressSelection:
-            return 1
-
-        case .fastOrder:
-            return dateArr.count
-        }
-    }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch componentArr[indexPath.section] {
         case .homaPageImages:
@@ -117,44 +100,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        switch componentArr[indexPath.section] {
-//        case .homaPageImages:
-//            // swiftlint:disable:next force_cast
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
-//            // swiftlint:disable:previous force_cast
-//
-//            
-//            return
-//            
-//        case .addressSelection:
-//            
-//            // swiftlint:disable:next force_cast
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
-//            // swiftlint:disable:previous force_cast
-//            
-//            
-//            return
-//            
-//        case .fastOrder:
-//            
-//            
-//            //swiftlint:disable:next force_cast
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
-//            //swiftlint:disable:previous force_cast
-//
-//            return
-//        }
-//        
-//        
-//    }
-
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // didmove
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
-        
+
         let layer = cell.mealImage!
-        
+
         layer.animation = "fadeOutLeft"
         layer.curve = "easeInOutQuad"
         layer.duration = 1.0
@@ -165,68 +116,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         layer.animate()
 
         return
-        
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        switch componentArr[indexPath.section] {
-        case .homaPageImages:
-            // swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
-            // swiftlint:disable:previous force_cast
-
-//            cell.frame = CGRect(x: 0, y: 0, width: screenSize.width , height: screenSize.height * 0.35)
-
-            return cell
-
-        case .addressSelection:
-
-            // swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
-            // swiftlint:disable:previous force_cast
-
-            cell.contentView.backgroundColor = .red
-
-            let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
-
-            self.addChildViewController(vcToAdd!)
-
-//            vcToAdd?.willMove(toParentViewController: self)
-
-            cell.contentView.addSubview((vcToAdd?.collectionView)!)
-
-            vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
-
-            vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
-            vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
-            vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
-            vcToAdd?.collectionView?.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
-
-            vcToAdd?.didMove(toParentViewController: self)
-
-            print("test frame", vcToAdd!.view!.frame)
-
-            return cell
-
-        case .fastOrder:
-
-
-            //swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
-            //swiftlint:disable:previous force_cast
-            cell.dateLabelonLayer.text = dateArr[indexPath.row]
-            cell.mealLabelonLayer.text = mealNameArr[indexPath.row]
-            cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
-            cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
-            cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
-            cell.mealImage.image = UIImage(named: imageNameArr[indexPath.row])
-            cell.mealImage.contentMode = .scaleAspectFill
-            cell.mealImage.clipsToBounds = true
-//            cell.mealImage.layer.cornerRadius = 15
-
-            return cell
-        }
 
     }
 
@@ -309,7 +198,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
 
         if !isAnonymous! {
-            
+
 //            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
 
             guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
@@ -319,7 +208,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             tabBarController?.tabBar.items?[2].badgeValue = "2"
 
 //            self.navigationController?.pushViewController(vc, animated: true)
-            
+
         } else {
 
             let alert = UIAlertController(title: "尚未登入",
@@ -617,4 +506,78 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
 
+}
+
+extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return componentArr.count
+        
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        switch componentArr[section] {
+            
+        case .homaPageImages:
+            return 1
+
+        case .addressSelection:
+            return 1
+
+        case .fastOrder:
+            return dateArr.count
+        }
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        switch componentArr[indexPath.section] {
+            
+        case .homaPageImages:
+            
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
+            // swiftlint:disable:previous force_cast
+
+            return cell
+
+        case .addressSelection:
+
+            // swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
+            // swiftlint:disable:previous force_cast
+
+            let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
+            self.addChildViewController(vcToAdd!)
+            vcToAdd?.willMove(toParentViewController: self)
+            cell.contentView.addSubview((vcToAdd?.collectionView)!)
+            vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Set Constraints
+            vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
+            vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
+            vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
+            vcToAdd?.collectionView?.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
+            vcToAdd?.didMove(toParentViewController: self)
+
+            return cell
+
+        case .fastOrder:
+
+            //swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
+            //swiftlint:disable:previous force_cast
+            
+            cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
+            cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
+            cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
+            cell.mealImage.image = UIImage(named: imageNameArr[indexPath.row])
+            cell.dateLabelonLayer.text = dateArr[indexPath.row]
+            cell.mealLabelonLayer.text = mealNameArr[indexPath.row]
+
+            return cell
+        }
+    }
 }

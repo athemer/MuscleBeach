@@ -146,7 +146,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             self.window?.makeKeyAndVisible()
 
-
         } else {
             self.window?.rootViewController = LoginInitialViewController
 
