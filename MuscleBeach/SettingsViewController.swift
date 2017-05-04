@@ -84,23 +84,23 @@ class SettingsViewController: FormViewController {
                 $0.steps = 25
             }
 
-            +++ Section("How the FUCK")
+            +++ Section("Testing hidden row")
             <<< SwitchRow("switchRowTag") {
-                $0.title = "You"
+                $0.title = "this"
             }
             <<< LabelRow {
 
                 $0.hidden = Condition.function(["switchRowTag"], { form in
                     return !((form.rowBy(tag: "switchRowTag") as? SwitchRow)?.value ?? false)
                 })
-                $0.title = "mother"
+                $0.title = "row"
             }
             <<< LabelRow {
 
                 $0.hidden = Condition.function(["switchRowTag"], { form in
                     return !((form.rowBy(tag: "switchRowTag") as? SwitchRow)?.value ?? false)
                 })
-                $0.title = "FUCKER!!!!!!!!!!!!!!!!"
+                $0.title = "is hidden"
             }
 
     }

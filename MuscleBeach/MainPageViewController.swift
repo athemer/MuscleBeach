@@ -33,20 +33,14 @@ class MainPageViewController: UIViewController {
 
     var deliver: String = ""
 
-    let dateArr: [String] = ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-06", "2017-01-09", "2017-01-10"]
-
-    let mealNameArr: [String] = ["快樂分享餐", "肯德基全家餐", "泰國好吃餐", "居家旅行餐", "必備涼拌餐", "八方雲集餐", "四海遊龍餐"]
-
-    let imageNameArr: [String] = ["one", "two", "three", "one", "two", "three", "one" ]
-
     let screenSize = UIScreen.main.bounds
 
     enum Components {
-        
+
         case homaPageImages
         case addressSelection
         case fastOrder
-        
+
     }
 
     let componentArr: [Components] = [.homaPageImages, .addressSelection, .fastOrder]
@@ -87,71 +81,7 @@ class MainPageViewController: UIViewController {
 
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch componentArr[indexPath.section] {
-        case .homaPageImages:
-            return screenSize.height * 0.35
 
-        case .addressSelection:
-            return screenSize.height * 0.35
-
-        case .fastOrder:
-            return 100
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // didmove
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
-
-        let layer = cell.mealImage!
-
-        layer.animation = "fadeOutLeft"
-        layer.curve = "easeInOutQuad"
-        layer.duration = 1.0
-        layer.scaleX = 1.5
-        layer.scaleY = 1.5
-        layer.damping = 0.9
-        layer.velocity = 0.5
-        layer.animate()
-
-        return
-
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch componentArr[section] {
-
-        case .homaPageImages:
-
-            return ""
-
-        case .addressSelection:
-
-            return "選擇訂餐地址"
-
-        case .fastOrder:
-
-            return "快速訂餐"
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch componentArr[section] {
-
-        case .homaPageImages:
-
-            return 0
-
-        case .addressSelection:
-
-            return 40
-
-        case .fastOrder:
-
-            return 40
-        }
-    }
 
     func showCart() {
         // swiftlint:disable:next force_cast
@@ -181,16 +111,6 @@ class MainPageViewController: UIViewController {
         let leftBarItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.leftBarButtonItem = leftBarItem
 
-//        let cartImage = UIImage(named: "cartIcon")
-//        let rightButton = UIButton(type: .custom)
-//        rightButton.setImage(cartImage, for: .normal)
-//        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-//        rightButton.addTarget(self, action: #selector(showCart), for: .touchUpInside)
-//        rightButton.tintColor = .green
-//
-//        let rightBarItem = UIBarButtonItem(customView: rightButton)
-//        self.navigationItem.rightBarButtonItem = rightBarItem
-
     }
 
     func fastAdd(_ sender: UIButton) {
@@ -199,15 +119,11 @@ class MainPageViewController: UIViewController {
 
         if !isAnonymous! {
 
-//            guard let vc = self.storyboard?.instantiateViewController(withIdentifier:"CalendarViewController") as? CalendarViewController else { return }
-
             guard let cell = sender.superview?.superview as? ThirdTableViewCell else { return }
             cell.timeView.isHidden = false
             cell.addToCartButton.isHidden = true
 
             tabBarController?.tabBar.items?[2].badgeValue = "2"
-
-//            self.navigationController?.pushViewController(vc, animated: true)
 
         } else {
 
@@ -352,8 +268,6 @@ class MainPageViewController: UIViewController {
         let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
 
        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "晚餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
-
-//        let orderData: [String: Any] = ["date": date, "deliver": deliver, "locationArea": locationArea, "locationDetail": locationDetail, "userUID": uid!, "time": "晚餐", "meal": self.mealPreference, "userData": "wait to be done", "paymentStatus": "unpaid", "paymentClaim": "false"]
 
            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
 
@@ -511,15 +425,15 @@ class MainPageViewController: UIViewController {
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        
+
         return componentArr.count
-        
+
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         switch componentArr[section] {
-            
+
         case .homaPageImages:
             return 1
 
@@ -527,35 +441,31 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
 
         case .fastOrder:
-            return dateArr.count
+            return Constants().dateArr.count
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch componentArr[indexPath.section] {
-            
+
         case .homaPageImages:
-            
-            // swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as! MainPageImagesTableViewCell
-            // swiftlint:disable:previous force_cast
+
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageImagesTableViewCell") as? MainPageImagesTableViewCell else { return UITableViewCell() }
 
             return cell
 
         case .addressSelection:
 
-            // swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as! SecondTableViewCell
-            // swiftlint:disable:previous force_cast
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell
+                else { return UITableViewCell() }
 
             let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
             self.addChildViewController(vcToAdd!)
             vcToAdd?.willMove(toParentViewController: self)
             cell.contentView.addSubview((vcToAdd?.collectionView)!)
             vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
-            
-            // Set Constraints
+
             vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
             vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
             vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
@@ -566,18 +476,79 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .fastOrder:
 
-            //swiftlint:disable:next force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as! ThirdTableViewCell
-            //swiftlint:disable:previous force_cast
-            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return UITableViewCell() }
+
             cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
             cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
             cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
-            cell.mealImage.image = UIImage(named: imageNameArr[indexPath.row])
-            cell.dateLabelonLayer.text = dateArr[indexPath.row]
-            cell.mealLabelonLayer.text = mealNameArr[indexPath.row]
+            cell.mealImage.image = UIImage(named: Constants().imageNameArr[indexPath.row])
+            cell.dateLabelonLayer.text = Constants().dateArr[indexPath.row]
+            cell.mealLabelonLayer.text = Constants().mealNameArr[indexPath.row]
 
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch componentArr[indexPath.section] {
+            
+        case .homaPageImages:
+            return screenSize.height * 0.35
+            
+        case .addressSelection:
+            return screenSize.height * 0.35
+            
+        case .fastOrder:
+            return 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
+        
+        let layer = cell.mealImage!
+        
+        layer.animation = "fadeOutLeft"
+        layer.curve = "easeInOutQuad"
+        layer.duration = 1.0
+        layer.scaleX = 1.5
+        layer.scaleY = 1.5
+        layer.damping = 0.9
+        layer.velocity = 0.5
+        layer.animate()
+        
+        return
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch componentArr[section] {
+            
+        case .homaPageImages:
+            return ""
+            
+        case .addressSelection:
+            return "選擇訂餐地址"
+            
+        case .fastOrder:
+            return "快速訂餐"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch componentArr[section] {
+            
+        case .homaPageImages:
+            return 0
+            
+        case .addressSelection:
+            return 40
+            
+        case .fastOrder:
+            return 40
         }
     }
 }

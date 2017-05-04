@@ -40,24 +40,18 @@ class ThirdTableViewCell: UITableViewCell {
         animation()
         // Initialization code
 
-        
-        
-        
         mealImage.contentMode = .scaleAspectFill
         mealImage.clipsToBounds = true
-        
-        
+
         addBtn.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
         addBtn.layer.shadowOffset = CGSize(width: 0, height: 5)
         addBtn.layer.shadowOpacity = 1.0
         addBtn.layer.masksToBounds = false
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
+    
+    
 
     func addGradientLayer() {
         gradientLayer = CAGradientLayer()
