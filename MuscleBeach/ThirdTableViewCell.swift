@@ -17,10 +17,6 @@ class ThirdTableViewCell: UITableViewCell {
 
     @IBOutlet weak var timeView: UIView!
 
-    @IBOutlet weak var date: UILabel!
-
-    @IBOutlet weak var mealName: UILabel!
-
     @IBOutlet weak var addToCartButton: UIButton!
 
     @IBOutlet weak var mealImage: SpringImageView!
@@ -31,6 +27,12 @@ class ThirdTableViewCell: UITableViewCell {
 
     var dateLabelonLayer: UILabel!
     var mealLabelonLayer: UILabel!
+
+    var dataConstants: Constants! {
+        didSet {
+            updateData()
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,9 +51,12 @@ class ThirdTableViewCell: UITableViewCell {
         addBtn.layer.masksToBounds = false
     }
 
-    
-    
-    
+    fileprivate func updateData() {
+
+        mealImage.image = UIImage(named: dataConstants.imageName)
+        mealLabelonLayer.text = dataConstants.mealName
+        dateLabelonLayer.text = dataConstants.date
+    }
 
     func addGradientLayer() {
         gradientLayer = CAGradientLayer()

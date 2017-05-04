@@ -17,10 +17,6 @@ class MainPageViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var segOne: UISegmentedControl!
-
-    @IBOutlet weak var segTwo: UISegmentedControl!
-
     var fetchData: [NSManagedObject] = []
 
     var mealPreference: [String: Any] = [:]
@@ -35,11 +31,12 @@ class MainPageViewController: UIViewController {
 
     let screenSize = UIScreen.main.bounds
 
+    let constants = Constants.createDataInCell()
+    
+
     enum Components {
 
-        case homaPageImages
-        case addressSelection
-        case fastOrder
+        case homaPageImages, addressSelection, fastOrder
 
     }
 
@@ -53,18 +50,16 @@ class MainPageViewController: UIViewController {
 //        fetchUserPreference()
 
         setUpBarItem()
+        
         SideMenuManager.menuWidth = 200
+        
         tableView.delegate = self
+        
         tableView.dataSource = self
 
         tableView.allowsSelection = false
 
-        let nib1 = UINib(nibName: "MainPageImagesTableViewCell", bundle: nil)
-        tableView.register(nib1, forCellReuseIdentifier: "MainPageImagesTableViewCell")
-        let nib2 = UINib(nibName: "SecondTableViewCell", bundle: nil)
-        tableView.register(nib2, forCellReuseIdentifier: "SecondTableViewCell")
-        let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
-        tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
+        registerCell()
 
     }
 
@@ -81,25 +76,20 @@ class MainPageViewController: UIViewController {
 
     }
 
-
-
-    func showCart() {
-        // swiftlint:disable:next force_cast
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ShoppingCartViewController") as! ShoppingCartViewController
-        // swiftlint:disable:previous force_cast
-
-        self.navigationController?.pushViewController(vc, animated: true)
+    
+    func registerCell() {
+        
+        let nib1 = UINib(nibName: "MainPageImagesTableViewCell", bundle: nil)
+        tableView.register(nib1, forCellReuseIdentifier: "MainPageImagesTableViewCell")
+        let nib2 = UINib(nibName: "SecondTableViewCell", bundle: nil)
+        tableView.register(nib2, forCellReuseIdentifier: "SecondTableViewCell")
+        let nib3 = UINib(nibName: "ThirdTableViewCell", bundle: nil)
+        tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
+        
     }
-
-    func goToMenu() {
-        // swiftlint:disable:next force_cast
-        let vc = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationController") as! UISideMenuNavigationController
-        // swiftlint:disable:previous force_cast
-
-        self.show(vc, sender: nil)
-
-    }
-
+    
+    
+    // Set up bar button item and action
     func setUpBarItem() {
         let menuImage = UIImage(named: "MenuIcon")
         let leftButton = UIButton(type: .custom)
@@ -112,7 +102,18 @@ class MainPageViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftBarItem
 
     }
+    
+    func goToMenu() {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationController") as? UISideMenuNavigationController else { return }
+        
+        self.show(vc, sender: nil)
+        
+    }
 
+    
+    
+    
     func fastAdd(_ sender: UIButton) {
 
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
@@ -249,7 +250,7 @@ class MainPageViewController: UIViewController {
             print("Could not fetch.")
         }
 
-        let date = cell.date.text
+        let date = cell.dateLabelonLayer.text
         let uid = FIRAuth.auth()?.currentUser?.uid
 
         let fetchedResult = fetchData[0]
@@ -270,17 +271,6 @@ class MainPageViewController: UIViewController {
        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "晚餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
 
            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-
-//        if mealPrefExsit == true {
-//            FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-//        } else if mealPrefExsit == false {
-//
-//            guard let vc = storyboard?.instantiateViewController(withIdentifier: "MealVariationViewController") as? MealVariationViewController else { return }
-//            navigationController?.pushViewController(vc, animated: true)
-//            print ("cant do fast order because no pref yet")
-//            return
-//        }
-
     }
 
     func fetchUserInfoWhenLaunchIfLoggedIn() {
@@ -390,7 +380,10 @@ class MainPageViewController: UIViewController {
         }
 
     }
-
+    
+    
+    
+    // Delete Data From Core Data
     func deleteAll() {
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -441,7 +434,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
 
         case .fastOrder:
-            return Constants().dateArr.count
+            return constants.count
         }
     }
 
@@ -481,35 +474,33 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.addToCartButton.addTarget(self, action: #selector(fastAdd), for: .touchUpInside)
             cell.lunchButton.addTarget(self, action: #selector(lunchAdded), for: .touchUpInside)
             cell.dinnerButton.addTarget(self, action: #selector(dinnerAdded), for: .touchUpInside)
-            cell.mealImage.image = UIImage(named: Constants().imageNameArr[indexPath.row])
-            cell.dateLabelonLayer.text = Constants().dateArr[indexPath.row]
-            cell.mealLabelonLayer.text = Constants().mealNameArr[indexPath.row]
+            cell.dataConstants = self.constants[indexPath.row]
 
             return cell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         switch componentArr[indexPath.section] {
-            
+
         case .homaPageImages:
             return screenSize.height * 0.35
-            
+
         case .addressSelection:
             return screenSize.height * 0.35
-            
+
         case .fastOrder:
             return 100
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
-        
+
         let layer = cell.mealImage!
-        
+
         layer.animation = "fadeOutLeft"
         layer.curve = "easeInOutQuad"
         layer.duration = 1.0
@@ -518,35 +509,35 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         layer.damping = 0.9
         layer.velocity = 0.5
         layer.animate()
-        
+
         return
-        
+
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
+
         switch componentArr[section] {
-            
+
         case .homaPageImages:
             return ""
-            
+
         case .addressSelection:
             return "選擇訂餐地址"
-            
+
         case .fastOrder:
             return "快速訂餐"
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch componentArr[section] {
-            
+
         case .homaPageImages:
             return 0
-            
+
         case .addressSelection:
             return 40
-            
+
         case .fastOrder:
             return 40
         }
