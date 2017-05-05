@@ -34,9 +34,11 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         fetchAddress()
 
+        
+        
         self.collectionView?.frame = CGRect(x: 0, y: 0, width: screensize.width, height: screensize.height * 0.35)
         let nib = UINib(nibName: "FirstCollectionViewCell", bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: "FirstCollectionViewCell")
@@ -93,6 +95,7 @@ class MainCollectionViewController: UICollectionViewController, UIPickerViewDele
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
 
+        
         switch componentArr[indexPath.section] {
         case .one :
             // swiftlint:disable:next force_cast

@@ -33,8 +33,12 @@ class MainPageViewController: UIViewController {
 
     let constants = Constants.createDataInCell()
     
-    let mainCollectionViewVC = MainCollectionViewController()
-
+    var mainCollectionViewVC: MainCollectionViewController!
+    
+    
+    
+    
+    
     enum Components {
 
         case homaPageImages, addressSelection, fastOrder
@@ -61,6 +65,12 @@ class MainPageViewController: UIViewController {
         tableView.allowsSelection = false
 
         registerCell()
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         // swiftlint:disable:next force_cast
+        mainCollectionViewVC = storyboard.instantiateViewController(withIdentifier: "MainCollectionViewController") as! MainCollectionViewController
+         // swiftlint:disable:previous force_cast
 
     }
 
@@ -417,17 +427,24 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell
                 else { return UITableViewCell() }
 
-            let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
-            self.addChildViewController(vcToAdd!)
-            vcToAdd?.willMove(toParentViewController: self)
-            cell.contentView.addSubview((vcToAdd?.collectionView)!)
-            vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
+//            let vcToAdd = storyboard?.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController
+//            self.addChildViewController(vcToAdd!)
+//            vcToAdd?.willMove(toParentViewController: self)
+//            cell.contentView.addSubview((vcToAdd?.collectionView)!)
+//            vcToAdd!.collectionView!.translatesAutoresizingMaskIntoConstraints = false
+            
+            
+            addChildViewController(mainCollectionViewVC)
+//            cell.addSubview(mainCollectionViewVC.view)
+            cell.addCollectionView(view: mainCollectionViewVC.view)
+            mainCollectionViewVC.didMove(toParentViewController: self)
+            
 
-            vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
-            vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
-            vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
-            vcToAdd?.collectionView?.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
-            vcToAdd?.didMove(toParentViewController: self)
+//            vcToAdd?.collectionView?.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor, constant: 0).isActive = true
+//            vcToAdd?.collectionView?.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor, constant: 0).isActive = true
+//            vcToAdd?.collectionView?.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
+//            vcToAdd?.collectionView?.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
+//            vcToAdd?.didMove(toParentViewController: self)
 
             return cell
 
@@ -517,33 +534,20 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell else { return }
-//        cell.addViewControllerToParent(parentVC: self)
-        
-//        addViewControllerToParent(cell: cell)
-        
-    }
 
-    func addViewControllerToParent(cell: UITableViewCell) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController else { return }
-        
-        self.addChildViewController(vc)
-        vc.willMove(toParentViewController: self)
-        cell.contentView.addSubview(vc.view)
-
-        
-    }
+//    func addViewControllerToParent(cell: UITableViewCell) {
+//        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        guard let vc = storyboard.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController else { return }
+//        
+//        
+//        print ("AGA")
+//        
+//        self.addChildViewController(vc)
+//        vc.willMove(toParentViewController: self)
+//        cell.contentView.addSubview(vc.view)
 //
-//    func removeViewControllerFromParentVC() {
-//        self.contentVC.view.removeFromSuperview()
-//        self.contentVC.willMove(toParentViewController: nil)
-//        self.contentVC.removeFromParentViewController()
+//        
 //    }
-//    
-    
     
 }

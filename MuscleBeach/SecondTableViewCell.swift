@@ -33,9 +33,13 @@ class SecondTableViewCell: UITableViewCell {
     
     
     
-    func addCollectionView(view: UICollectionView){
+    func addCollectionView(view: UIView){
         
         contentView.addSubview(view)
+        view.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 0).isActive = true
+        view.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: 0).isActive = true
+        view.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0).isActive = true
+        view.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0).isActive = true
         
     }
     
