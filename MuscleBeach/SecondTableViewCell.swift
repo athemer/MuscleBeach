@@ -9,11 +9,20 @@
 import UIKit
 
 class SecondTableViewCell: UITableViewCell {
+    
+    
 
+//    story
+    
+//    var contentVC: MainCollectionViewController {
+//        contentVC = MainCollectionViewController()
+//        self.contentVC = contentVC
+//        return contentVC
+//    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,5 +30,13 @@ class SecondTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    
+    
+    func addCollectionView(view: UICollectionView){
+        
+        contentView.addSubview(view)
+        
+    }
+    
 }

@@ -33,6 +33,7 @@ class MainPageViewController: UIViewController {
 
     let constants = Constants.createDataInCell()
     
+    let mainCollectionViewVC = MainCollectionViewController()
 
     enum Components {
 
@@ -75,7 +76,6 @@ class MainPageViewController: UIViewController {
         deleteAll()
 
     }
-
     
     func registerCell() {
         
@@ -87,7 +87,6 @@ class MainPageViewController: UIViewController {
         tableView.register(nib3, forCellReuseIdentifier: "ThirdTableViewCell")
         
     }
-    
     
     // Set up bar button item and action
     func setUpBarItem() {
@@ -108,12 +107,10 @@ class MainPageViewController: UIViewController {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationController") as? UISideMenuNavigationController else { return }
         
         self.show(vc, sender: nil)
-        
     }
-
     
     
-    
+    // Set Up Fast Add Action and Alert
     func fastAdd(_ sender: UIButton) {
 
         let isAnonymous = FIRAuth.auth()?.currentUser?.isAnonymous
@@ -185,31 +182,42 @@ class MainPageViewController: UIViewController {
             self.deliver = deliver
 
         })
+    }
+    
+    // Handle Button Action
+    func lunchAdded(_ sender: UIButton) {
+        
+        fetchThenSetValueToDB(sender: sender, time: "午餐")
 
     }
 
-    func lunchAdded(_ sender: UIButton) {
+    func dinnerAdded(_ sender: UIButton) {
+        
+        fetchThenSetValueToDB(sender: sender, time: "晚餐")
+    }
 
+    func fetchThenSetValueToDB(sender: UIButton, time: String) {
+    
         guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
-
+    
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-
+    
         let context = appDelegate.persistentContainer.viewContext
-
+    
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
-
+    
         do {
-
+        
             self.fetchData = try context.fetch(fetchRequest)
-
+            
         } catch let error as NSError {
             print (error)
             print("Could not fetch.")
         }
-
+    
         let date = cell.dateLabelonLayer.text
         let uid = FIRAuth.auth()?.currentUser?.uid
-
+    
         let fetchedResult = fetchData[0]
         guard
             let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
@@ -221,57 +229,15 @@ class MainPageViewController: UIViewController {
             let prefB = fetchedResult.value(forKey: "prefB") as? Int,
             let prefC = fetchedResult.value(forKey: "prefC") as? Int
             else { return }
-
+    
         let mealPreferenceFromFetch = ["typeA": prefA, "typeB": prefB, "typeC": prefC]
         let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
-
-        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "午餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
-
+    
+        let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": time, "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
+    
         FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-
-    }
-
-    func dinnerAdded(_ sender: UIButton) {
-
-        guard let cell = sender.superview?.superview?.superview as? ThirdTableViewCell else { return }
-
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-
-        let context = appDelegate.persistentContainer.viewContext
-
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserMO")
-
-        do {
-
-           self.fetchData = try context.fetch(fetchRequest)
-
-        } catch let error as NSError {
-            print (error)
-            print("Could not fetch.")
+    
         }
-
-        let date = cell.dateLabelonLayer.text
-        let uid = FIRAuth.auth()?.currentUser?.uid
-
-        let fetchedResult = fetchData[0]
-        guard
-            let userNameFromFetch = fetchedResult.value(forKey: "name") as? String,
-            let userNumber = fetchedResult.value(forKey: "number") as? String,
-            let deliverFromFetch = fetchedResult.value(forKey: "deliver") as? String,
-            let locationAreaFromFetch = fetchedResult.value(forKey: "addressMain") as? String,
-            let locationDetailFromFetch = fetchedResult.value(forKey: "addressDetail") as? String,
-            let prefA = fetchedResult.value(forKey: "prefA") as? Int,
-            let prefB = fetchedResult.value(forKey: "prefB") as? Int,
-            let prefC = fetchedResult.value(forKey: "prefC") as? Int
-        else { return }
-
-        let mealPreferenceFromFetch = ["typeA": prefA, "typeB": prefB, "typeC": prefC]
-        let userData = ["userName": userNameFromFetch, "userNumber": userNumber]
-
-       let orderData: [String: Any] = ["date": date, "deliver": deliverFromFetch, "locationArea": locationAreaFromFetch, "locationDetail": locationDetailFromFetch, "userUID": uid!, "time": "晚餐", "meal": mealPreferenceFromFetch, "userData": userData, "paymentStatus": "unpaid", "paymentClaim": "false"]
-
-           FIRDatabase.database().reference().child("order").childByAutoId().setValue(orderData)
-    }
 
     func fetchUserInfoWhenLaunchIfLoggedIn() {
 
@@ -380,8 +346,6 @@ class MainPageViewController: UIViewController {
         }
 
     }
-    
-    
     
     // Delete Data From Core Data
     func deleteAll() {
@@ -510,8 +474,18 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         layer.velocity = 0.5
         layer.animate()
 
-        return
+        if indexPath.row == 0 {
+            mainCollectionViewVC.willMove(toParentViewController: nil)
+            mainCollectionViewVC.view.removeFromSuperview()
+            mainCollectionViewVC.removeFromParentViewController()
 
+        }
+
+        return
+//
+//         guard let cell2 = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell else { return }
+//         cell2.removeViewControllerFromParentVC()
+//        
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -542,4 +516,34 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
             return 40
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell else { return }
+//        cell.addViewControllerToParent(parentVC: self)
+        
+//        addViewControllerToParent(cell: cell)
+        
+    }
+
+    func addViewControllerToParent(cell: UITableViewCell) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "MainCollectionViewController") as? MainCollectionViewController else { return }
+        
+        self.addChildViewController(vc)
+        vc.willMove(toParentViewController: self)
+        cell.contentView.addSubview(vc.view)
+
+        
+    }
+//
+//    func removeViewControllerFromParentVC() {
+//        self.contentVC.view.removeFromSuperview()
+//        self.contentVC.willMove(toParentViewController: nil)
+//        self.contentVC.removeFromParentViewController()
+//    }
+//    
+    
+    
 }
