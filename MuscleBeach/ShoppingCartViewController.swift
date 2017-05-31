@@ -292,6 +292,9 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                             // swiftlint:disable:previous force_cast
                             // swiftlint:disable:next force_cast
                                 let typeCAmount = meal["typeC"] as! Int
+
+
+
                             // swiftlint:disable:previous force_cast
                             // swiftlint:disable:next force_cast
                                 let typeAAmount = meal["typeA"] as! Int
