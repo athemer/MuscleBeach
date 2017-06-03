@@ -478,9 +478,9 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
+        guard let cell3 = tableView.dequeueReusableCell(withIdentifier: "ThirdTableViewCell") as? ThirdTableViewCell else { return }
 
-        let layer = cell.mealImage!
+        let layer = cell3.mealImage!
 
         layer.animation = "fadeOutLeft"
         layer.curve = "easeInOutQuad"
@@ -491,12 +491,15 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         layer.velocity = 0.5
         layer.animate()
 
-        if indexPath.row == 1 {
-            mainCollectionViewVC.willMove(toParentViewController: nil)
-            mainCollectionViewVC.view.removeFromSuperview()
-            mainCollectionViewVC.removeFromParentViewController()
+        guard let cell2 = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell else { return }
 
-        }
+
+//        if  {
+//            mainCollectionViewVC.willMove(toParentViewController: nil)
+//            mainCollectionViewVC.view.removeFromSuperview()
+//            mainCollectionViewVC.removeFromParentViewController()
+//
+//        }
 
         return
 
