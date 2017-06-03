@@ -491,7 +491,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         layer.velocity = 0.5
         layer.animate()
 
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
             mainCollectionViewVC.willMove(toParentViewController: nil)
             mainCollectionViewVC.view.removeFromSuperview()
             mainCollectionViewVC.removeFromParentViewController()
@@ -499,10 +499,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         return
-//
-//         guard let cell2 = tableView.dequeueReusableCell(withIdentifier: "SecondTableViewCell") as? SecondTableViewCell else { return }
-//         cell2.removeViewControllerFromParentVC()
-//        
+
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
